@@ -1,0 +1,96 @@
+/*****************************************************************************************
+ * 
+ * Générateur de bordereaux de transfert guidé par le profil d'archivage
+ *                         -----------------------
+ * Département du Morbihan
+ * Direction des systèmes d'information
+ * Service Études
+ * Patrick Percot
+ * Mai 2015
+ * 
+ * Réutilisation du code autorisée dans l'intérêt des collectivités territoriales
+ * 
+ * ****************************************************************************************/
+
+Guide de rédaction des profils d'archivage
+
+Voir la documentation HOWTO-donnees-metier.txt pour les règles à respecter par l'application 
+métier pour fournir les données métier qui sont attendues par le profil d'archivage.
+
+Après sa rédaction, un profil doit être contrôlé avec l'outil de contrôle pour s'assurer qu'il
+est correctement rédigé. Toutes les erreurs signalées doivent être corrigées avant mise en production.
+
+0) Utilité du profil d'archivage
+
+Le profil d'archivage décrit la façon dont les bordereaux de transfert doivent être organisés.
+Il contient de nombreuses informations archivistiques qui ne sont pas connues des applications métier.
+
+Le générateur automatique de bordereaux de transfert permet donc d'éviter de demander aux applications
+métier de produire ces données archivistiques en produisant ces données à partir de celles qui sont 
+fournies dans le profil.
+
+Les versions 0.2 et 1.0 du SEDA sont gérées.
+
+1) Principes de base :
+
+ATTENTION : seules les informations obligatoires sont générées. Dans AGAPE, la case 
+à cocher présente sur la balise doit donc être cochée. Si cette règle n'est pas respectée,
+ceci peut entraîner la production d'un bordereau quasiment vide.
+
+À ce jour, les données de contact ne sont pas gérées.
+
+2) unités documentaires
+
+Un profil d'archivage est divisé en unités documentaires. 
+Une unité documentaire joue le rôle de conteneur de documents ayant un point commun.
+
+Les unités documentaires ne contenant pas de documents ne sont pas générées.
+Cette règle est récursive. Ce qui signifie que les unités documentaires ne contenant 
+pas d'unités documentaires qui contiennent des documents ne sont pas générées.
+Des branches complètes du profil peuvent donc être absentes du bordereau de tranfert.
+
+Chaque unité documentaire doit être marquée par un TAG qui donne une indication sur le
+rôle de cete unité documentaire. Ces TAGs sont contenus dans l'attribut schemeID de la 
+balise ArchivalAgencyObjectIdentifier. Dans AGAPE cette balise est identifiée comme
+" Identifiant unité documentaire service d'archive ", l'attribut comme " identifiant
+du schéma ". Cet attribut doit être marqué comme obligatoire et contenir une information
+formattée comme ceci : 
+EMEG_DOCLIST_2015 / CONSULTATION
+où :
+EMEG_DOCLIST_2015 représente un ensemble de TAGs produits par une entité ;
+CONSULTATION est un TAG désignant une typologie documentaire de préférence parlante
+             pour l'application métier
+
+Si une unité documentaire peut être répétée plusieurs fois, son TAG doit être postfixé
+par un " + ". L'unité documentaire doit également avoir une cardinalité maximum de N, 
+ce qui signifie que la même unité documentaire peut être rencontrée plusieurs fois dans
+le bordereau de transfert.
+
+Les TAGs sont uniques dans un profil d'archivage.
+Chaque unité documentaire doit porter un TAG.
+
+Les unités documentaires peuvent contenir des documents.
+
+
+3) Documents
+
+Les documents doivent contenir une balise Attachment avec un attribut filename obligatoire. 
+Avec AGAPE, un Document doit contenir une pièce jointe avec un nom de fichier obligatoire.
+
+Les documents peuvent avoir une date de création et une description.
+
+Le Type qui est obligatoire doit être valorisé à CDO (Content Data Object) dans le profil
+d'archivage car cette information archivistique ne peut pas être connue des applications
+métier.
+
+Si il y a plusieurs typologies de documents dans une unité documentaire, ces documents doivent
+contenir une balise Identification obligatoire avec un attribut SchemeId. Le format est 
+identique à celui de la balise ArchivalAgencyObjectIdentifier. Voir ci-dessus.
+Avec AGAPE, il faut activer Identifiant, cardinalité 1-1, attribut Identifiant du schéma 
+obligatoire.
+
+
+4) Mots-clés
+
+Des mots-clés peuvent être laissés avec un contenu vide à la fois dans la description du
+contenu de l'archive et dans les unités documentaires.

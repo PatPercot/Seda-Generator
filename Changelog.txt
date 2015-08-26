@@ -1,0 +1,90 @@
+-------------------------
+Changements du 2015-06-24
+
+- Ajout de la génération de quelques métadonnées : Comment, CustodialHistory et attribut mimeCode
+
+-------------------------
+Changements du 2015-06-24
+
+- Ajout d'un contrôle de cohérence entre le TAG et les cardinalités de l'unité documentaire dans RngProfileController
+
+-------------------------
+Changements du 2015-06-22
+
+- Correction d'un bug dans CsvArchiveDocuments méthode prepareCompleteList, il manquait la réinitialisation
+  de la variable lastError à "" au moment de la préparation de la liste
+
+-------------------------
+Changements du 2015-06-19
+
+- Amélioration de la lisibilité de l'affichage du programme test de contrôle du profil
+  Mise en évidence des erreurs
+
+- correction d'un bug dans le parcours d'arbre en passe 2
+  ajout d'une méthode pour couper les branches vides
+  L’arbre doit correspondre à ce qui sera généré, car le code le suit parallèlement au profil
+  sans vérifier qu’il est bien sur la même unité documentaire côté profil et côté arbre..
+  En passe 2, l’arbre est lu en profondeur en parcourant toutes les branches et seules les 
+  unités documentaires qui contiennent des documents sont générées, on zappe donc dans le 
+  profil le traitement des enfants de cette unité.
+
+  Problème : quand une unité documentaire vide contenait une unité documentaire vide, on arrêtait
+  le parcours du profil à la première unité vide, MAIS on continuait à parcourir l’arbre et on 
+  tombait sur sa fille qui est vide alors qu’on était passé à la sœur dans le profil.
+
+
+-------------------------
+Changements du 2015-06-18
+
+- Ajout du contrôle de la présence des balises Identification en cas de Document multiples dans une
+  unité documentaire dans la classe RngProfileController
+- Contrôle compatible avec le SEDA 1.0
+
+-------------------------
+Changements du 2015-06-17
+
+- En fin de passe 1 contrôle du nombre de documents des unités documentaires obligatoires
+  Pas de déclenchement de la passe 2 si une unité documentaire obligatoire n'a pas de documents
+
+-------------------------
+Changements du 2015-06-10
+
+- Corrections gestion des pré requis de chargement du profil, des données, de la base de données
+  + captation d'exceptions sur le calcul d'intégrité
+
+-------------------------
+Changements du 2015-06-03
+
+- Compatibilité avec le SEDA 1.0
+  Le changement du profil de SEDA 0.2 vers SEDA 1.0 n'a pas d'impact sur les données métier
+  
+- Génération des éléments optionnels de type oneOrMore (c'est-à-dire au minimum un élément) pour respecter la conformité avec le profil
+  Les éléments totalement optionnels (optional ou zeroOrMore) ne sont pas générés puisqu'ils ne provoquent pas de non conformité
+
+-------------------------
+Changements du 2015-05-21
+
+La dernière version du générateur de bordereaux de versements traite les problématiques du profil d’archivages des marchés publics.
+La version précédente permettait de générer  une et une seule unité documentaire dans le bordereau de versement pour chaque unité documentaire trouvée dans le profil d’archivage. Cette limitation ne permettait pas de traiter les marchés publics.
+Les TAGs qui permettaient de lier les unités documentaires aux documents avaient donc cette simple forme : « TAG_UNITE_DOCUMENTAIRE_1 » à la fois dans le profil et les données métier.
+Ces TAGs sont positionnés dans l’attribut SchemeId  de la balise ArchivalAgencyObjectIdenitfier.
+1)	Marchés allotis
+Un marché peut contenir plusieurs lots. Une seule unité documentaire (contenant d’autres unités documentaires) décrit ce que l’on attend comme documents pour chaque lot.
+Chacun des lots utilise la structure définie par une seule unité documentaire. Cette structure est répétée autant de fois qu’il y a de lots.
+Les TAGs qui permettent de lier les unités documentaires aux documents peuvent prendre une forme plus complexe : 
+-	« TAG_LOT+ » dans le profil d’archivage ;
+-	« TAG_LOT{#3] » dans les données métier (3ème lot).
+
+2)	Réponses des entreprises
+Pour les marchés, qu’ils soient allotis ou non, plusieurs entreprises peuvent proposer leur candidature.  Chaque candidature est structurée de la même façon et cette organisation est décrite une seul fois dans le profil d’archivage.
+Chacune des candidatures d’entreprise utilise la structure définie par une seule unité documentaire. Cette structure est répétée autant de fois qu’il y a de candidatures d’entreprises. Ceci peut ^donc être le cas dans un lot qui est lui-même une répétition d’une structure définie une seule fois dans le profil.
+Les TAGs qui permettent de lier les unités documentaires aux documents peuvent prendre une forme encore plus complexe : 
+-	« TAG_ENTREPRISE+ » dans le profil d’archivage (l’unité documentaire est fille de l’unité documentaire « TAG_LOT+ »)  ;
+-	« TAG_LOT{#3]//TAG_ENTREPRISE[#2] » dans les données métier (2ème entreprise candidate pour le 3ème lot).
+
+3)	Types de documents
+Le profil marchés publics (mais il n’est pas le seul) contient des unités documentaires dans lesquelles plusieurs types de documents peuvent être enregistrés. On peut ainsi avoir de 0 à N documents de type offre, suivis de 0 à N documents de type signature.
+Le TAG se trouve cette fois ci dans l’attribut SchemeId de la balise Identification des documents.
+Les TAGs qui permettent de lier les unités documentaires aux documents peuvent prendre une forme encore plus complexe : 
+-	« ENGAGEMENT » dans le profil d’archivage (Le document est dans l’unité documentaire « TAG_ENTREPRISE+ »  qui est fille de l’unité documentaire « TAG_LOT+ »)  ;
+-	« TAG_LOT{#3]//TAG_ENTREPRISE[#2]{ENGAGEMENT} » dans les données métier (engagement de la 2ème entreprise candidate pour le 3ème lot).

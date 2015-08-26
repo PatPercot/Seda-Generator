@@ -1,0 +1,14 @@
+**************************
+2015-07-09
+	Bug si SAEUrl est différent entre BDD et code WS
+
+**************************
+2015-07-06
+	Ajouter un contrôle pour les mots-clés, la description du contenu doit être obligatoire pour que le mot-clé soit généré
+
+**************************
+2015-06-19 
+	Ajouter la captation de l'exception dans le cas où le répertoire est inexistant pour le fichier bordereau
+	OU ERREUR droits insuffisants sans doute aussi
+	Une exception non gérée du type 'System.IO.DirectoryNotFoundException' s'est produite dans System.Xml.dll
+	Informations supplémentaires : Impossible de trouver une partie du chemin d'accès 'D:\DEV_PPE\tests\CGI\Test_MARCHES-V5bis\WORK\bordereau-marches-V5bis.xml'.
