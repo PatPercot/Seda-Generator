@@ -34,7 +34,7 @@ namespace RngProfileControllerUnitTest {
          * */
         public void TestErreursTagDoclistIdentification() {
             StreamWriter streamWriter = null;
-            String traceFile = @"../../../TestCases/ProfileController/profil_erreurs_tags_doclist_identification-traces.txt";
+            String traceFile = @"../../../TestCases/ProfileController/traces/profil_erreurs_tags_doclist_identification-traces.txt";
 
             String profileFile = @"../../../TestCases/ProfileController/profiles/profil_erreurs_tags_doclist_identification.rng";
 
