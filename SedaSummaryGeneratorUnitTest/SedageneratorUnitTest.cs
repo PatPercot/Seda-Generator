@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SedaSummaryGenerator;
 
-namespace RngProfileControllerUnitTest {
+namespace SedaSummaryGeneratorUnitTest {
     [TestClass]
-    public class UnitTest1 {
+    public class SedageneratorUnitTest {
         [TestMethod]
         public void TestMethod1() {
         }

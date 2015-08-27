@@ -1,0 +1,39 @@
+,#ContainsName[LOT[#1]],Lot premier du marché
+
+,#ContainsName[LOT[#1]//OR_ETP[#1]//REGROUPEMENT_1],Unité fictive de regroupement pour l'entreprise 1 et le lot 1
+,#ContainsName[LOT[#1]//OR_ETP[#1]],Offre retenue de l'entreprise 1 pour le lot 1
+,document1e1l1.txt,LOT[#1]//OR_ETP[#1]//OFFRE_R,Document 1 E1 L1,01/12/2014 12:00:00
+,#ContainsName[LOT[#1]//OR_ETP[#1]//ENGAGT_R],Engagement retenu
+,document2e1l1.txt,LOT[#1]//OR_ETP[#1]//ENGAGT_R,Document 2 E1 L1,01/12/2014 12:00:00
+
+,#ContainsName[LOT[#1]//OR_ETP[#2]//REGROUPEMENT_1],Unité fictive de regroupement pour l'entreprise 2 et le lot 1
+,#ContainsName[LOT[#1]//OR_ETP[#2]],Offre retenue de l'entreprise 2 pour le lot 1
+,document1e2l1.txt,LOT[#1]//OR_ETP[#2]//OFFRE_R,Document 1 E2 L1,01/12/2014 12:00:00
+,#ContainsName[LOT[#1]//OR_ETP[#2]//ENGAGT_R],Engagement retenu
+,document2e2l1.txt,LOT[#1]//OR_ETP[#2]//ENGAGT_R,Document 2 E2 L1,01/12/2014 12:00:00
+
+,#ContainsName[LOT[#1]//ONR_ETP[#1]],Offre non retenue de l'entreprise 1 pour le lot 1
+,document1e1l1nr.txt,LOT[#1]//ONR_ETP[#1]//OFFRE_NR,Document NR 1 E1 L1,01/12/2014 12:00:00
+,document2e1l1nr.txt,LOT[#1]//ONR_ETP[#1]//ENGAGT_NR,Document NR 2 E1 L1,01/12/2014 12:00:00
+
+,#ContainsName[LOT[#1]//ONR_ETP[#2]],Offre non retenue de l'entreprise 2 pour le lot 1
+,document1e2l1nr.txt,LOT[#1]//ONR_ETP[#2]//OFFRE_NR,Document NR 1 E2 L1,01/12/2014 12:00:00
+,document2e2l1nr.txt,LOT[#1]//ONR_ETP[#2]//ENGAGT,Document NR 2 E2 L1,01/12/2014 12:00:00
+
+,#ContainsName[LOT[#2]],Lot second du marché
+
+,#ContainsName[LOT[#2]//OR_ETP[#1]],Offre retenue de l'entreprise 1 pour le lot 2
+,document1e1l2.txt,LOT[#2]//OR_ETP[#1]//OFFRE_R,Document 1 E1 L2,01/12/2014 12:00:00
+,document2e1l2.txt,LOT[#2]//OR_ETP[#1]//ENGAGT_R,Document 2 E1 L2,01/12/2014 12:00:00
+
+,#ContainsName[LOT[#2]//OR_ETP[#2]],Offre retenue de l'entreprise 2 pour le lot 2
+,document1e2l2.txt,LOT[#2]//OR_ETP[#2]//OFFRE_R,Document 1 E2 L2,01/12/2014 12:00:00
+,document2e2l2.txt,LOT[#2]//OR_ETP[#2]//ENGAGT_R,Document 2 E2 L2,01/12/2014 12:00:00
+
+,#ContainsName[LOT[#2]//ONR_ETP[#1]],Offre non retenue de l'entreprise 1 pour le lot 2
+,document1e1l1nr.txt,LOT[#2]//ONR_ETP[#1]//OFFRE_NR,Document NR 1 E1 L1,01/12/2014 12:00:00
+,document2e1l1nr.txt,LOT[#2]//ONR_ETP[#1]//ENGAGT_NR,Document NR 2 E1 L1,01/12/2014 12:00:00
+
+,#ContainsName[LOT[#2]//ONR_ETP[#2]],Offre non retenue de l'entreprise 2 pour le lot 2
+,document1e2l1nr.txt,LOT[#2]//ONR_ETP[#2]//OFFRE_NR,Document NR 1 E2 L1,01/12/2014 12:00:00
+,document2e2l1nr.txt,LOT[#2]//ONR_ETP[#2]//ENGAGT_NR,Document NR 2 E2 L1,01/12/2014 12:00:00

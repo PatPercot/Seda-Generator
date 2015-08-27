@@ -1,0 +1,25 @@
+Les testcases situés ici permettent de tester le bon fonctionnement global du générateur
+
+Ils sont divisés en deux parties :
+- le contrôle des profils d'archivage dans ProfileController
+- la génération des bordereaux de transfert dans ProfileGenerator
+
+À venir :
+- vérification des données métier confrontées au profil d'archivage
+
+
+1) ProfileController
+
+Un répertoire profiles contient les profils à tester
+Les erreurs attendues et la structure attendue sont dans les testcases
+Un répertoire traces contient les traces d'exécution
+
+
+2) ProfileGenerator
+
+Un répertoire profiles contient les profils utilisés pour la production des bordereaux
+Un répertoire datafiles contient les données métier à utiliser pour la production des bordereaux
+Un répertoire database contient les informations à mettre dans la base de données pour une exécution correcte
+Les erreurs attendues et la structure attendue sont dans les testcases
+Un répertoire traces contient les traces d'exécution
+Un répertoire profiles-and-data-not-yet-under-test contient,à titre d'exemple, des profils et données qui ne sont pas encore sous tests
