@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArchiveTransfer xmlns="fr:gouv:ae:archive:draft:standard_echange_v0.2">
+  <Comment />
+  <Date>2015-08-28T15:54:49.3528976Z</Date>
+  <TransferIdentifier>CG56_MARCHE_0000000111</TransferIdentifier>
+  <TransferringAgency>
+    <Identification>1234</Identification>
+    <Name>Service versant</Name>
+  </TransferringAgency>
+  <ArchivalAgency>
+    <Identification>5678</Identification>
+    <Name>Service d'archives</Name>
+  </ArchivalAgency>
+  <Integrity>
+    <Contains algorithme="http://www.w3.org/2000/09/xmldsig#sha1">fb20d26a36b8368ea31695298ca0222a31968847</Contains>
+    <UnitIdentifier>document1e1.txt</UnitIdentifier>
+  </Integrity>
+  <Integrity>
+    <Contains algorithme="http://www.w3.org/2000/09/xmldsig#sha1">fb20d26a36b8368ea31695298ca0222a31968847</Contains>
+    <UnitIdentifier>document2e1.txt</UnitIdentifier>
+  </Integrity>
+  <Integrity>
+    <Contains algorithme="http://www.w3.org/2000/09/xmldsig#sha1">fb20d26a36b8368ea31695298ca0222a31968847</Contains>
+    <UnitIdentifier>document1e2.txt</UnitIdentifier>
+  </Integrity>
+  <Integrity>
+    <Contains algorithme="http://www.w3.org/2000/09/xmldsig#sha1">fb20d26a36b8368ea31695298ca0222a31968847</Contains>
+    <UnitIdentifier>document2e2.txt</UnitIdentifier>
+  </Integrity>
+  <Integrity>
+    <Contains algorithme="http://www.w3.org/2000/09/xmldsig#sha1">fb20d26a36b8368ea31695298ca0222a31968847</Contains>
+    <UnitIdentifier>document3e2.txt</UnitIdentifier>
+  </Integrity>
+  <Integrity>
+    <Contains algorithme="http://www.w3.org/2000/09/xmldsig#sha1">fb20d26a36b8368ea31695298ca0222a31968847</Contains>
+    <UnitIdentifier>document1e3.txt</UnitIdentifier>
+  </Integrity>
+  <Integrity>
+    <Contains algorithme="http://www.w3.org/2000/09/xmldsig#sha1">fb20d26a36b8368ea31695298ca0222a31968847</Contains>
+    <UnitIdentifier>document2e3.txt</UnitIdentifier>
+  </Integrity>
+  <Integrity>
+    <Contains algorithme="http://www.w3.org/2000/09/xmldsig#sha1">fb20d26a36b8368ea31695298ca0222a31968847</Contains>
+    <UnitIdentifier>document3e3.txt</UnitIdentifier></Integrity>
+  <Contains>
+    <DescriptionLanguage listVersionID="edition 2009">fr</DescriptionLanguage>
+    <DescriptionLevel listVersionID="edition 2009">fonds</DescriptionLevel>
+    <Name>Versement avec unités documentaires répétées</Name>
+    <ContentDescription>
+      <CustodialHistory>ERR: key '#CustodialHistory#1' not found</CustodialHistory>
+      <Language listVersionID="edition 2009">fr</Language>
+    </ContentDescription>
+    <Contains>
+      <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OFFRES_RETENUES">CG56_MARCHE_0000000111_00001</ArchivalAgencyObjectIdentifier>
+      <DescriptionLevel listVersionID="edition 2009">file</DescriptionLevel>
+      <Name>Offres retenues</Name>
+      <ContentDescription>
+        <Language listVersionID="edition 2009">aa</Language>
+        <ContentDescriptive>
+          <KeywordContent>mot-clé 1 pour l'offre retenue</KeywordContent>
+        </ContentDescriptive>
+        <ContentDescriptive>
+          <KeywordContent>mot-clé 2 pour l'offre retenue</KeywordContent>
+        </ContentDescriptive>
+      </ContentDescription>
+      <Contains>
+        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000111_00002</ArchivalAgencyObjectIdentifier>
+        <DescriptionLevel listVersionID="edition 2009">file</DescriptionLevel>
+        <Name>Offre retenue de l'entreprise 1</Name>
+        <ContentDescription>
+          <Language listVersionID="edition 2009">aa</Language>
+          <ContentDescriptive />
+        </ContentDescription>
+        <Document>
+          <Attachment mimeCode="text/plain" filename="document1e1.txt" />
+          <Creation>2014-12-01T00:00:00.0000000</Creation>
+          <Description>Document 1 E1</Description>
+          <Type listVersionID="edition 2009">CDO</Type>
+        </Document>
+        <Document>
+          <Attachment mimeCode="text/plain" filename="document2e1.txt" />
+          <Creation>2014-12-01T00:00:00.0000000</Creation>
+          <Description>Document 2 E1</Description>
+          <Type listVersionID="edition 2009">CDO</Type>
+        </Document>
+      </Contains>
+      <Contains>
+        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000111_00003</ArchivalAgencyObjectIdentifier>
+        <DescriptionLevel listVersionID="edition 2009">file</DescriptionLevel>
+        <Name>Offre retenue de l'entreprise 2</Name>
+        <ContentDescription>
+          <Language listVersionID="edition 2009">aa</Language>
+          <ContentDescriptive />
+        </ContentDescription>
+        <Document>
+          <Attachment mimeCode="text/plain" filename="document1e2.txt" />
+          <Creation>2014-12-01T00:00:00.0000000</Creation>
+          <Description>Document 1 E2</Description>
+          <Type listVersionID="edition 2009">CDO</Type>
+        </Document>
+        <Document>
+          <Attachment mimeCode="text/plain" filename="document2e2.txt" />
+          <Creation>2014-12-01T00:00:00.0000000</Creation>
+          <Description>Document 2 E2</Description>
+          <Type listVersionID="edition 2009">CDO</Type>
+        </Document>
+        <Document>
+          <Attachment mimeCode="text/plain" filename="document3e2.txt" />
+          <Creation>2014-12-01T00:00:00.0000000</Creation>
+          <Description>Document 3 E2</Description>
+          <Type listVersionID="edition 2009">CDO</Type>
+        </Document>
+      </Contains>
+      <Contains>
+        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000111_00004</ArchivalAgencyObjectIdentifier>
+        <DescriptionLevel listVersionID="edition 2009">file</DescriptionLevel>
+        <Name>Offre retenue de l'entreprise 33333</Name>
+        <ContentDescription>
+          <Language listVersionID="edition 2009">aa</Language>
+          <ContentDescriptive />
+          <ContentDescriptive />
+        </ContentDescription>
+        <Document>
+          <Attachment mimeCode="text/plain" filename="document1e3.txt" />
+          <Creation>2014-12-01T00:00:00.0000000</Creation>
+          <Description>Document réponse  1 E2</Description>
+          <Type listVersionID="edition 2009">CDO</Type>
+        </Document>
+        <Document>
+          <Attachment mimeCode="text/plain" filename="document2e3.txt" />
+          <Creation>2014-12-01T00:00:00.0000000</Creation>
+          <Description>Document signature  2 E2</Description>
+          <Type listVersionID="edition 2009">CDO</Type>
+        </Document>
+        <Document>
+          <Attachment mimeCode="text/plain" filename="document3e3.txt" />
+          <Creation>2014-12-01T00:00:00.0000000</Creation>
+          <Description>Document jeton d'horodatage 3 E2</Description>
+          <Type listVersionID="edition 2009">CDO</Type>
+        </Document>
+      </Contains>
+    </Contains>
+  </Contains>
+</ArchiveTransfer>
