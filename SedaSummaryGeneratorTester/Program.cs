@@ -19,6 +19,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Collections.Specialized;
+using System.Configuration;
 using SedaSummaryGenerator;
 
 namespace SedaSummaryGeneratorTester {
@@ -73,7 +74,7 @@ namespace SedaSummaryGeneratorTester {
             //String fichier_bordereau = @"D:\DEV_PPE\tests\work\bordereau-marche-une_unite-trois_documents.xml";
             //String traceFile = @"D:/DEV_PPE/traces/trace-marche-une_unite-trois_documents.txt";
 
-            String informationsDatabase = "Server=VM-PSQL02\\OUTILS_P;Database=BW_DEV;User=App-Blueway-Exploitation;Password=Pi=3.14159;";
+            String informationsDatabase = ConfigurationManager.AppSettings["databaseConnexion"];
 
             Action<Exception, String> eh = (ex, str) =>
             {
@@ -126,7 +127,7 @@ namespace SedaSummaryGeneratorTester {
         {
             StreamWriter streamWriter = null;
             String traceFile = "D:/DEV_PPE/traces/trace-PES.txt";
-            String informationsDatabase = "Server=VM-PSQL02\\OUTILS_P;Database=BW_DEV;User=App-Blueway-Exploitation;Password=Pi=3.14159;";
+            String informationsDatabase = ConfigurationManager.AppSettings["databaseConnexion"];
 
             Action<Exception, String> eh = (ex, str) => {
                 Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);
@@ -172,7 +173,7 @@ namespace SedaSummaryGeneratorTester {
         static void genererESCO() {
             StreamWriter streamWriter = null;
             String traceFile = "D:/DEV_PPE/devel/RNG/trace.txt";
-            String informationsDatabase = "Server=VM-PSQL02\\OUTILS_P;Database=BW_DEV;User=App-Blueway-Exploitation;Password=Pi=3.14159;";
+            String informationsDatabase = ConfigurationManager.AppSettings["databaseConnexion"];
 
             Action<Exception, String> eh = (ex, str) => {
                 Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);
