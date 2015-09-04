@@ -25,12 +25,13 @@ namespace RngProfileControllerTester {
     class Program {
         static void Main(string[] args) {
             StreamWriter streamWriter = null;
-            String traceFile = "D:/DEV_PPE/devel/RNG/trace-control.txt";
+            String traceFile = @"D:\DEV_PPE\devel\gw-quimper\trace-control.txt";
 
             //String profileFile = @"D:\DEV_PPE\tests\marches\20150619Profil_avec_doc_falcultatif_donne_avant_engagement\EMEG_PROFIL_MP_0002_schema.rng";
             //String profileFile = @"D:\DEV_PPE\tests\marches\repetition_une_unite-1-v1_0_schema.rng";
 
-            String profileFile = @"D:\DEV_PPE\tests\marches\repetition_une_unite-trois_documents-optionnels_schema.rng";
+            //String profileFile = @"D:\DEV_PPE\tests\marches\repetition_une_unite-trois_documents-optionnels_schema.rng";
+            String profileFile = @"D:\DEV_PPE\devel\gw-quimper\repetition_une_unite_deux_documents_schema.rng";
 
             //String profileFile = @"D:\DEV_PPE\tests\CGI\Test_MARCHES-V5bis\EMEG_PROFIL_MP_0002-PPE_schema.rng";
 

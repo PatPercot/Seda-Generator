@@ -136,6 +136,7 @@ namespace SedaSummaryGenerator {
         override public void prepareInformationsWithDatabase(String informationsDatabase, String baseURI, String accordVersement)
         {
             informationsLoaded = false;
+            if (traceActions) tracesWriter.WriteLineFlush("informationsDatabase='" + informationsDatabase +"'");
             using (SqlConnection connection = new SqlConnection(informationsDatabase)) {
                 try {
                     connection.Open();

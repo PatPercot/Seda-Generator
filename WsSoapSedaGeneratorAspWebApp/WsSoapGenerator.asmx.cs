@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Services;
+using System.Configuration;
 using SedaSummaryGenerator;
 
 namespace WsSoapSedaGeneratorAspWebApp {
@@ -131,7 +132,6 @@ namespace WsSoapSedaGeneratorAspWebApp {
         {
             String traceFile = buildTraceFileName(repLog, "PBV");
             StreamWriter streamWriter = null;
-            String informationsDatabase = "Server=VM-PSQL02\\OUTILS_P;Database=BW_DEV;User=App-Blueway-Exploitation;Password=Pi=3.14159;";
 
             Action<Exception, String> eh = (ex, str) => {
                 Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);
@@ -141,6 +141,10 @@ namespace WsSoapSedaGeneratorAspWebApp {
             try {
                 streamWriter = new StreamWriter(traceFile);
             } catch (IOException e) { eh(e, "Mauvaise syntaxe de nom de fichier"); } catch (UnauthorizedAccessException e) { eh(e, "Droits d'accès à corriger"); } catch (System.Security.SecurityException e) { eh(e, "Droits d'accès à corriger"); }
+
+            streamWriter.WriteLineFlush("Prepare to 'ConfigurationManager.AppSettings[\"databaseConnexion\"]'");
+            String informationsDatabase = ConfigurationManager.AppSettings["databaseConnexion"];
+            streamWriter.WriteLineFlush("informationsDatabase='" + informationsDatabase + "'");
 
             SedaSummaryGenerator.SedaSummaryGenerator ssg = new SedaSummaryRngGenerator();
             ssg.setTracesWriter(streamWriter);

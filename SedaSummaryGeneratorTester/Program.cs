@@ -35,10 +35,15 @@ namespace SedaSummaryGeneratorTester {
         static void genererMarcheUneUnite() {
             StreamWriter streamWriter = null;
 
-            String accordVersement = "CG56_ACCORD_MARCHE_TEST_1";
-            String fichier_test = @"D:\DEV_PPE\tests\marches\liste_repetition_une_unite-1.txt";
-            String fichier_bordereau = @"D:\DEV_PPE\tests\work\bordereau-marche-une-unite.xml";
-            String traceFile = "D:/DEV_PPE/traces/trace-marche-une-unite.txt";
+            String accordVersement = "CD29_ACCORD_ENREG_SONORES";
+            String fichier_test = @"D:\DEV_PPE\devel\gw-quimper\liste_repetition_une_unite-deux_documents.txt";
+            String fichier_bordereau = @"D:\DEV_PPE\devel\gw-quimper\bordereau-enrson-1.xml";
+            String traceFile = @"D:\DEV_PPE\devel\gw-quimper\traces-enrson-1.txt";
+
+            //string accordversement = "cg56_accord_marche_test_1";
+            //string fichier_test = @"d:\dev_ppe\tests\marches\liste_repetition_une_unite-1.txt";
+            //string fichier_bordereau = @"d:\dev_ppe\tests\work\bordereau-marche-une-unite.xml";
+            //string tracefile = "d:/dev_ppe/traces/trace-marche-une-unite.txt";
 
             //String accordVersement = "CG56_ACCORD_MARCHE_TEST_2";
             //String fichier_test = @"D:\DEV_PPE\tests\marches\liste_repetition_une_unite_avec_sous_unites-1.txt";

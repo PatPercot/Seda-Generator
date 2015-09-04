@@ -3,25 +3,33 @@
   Pour plus d'informations sur la configuration de votre application ASP.NET, consultez
   http://go.microsoft.com/fwlink/?LinkId=169433
   -->
+
+  
+<!--
+  Voir et modifier la section appSettings à la fin du fichier de configuration
+-->
+
+
 <configuration>
   <configSections>
     <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
-    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false"/>
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
   </configSections>
   <connectionStrings>
-    <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\v11.0;AttachDbFilename=|DataDirectory|\aspnet-WsSoapSedaGeneratorAspWebApp-20141119043217.mdf;Initial Catalog=aspnet-WsSoapSedaGeneratorAspWebApp-20141119043217;Integrated Security=True" providerName="System.Data.SqlClient"/>
+    <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\v11.0;AttachDbFilename=|DataDirectory|\aspnet-WsSoapSedaGeneratorAspWebApp-20141119043217.mdf;Initial Catalog=aspnet-WsSoapSedaGeneratorAspWebApp-20141119043217;Integrated Security=True"
+      providerName="System.Data.SqlClient" />
   </connectionStrings>
   <system.web>
-    <authentication mode="None"/>
-    <compilation debug="true" targetFramework="4.5"/>
-    <httpRuntime targetFramework="4.5"/>
+    <authentication mode="None" />
+    <compilation debug="true" targetFramework="4.5" />
+    <httpRuntime targetFramework="4.5" />
     <pages>
       <namespaces>
-        <add namespace="System.Web.Optimization"/>
-        <add namespace="Microsoft.AspNet.Identity"/>
+        <add namespace="System.Web.Optimization" />
+        <add namespace="Microsoft.AspNet.Identity" />
       </namespaces>
       <controls>
-        <add assembly="Microsoft.AspNet.Web.Optimization.WebForms" namespace="Microsoft.AspNet.Web.Optimization.WebForms" tagPrefix="webopt"/>
+        <add assembly="Microsoft.AspNet.Web.Optimization.WebForms" namespace="Microsoft.AspNet.Web.Optimization.WebForms" tagPrefix="webopt" />
       </controls>
     </pages>
     <membership>
@@ -29,7 +37,7 @@
         <!--
 	      L'appartenance ASP.NET est désactivée dans ce modèle. Activez le lien suivant http://go.microsoft.com/fwlink/?LinkId=301889 pour en savoir plus sur la prise en charge de l'appartenance ASP.NET dans ce modèle
         -->
-        <clear/>
+        <clear />
       </providers>
     </membership>
     <profile>
@@ -37,7 +45,7 @@
         <!--
 	      Le rôle d’appartenances ASP.NET est désactivé dans cet exemple. Activez le lien suivant http://go.microsoft.com/fwlink/?LinkId=301889 pour en savoir plus sur la prise en charge de l'appartenance ASP.NET dans ce modèle
         -->
-        <clear/>
+        <clear />
       </providers>
     </profile>
     <roleManager>
@@ -45,7 +53,7 @@
 	        Le rôle d’appartenances ASP.NET est désactivé dans cet exemple. Activez le lien suivant http://go.microsoft.com/fwlink/?LinkId=301889 pour en savoir plus sur la prise en charge de l'appartenance ASP.NET dans ce modèle
         -->
       <providers>
-        <clear/>
+        <clear />
       </providers>
     </roleManager>
     <!--
@@ -56,40 +64,36 @@
       -->
     <sessionState mode="InProc" customProvider="DefaultSessionProvider">
       <providers>
-        <add name="DefaultSessionProvider" type="System.Web.Providers.DefaultSessionStateProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" connectionStringName="DefaultConnection"/>
+        <add name="DefaultSessionProvider" type="System.Web.Providers.DefaultSessionStateProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" connectionStringName="DefaultConnection" />
       </providers>
     </sessionState>
   </system.web>
   <system.webServer>
     <modules>
-      <remove name="FormsAuthenticationModule"/>
+      <remove name="FormsAuthenticationModule" />
     </modules>
   </system.webServer>
   <runtime>
     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
-			<dependentAssembly>
-				<assemblyIdentity name="EntityFramework" publicKeyToken="B77A5C561934E089" culture="neutral"/>
-				<bindingRedirect oldVersion="0.0.0.0-6.0.0.0" newVersion="6.0.0.0"/>
-			</dependentAssembly>
       <dependentAssembly>
-        <assemblyIdentity name="WebGrease" culture="neutral" publicKeyToken="31bf3856ad364e35"/>
-        <bindingRedirect oldVersion="0.0.0.0-1.5.2.14234" newVersion="1.5.2.14234"/>
+        <assemblyIdentity name="WebGrease" culture="neutral" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-1.5.2.14234" newVersion="1.5.2.14234" />
       </dependentAssembly>
     </assemblyBinding>
   </runtime>
   <entityFramework>
     <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
       <parameters>
-        <parameter value="v11.0"/>
+        <parameter value="v11.0" />
       </parameters>
     </defaultConnectionFactory>
     <providers>
-      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer"/>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
     </providers>
   </entityFramework>
-
+  
   <appSettings>
-    <add key="databaseConnexion" value="Server=VM-PSQL02\OUTILS_P;Database=BW_DEV;User=App-Blueway-Exploitation;Password=Pi=3.14159;"/>
+    <add key="databaseConnexion" value="Remplacer par la chaîne de connexion SQL server"/> <!-- example : value="Server=SQLServer\Instance;Database=DatabaseName;User=UserLogin;Password=UserPassword;" -->
   </appSettings>
 
 </configuration>
