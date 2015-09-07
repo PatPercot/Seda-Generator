@@ -1,4 +1,36 @@
 **************************
+2015-09-07
+	Ajouter des try catch autour des Datetime.Parse pour signaler en erreur les dates
+	qui déclenchent une exception. À noter qu'une date inexistante et un format erroné
+	déclenchent l'exception System.FormatException
+
+**************************
+2015-09-07
+	Créer un outil de contrôle des données métier (confrontées au prodil d'archivage)
+	Points à vérifier :
+		Une donnée est fournie alors qu'elle est fixe dans le profil
+		Un TAG utilisé n'est pas référencé dans le profil
+		Le TAG est indiqué comme répétable alors qu'il ne l'est pas dans le profil
+		Le TAG est fourni sous forme fixe alors qu'il est répétable dans le profil
+		Le format de la date est incorrect ou la date est inexistante
+		Le TAG n'est pas générable car le nom de balise n'existe pas 
+			(vérifier ContainsName, Originating_Description, ...)
+		Nombre de champs incorrect ou séparateur mal choisi
+		Vérification des champs d'une ligne document (qui peuvent être mal ordonnés) :
+			TAG non conforme
+			Syntaxe du nom de fichier incorrecte
+			Date du fichier non conforme
+			Nombre de champs insuffisant
+			
+**************************
+2015-09-07
+	Rendre les outils de contrôle exécutables.
+	Soit par une interface utilisateur avec choix des fichiers
+	Soit par fichier de configuration
+		Cette option semble la plus pratique dans un processus de développement
+		car facilement répétable sans avoir à sélectionner des fichiers dans un répertoire
+
+**************************
 2015-07-09
 	Bug si SAEUrl est différent entre BDD et code WS
 
