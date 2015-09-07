@@ -871,7 +871,8 @@ namespace SedaSummaryGenerator {
          * */
         private String getTag(String tag, String context) {
             DateTime date;
-            String dateString;
+            String dateString = String.Empty;
+            String dateTraitee;
             switch (tag) {
                 case "Receipt":
                     return "TODO: Receipt";
@@ -882,17 +883,44 @@ namespace SedaSummaryGenerator {
                 case "Duration":
                     return "TODO: Duration";
                 case "Creation":
-                    date = DateTime.Parse(archiveDocuments.getDocumentDate(), new System.Globalization.CultureInfo("fr-FR", false));
-                    return date.Date.ToString("o");
+                    dateTraitee = archiveDocuments.getDocumentDate();
+                    try {
+                        date = DateTime.Parse(dateTraitee, new System.Globalization.CultureInfo("fr-FR", false));
+                        dateString = date.Date.ToString("o");
+                    } catch (FormatException e) {
+                        dateString = "#ERR date " + dateTraitee;
+                        errorsList.Add("La date '" + dateTraitee + "' du document '" + archiveDocuments.getFileName() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
+                    }
+                    return dateString;
                 case "OldestDate":
-                    date = DateTime.Parse(archiveDocuments.getOldestDate(), new System.Globalization.CultureInfo("fr-FR", false));
-                    dateString = date.ToString("o");
-                    return dateString.Substring(0, dateString.IndexOf("T"));
+                    dateTraitee = archiveDocuments.getOldestDate();
+                    try {
+                        date = DateTime.Parse(dateTraitee, new System.Globalization.CultureInfo("fr-FR", false));
+                        int posT = dateString.IndexOf("T");
+                        if (posT > 0)
+                            dateString = date.ToString("o").Substring(0, posT);
+                        else
+                            dateString = date.ToString("o");
+                    } catch (FormatException e) {
+                        dateString = "#ERR date " + dateTraitee;
+                        errorsList.Add("La date '" + dateTraitee + "' du document '" + archiveDocuments.getFileName() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
+                    }
+                    return dateString;
                 case "StartDate":
                 case "LatestDate":
-                    date = DateTime.Parse(archiveDocuments.getLatestDate(), new System.Globalization.CultureInfo("fr-FR", false));
-                    dateString = date.ToString("o");
-                    return dateString.Substring(0, dateString.IndexOf("T"));
+                    dateTraitee = archiveDocuments.getLatestDate();
+                    try {
+                        date = DateTime.Parse(archiveDocuments.getLatestDate(), new System.Globalization.CultureInfo("fr-FR", false));
+                        int posT = dateString.IndexOf("T");
+                        if (posT > 0)
+                            dateString = date.ToString("o").Substring(0, posT);
+                        else
+                            dateString = date.ToString("o");
+                    } catch (FormatException e) {
+                        dateString = "#ERR date " + dateTraitee;
+                        errorsList.Add("La date '" + dateTraitee + "' du document '" + archiveDocuments.getFileName() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
+                    }
+                    return dateString;
                 case "Date":
                     switch (context) {
                         case "/ArchiveTransfer":

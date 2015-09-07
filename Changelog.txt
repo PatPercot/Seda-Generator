@@ -1,4 +1,9 @@
 -------------------------
+Changements du 2015-09-07
+
+- Récupération des erreurs de formats de date dans SedaSummaryRngGenerator
+
+-------------------------
 Changements du 2015-06-24
 
 - Ajout de la génération de quelques métadonnées : Comment, CustodialHistory et attribut mimeCode

@@ -1,11 +1,5 @@
 **************************
 2015-09-07
-	Ajouter des try catch autour des Datetime.Parse pour signaler en erreur les dates
-	qui déclenchent une exception. À noter qu'une date inexistante et un format erroné
-	déclenchent l'exception System.FormatException
-
-**************************
-2015-09-07
 	Créer un outil de contrôle des données métier (confrontées au prodil d'archivage)
 	Points à vérifier :
 		Une donnée est fournie alors qu'elle est fixe dans le profil
