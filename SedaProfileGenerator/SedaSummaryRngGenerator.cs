@@ -809,7 +809,7 @@ namespace SedaSummaryGenerator {
                     break;
                 case "/ArchiveTransfer/Archive/ContentDescription/CustodialHistory": // SEDA 1.0
                 case "/ArchiveTransfer/Contains/ContentDescription/CustodialHistory": // SEDA 0.2
-                    dataString = archiveDocuments.getNextKeyValue("CustodialHistory", null);
+                    dataString = archiveDocuments.getKeyValue("CustodialHistory");
                     break;
                 case "/ArchiveTransfer/Archive/ContentDescription/Keyword/KeywordContent": // SEDA 1.0
                 case "/ArchiveTransfer/Contains/ContentDescription/ContentDescriptive/KeywordContent": // SEDA 0.2
