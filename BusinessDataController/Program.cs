@@ -1,48 +1,19 @@
-Données produites par le générateur
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-		Les chemins qui débutent par / sont des chemins absolus
-		Les chemins qui débutent par une balise sont des chemins relatifs (ils peuvent être précédés par d'autres balises)
-		[TagPath] représente un chemin de tags
-				soit un TAG seul, ex : REPONSE
-				soit un TAG qui doit être un fils d'un autre TAG, ex : LOT[#1]//REPONSE
-		Les sources sont : Métier (fichier des données métier), Database (la base de données), Auto (la valeur est générée par le code)
 
-Documents
-Xpath								Attribut			Source			Type												Seda
-
+/* Premiers éléments à contrôler
+ * 
+ * 
 Document/Description									Métier			Champ Nom (position 3)
 Document/Creation										Métier			Champ Date (position 4)
 Document/Attachment 				filename			Métier			Champ Nom (position 1)
-Document/Attachment 				mimeCode			Auto			Calcul
-Document/Size											Auto			Calcul
-Integrity							algorithme			Auto			Fixe : http://www.w3.org/2000/09/xmldsig#sha1
-Document/Integrity										Auto			Calcul												1.0
-/ArchiveTransfer/Integrity								Auto			Calcul												0.2
-LatestDate												Auto			Calcul (date la plus récente des documents)
-StartDate												Auto			Calcul (date la plus récente des documents)
-OldestDate												Auto			Calcul (date la plus ancienne des documents)
-
-
-
-
-
-
-Autres que documents
-
-Xpath																					Source			Type										Seda
-
-/ArchiveTransfer/Date																	Auto			Calcul date exécution du code
-/ArchiveTransfer/Contains/ContentDescription/Size																									0.2
-/ArchiveTransfer/TransferIdentifier														Auto			Préfixe+calcul          
 /ArchiveTransfer/Archive/Name															Métier			#TransferName								1.0
 /ArchiveTransfer/Contains/Name															Métier			#TransferName								0.2
 /ArchiveTransfer/Comment																Métier			#Comment
-/ArchiveTransfer/TransferringAgency/Description											Database		Champ TransferringAgencyDesc
-/ArchiveTransfer/TransferringAgency/Identification										Database		Champ TransferringAgencyId
-/ArchiveTransfer/TransferringAgency/Name												Database		Champ TransferringAgencyName
-/ArchiveTransfer/ArchivalAgency/Description												Database		Champ ArchivalAgencyDesc
-/ArchiveTransfer/ArchivalAgency/Identification											Database		Champ ArchivalAgencyId
-/ArchiveTransfer/ArchivalAgency/Name													Database		Champ ArchivalAgencyName
 /ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/BusinessType				Métier			#OriginatingAgency_BusinessType				1.0	
 /ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/Identification			Métier			#OriginatingAgency_Identification			1.0	
 /ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/Description				Métier			#OriginatingAgency_Description				1.0	
@@ -61,9 +32,15 @@ Xpath																					Source			Type										Seda
 /ArchiveTransfer/Contains/Contains/TransferringAgencyObjectIdentifier					Métier			TODO										0.2
 ArchiveObject/Name																		Métier			#ContainsName[TagPath]						1.0
 Contains/Contains/Name																	Métier			#ContainsName[TagPath]						0.2
-ArchiveObject/ArchivalAgencyObjectIdentifier											Auto			Préfixe+calcul          					1.0
-Contains/ArchivalAgencyObjectIdentifier													Auto			Préfixe+calcul          					0.2
-Document/Identification																	Auto			Préfixe+calcul          					0.2
 ArchiveObject/ContentDescription/Keyword/KeywordContent									Métier			#KeywordContent_TagPath[#x]					1.0
 Contains/ContentDescription/ContentDescriptive/KeywordContent							Métier			#KeywordContent_TagPath[#x]					0.2
 
+ * 
+ * */
+
+namespace BusinessDataController {
+    class Program {
+        static void Main(string[] args) {
+        }
+    }
+}

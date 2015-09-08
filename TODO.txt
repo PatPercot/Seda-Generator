@@ -1,4 +1,10 @@
 **************************
+2015-09-08
+	Contrôle des profils (voir aussi 2015-07-06)
+	Ajouter un contrôle sur la cardinalité de la balise "ArchivalAgencyObjectIdentifier" 
+		(la balise doit avoir une cardinalité 1,1)
+
+**************************
 2015-09-07
 	Créer un outil de contrôle des données métier (confrontées au prodil d'archivage)
 	Points à vérifier :
