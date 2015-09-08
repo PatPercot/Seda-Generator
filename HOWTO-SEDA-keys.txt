@@ -1,0 +1,70 @@
+Données produites par le générateur
+
+		Les chemins qui débutent par / sont des chemins absolus
+		Les chemins qui débutent par une balise sont des chemins relatifs (ils peuvent être précédés par d'autres balises)
+		[TagPath] représente un chemin de tags
+				soit un TAG seul, ex : REPONSE
+				soit un TAG qui doit être un fils d'un autre TAG, ex : LOT[#1]//REPONSE
+		Les sources sont : Métier (fichier des données métier), Database (la base de données), Auto (la valeur est générée par le code)
+
+Documents
+Xpath								Attribut			Source			Type												Seda
+
+Document/Attachment 				filename			Métier
+Document/Attachment 				mimeCode			Auto			Calcul
+Document/Size											Auto			Calcul
+Integrity							algorithme			Auto			Fixe : http://www.w3.org/2000/09/xmldsig#sha1
+Document/Integrity										Auto			Calcul												1.0
+/ArchiveTransfer/Integrity								Auto			Calcul												0.2
+Document/Description									Métier			Champ Nom (position 3)
+Creation												Métier			Champ Date (position 4)
+LatestDate												Auto			Calcul (date la plus récente des documents)
+StartDate												Auto			Calcul (date la plus récente des documents)
+OldestDate												Auto			Calcul (date la plus ancienne des documents)
+
+
+
+
+
+
+Autres que documents
+
+Xpath																					Source			Type										Seda
+
+/ArchiveTransfer/Date																	Auto			Calcul date exécution du code
+/ArchiveTransfer/Contains/ContentDescription/Size																									0.2
+/ArchiveTransfer/TransferIdentifier														Auto			Préfixe+calcul          
+/ArchiveTransfer/Archive/Name															Métier			#TransferName								1.0
+/ArchiveTransfer/Contains/Name															Métier			#TransferName								0.2
+/ArchiveTransfer/Archive/Comment														Métier			#Comment									1.0
+/ArchiveTransfer/Contains/Comment														Métier			#Comment									0.2
+/ArchiveTransfer/TransferringAgency/Description											Database		Champ TransferringAgencyDesc
+/ArchiveTransfer/TransferringAgency/Identification										Database		Champ TransferringAgencyId
+/ArchiveTransfer/TransferringAgency/Name												Database		Champ TransferringAgencyName
+/ArchiveTransfer/ArchivalAgency/Description												Database		Champ ArchivalAgencyDesc
+/ArchiveTransfer/ArchivalAgency/Identification											Database		Champ ArchivalAgencyId
+/ArchiveTransfer/ArchivalAgency/Name													Database		Champ ArchivalAgencyName
+/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/BusinessType				Métier			#OriginatingAgency_BusinessType				1.0	
+/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/Identification			Métier			#OriginatingAgency_Identification			1.0	
+/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/Description				Métier			#OriginatingAgency_Description				1.0	
+/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/LegalClassification		Métier			#OriginatingAgency_LegalClassification		1.0	
+/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/Name						Métier			#OriginatingAgency_Name						1.0	
+/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/BusinessType				Métier			#OriginatingAgency_BusinessType				0.2	
+/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/Identification			Métier			#OriginatingAgency_Identification			0.2	
+/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/Description				Métier			#OriginatingAgency_Description				0.2
+/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/LegalClassification		Métier			#OriginatingAgency_LegalClassification		0.2
+/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/Name						Métier			#OriginatingAgency_Name						0.2
+/ArchiveTransfer/Archive/ContentDescription/CustodialHistory							Métier			#CustodialHistory							1.0
+/ArchiveTransfer/Contains/ContentDescription/CustodialHistory							Métier			#CustodialHistory							0.2
+/ArchiveTransfer/Archive/ContentDescription/Keyword/KeywordContent						Métier			#KeywordContent[#x]							1.0
+/ArchiveTransfer/Contains/ContentDescription/ContentDescriptive/KeywordContent			Métier			#KeywordContent[#x]							0.2
+/ArchiveTransfer/Archive/ArchiveObject/TransferringAgencyObjectIdentifier				Métier			TODO										1.0
+/ArchiveTransfer/Contains/Contains/TransferringAgencyObjectIdentifier					Métier			TODO										0.2
+ArchiveObject/Name																		Métier			#ContainsName[TagPath]						1.0
+Contains/Contains/Name																	Métier			#ContainsName[TagPath]						0.2
+ArchiveObject/ArchivalAgencyObjectIdentifier											Auto			Préfixe+calcul          					1.0
+Contains/ArchivalAgencyObjectIdentifier													Auto			Préfixe+calcul          					0.2
+Document/Identification																	Auto			Préfixe+calcul          					0.2
+ArchiveObject/ContentDescription/Keyword/KeywordContent									Métier			#KeywordContent_TagPath[#x]					1.0
+Contains/ContentDescription/ContentDescriptive/KeywordContent							Métier			#KeywordContent_TagPath[#x]					0.2
+
