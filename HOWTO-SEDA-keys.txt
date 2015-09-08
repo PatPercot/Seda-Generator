@@ -36,8 +36,7 @@ Xpath																					Source			Type										Seda
 /ArchiveTransfer/TransferIdentifier														Auto			Préfixe+calcul          
 /ArchiveTransfer/Archive/Name															Métier			#TransferName								1.0
 /ArchiveTransfer/Contains/Name															Métier			#TransferName								0.2
-/ArchiveTransfer/Archive/Comment														Métier			#Comment									1.0
-/ArchiveTransfer/Contains/Comment														Métier			#Comment									0.2
+/ArchiveTransfer/Comment																Métier			#Comment									1.0
 /ArchiveTransfer/TransferringAgency/Description											Database		Champ TransferringAgencyDesc
 /ArchiveTransfer/TransferringAgency/Identification										Database		Champ TransferringAgencyId
 /ArchiveTransfer/TransferringAgency/Name												Database		Champ TransferringAgencyName
