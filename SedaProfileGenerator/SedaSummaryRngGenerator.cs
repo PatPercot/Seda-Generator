@@ -771,8 +771,7 @@ namespace SedaSummaryGenerator {
                 case "/ArchiveTransfer/Contains/Name": // SEDA 0.2
                     dataString = archiveDocuments.getKeyValue("TransferName");
                     break;
-                case "/ArchiveTransfer/Archive/Comment": // SEDA 1.0
-                case "/ArchiveTransfer/Contains/Comment": // SEDA 0.2
+                case "/ArchiveTransfer/Comment":
                     dataString = archiveDocuments.getKeyValue("Comment");
                     break;
                 case "/ArchiveTransfer/TransferringAgency/Description":
