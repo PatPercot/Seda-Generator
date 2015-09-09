@@ -41,6 +41,31 @@ Contains/ContentDescription/ContentDescriptive/KeywordContent							Métier			#K
 namespace BusinessDataController {
     class Program {
         static void Main(string[] args) {
+            if (args.Length < 1) {
+                System.Console.WriteLine("Syntaxe attendue : BusinessDataController nom-job-controle");
+                System.Console.WriteLine("nom-job-controle est une section dans le fichier jobs.config");
+                System.Console.WriteLine("Une section a la forme :");
+                System.Console.WriteLine("[data-control : nom-job-controle]");
+                System.Console.WriteLine("  trace = chemin/vers/fichier-de-trace.txt");
+                System.Console.WriteLine("  profil = chemin/vers/fichier-de-profil.rng");
+                System.Console.WriteLine("  data = chemin/vers/fichier-de-donnees-metier.txt");
+                System.Console.WriteLine("");
+                // return;
+            }
+
+            String jobName = "quimper"; // Remplacer par args[0]
+
+            SimpleConfig config = new SimpleConfig();
+            config.loadFile("./job.config");
+
+            // args[0] = job de type data-control à exécuter 
+            DataControlConfig datacontrol = config.getDatacontrolConfig(jobName);
+
+            System.Console.WriteLine("Contrôle métier de '" + datacontrol.dataFile + "' avec le profil '" + datacontrol.profileFile + "'");
+
+
+            System.Console.ReadKey();
+
         }
     }
 }

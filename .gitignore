@@ -1,6 +1,7 @@
 Project specific files
 WsSoapSedaGeneratorAspWebApp/Web.config
 SedaSummaryGeneratorTester/App.config
+job.config
 
 #################
 ## Eclipse

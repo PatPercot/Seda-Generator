@@ -1,0 +1,53 @@
+# Exemple de fihcier de configuration de jobs
+
+# Un fichier de configuration peut contenir :
+# 	- des commentaires qui commencent par de s#
+#	- des lignes vides ou ne contenant que des espaces
+#	- des jobs de contrôle de profils [profil-control : nom-job-controle]
+#	- des jobs de contrôle de données métier [data-control : nom-job-controle]
+#	- des jobs de génération de bordereaux de transfert [géenerator-control : nom-job-controle]
+#	- des chemins de fichiers :
+#		- fichiers de trace : trace
+#		- fichiers de profil : profil
+#		- fichiers de données : data
+#		- fichiers de bordereaux : bordereau
+
+# Les noms de job peuvent être identiques entre profil-control, data-control et generator
+# Par exemple [profil-control : marche-public-v1] [data-control : marche-public-v1]  [generator : marche-public-v1]
+# Mais pour un même type de section, les noms doivent être différents. Si ce n'est pas le cas, le premier job est exécuté
+#
+
+
+
+[profil-control : nom-job]
+  trace = chemin/vers/fichier-de-trace.txt
+  profil = chemin/vers/fichier-de-profil.rng
+  
+[profil-control : marche-v1]
+  trace = chemin/vers/trace-marche.txt
+  profil = chemin/vers/profil-marche.rng
+  
+  
+[data-control : nom-job]
+  trace = chemin/vers/fichier-de-trace.txt
+  profil = chemin/vers/fichier-de-profil.rng
+  data = chemin/vers/fichier-de-donnees-metier.txt
+  
+[data-control : marche-v1]
+  trace = chemin/vers/trace-marche.txt
+  profil = chemin/vers/profil-marche.rng
+  data = chemin/vers/donnees-marche.txt
+  
+  
+[generator : nom-job]
+  trace = chemin/vers/fichier-de-trace.txt
+  profil = chemin/vers/fichier-de-profil.rng
+  data = chemin/vers/fichier-de-donnees-metier.txt
+  bordereau = chemin/vers/fichier-de-bordereau.xml
+
+[generator : marche-v1]
+  trace = chemin/vers/trace-marche.txt
+  profil = chemin/vers/profil-marche.rng
+  data = chemin/vers/donnees-marche.txt
+  bordereau = chemin/vers/bordereau-marche.txt
+  
