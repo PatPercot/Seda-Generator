@@ -75,7 +75,7 @@ namespace SedaSummaryGenerator {
             Action<Exception> eh = (ex) => {
                 if (traceActions) tracesWriter.WriteLineFlush(ex.GetType().Name + " while reading: " + profileFile);
                 if (traceActions) tracesWriter.WriteLineFlush(ex.Message);
-                errorsList.Add("Erreur lors de la préparation du profil d'archivage '" + profileFile + "' " + ex.GetType().Name);
+                errorsList.Add("Erreur lors de la préparation du profil d'archivage '" + profileFile + "' " + ex.GetType().Name + " : " + ex.Message);
             };
             profileLoaded = false;
             docIn = new XmlDocument();
@@ -94,8 +94,9 @@ namespace SedaSummaryGenerator {
             catch (ArgumentException e) { eh(e); }
             catch (DirectoryNotFoundException e) { eh(e); }
             catch (FileNotFoundException e) { eh(e); }
-            catch (OutOfMemoryException e) { eh(e); }
-            catch (IOException e) { eh(e); }
+            catch (OutOfMemoryException e) { eh(e); } 
+            catch (IOException e) { eh(e); } 
+            catch (XmlException e) { eh(e);  }
         }
 
         /*

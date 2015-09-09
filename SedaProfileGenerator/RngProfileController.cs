@@ -64,7 +64,7 @@ namespace SedaSummaryGenerator {
              Action<Exception> eh = (ex) => {
                 if (traceActions) tracesWriter.WriteLine(ex.GetType().Name + " while reading: " + profileFile);
                 if (traceActions) tracesWriter.WriteLine(ex.Message);
-                errorsList.Add("Erreur lors de la préparation du profil d'archivage '" + profileFile + "' " + ex.GetType().Name);
+                errorsList.Add("Erreur lors de la préparation du profil d'archivage '" + profileFile + "' " + ex.GetType().Name + " : " + ex.Message);
             };
 
             docIn = new XmlDocument();
@@ -78,7 +78,13 @@ namespace SedaSummaryGenerator {
                     //Add the namespaces used in books.xml to the XmlNamespaceManager.
                     docInXmlnsManager.AddNamespace("rng", "http://relaxng.org/ns/structure/1.0");
                 }
-            } catch (ArgumentException e) { eh(e); } catch (DirectoryNotFoundException e) { eh(e); } catch (FileNotFoundException e) { eh(e); } catch (OutOfMemoryException e) { eh(e); } catch (IOException e) { eh(e); }
+            } 
+            catch (ArgumentException e) { eh(e); }
+            catch (DirectoryNotFoundException e) { eh(e); }
+            catch (FileNotFoundException e) { eh(e); }
+            catch (OutOfMemoryException e) { eh(e); } 
+            catch (IOException e) { eh(e); } 
+            catch (XmlException e) { eh(e);  }
 
             if (traceActions) tracesWriter.WriteLine("\n-----------------------------------------\n");
             if (traceActions) tracesWriter.WriteLine("Début de la vérification du profil");
