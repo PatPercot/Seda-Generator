@@ -1,6 +1,7 @@
+informationsDatabase='Server=VM-PSQL02\OUTILS_P;Database=BW_DEV;User=App-Blueway-Exploitation;Password=Pi=3.14159;'
 ServerVersion: 10.00.5500
 State: Open
-CG56_MARCHE_, 110       , D:\DEV_PPE\tests\marches\repetition_une_unite-1_schema.rng, 225600014_122
+CG56_MARCHE_, 113       , D:\DEV_PPE\tests\marches\repetition_une_unite-1_schema.rng, 225600014_122
 ArchiveDocuments.LoadFile
 ,#OriginatingAgency_Description,Service support chargé de la fourniture et de la maintenance des systèmes d'information
 field: '' field: '#OriginatingAgency_Description' field: 'Service support chargé de la fourniture et de la maintenance des systèmes d'information' 
@@ -542,7 +543,6 @@ recurseDefine visiting 'rng:element'[name='Comment']
 genElement (rng:element, Comment, /ArchiveTransfer)
 recurseDefine ('Comment_N65541', '/ArchiveTransfer/Comment', 'root')
 recurseDefine visiting 'rng:data'
-getData  ----  !!!! context '/ArchiveTransfer/Comment' Unhandled in 'rng:data'
 recurseDefine visiting 'rng:element'[name='Date']
 genElement (rng:element, Date, /ArchiveTransfer)
 recurseDefine visiting 'rng:element'[name='TransferIdentifier']
@@ -720,9 +720,7 @@ recurseDefine visiting 'rng:value'
 recurseDefine visiting 'rng:attribute'[name='listVersionID']
 recurseDefine visiting 'rng:oneOrMore'
 recurseDefine ??OrMore for rng:oneOrMore in context /ArchiveTransfer/Contains/Contains/Contains/ContentDescription on defineNode ContentDescription_N65927
-KeywordContent(OR_ETP[#1]) contains 1 keywords
-genElement (rng:element, ContentDescriptive, /ArchiveTransfer/Contains/Contains/Contains/ContentDescription)
-getTag  ----  !!!! tag Unhandled 'ContentDescriptive'
+KeywordContent(OR_ETP[#1]) contains 0 keywords
 recurseDefine visiting 'rng:zeroOrMore'
 recurseDefine ??OrMore for rng:zeroOrMore in context /ArchiveTransfer/Contains/Contains/Contains on defineNode Contains_N65868
 ArchiveDocuments.prepareListForType('OR_ETP[#1]')
@@ -817,9 +815,7 @@ recurseDefine visiting 'rng:value'
 recurseDefine visiting 'rng:attribute'[name='listVersionID']
 recurseDefine visiting 'rng:oneOrMore'
 recurseDefine ??OrMore for rng:oneOrMore in context /ArchiveTransfer/Contains/Contains/Contains/ContentDescription on defineNode ContentDescription_N65927
-KeywordContent(OR_ETP[#2]) contains 1 keywords
-genElement (rng:element, ContentDescriptive, /ArchiveTransfer/Contains/Contains/Contains/ContentDescription)
-getTag  ----  !!!! tag Unhandled 'ContentDescriptive'
+KeywordContent(OR_ETP[#2]) contains 0 keywords
 recurseDefine visiting 'rng:zeroOrMore'
 recurseDefine ??OrMore for rng:zeroOrMore in context /ArchiveTransfer/Contains/Contains/Contains on defineNode Contains_N65868
 ArchiveDocuments.prepareListForType('OR_ETP[#2]')
@@ -941,11 +937,7 @@ recurseDefine visiting 'rng:value'
 recurseDefine visiting 'rng:attribute'[name='listVersionID']
 recurseDefine visiting 'rng:oneOrMore'
 recurseDefine ??OrMore for rng:oneOrMore in context /ArchiveTransfer/Contains/Contains/Contains/ContentDescription on defineNode ContentDescription_N65927
-KeywordContent(OR_ETP[#3]) contains 2 keywords
-genElement (rng:element, ContentDescriptive, /ArchiveTransfer/Contains/Contains/Contains/ContentDescription)
-getTag  ----  !!!! tag Unhandled 'ContentDescriptive'
-genElement (rng:element, ContentDescriptive, /ArchiveTransfer/Contains/Contains/Contains/ContentDescription)
-getTag  ----  !!!! tag Unhandled 'ContentDescriptive'
+KeywordContent(OR_ETP[#3]) contains 0 keywords
 recurseDefine visiting 'rng:zeroOrMore'
 recurseDefine ??OrMore for rng:zeroOrMore in context /ArchiveTransfer/Contains/Contains/Contains on defineNode Contains_N65868
 ArchiveDocuments.prepareListForType('OR_ETP[#3]')

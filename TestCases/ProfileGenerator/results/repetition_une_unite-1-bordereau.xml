@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArchiveTransfer xmlns="fr:gouv:ae:archive:draft:standard_echange_v0.2">
-  <Comment />
-  <Date>2015-08-28T15:54:49.3528976Z</Date>
-  <TransferIdentifier>CG56_MARCHE_0000000111</TransferIdentifier>
+  <Comment>ERR: key '#Comment' not found</Comment>
+  <Date>2015-09-10T14:59:33.8313214Z</Date>
+  <TransferIdentifier>CG56_MARCHE_0000000114</TransferIdentifier>
   <TransferringAgency>
     <Identification>1234</Identification>
     <Name>Service versant</Name>
@@ -47,11 +47,11 @@
     <DescriptionLevel listVersionID="edition 2009">fonds</DescriptionLevel>
     <Name>Versement avec unités documentaires répétées</Name>
     <ContentDescription>
-      <CustodialHistory>ERR: key '#CustodialHistory#1' not found</CustodialHistory>
+      <CustodialHistory>ERR: key '#CustodialHistory' not found</CustodialHistory>
       <Language listVersionID="edition 2009">fr</Language>
     </ContentDescription>
     <Contains>
-      <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OFFRES_RETENUES">CG56_MARCHE_0000000111_00001</ArchivalAgencyObjectIdentifier>
+      <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OFFRES_RETENUES">CG56_MARCHE_0000000114_00001</ArchivalAgencyObjectIdentifier>
       <DescriptionLevel listVersionID="edition 2009">file</DescriptionLevel>
       <Name>Offres retenues</Name>
       <ContentDescription>
@@ -64,12 +64,11 @@
         </ContentDescriptive>
       </ContentDescription>
       <Contains>
-        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000111_00002</ArchivalAgencyObjectIdentifier>
+        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000114_00002</ArchivalAgencyObjectIdentifier>
         <DescriptionLevel listVersionID="edition 2009">file</DescriptionLevel>
         <Name>Offre retenue de l'entreprise 1</Name>
         <ContentDescription>
           <Language listVersionID="edition 2009">aa</Language>
-          <ContentDescriptive />
         </ContentDescription>
         <Document>
           <Attachment mimeCode="text/plain" filename="document1e1.txt" />
@@ -85,12 +84,11 @@
         </Document>
       </Contains>
       <Contains>
-        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000111_00003</ArchivalAgencyObjectIdentifier>
+        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000114_00003</ArchivalAgencyObjectIdentifier>
         <DescriptionLevel listVersionID="edition 2009">file</DescriptionLevel>
         <Name>Offre retenue de l'entreprise 2</Name>
         <ContentDescription>
           <Language listVersionID="edition 2009">aa</Language>
-          <ContentDescriptive />
         </ContentDescription>
         <Document>
           <Attachment mimeCode="text/plain" filename="document1e2.txt" />
@@ -112,13 +110,11 @@
         </Document>
       </Contains>
       <Contains>
-        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000111_00004</ArchivalAgencyObjectIdentifier>
+        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000114_00004</ArchivalAgencyObjectIdentifier>
         <DescriptionLevel listVersionID="edition 2009">file</DescriptionLevel>
         <Name>Offre retenue de l'entreprise 33333</Name>
         <ContentDescription>
           <Language listVersionID="edition 2009">aa</Language>
-          <ContentDescriptive />
-          <ContentDescriptive />
         </ContentDescription>
         <Document>
           <Attachment mimeCode="text/plain" filename="document1e3.txt" />
