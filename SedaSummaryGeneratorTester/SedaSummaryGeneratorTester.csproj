@@ -55,6 +55,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonClassesLibrary\CommonClassesLibrary.csproj">
+      <Project>{b3133d2c-981a-44bd-ab57-99c09433132c}</Project>
+      <Name>CommonClassesLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SedaProfileGenerator\SedaProfileGenerator.csproj">
       <Project>{02fe45d7-4311-4d32-8488-fee19c30beda}</Project>
       <Name>SedaProfileGenerator</Name>

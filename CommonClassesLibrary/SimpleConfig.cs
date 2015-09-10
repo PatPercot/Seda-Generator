@@ -7,32 +7,33 @@ using System.Threading.Tasks;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
 
-namespace BusinessDataController {
+namespace CommonClassesLibrary {
     /*
      * Les classes Job, ProfileControlConfig, DataControlConfig et GeneratorConfig
      * contiennent les éléments nécessaires à la réalistion d'un contrôle 
      * ou d'une génération, à savoir les noms de fichiers qui sont concernés 
      * par le job.
      * */
-    class Job {
+    public class Job {
         public String nomJob = String.Empty;
         public String traceFile = String.Empty;
     }
 
-    class ProfileControlConfig : Job {
+    public class ProfileControlConfig : Job {
         public String profileFile = String.Empty;
     }
 
-    class DataControlConfig : ProfileControlConfig {
+    public class DataControlConfig : ProfileControlConfig {
         public String dataFile = String.Empty;
     }
 
-    class GeneratorConfig : DataControlConfig {
-        public String accordVersment = String.Empty;
+    public class GeneratorConfig : Job {
+        public String accordVersement = String.Empty;
         public String bordereauFile = String.Empty;
+        public String dataFile = String.Empty;
     }
 
-    class SimpleConfig {
+    public class SimpleConfig {
         protected TextWriter tracesWriter = null;
         protected bool traceActions = false;
 
@@ -42,7 +43,7 @@ namespace BusinessDataController {
         protected List<DataControlConfig> datacontrolList;
         protected List<GeneratorConfig> generatorList;
 
-        protected String section, sectionName, traceFile, profileFile, dataFile, bordereauFile;
+        protected String section, sectionName, traceFile, profileFile, dataFile, bordereauFile, accordVersement;
         protected bool inSection = false;
 
         public SimpleConfig() {
@@ -52,29 +53,32 @@ namespace BusinessDataController {
             profilecontrolList = new List<ProfileControlConfig>();
         }
 
+        // Retourne la configuration demandée ou la première si le nom de config est vide
         public ProfileControlConfig getProfileConfig(String configName) {
             ProfileControlConfig config = null;
             foreach (ProfileControlConfig c in profilecontrolList) {
-                if (c.nomJob.Equals(configName))
-                    config = c;
+                if (configName == String.Empty || c.nomJob.Equals(configName))
+                    return c;
             }
             return config;
         }
 
+        // Retourne la configuration demandée ou la première si le nom de config est vide
         public DataControlConfig getDatacontrolConfig(String configName) {
             DataControlConfig config = null;
             foreach (DataControlConfig c in datacontrolList) {
-                if (c.nomJob.Equals(configName))
-                    config = c;
+                if (configName == String.Empty || c.nomJob.Equals(configName))
+                    return c;
             }
             return config;
         }
 
+        // Retourne la configuration demandée ou la première si le nom de config est vide
         public GeneratorConfig getGeneratorConfig(String configName) {
             GeneratorConfig config = null;
             foreach (GeneratorConfig c in generatorList) {
-                if (c.nomJob.Equals(configName))
-                    config = c;
+                if (configName == String.Empty || c.nomJob.Equals(configName))
+                    return c;
             }
             return config;
         }
@@ -101,7 +105,7 @@ namespace BusinessDataController {
                         GeneratorConfig generator = new GeneratorConfig();
                         generator.nomJob = sectionName;
                         generator.traceFile = traceFile;
-                        generator.profileFile = profileFile;
+                        generator.accordVersement = accordVersement;
                         generator.dataFile = dataFile;
                         generator.bordereauFile = bordereauFile;
                         generatorList.Add(generator);
@@ -109,11 +113,14 @@ namespace BusinessDataController {
                 }
             }
         }
-        public void loadFile(String configFile) {
+
+
+        public String loadFile(String configFile) {
+            String retourMsg = String.Empty;
             Action<Exception> eh = (ex) => {
                 if (traceActions) tracesWriter.WriteLine(ex.GetType().Name + " while reading: " + configFile);
                 if (traceActions) tracesWriter.WriteLine(ex.Message);
-                throw (ex);
+                retourMsg = ex.Message;
             };
 
             if (traceActions) tracesWriter.WriteLine("SimpleControlConfig.LoadFile");
@@ -138,7 +145,7 @@ namespace BusinessDataController {
                                 inSection = true;
                                 if (section.Equals("profile-control"))    authorizedFiles = "trace|profil";
                                 else if (section.Equals("data-control"))  authorizedFiles = "trace|profil|data";
-                                else if (section.Equals("generator"))     authorizedFiles = "trace|profil|data|bordereau";
+                                else if (section.Equals("generator"))     authorizedFiles = "trace|accord|data|bordereau";
                                 else {
                                     String errMsg = "Le nom de section '" + section + "' n'existe pas (choix entre profile-control, data-control ou generator).";
                                     if (traceActions) tracesWriter.WriteLine(errMsg);
@@ -147,7 +154,7 @@ namespace BusinessDataController {
                                 }
                                 if (inSection) {
                                     sectionName = m.Groups[2].ToString();
-                                    traceFile = profileFile = dataFile = bordereauFile = String.Empty;
+                                    traceFile = profileFile = dataFile = bordereauFile = accordVersement = String.Empty;
                                     fileRegex = new Regex(@"^\s*(" + authorizedFiles + @")\s*=\s*([-a-zA-Z0-9_./:]+)\s*$");
                                 }
                             } else { // if (m.Success) 
@@ -159,6 +166,8 @@ namespace BusinessDataController {
                                             traceFile = m.Groups[2].ToString();
                                         if (g.ToString().Equals("profil"))
                                             profileFile = m.Groups[2].ToString();
+                                        if (g.ToString().Equals("accord"))
+                                            accordVersement = m.Groups[2].ToString();
                                         if (g.ToString().Equals("data"))
                                             dataFile = m.Groups[2].ToString();
                                         if (g.ToString().Equals("bordereau"))
@@ -178,7 +187,7 @@ namespace BusinessDataController {
             catch (FileNotFoundException e) { eh(e); } 
             catch (OutOfMemoryException e) { eh(e); } 
             catch (IOException e) { eh(e); }
-
+            return retourMsg;
         }
     }
 }

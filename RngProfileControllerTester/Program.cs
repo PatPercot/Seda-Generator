@@ -20,18 +20,54 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Collections.Specialized;
 using SedaSummaryGenerator;
+using CommonClassesLibrary;
 
 namespace RngProfileControllerTester {
     class Program {
         static void Main(string[] args) {
             StreamWriter streamWriter = null;
-            String traceFile = @"D:\DEV_PPE\devel\gw-quimper\trace-control.txt";
+
+            String jobName;
+            if (args.Length < 1) {
+                System.Console.WriteLine("Syntaxe attendue : BusinessDataController nom-job-controle");
+                System.Console.WriteLine("nom-job-controle est une section dans le fichier jobs.config");
+                System.Console.WriteLine("Une section a la forme :");
+                System.Console.WriteLine("[data-control : nom-job-controle]");
+                System.Console.WriteLine("  trace = chemin/vers/fichier-de-trace.txt");
+                System.Console.WriteLine("  profil = chemin/vers/fichier-de-profil.rng");
+                System.Console.WriteLine("  data = chemin/vers/fichier-de-donnees-metier.txt");
+                System.Console.WriteLine("");
+                System.Console.WriteLine("Aucun job demandé, le premier job sera exécuté");
+                System.Console.WriteLine("");
+                jobName = String.Empty;
+            } else {
+                jobName = args[0];
+            }
+
+            SimpleConfig config = new SimpleConfig();
+            String erreur = config.loadFile("./job.config");
+            if (erreur != String.Empty) // on tient compte du fait qu'en environnement de développement, l'exe est dans bin/Release
+                erreur = config.loadFile("../../job.config");
+
+            if (erreur != String.Empty) {
+                System.Console.WriteLine(erreur);
+                return;
+            }
+
+            ProfileControlConfig control = config.getProfileConfig(jobName);
+
+            System.Console.WriteLine("Contrôle profil du job '" + control.nomJob +  "' du profil '" + control.profileFile + "'");
+
+            String profileFile = control.profileFile;
+            String traceFile = control.traceFile;
+
+            // String traceFile = @"D:\DEV_PPE\devel\gw-quimper\trace-control.txt";
+            // String profileFile = @"D:\DEV_PPE\devel\gw-quimper\repetition_une_unite_deux_documents_schema.rng";
 
             //String profileFile = @"D:\DEV_PPE\tests\marches\20150619Profil_avec_doc_falcultatif_donne_avant_engagement\EMEG_PROFIL_MP_0002_schema.rng";
             //String profileFile = @"D:\DEV_PPE\tests\marches\repetition_une_unite-1-v1_0_schema.rng";
 
             //String profileFile = @"D:\DEV_PPE\tests\marches\repetition_une_unite-trois_documents-optionnels_schema.rng";
-            String profileFile = @"D:\DEV_PPE\devel\gw-quimper\repetition_une_unite_deux_documents_schema.rng";
 
             //String profileFile = @"D:\DEV_PPE\tests\CGI\Test_MARCHES-V5bis\EMEG_PROFIL_MP_0002-PPE_schema.rng";
 

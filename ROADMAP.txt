@@ -1,0 +1,9 @@
+Roadmap
+
+Éléments prioritaires
+
+- Faciliter l'exécution des programmes de contrôle avec un fichier de configuration qui définit
+  les fichiers sur lesquels l'archiviste ou l'éditeur de l'applciation métier travaille
+  Permettre de conserver plusieurs configurations et de choisir celle que l'on traite
+  Le fichier de configuration doit servir aux trois programmes de contrôle
+  

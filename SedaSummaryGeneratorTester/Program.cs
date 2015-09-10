@@ -21,15 +21,89 @@ using System.IO;
 using System.Collections.Specialized;
 using System.Configuration;
 using SedaSummaryGenerator;
+using CommonClassesLibrary;
 
 namespace SedaSummaryGeneratorTester {
     class Program {
 
         static void Main(string[] args) {
-            genererMarcheUneUnite();
+            StreamWriter streamWriter = null;
 
-            // genererPES();
-            // genererESCO();
+            String jobName;
+            if (args.Length < 1) {
+                System.Console.WriteLine("Syntaxe attendue : BusinessDataController nom-job-controle");
+                System.Console.WriteLine("nom-job-controle est une section dans le fichier jobs.config");
+                System.Console.WriteLine("Une section a la forme :");
+                System.Console.WriteLine("[data-control : nom-job-controle]");
+                System.Console.WriteLine("  trace = chemin/vers/fichier-de-trace.txt");
+                System.Console.WriteLine("  profil = chemin/vers/fichier-de-profil.rng");
+                System.Console.WriteLine("  data = chemin/vers/fichier-de-donnees-metier.txt");
+                System.Console.WriteLine("");
+                System.Console.WriteLine("Aucun job demandé, le premier job sera exécuté");
+                System.Console.WriteLine("");
+                jobName = String.Empty;
+            } else {
+                jobName = args[0];
+            }
+
+            SimpleConfig config = new SimpleConfig();
+            String erreur = config.loadFile("./job.config");
+            if (erreur != String.Empty) // on tient compte du fait qu'en environnement de développement, l'exe est dans bin/Release
+                erreur = config.loadFile("../../job.config");
+
+            if (erreur != String.Empty) {
+                System.Console.WriteLine(erreur);
+                return;
+            }
+
+            GeneratorConfig generatorJob = config.getGeneratorConfig(jobName);
+
+            System.Console.WriteLine("Génération bordereau du job '" + generatorJob.nomJob + "' : '" + generatorJob.dataFile + "' avec l'accord '" + generatorJob.accordVersement + "'");
+
+            String accordVersement = generatorJob.accordVersement;
+            String fichier_donnees = generatorJob.dataFile;
+            String fichier_bordereau = generatorJob.bordereauFile;
+            String traceFile = generatorJob.traceFile;
+
+            String informationsDatabase = ConfigurationManager.AppSettings["databaseConnexion"];
+
+            Action<Exception, String> eh = (ex, str) => {
+                Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);
+                throw ex;
+            };
+
+            try {
+                streamWriter = new StreamWriter(traceFile);
+            } catch (IOException e) { eh(e, "Mauvaise syntaxe de nom de fichier"); } catch (UnauthorizedAccessException e) { eh(e, "Droits d'accès à corriger"); } catch (System.Security.SecurityException e) { eh(e, "Droits d'accès à corriger"); }
+
+
+            String baseURI = "http://test";
+
+            StringCollection errors;
+
+            SedaSummaryGenerator.SedaSummaryGenerator ssg = new SedaSummaryRngGenerator();
+            ssg.setTracesWriter(streamWriter);
+
+            ssg.prepareInformationsWithDatabase(informationsDatabase, baseURI, accordVersement);
+
+            ssg.prepareArchiveDocumentsWithFile(@"D:\DEV_PPE\tests\marches", fichier_donnees);
+
+            ssg.generateSummaryFile(fichier_bordereau);
+
+            ssg.close();
+            streamWriter.Close();
+
+            errors = ssg.getErrorsList();
+
+            if (errors != null && errors.Count != 0) {
+                Console.WriteLine("Il y a eu des erreurs.");
+                foreach (String str in errors) {
+                    Console.WriteLine(str);
+                }
+            }
+            Console.WriteLine("Fin de la liste des erreurs du programme de génération du bordereau");
+            Console.WriteLine("Tapez une touche pour arrêter");
+            Console.ReadKey();
         }
 
         static void genererMarcheUneUnite() {

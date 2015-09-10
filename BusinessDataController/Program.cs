@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using CommonClassesLibrary;
 
 /* Premiers éléments à contrôler
  * 
@@ -41,6 +41,7 @@ Contains/ContentDescription/ContentDescriptive/KeywordContent							Métier			#K
 namespace BusinessDataController {
     class Program {
         static void Main(string[] args) {
+            String jobName;
             if (args.Length < 1) {
                 System.Console.WriteLine("Syntaxe attendue : BusinessDataController nom-job-controle");
                 System.Console.WriteLine("nom-job-controle est une section dans le fichier jobs.config");
@@ -50,20 +51,28 @@ namespace BusinessDataController {
                 System.Console.WriteLine("  profil = chemin/vers/fichier-de-profil.rng");
                 System.Console.WriteLine("  data = chemin/vers/fichier-de-donnees-metier.txt");
                 System.Console.WriteLine("");
-                // return;
+                System.Console.WriteLine("Aucun job demandé, le premier job sera exécuté");
+                System.Console.WriteLine("");
+                jobName = String.Empty;
+            } else {
+                jobName = args[0];
             }
 
-            String jobName = "quimper"; // Remplacer par args[0]
-
             SimpleConfig config = new SimpleConfig();
-            config.loadFile("./job.config");
+            String erreur = config.loadFile("./job.config");
+            if (erreur != String.Empty) // on tient compte du fait qu'en environnement de développement, l'exe est dans bin/Release
+                erreur = config.loadFile("../../job.config");
 
-            // args[0] = job de type data-control à exécuter 
+            if (erreur != String.Empty) {
+                System.Console.WriteLine(erreur);
+                return;
+            }
+
             DataControlConfig datacontrol = config.getDatacontrolConfig(jobName);
 
-            System.Console.WriteLine("Contrôle métier de '" + datacontrol.dataFile + "' avec le profil '" + datacontrol.profileFile + "'");
+            System.Console.WriteLine("Contrôle métier du job '" + datacontrol.nomJob + "' : '" + datacontrol.dataFile + "' avec le profil '" + datacontrol.profileFile + "'");
 
-
+            System.Console.WriteLine("hitakey");
             System.Console.ReadKey();
 
         }
