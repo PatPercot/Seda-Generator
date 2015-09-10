@@ -35,47 +35,53 @@ namespace SedaSummaryGeneratorTester {
         static void genererMarcheUneUnite() {
             StreamWriter streamWriter = null;
 
+            String accordVersement = "CG56_ACCORD_MARCHE_TEST_8";
+            String fichier_donnees = @"D:\DEV_PPE\tests\keywords\liste-fichiers1-01.txt";
+            String fichier_bordereau = @"D:\DEV_PPE\tests\keywords\bordereau-debug-KW.xml";
+            String traceFile = @"D:\DEV_PPE\tests\keywords\traces-debug-KW.txt";
+
+            /*
             String accordVersement = "CD29_ACCORD_ENREG_SONORES";
-            String fichier_test = @"D:\DEV_PPE\devel\gw-quimper\liste_repetition_une_unite-deux_documents.txt";
+            String fichier_donnees = @"D:\DEV_PPE\devel\gw-quimper\liste_repetition_une_unite-deux_documents.txt";
             String fichier_bordereau = @"D:\DEV_PPE\devel\gw-quimper\bordereau-enrson-1.xml";
             String traceFile = @"D:\DEV_PPE\devel\gw-quimper\traces-enrson-1.txt";
-
+            */
             //string accordversement = "cg56_accord_marche_test_1";
-            //string fichier_test = @"d:\dev_ppe\tests\marches\liste_repetition_une_unite-1.txt";
+            //string fichier_donnees = @"d:\dev_ppe\tests\marches\liste_repetition_une_unite-1.txt";
             //string fichier_bordereau = @"d:\dev_ppe\tests\work\bordereau-marche-une-unite.xml";
             //string tracefile = "d:/dev_ppe/traces/trace-marche-une-unite.txt";
 
             //String accordVersement = "CG56_ACCORD_MARCHE_TEST_2";
-            //String fichier_test = @"D:\DEV_PPE\tests\marches\liste_repetition_une_unite_avec_sous_unites-1.txt";
+            //String fichier_donnees = @"D:\DEV_PPE\tests\marches\liste_repetition_une_unite_avec_sous_unites-1.txt";
             //String fichier_bordereau = @"D:\DEV_PPE\tests\work\bordereau-marche-une-unite_avec_sous_unites.xml";
             //String traceFile = "D:/DEV_PPE/traces/trace-marche-une-unite_avec_sous_unites.txt";
 
             //String accordVersement = "CG56_ACCORD_MARCHE_TEST_3";
-            //String fichier_test = @"D:\DEV_PPE\tests\marches\liste_repetition_deux_unites_avec_sous_unites-1.txt";
+            //String fichier_donnees = @"D:\DEV_PPE\tests\marches\liste_repetition_deux_unites_avec_sous_unites-1.txt";
             //String fichier_bordereau = @"D:\DEV_PPE\tests\work\bordereau-marche-deux_unites_avec_sous_unites.xml";
             //String traceFile = "D:/DEV_PPE/traces/trace-marche-deux_unites_avec_sous_unites.txt";
 
             //String accordVersement = "CG56_ACCORD_MARCHE_TEST_4";
-            //String fichier_test = @"D:\DEV_PPE\tests\marches\liste_repetition_une_unite-deux_documents.txt";
+            //String fichier_donnees = @"D:\DEV_PPE\tests\marches\liste_repetition_une_unite-deux_documents.txt";
             //String fichier_bordereau = @"D:\DEV_PPE\tests\work\bordereau-marche-une_unite-deux_documents.xml";
             //String traceFile = "D:/DEV_PPE/traces/trace-marche-une_unite-deux_documents.txt";
 
             //string accordVersement = "cg56_accord_marche_test_5";
-            //string fichier_test = @"d:\dev_ppe\tests\marches\liste_repetition_une_unite-1.txt";
+            //string fichier_donnees = @"d:\dev_ppe\tests\marches\liste_repetition_une_unite-1.txt";
             //string fichier_bordereau = @"d:\dev_ppe\tests\work\bordereau-marche-une-unite-v1_0.xml";
             //string tracefile = "d:/dev_ppe/traces/trace-marche-une-unite-v1_0.txt";
 
             //String accordVersement = "CG56_ACCORD_MARCHE_TEST_6";
-            //String fichier_test = @"D:\DEV_PPE\tests\CGI\20150619Profil_avec_doc_falcultatif_donne_avant_engagement\Sans documents dans MP_OetD_analyse_decision1\liste-fichiers-marches-V5bis.txt";
+            //String fichier_donnees = @"D:\DEV_PPE\tests\CGI\20150619Profil_avec_doc_falcultatif_donne_avant_engagement\Sans documents dans MP_OetD_analyse_decision1\liste-fichiers-marches-V5bis.txt";
             //String fichier_bordereau = @"D:\DEV_PPE\tests\CGI\Test_MARCHES-V5bis\WORK\bordereau-marches-V5bis.xml";
             //String traceFile = @"D:/DEV_PPE\tests\CGI\Test_MARCHES-V5bis\WORK\trace-marches-V5bis.txt";
             //
-            //String fichier_test = @"D:\DEV_PPE\tests\CGI\20150619Profil_avec_doc_falcultatif_donne_avant_engagement\Avec documents dans MP_OetD_analyse_decision1\liste-fichiers-marches-V5bis.txt";
+            //String fichier_donnees = @"D:\DEV_PPE\tests\CGI\20150619Profil_avec_doc_falcultatif_donne_avant_engagement\Avec documents dans MP_OetD_analyse_decision1\liste-fichiers-marches-V5bis.txt";
             //String fichier_bordereau = @"D:\DEV_PPE\tests\CGI\Test_MARCHES-V5bis\WORK\bordereau-marches-V5bis-avec-optionnel.xml";
             //String traceFile = @"D:/DEV_PPE\tests\CGI\Test_MARCHES-V5bis\WORK\trace-marches-V5bis-avec-optionnel.txt";
 
             //string accordVersement = "CG56_ACCORD_MARCHE_TEST_7";
-            //String fichier_test = @"D:\DEV_PPE\tests\marches\liste_repetition_une_unite-trois_documents.txt";
+            //String fichier_donnees = @"D:\DEV_PPE\tests\marches\liste_repetition_une_unite-trois_documents.txt";
             //String fichier_bordereau = @"D:\DEV_PPE\tests\work\bordereau-marche-une_unite-trois_documents.xml";
             //String traceFile = @"D:/DEV_PPE/traces/trace-marche-une_unite-trois_documents.txt";
 
@@ -105,7 +111,7 @@ namespace SedaSummaryGeneratorTester {
 
             ssg.prepareInformationsWithDatabase(informationsDatabase, baseURI, accordVersement);
 
-            ssg.prepareArchiveDocumentsWithFile(@"D:\DEV_PPE\tests\marches", fichier_test);
+            ssg.prepareArchiveDocumentsWithFile(@"D:\DEV_PPE\tests\marches", fichier_donnees);
             
             ssg.generateSummaryFile(fichier_bordereau);
 

@@ -1,4 +1,19 @@
 -------------------------
+Changements du 2015-09-10
+
+- Correction bug de comptage des KeywordContent (méthode CsvArchiveDocuments.getNbKeys())
+
+-------------------------
+Changements du 2015-09-09
+
+- Ajout try catch XMLException sur la lecture du profil d'archivage
+
+-------------------------
+Changements du 2015-09-08
+
+- Correction du chemin de la balise Comment
+
+-------------------------
 Changements du 2015-09-07
 
 - Récupération des erreurs de formats de date dans SedaSummaryRngGenerator

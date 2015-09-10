@@ -298,12 +298,26 @@ namespace SedaSummaryGenerator {
             if (documentTag != null && String.Empty != documentTag) {
                 key2search += "_" + documentTag;
             }
+            // On cherche la clé non suivie de _ pour s'assurer que la clé n'existe pas sous une forme
+            // où elle est concaténée avec un nom d'unité documentaire
+            // Ex : #KeywordContent#1 à différencier de #KeywordContent_UNITE#1
+            Regex r = new Regex(key2search + @"[^_]");
             if (keyList != null) {
                 foreach (String[] elements in keyList) {
+                    /* Ce test simple non fonctionnel remplacé par la suite
                     if (elements[1].StartsWith(key2search)) {
                         nbKeys++;
                     }
+                     * */
+                    Match m = r.Match(elements[1]);
+                    if (m.Success)
+                        nbKeys++;
                 }
+            }
+            if (key2search == currentKey2search) {
+                nbKeys -= currentKey2searchCounter;
+                if (nbKeys < 0)
+                    nbKeys = 0;
             }
             return nbKeys;
         }
