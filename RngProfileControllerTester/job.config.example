@@ -10,6 +10,7 @@
 #		- fichiers de trace : trace
 #		- fichiers de profil : profil
 #		- fichiers de données : data
+#		- répertoire des documents à archiver = rep_documents
 #		- fichiers de bordereaux : bordereau
 
 # Les noms de job peuvent être identiques entre profil-control, data-control et generator

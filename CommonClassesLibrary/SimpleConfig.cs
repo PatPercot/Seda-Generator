@@ -31,6 +31,7 @@ namespace CommonClassesLibrary {
         public String accordVersement = String.Empty;
         public String bordereauFile = String.Empty;
         public String dataFile = String.Empty;
+        public String repDocuments = String.Empty;
     }
 
     public class SimpleConfig {
@@ -43,7 +44,7 @@ namespace CommonClassesLibrary {
         protected List<DataControlConfig> datacontrolList;
         protected List<GeneratorConfig> generatorList;
 
-        protected String section, sectionName, traceFile, profileFile, dataFile, bordereauFile, accordVersement;
+        protected String section, sectionName, traceFile, profileFile, dataFile, repDocuments, bordereauFile, accordVersement;
         protected bool inSection = false;
 
         public SimpleConfig() {
@@ -107,6 +108,7 @@ namespace CommonClassesLibrary {
                         generator.traceFile = traceFile;
                         generator.accordVersement = accordVersement;
                         generator.dataFile = dataFile;
+                        generator.repDocuments = repDocuments;
                         generator.bordereauFile = bordereauFile;
                         generatorList.Add(generator);
                         break;
@@ -154,7 +156,7 @@ namespace CommonClassesLibrary {
                                 }
                                 if (inSection) {
                                     sectionName = m.Groups[2].ToString();
-                                    traceFile = profileFile = dataFile = bordereauFile = accordVersement = String.Empty;
+                                    traceFile = profileFile = dataFile = bordereauFile = repDocuments = accordVersement = String.Empty;
                                     fileRegex = new Regex(@"^\s*(" + authorizedFiles + @")\s*=\s*([-a-zA-Z0-9_./:]+)\s*$");
                                 }
                             } else { // if (m.Success) 
@@ -168,6 +170,8 @@ namespace CommonClassesLibrary {
                                             profileFile = m.Groups[2].ToString();
                                         if (g.ToString().Equals("accord"))
                                             accordVersement = m.Groups[2].ToString();
+                                        if (g.ToString().Equals("rep_documents"))
+                                            repDocuments = m.Groups[2].ToString();
                                         if (g.ToString().Equals("data"))
                                             dataFile = m.Groups[2].ToString();
                                         if (g.ToString().Equals("bordereau"))

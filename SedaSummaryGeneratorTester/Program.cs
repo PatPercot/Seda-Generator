@@ -62,6 +62,7 @@ namespace SedaSummaryGeneratorTester {
 
             String accordVersement = generatorJob.accordVersement;
             String fichier_donnees = generatorJob.dataFile;
+            String repertoire_documents = generatorJob.repDocuments;
             String fichier_bordereau = generatorJob.bordereauFile;
             String traceFile = generatorJob.traceFile;
 
@@ -86,7 +87,7 @@ namespace SedaSummaryGeneratorTester {
 
             ssg.prepareInformationsWithDatabase(informationsDatabase, baseURI, accordVersement);
 
-            ssg.prepareArchiveDocumentsWithFile(@"D:\DEV_PPE\tests\marches", fichier_donnees);
+            ssg.prepareArchiveDocumentsWithFile(repertoire_documents, fichier_donnees);
 
             ssg.generateSummaryFile(fichier_bordereau);
 
