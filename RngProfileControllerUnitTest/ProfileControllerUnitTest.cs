@@ -3,10 +3,26 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using SedaSummaryGenerator;
 using System.Collections.Specialized;
+using CommonClassesLibrary;
 
 namespace RngProfileControllerUnitTest {
     [TestClass]
     public class ProfileControllerUnitTest {
+
+        ProfileControlConfig configLoader(String configName) {
+            SimpleConfig config = new SimpleConfig();
+            String erreur = config.loadFile("./job.config");
+            if (erreur != String.Empty) // on tient compte du fait qu'en environnement de développement, l'exe est dans bin/Release
+                erreur = config.loadFile("../../job.config");
+
+            if (erreur != String.Empty) {
+                System.Console.WriteLine(erreur);
+                Assert.Fail(erreur);
+            }
+
+            return config.getProfileConfig(configName);
+        }
+
         [TestMethod]
         /*
          * 
@@ -34,9 +50,9 @@ namespace RngProfileControllerUnitTest {
          * */
         public void TestErreursTagDoclistIdentification() {
             StreamWriter streamWriter = null;
-            String traceFile = @"../../../TestCases/ProfileController/traces/profil_erreurs_tags_doclist_identification-traces.txt";
-
-            String profileFile = @"../../../TestCases/ProfileController/profiles/profil_erreurs_tags_doclist_identification.rng";
+            ProfileControlConfig control = configLoader("tag_doclist");
+            String traceFile = control.traceFile;
+            String profileFile = control.profileFile;
 
             Action<Exception, String> eh = (ex, str) => {
                 Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);

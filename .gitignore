@@ -1,7 +1,9 @@
 Project specific files
 WsSoapSedaGeneratorAspWebApp/Web.config
 SedaSummaryGeneratorTester/App.config
-job.config
+BusinessDataController/job.config
+RngProfileControllerTester/job.config
+SedaSummaryGeneratorTester/job.config
 
 #################
 ## Eclipse

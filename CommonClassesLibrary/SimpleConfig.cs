@@ -32,6 +32,7 @@ namespace CommonClassesLibrary {
         public String bordereauFile = String.Empty;
         public String dataFile = String.Empty;
         public String repDocuments = String.Empty;
+        public String baseURI = String.Empty;
     }
 
     public class SimpleConfig {
@@ -44,7 +45,7 @@ namespace CommonClassesLibrary {
         protected List<DataControlConfig> datacontrolList;
         protected List<GeneratorConfig> generatorList;
 
-        protected String section, sectionName, traceFile, profileFile, dataFile, repDocuments, bordereauFile, accordVersement;
+        protected String section, sectionName, traceFile, profileFile, dataFile, repDocuments, baseURI, bordereauFile, accordVersement;
         protected bool inSection = false;
 
         public SimpleConfig() {
@@ -109,6 +110,7 @@ namespace CommonClassesLibrary {
                         generator.accordVersement = accordVersement;
                         generator.dataFile = dataFile;
                         generator.repDocuments = repDocuments;
+                        generator.baseURI = baseURI;
                         generator.bordereauFile = bordereauFile;
                         generatorList.Add(generator);
                         break;
@@ -147,7 +149,7 @@ namespace CommonClassesLibrary {
                                 inSection = true;
                                 if (section.Equals("profile-control"))    authorizedFiles = "trace|profil";
                                 else if (section.Equals("data-control"))  authorizedFiles = "trace|profil|data";
-                                else if (section.Equals("generator"))     authorizedFiles = "trace|accord|data|bordereau";
+                                else if (section.Equals("generator"))     authorizedFiles = "trace|accord|data|rep_documents|baseURI|bordereau";
                                 else {
                                     String errMsg = "Le nom de section '" + section + "' n'existe pas (choix entre profile-control, data-control ou generator).";
                                     if (traceActions) tracesWriter.WriteLine(errMsg);
@@ -156,7 +158,7 @@ namespace CommonClassesLibrary {
                                 }
                                 if (inSection) {
                                     sectionName = m.Groups[2].ToString();
-                                    traceFile = profileFile = dataFile = bordereauFile = repDocuments = accordVersement = String.Empty;
+                                    traceFile = profileFile = dataFile = bordereauFile = repDocuments = baseURI = accordVersement = String.Empty;
                                     fileRegex = new Regex(@"^\s*(" + authorizedFiles + @")\s*=\s*([-a-zA-Z0-9_./:]+)\s*$");
                                 }
                             } else { // if (m.Success) 
@@ -172,6 +174,8 @@ namespace CommonClassesLibrary {
                                             accordVersement = m.Groups[2].ToString();
                                         if (g.ToString().Equals("rep_documents"))
                                             repDocuments = m.Groups[2].ToString();
+                                        if (g.ToString().Equals("baseURI"))
+                                            baseURI = m.Groups[2].ToString();
                                         if (g.ToString().Equals("data"))
                                             dataFile = m.Groups[2].ToString();
                                         if (g.ToString().Equals("bordereau"))

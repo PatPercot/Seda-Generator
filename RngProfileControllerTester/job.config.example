@@ -11,6 +11,7 @@
 #		- fichiers de profil : profil
 #		- fichiers de données : data
 #		- répertoire des documents à archiver = rep_documents
+#		- URI du SAE : baseURI
 #		- fichiers de bordereaux : bordereau
 
 # Les noms de job peuvent être identiques entre profil-control, data-control et generator
@@ -45,11 +46,15 @@
   trace = chemin/vers/fichier-de-trace.txt
   accord = nomaccord
   data = chemin/vers/fichier-de-donnees-metier.txt
+  rep_documents = chemin/vers/repretoire/documents
+  baseURI = http://uri.sae
   bordereau = chemin/vers/fichier-de-bordereau.xml
 
 [generator : marche-v1]
   trace = chemin/vers/trace-marche.txt
   accord = nomaccord
   data = chemin/vers/donnees-marche.txt
-  bordereau = chemin/vers/bordereau-marche.txt
+  rep_documents = chemin/vers/repretoire/documents
+  baseURI = http://uri.sae
+  bordereau = chemin/vers/bordereau-marche.xml
   

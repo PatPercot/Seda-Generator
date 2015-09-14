@@ -5,6 +5,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 using System.Collections.Specialized;
+using CommonClassesLibrary;
 
 namespace SedaSummaryGeneratorUnitTest {
     [TestClass]
@@ -26,6 +27,20 @@ namespace SedaSummaryGeneratorUnitTest {
         SedaSummaryGenerator.SedaSummaryGenerator ssg;
         XmlDocument docBordereau;
         // XmlNamespaceManager docInXmlnsManager;
+
+        GeneratorConfig configLoader(String configName) {
+            SimpleConfig config = new SimpleConfig();
+            String erreur = config.loadFile("./job.config");
+            if (erreur != String.Empty) // on tient compte du fait qu'en environnement de développement, l'exe est dans bin/Release
+                erreur = config.loadFile("../../job.config");
+
+            if (erreur != String.Empty) {
+                System.Console.WriteLine(erreur);
+                Assert.Fail(erreur);
+            }
+
+            return config.getGeneratorConfig(configName);
+        }
 
         protected void executeGenerator() {
             Action<Exception, String> eh = (ex, str) => {
@@ -76,13 +91,17 @@ namespace SedaSummaryGeneratorUnitTest {
         [TestMethod]
         public void TestRepetitionUneUnite() {
             streamWriter = null;
+            String dir;
+            dir = Directory.GetCurrentDirectory();
+            System.Console.WriteLine(dir);
+            GeneratorConfig control = configLoader("repetition_une_unite");
 
-            accordVersement   = "CG56_ACCORD_MARCHE_TEST_1";
-            fichier_metier    = @"../../../TestCases/ProfileGenerator/datafiles/liste_repetition_une_unite-1.txt";
-            path_datafiles    = @"../../../TestCases/ProfileGenerator/datafiles/";
-            fichier_bordereau = @"../../../TestCases/ProfileGenerator/results/repetition_une_unite-1-bordereau.xml";
-            traceFile         = @"../../../TestCases/ProfileGenerator/traces/repetition_une_unite-1-traces.txt";
-            baseURI           = "http://test";
+            accordVersement = control.accordVersement;
+            fichier_metier = control.dataFile;
+            path_datafiles = control.repDocuments;
+            fichier_bordereau = control.bordereauFile;
+            traceFile = control.traceFile;
+            baseURI = control.baseURI;
             // namespace_seda    = "fr:gouv:ae:archive:draft:standard_echange_v0.2";
 
             informationsDatabase = "Server=VM-PSQL02\\OUTILS_P;Database=BW_DEV;User=App-Blueway-Exploitation;Password=Pi=3.14159;";

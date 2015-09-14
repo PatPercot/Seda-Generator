@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArchiveTransfer xmlns="fr:gouv:ae:archive:draft:standard_echange_v0.2">
   <Comment>ERR: key '#Comment' not found</Comment>
-  <Date>2015-09-10T16:40:12.9401644Z</Date>
-  <TransferIdentifier>CG56_MARCHE_0000000115</TransferIdentifier>
+  <Date>2015-09-14T08:52:13.1159121Z</Date>
+  <TransferIdentifier>CG56_MARCHE_0000000119</TransferIdentifier>
   <TransferringAgency>
     <Identification>1234</Identification>
     <Name>Service versant</Name>
@@ -51,7 +51,7 @@
       <Language listVersionID="edition 2009">fr</Language>
     </ContentDescription>
     <Contains>
-      <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OFFRES_RETENUES">CG56_MARCHE_0000000115_00001</ArchivalAgencyObjectIdentifier>
+      <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OFFRES_RETENUES">CG56_MARCHE_0000000119_00001</ArchivalAgencyObjectIdentifier>
       <DescriptionLevel listVersionID="edition 2009">file</DescriptionLevel>
       <Name>Offres retenues</Name>
       <ContentDescription>
@@ -64,7 +64,7 @@
         </ContentDescriptive>
       </ContentDescription>
       <Contains>
-        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000115_00002</ArchivalAgencyObjectIdentifier>
+        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000119_00002</ArchivalAgencyObjectIdentifier>
         <DescriptionLevel listVersionID="edition 2009">file</DescriptionLevel>
         <Name>Offre retenue de l'entreprise 1</Name>
         <ContentDescription>
@@ -84,7 +84,7 @@
         </Document>
       </Contains>
       <Contains>
-        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000115_00003</ArchivalAgencyObjectIdentifier>
+        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000119_00003</ArchivalAgencyObjectIdentifier>
         <DescriptionLevel listVersionID="edition 2009">file</DescriptionLevel>
         <Name>Offre retenue de l'entreprise 2</Name>
         <ContentDescription>
@@ -110,7 +110,7 @@
         </Document>
       </Contains>
       <Contains>
-        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000115_00004</ArchivalAgencyObjectIdentifier>
+        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000119_00004</ArchivalAgencyObjectIdentifier>
         <DescriptionLevel listVersionID="edition 2009">file</DescriptionLevel>
         <Name>Offre retenue de l'entreprise 33333</Name>
         <ContentDescription>
