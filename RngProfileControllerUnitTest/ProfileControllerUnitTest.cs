@@ -23,6 +23,58 @@ namespace RngProfileControllerUnitTest {
             return config.getProfileConfig(configName);
         }
 
+        void declencherTestProfil(String jobName, String[] branchesAttendues, String[] erreursAttendues) {
+            StreamWriter streamWriter = null;
+            ProfileControlConfig control = configLoader(jobName);
+            String traceFile = control.traceFile;
+            String profileFile = control.profileFile;
+
+            Action<Exception, String> eh = (ex, str) => {
+                Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);
+                throw ex;
+            };
+
+            try {
+                streamWriter = new StreamWriter(traceFile);
+            } catch (IOException e) { eh(e, "Mauvaise syntaxe de nom de fichier"); } catch (UnauthorizedAccessException e) { eh(e, "Droits d'accès à corriger"); } catch (System.Security.SecurityException e) { eh(e, "Droits d'accès à corriger"); }
+
+            RngProfileController rpc = new RngProfileController();
+            rpc.setTracesWriter(streamWriter);
+
+            rpc.controlProfileFile(profileFile);
+
+            if (branchesAttendues != null) {
+                StringCollection arbre = rpc.getTreeList();
+
+                Assert.AreEqual(branchesAttendues.Length, arbre.Count, "La taille des arbres diffère");
+
+                if (arbre != null && arbre.Count != 0) {
+                    int branche = 0;
+                    foreach (String str in arbre) {
+                        Assert.AreEqual(branchesAttendues[branche], str, "Comparaison du nom des branches");
+                        branche++;
+                    }
+                }
+            }
+
+            if (erreursAttendues != null) {
+                StringCollection errors = rpc.getErrorsList();
+
+                Assert.AreEqual(erreursAttendues.Length, errors.Count, "Le nombre d'erreurs attendues et obtenues diffère");
+
+                if (errors != null && errors.Count != 0) {
+                    int erreur = 0;
+                    foreach (String str in errors) {
+                        StringAssert.StartsWith(str, erreursAttendues[erreur], "Comparaison es erreurs");
+                        erreur++;
+                    }
+                }
+            }
+
+            streamWriter.Close();
+        }
+
+        
         [TestMethod]
         /*
          * 
@@ -49,36 +101,7 @@ namespace RngProfileControllerUnitTest {
 
          * */
         public void TestErreursTagDoclistIdentification() {
-            StreamWriter streamWriter = null;
-            ProfileControlConfig control = configLoader("tag_doclist");
-            String traceFile = control.traceFile;
-            String profileFile = control.profileFile;
-
-            Action<Exception, String> eh = (ex, str) => {
-                Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);
-                throw ex;
-            };
-
-            try {
-                streamWriter = new StreamWriter(traceFile);
-            } catch (IOException e) { eh(e, "Mauvaise syntaxe de nom de fichier"); } catch (UnauthorizedAccessException e) { eh(e, "Droits d'accès à corriger"); } catch (System.Security.SecurityException e) { eh(e, "Droits d'accès à corriger"); }
-
-            RngProfileController rpc = new RngProfileController();
-            rpc.setTracesWriter(streamWriter);
-
-            rpc.controlProfileFile(profileFile);
-
-            StringCollection arbre = rpc.getTreeList();
             String[] branchesAttendues = { "\troot", "\t\tOFFRES_RETENUES[#1]", "\t\t\tOR_ETP[#1]", "\t\tMACHIN", ""};
-            if (arbre != null && arbre.Count != 0) {
-                int branche = 0;
-                foreach (String str in arbre) {
-                    Assert.AreEqual(branchesAttendues[branche], str, "Comparaison du nom des branches" );
-                    branche++;
-                }
-            }
-
-            StringCollection errors = rpc.getErrorsList();
             String[] erreursAttendues = 
                 { 
                 "L'unité documentaire 'OFFRES_RETENUES+' est unique ou optionnelle, mais elle possède un TAG répétable (TAG+). Il faut supprimer le '+' du tag ou changer les cardinalités", 
@@ -87,15 +110,85 @@ namespace RngProfileControllerUnitTest {
                 "Erreur dans le contexte '/Contains' sur le DOCLIST 'MACHIN', la balise Document n°'1' doit contenir une balise Identification",
                 "L'unité documentaire 'MACHIN' peut être répétée, mais elle ne possède pas de TAG répétable (TAG+). Il faut ajouter un '+' au tag ou changer les cardinalités"
                 };
-            if (errors != null && errors.Count != 0) {
-                int erreur = 0;
-                foreach (String str in errors) {
-                    Assert.AreEqual(erreursAttendues[erreur], str, "Comparaison du nom des branches");
-                    erreur++;
-                }
-            }
-
-            streamWriter.Close();
+            declencherTestProfil("tag_doclist", branchesAttendues, erreursAttendues);
         }
+
+        [TestMethod]
+        public void TestProfil01() {
+            String[] branchesAttendues = null;
+            String[] erreursAttendues = { };
+            declencherTestProfil("profil_test_1-01", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void TestProfil02() {
+            String[] branchesAttendues = null;
+            String[] erreursAttendues = { "Erreur lors de la préparation du profil d'archivage" };
+            declencherTestProfil("profil_test_1-02", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void TestProfil03() {
+            String[] branchesAttendues = null;
+            String[] erreursAttendues = { "Le nœud 'rng:grammar' n'a pas été trouvé dans le profil" };
+            declencherTestProfil("profil_test_1-03", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void TestProfil04() {
+            String[] branchesAttendues = null;
+            String[] erreursAttendues = { "Version du SEDA inconnue : '" };
+            declencherTestProfil("profil_test_1-04", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void TestProfil05() {
+            String[] branchesAttendues = null;
+            String[] erreursAttendues = { "Erreur lors de la préparation du profil d'archivage" };
+            declencherTestProfil("profil_test_1-05", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void TestProfil06() {
+            String[] branchesAttendues = null;
+            String[] erreursAttendues = { "L'identifiant MP_Cons n'est pas unique, il est utilisé 2 fois." };
+            declencherTestProfil("profil_test_1-06", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void TestProfil07() {
+            String[] branchesAttendues = null;
+            String[] erreursAttendues = { "Identifiant DOCLIST malformé, on attend 'DOCLIST / identifier' et on a 'CG56_DOCLIST_2015 MP_Cons'" };
+            declencherTestProfil("profil_test_1-07", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void TestProfil08() {
+            String[] branchesAttendues = null;
+            String[] erreursAttendues = { "Le nœud 'rng:define[@name='ArchivalAgencyObjectIdentifier_N66838']/rng:attribute[@name='schemeID']/rng:value' n'a pas été trouvé dans le profil" };
+            declencherTestProfil("profil_test_1-08", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void TestProfil10() {
+            String[] branchesAttendues = null;
+            String[] erreursAttendues = { "Le nœud 'rng:define[@name='Contains_N66833']/rng:element[@name='ArchivalAgencyObjectIdentifier']/rng:ref' n'a pas été trouvé dans le profil" };
+            declencherTestProfil("profil_test_1-10", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void TestProfil11() {
+            String[] branchesAttendues = null;
+            String[] erreursAttendues = { "L'unité documentaire 'MP_OetD_Analyse' peut être répétée, mais elle ne possède pas de TAG répétable (TAG+)." };
+            declencherTestProfil("profil_test_1-11", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void TestProfil12() {
+            String[] branchesAttendues = null;
+            String[] erreursAttendues = { "L'unité documentaire 'MP_OetD_Analyse+' est unique ou optionnelle, mais elle possède un TAG répétable (TAG+)." };
+            declencherTestProfil("profil_test_1-12", branchesAttendues, erreursAttendues);
+        }
+
     }
 }
