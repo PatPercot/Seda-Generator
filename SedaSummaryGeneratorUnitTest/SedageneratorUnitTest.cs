@@ -121,7 +121,7 @@ namespace SedaSummaryGeneratorUnitTest {
         // Ce test correspond à la génération d'un bordereau au format SEDA 0.2, 
         // le test suivant vérifie avec les mêmes données la génération d'un bordereau au format SEDA 1.0
         [TestMethod]
-        public void TestRepetitionUneUniteSeda02() {
+        public void W50_TestRepetitionUneUniteSeda02() {
             executeGenerator("repetition_une_unite_seda02", "0.2");
 
             // Début de vérification de bon déroulement
@@ -151,7 +151,7 @@ namespace SedaSummaryGeneratorUnitTest {
         // Ce test correspond à la génération d'un bordereau au format SEDA 1.0, 
         // le test suivant vérifie avec les mêmes données la génération d'un bordereau au format SEDA 0.2
         [TestMethod]
-        public void TestRepetitionUneUniteSeda10() {
+        public void W51_TestRepetitionUneUniteSeda10() {
             executeGenerator("repetition_une_unite_seda10", "1.0");
 
             // Début de vérification de bon déroulement

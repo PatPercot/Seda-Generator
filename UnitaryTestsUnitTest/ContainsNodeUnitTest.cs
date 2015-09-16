@@ -6,7 +6,7 @@ namespace UnitaryTestsUnitTest {
     [TestClass]
     public class ContainsNodeUnitTest {
         [TestMethod]
-        public void rootContainsTest() {
+        public void C50_rootContainsTest() {
             ContainsNode root = new ContainsNode("root", null, true);
             Assert.AreNotEqual(null, root);
             Assert.AreEqual(0, root.getNbDocuments());
@@ -16,7 +16,7 @@ namespace UnitaryTestsUnitTest {
         }
 
         [TestMethod]
-        public void rootChildrensContainsTest() {
+        public void C51_rootChildrensContainsTest() {
             ContainsNode root = new ContainsNode("root", null, true);
             ContainsNode child1 = new ContainsNode("child1", root, true);
             ContainsNode child11 = new ContainsNode("child11", child1, true);
@@ -35,7 +35,7 @@ namespace UnitaryTestsUnitTest {
         }
 
         [TestMethod]
-        public void treeNbDocumentsTest() {
+        public void C52_treeNbDocumentsTest() {
             ContainsNode root = new ContainsNode("root", null, true);
             ContainsNode n1 = root.addNewNode("n1", true);
             ContainsNode n11 = n1.addNewNode("n11", true);
@@ -60,7 +60,7 @@ namespace UnitaryTestsUnitTest {
 
         [TestMethod]
         // Des nœuds non obligatoires mais contenant des documents sont conservés
-        public void treeNonMandatoryButNotEmptyTest() {
+        public void C53_treeNonMandatoryButNotEmptyTest() {
             ContainsNode root = new ContainsNode("root", null, true);
             ContainsNode n1 = root.addNewNode("n1", true);
             ContainsNode n11 = n1.addNewNode("n11", false);
@@ -86,7 +86,7 @@ namespace UnitaryTestsUnitTest {
 
         [TestMethod]
         // Des nœuds non obligatoires mais contenant des documents sont conservés
-        public void treeNonMandatoryAndEmptyTest() {
+        public void C54_treeNonMandatoryAndEmptyTest() {
             ContainsNode root = new ContainsNode("root", null, true);
             ContainsNode n1 = root.addNewNode("n1", true);
             ContainsNode n11 = n1.addNewNode("n11", false);
@@ -111,7 +111,7 @@ namespace UnitaryTestsUnitTest {
         }
 
         [TestMethod]
-        public void getRelativeContextTest() {
+        public void C55_getRelativeContextTest() {
             ContainsNode root = new ContainsNode("root", null, true);
             ContainsNode A_1 = root.addNewNode("A[#1]", true);
             ContainsNode AA_1 = A_1.addNewNode("AA", false);

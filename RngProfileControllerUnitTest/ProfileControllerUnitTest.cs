@@ -100,7 +100,7 @@ namespace RngProfileControllerUnitTest {
              répétable (TAG+). Il faut ajouter un '+' au tag ou changer les cardinalités
 
          * */
-        public void TestErreursTagDoclistIdentification() {
+        public void M50_TestErreursTagDoclistIdentification() {
             String[] branchesAttendues = { "\troot", "\t\tOFFRES_RETENUES[#1]", "\t\t\tOR_ETP[#1]", "\t\tMACHIN", ""};
             String[] erreursAttendues = 
                 { 
@@ -114,77 +114,77 @@ namespace RngProfileControllerUnitTest {
         }
 
         [TestMethod]
-        public void TestProfil01() {
+        public void M51_TestProfil01() {
             String[] branchesAttendues = null;
             String[] erreursAttendues = { };
             declencherTestProfil("profil_test_1-01", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
-        public void TestProfil02() {
+        public void M52_TestProfil02() {
             String[] branchesAttendues = null;
             String[] erreursAttendues = { "Erreur lors de la préparation du profil d'archivage" };
             declencherTestProfil("profil_test_1-02", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
-        public void TestProfil03() {
+        public void M53_TestProfil03() {
             String[] branchesAttendues = null;
             String[] erreursAttendues = { "Le nœud 'rng:grammar' n'a pas été trouvé dans le profil" };
             declencherTestProfil("profil_test_1-03", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
-        public void TestProfil04() {
+        public void M54_TestProfil04() {
             String[] branchesAttendues = null;
             String[] erreursAttendues = { "Version du SEDA inconnue : '" };
             declencherTestProfil("profil_test_1-04", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
-        public void TestProfil05() {
+        public void M55_TestProfil05() {
             String[] branchesAttendues = null;
             String[] erreursAttendues = { "Erreur lors de la préparation du profil d'archivage" };
             declencherTestProfil("profil_test_1-05", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
-        public void TestProfil06() {
+        public void M56_TestProfil06() {
             String[] branchesAttendues = null;
             String[] erreursAttendues = { "L'identifiant MP_Cons n'est pas unique, il est utilisé 2 fois." };
             declencherTestProfil("profil_test_1-06", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
-        public void TestProfil07() {
+        public void M57_TestProfil07() {
             String[] branchesAttendues = null;
             String[] erreursAttendues = { "Identifiant DOCLIST malformé, on attend 'DOCLIST / identifier' et on a 'CG56_DOCLIST_2015 MP_Cons'" };
             declencherTestProfil("profil_test_1-07", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
-        public void TestProfil08() {
+        public void M58_TestProfil08() {
             String[] branchesAttendues = null;
             String[] erreursAttendues = { "Le nœud 'rng:define[@name='ArchivalAgencyObjectIdentifier_N66838']/rng:attribute[@name='schemeID']/rng:value' n'a pas été trouvé dans le profil" };
             declencherTestProfil("profil_test_1-08", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
-        public void TestProfil10() {
+        public void M59_TestProfil10() {
             String[] branchesAttendues = null;
             String[] erreursAttendues = { "Le nœud 'rng:define[@name='Contains_N66833']/rng:element[@name='ArchivalAgencyObjectIdentifier']/rng:ref' n'a pas été trouvé dans le profil" };
             declencherTestProfil("profil_test_1-10", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
-        public void TestProfil11() {
+        public void M60_TestProfil11() {
             String[] branchesAttendues = null;
             String[] erreursAttendues = { "L'unité documentaire 'MP_OetD_Analyse' peut être répétée, mais elle ne possède pas de TAG répétable (TAG+)." };
             declencherTestProfil("profil_test_1-11", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
-        public void TestProfil12() {
+        public void M61_TestProfil12() {
             String[] branchesAttendues = null;
             String[] erreursAttendues = { "L'unité documentaire 'MP_OetD_Analyse+' est unique ou optionnelle, mais elle possède un TAG répétable (TAG+)." };
             declencherTestProfil("profil_test_1-12", branchesAttendues, erreursAttendues);
