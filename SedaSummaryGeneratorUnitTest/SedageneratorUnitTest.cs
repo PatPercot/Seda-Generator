@@ -248,6 +248,31 @@ namespace SedaSummaryGeneratorUnitTest {
             checkNotExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse']/../../s:Contains[1]/s:Document[1]/s:Attachment");
         }
 
+        [TestMethod]
+        public void W52_TestGenerateur_2_1_03() {
+            executeGenerator("liste-fichiers_2-1-03", "0.2");
+
+            // Début de vérification de bon déroulement
+            errors = ssg.getErrorsList();
+            Assert.AreEqual(false, errors != null && errors.Count != 0, "Aucune erreur ne doit avoir été détectée");
+            int numerror = 0;
+            if (errors != null && errors.Count != 0) {
+                Assert.AreEqual("", errors[numerror], "Cette erreur n'aurait pas dû se produire");
+                numerror++;
+            }
+
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+
+            /* Ce test et le suivant sont identiques */
+            checkAttributeInList("//s:ArchivalAgencyObjectIdentifier"
+                , "schemeID", "CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse");
+            /* Ce test et le précédent sont identiques */
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse']");
+
+            checkNotExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse']/../../s:Contains[1]/s:Document[1]/s:Attachment");
+        }
+
 
     }
 }
