@@ -55,11 +55,35 @@ namespace SedaSummaryGeneratorUnitTest {
                 + "' au lieu de '" + content + "'");
         }
 
+        protected void checkAttributeInList(String xPath, String attribute, String value) {
+            XmlNodeList nodeList = docBordereau.SelectNodes(xPath, docInXmlnsManager);
+            Assert.AreNotEqual(0, nodeList.Count, "Le nœud '" + xPath + "' devrait exister");
+            Boolean found = false;
+            XmlNode attr;
+            foreach (XmlNode node in nodeList) {
+                attr = node.Attributes.GetNamedItem(attribute);
+                if (attr != null && value.Equals(attr.InnerText))
+                    found = true;
+            }
+            Assert.AreNotEqual(false, found, "Il devrait exister un nœud '" + xPath + "' dont l'attribut '"
+                + attribute + "' " );
+        }
+
         protected void checkInnerText(String xPath, String contentToCheck) {
             XmlNode node = docBordereau.SelectSingleNode(xPath, docInXmlnsManager);
             Assert.IsNotNull(node, "Le nœud '" + xPath + "' devrait exister");
             String content = node.InnerText;
             Assert.AreEqual(contentToCheck, content, "Le xPath '" + xPath + "' doit contenir '" + contentToCheck + "' au lieu de '" + content + "'");
+        }
+
+        protected void checkExists(String xPath) {
+            XmlNode node = docBordereau.SelectSingleNode(xPath, docInXmlnsManager);
+            Assert.IsNotNull(node, "Le nœud '" + xPath + "' devrait exister");
+        }
+
+        protected void checkNotExists(String xPath) {
+            XmlNode node = docBordereau.SelectSingleNode(xPath, docInXmlnsManager);
+            Assert.IsNull(node, "Le nœud '" + xPath + "' devrait exister");
         }
 
         protected void executeGenerator(String jobName, String sedaVersion) {
@@ -149,7 +173,7 @@ namespace SedaSummaryGeneratorUnitTest {
 
 
         // Ce test correspond à la génération d'un bordereau au format SEDA 1.0, 
-        // le test suivant vérifie avec les mêmes données la génération d'un bordereau au format SEDA 0.2
+        // le test précédent vérifie avec les mêmes données la génération d'un bordereau au format SEDA 0.2
         [TestMethod]
         public void W51_TestRepetitionUneUniteSeda10() {
             executeGenerator("repetition_une_unite_seda10", "1.0");
@@ -159,7 +183,7 @@ namespace SedaSummaryGeneratorUnitTest {
             Assert.AreEqual(false, errors != null && errors.Count != 0, "Aucune erreur ne doit avoir été détectée");
             int numerror = 0;
             if (errors != null && errors.Count != 0) {
-                Assert.AreEqual("", errors[numerror],"Cette erreur n'aurait pas dû se produire");
+                Assert.AreEqual("", errors[numerror], "Cette erreur n'aurait pas dû se produire");
                 numerror++;
             }
 
@@ -171,6 +195,57 @@ namespace SedaSummaryGeneratorUnitTest {
 
             checkInnerText("/s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ArchiveObject[1]/s:Document[1]/s:Integrity"
                 , "fb20d26a36b8368ea31695298ca0222a31968847");
+        }
+
+        [TestMethod]
+        public void W52_TestGenerateur_2_1_01() {
+            executeGenerator("liste-fichiers_2-1-01", "0.2");
+
+            // Début de vérification de bon déroulement
+            errors = ssg.getErrorsList();
+            Assert.AreEqual(false, errors != null && errors.Count != 0, "Aucune erreur ne doit avoir été détectée");
+            int numerror = 0;
+            if (errors != null && errors.Count != 0) {
+                Assert.AreEqual("", errors[numerror], "Cette erreur n'aurait pas dû se produire");
+                numerror++;
+            }
+
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+
+            /* Ce test et le suivant sont identiques */
+            checkAttributeInList("//s:ArchivalAgencyObjectIdentifier"
+                , "schemeID", "CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse");
+            /* Ce test et le précédent sont identiques */
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse']");
+
+            checkAttributeInList("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse']/../../s:Contains[1]/s:Document[1]/s:Attachment"
+                , "filename", "MP_OetD_Analyse_Recept_ONR1_Reponse_1_1_1.pdf");
+        }
+
+        [TestMethod]
+        public void W52_TestGenerateur_2_1_02() {
+            executeGenerator("liste-fichiers_2-1-02", "0.2");
+
+            // Début de vérification de bon déroulement
+            errors = ssg.getErrorsList();
+            Assert.AreEqual(false, errors != null && errors.Count != 0, "Aucune erreur ne doit avoir été détectée");
+            int numerror = 0;
+            if (errors != null && errors.Count != 0) {
+                Assert.AreEqual("", errors[numerror], "Cette erreur n'aurait pas dû se produire");
+                numerror++;
+            }
+
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+
+            /* Ce test et le suivant sont identiques */
+            checkAttributeInList("//s:ArchivalAgencyObjectIdentifier"
+                , "schemeID", "CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse");
+            /* Ce test et le précédent sont identiques */
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse']");
+
+            checkNotExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse']/../../s:Contains[1]/s:Document[1]/s:Attachment");
         }
 
 
