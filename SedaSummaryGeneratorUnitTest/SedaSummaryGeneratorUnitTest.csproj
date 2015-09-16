@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <Choose>
@@ -63,6 +64,9 @@
       <Project>{02fe45d7-4311-4d32-8488-fee19c30beda}</Project>
       <Name>SedaProfileGenerator</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

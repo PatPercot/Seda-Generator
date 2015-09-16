@@ -1,6 +1,7 @@
 Project specific files
 WsSoapSedaGeneratorAspWebApp/Web.config
 SedaSummaryGeneratorTester/App.config
+SedaSummaryGeneratorUnitTest/App.config
 BusinessDataController/job.config
 RngProfileControllerTester/job.config
 SedaSummaryGeneratorTester/job.config

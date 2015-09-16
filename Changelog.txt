@@ -1,4 +1,10 @@
 -------------------------
+Changements du 2015-09-16
+
+- Ajout des testcases du contrôleur de profils
+- Restructuration des testcases du générateur de bordereaux
+
+-------------------------
 Changements du 2015-09-10
 
 - Correction bug de comptage des KeywordContent (méthode CsvArchiveDocuments.getNbKeys())
