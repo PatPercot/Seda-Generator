@@ -45,6 +45,17 @@ namespace SedaSummaryGeneratorUnitTest {
             return config.getGeneratorConfig(configName);
         }
 
+        protected void checkForNoErrors() {
+            // Début de vérification de bon déroulement
+            errors = ssg.getErrorsList();
+            Assert.AreEqual(false, errors != null && errors.Count != 0, "Aucune erreur ne doit avoir été détectée");
+            int numerror = 0;
+            if (errors != null && errors.Count != 0) {
+                Assert.AreEqual("", errors[numerror], "Cette erreur n'aurait pas dû se produire");
+                numerror++;
+            }
+        }
+
         protected void checkAttribute(String xPath, String attribute, String contentToCheck) {
             XmlNode node = docBordereau.SelectSingleNode(xPath, docInXmlnsManager);
             Assert.IsNotNull(node, "Le nœud '" + xPath + "' devrait exister");
@@ -83,7 +94,7 @@ namespace SedaSummaryGeneratorUnitTest {
 
         protected void checkNotExists(String xPath) {
             XmlNode node = docBordereau.SelectSingleNode(xPath, docInXmlnsManager);
-            Assert.IsNull(node, "Le nœud '" + xPath + "' devrait exister");
+            Assert.IsNull(node, "Le nœud '" + xPath + "' ne devrait pas exister");
         }
 
         protected void executeGenerator(String jobName, String sedaVersion) {
@@ -120,6 +131,16 @@ namespace SedaSummaryGeneratorUnitTest {
             ssg.generateSummaryFile(fichier_bordereau);
 
             ssg.close();
+
+            streamWriter.WriteLine("\n---------- ERREURS ----------\n");
+            StringCollection dumpErrors = ssg.getErrorsList();
+            if (dumpErrors != null && dumpErrors.Count != 0) {
+                foreach (String err in dumpErrors) {
+                    streamWriter.WriteLine(err);
+                }
+            }
+            streamWriter.WriteLine("\n---------- ^^^^^^^ ----------\n");
+
             streamWriter.Close();
 
             docBordereau = new XmlDocument();
@@ -145,18 +166,10 @@ namespace SedaSummaryGeneratorUnitTest {
         // Ce test correspond à la génération d'un bordereau au format SEDA 0.2, 
         // le test suivant vérifie avec les mêmes données la génération d'un bordereau au format SEDA 1.0
         [TestMethod]
-        public void W50_TestRepetitionUneUniteSeda02() {
+        public void W00_TestRepetitionUneUniteSeda02() {
             executeGenerator("repetition_une_unite_seda02", "0.2");
 
-            // Début de vérification de bon déroulement
-            errors = ssg.getErrorsList();
-            Assert.AreEqual(false, errors != null && errors.Count != 0, "Aucune erreur ne doit avoir été détectée");
-            int numerror = 0;
-            if (errors != null && errors.Count != 0) {
-                Assert.AreEqual("", errors[numerror], "Cette erreur n'aurait pas dû se produire");
-                numerror++;
-            }
-
+            checkForNoErrors();
             checkAttribute("/s:ArchiveTransfer/s:Contains/s:Contains[1]/s:Contains[1]/s:ArchivalAgencyObjectIdentifier"
                 , "schemeID", "DOCLIST / OR_ETP+");
 
@@ -175,18 +188,10 @@ namespace SedaSummaryGeneratorUnitTest {
         // Ce test correspond à la génération d'un bordereau au format SEDA 1.0, 
         // le test précédent vérifie avec les mêmes données la génération d'un bordereau au format SEDA 0.2
         [TestMethod]
-        public void W51_TestRepetitionUneUniteSeda10() {
+        public void W01_TestRepetitionUneUniteSeda10() {
             executeGenerator("repetition_une_unite_seda10", "1.0");
 
-            // Début de vérification de bon déroulement
-            errors = ssg.getErrorsList();
-            Assert.AreEqual(false, errors != null && errors.Count != 0, "Aucune erreur ne doit avoir été détectée");
-            int numerror = 0;
-            if (errors != null && errors.Count != 0) {
-                Assert.AreEqual("", errors[numerror], "Cette erreur n'aurait pas dû se produire");
-                numerror++;
-            }
-
+            checkForNoErrors();
             checkAttribute("/s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ArchiveObject[1]/s:ArchivalAgencyObjectIdentifier"
                 , "schemeID", "DOCLIST / OR_ETP+");
 
@@ -198,18 +203,10 @@ namespace SedaSummaryGeneratorUnitTest {
         }
 
         [TestMethod]
-        public void W52_TestGenerateur_2_1_01() {
+        public void W02_TestGenerateur_2_1_01() {
             executeGenerator("liste-fichiers_2-1-01", "0.2");
 
-            // Début de vérification de bon déroulement
-            errors = ssg.getErrorsList();
-            Assert.AreEqual(false, errors != null && errors.Count != 0, "Aucune erreur ne doit avoir été détectée");
-            int numerror = 0;
-            if (errors != null && errors.Count != 0) {
-                Assert.AreEqual("", errors[numerror], "Cette erreur n'aurait pas dû se produire");
-                numerror++;
-            }
-
+            checkForNoErrors();
             checkInnerText("/s:ArchiveTransfer/s:Comment"
                , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
 
@@ -224,18 +221,31 @@ namespace SedaSummaryGeneratorUnitTest {
         }
 
         [TestMethod]
-        public void W52_TestGenerateur_2_1_02() {
+        public void W03_TestGenerateur_2_1_02() {
             executeGenerator("liste-fichiers_2-1-02", "0.2");
 
-            // Début de vérification de bon déroulement
-            errors = ssg.getErrorsList();
-            Assert.AreEqual(false, errors != null && errors.Count != 0, "Aucune erreur ne doit avoir été détectée");
-            int numerror = 0;
-            if (errors != null && errors.Count != 0) {
-                Assert.AreEqual("", errors[numerror], "Cette erreur n'aurait pas dû se produire");
-                numerror++;
-            }
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
 
+            /* Ce test et le suivant sont identiques */
+            checkAttributeInList("//s:ArchivalAgencyObjectIdentifier"
+                , "schemeID", "CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse");
+            /* Ce test et le précédent sont identiques */
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse']");
+
+            checkNotExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse']/../../s:Contains[1]/s:Document[1]/s:Attachment");
+        }
+
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // TODO: À rediscuter, ce test ne semble pas cohérent avec les erreurs qui sont détectées.
+        // TODO: De plus, je ne sais pas quoi vérifier
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        [TestMethod]
+        public void W04_TestGenerateur_2_1_03() {
+            executeGenerator("liste-fichiers_2-1-03", "0.2");
+
+            checkForNoErrors();
             checkInnerText("/s:ArchiveTransfer/s:Comment"
                , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
 
@@ -249,28 +259,134 @@ namespace SedaSummaryGeneratorUnitTest {
         }
 
         [TestMethod]
-        public void W52_TestGenerateur_2_1_03() {
-            executeGenerator("liste-fichiers_2-1-03", "0.2");
+        public void W05_TestGenerateur_2_2_01() {
+            executeGenerator("liste-fichiers_2-2-01", "0.2");
 
-            // Début de vérification de bon déroulement
-            errors = ssg.getErrorsList();
-            Assert.AreEqual(false, errors != null && errors.Count != 0, "Aucune erreur ne doit avoir été détectée");
-            int numerror = 0;
-            if (errors != null && errors.Count != 0) {
-                Assert.AreEqual("", errors[numerror], "Cette erreur n'aurait pas dû se produire");
-                numerror++;
-            }
-
+            checkForNoErrors();
             checkInnerText("/s:ArchiveTransfer/s:Comment"
                , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_DAD_DocsExts+']");
+            // On vérifie qu'il y a bien une première unité documentaire avec un document
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_DAD_DocsExts+']/../../s:Contains[1]/s:Document[1]/s:Attachment");
+            // On vérifie qu'il n'y a pas de seconde unité documentaire avec un document
+            checkNotExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_DAD_DocsExts+']/../../s:Contains[2]/s:Document[1]/s:Attachment");
+        }
 
-            /* Ce test et le suivant sont identiques */
-            checkAttributeInList("//s:ArchivalAgencyObjectIdentifier"
-                , "schemeID", "CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse");
-            /* Ce test et le précédent sont identiques */
-            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse']");
+        [TestMethod]
+        public void W06_TestGenerateur_2_2_02() {
+            executeGenerator("liste-fichiers_2-2-02", "0.2");
 
-            checkNotExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse']/../../s:Contains[1]/s:Document[1]/s:Attachment");
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_DAD_DocsExts+']");
+            // On vérifie qu'il y a bien une première unité documentaire avec un document
+            checkAttribute("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_DAD_DocsExts+']/../../s:Contains[1]/s:Document[1]/s:Attachment", "filename", "MP_OetD_DAD_DocsExts_1.pdf");
+            // On vérifie qu'il y a bien une seconde unité documentaire avec un document
+            checkAttribute("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_DAD_DocsExts+']/../../s:Contains[2]/s:Document[1]/s:Attachment", "filename", "MP_OetD_DAD_DocsExts_2.pdf");
+        }
+
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // TODO: À rediscuter, est-ce qu'il ne serait pas préférable d'avoir une erreur générée
+        // TODO: Par contre, il n'est pas évident de déterminer le niveau de difficulté
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        [TestMethod]
+        public void W07_TestGenerateur_2_2_03() {
+            executeGenerator("liste-fichiers_2-2-03", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire n'existe pas
+            checkNotExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_DAD_DocsExts+']");
+        }
+
+        [TestMethod]
+        public void W08_TestGenerateur_2_3_01() {
+            executeGenerator("liste-fichiers_2-3-01", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Docs_Ext']");
+            // On vérifie qu'il y a bien une première unité documentaire avec un document
+            checkAttribute("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Docs_Ext']/../../s:Contains[4]/s:Document[1]/s:Attachment", "filename", "MP_Cons_Dossier_Docs_Ext_1.pdf");
+        }
+
+        [TestMethod]
+        public void W09_TestGenerateur_2_3_02() {
+            executeGenerator("liste-fichiers_2-3-02", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkNotExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Docs_Ext']");
+        }
+
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // TODO: À rediscuter, ce test est en échec, mais il me semble que le résultat attendu ne
+        // TODO: peut pas être obtenu, car le générateur recherche un tag non numéroté or il l'est
+        // TODO: dans les données.
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        [TestMethod]
+        public void W10_TestGenerateur_2_3_03() {
+            executeGenerator("liste-fichiers_2-3-03", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Docs_Ext']");
+            // On vérifie qu'il y a bien une première unité documentaire avec un document
+            checkAttribute("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Docs_Ext']/../../s:Contains[4]/s:Document[1]/s:Attachment", "filename", "MP_Cons_Dossier_Docs_Ext_1.pdf");
+            // On vérifie qu'il y a bien une première unité documentaire avec un document
+            checkAttribute("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Docs_Ext']/../../s:Contains[5]/s:Document[1]/s:Attachment", "filename", "MP_Cons_Dossier_Docs_Ext_2.pdf");
+        }
+
+        [TestMethod]
+        public void W11_TestGenerateur_2_4_01() {
+            executeGenerator("liste-fichiers_2-4-01", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Admissibilite_Compl2+']");
+            // On vérifie qu'il y a bien une première unité documentaire avec deux documents
+            checkAttribute("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Admissibilite_Compl2+']/../../s:Contains[3]/s:Document[1]/s:Attachment", "filename", "MP_OetD_Admissibilite_Compl2_1_1.pdf");
+            checkAttribute("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Admissibilite_Compl2+']/../../s:Contains[3]/s:Document[2]/s:Attachment", "filename", "MP_OetD_Admissibilite_Compl2_1_2.pdf");
+        }
+
+        [TestMethod]
+        public void W12_TestGenerateur_2_4_02() {
+            executeGenerator("liste-fichiers_2-4-02", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Admissibilite_Compl2+']");
+            // On vérifie qu'il y a bien une première unité documentaire avec deux documents
+            checkAttribute("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Admissibilite_Compl2+']/../../s:Contains[3]/s:Document[1]/s:Attachment", "filename", "MP_OetD_Admissibilite_Compl2_1_1.pdf");
+            checkAttribute("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Admissibilite_Compl2+']/../../s:Contains[3]/s:Document[2]/s:Attachment", "filename", "MP_OetD_Admissibilite_Compl2_1_2.pdf");
+            // On vérifie qu'il y a bien une seconde unité documentaire avec deux documents
+            checkAttribute("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Admissibilite_Compl2+']/../../s:Contains[4]/s:Document[1]/s:Attachment", "filename", "MP_OetD_Admissibilite_Compl2_2_1.pdf");
+            checkAttribute("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Admissibilite_Compl2+']/../../s:Contains[4]/s:Document[2]/s:Attachment", "filename", "MP_OetD_Admissibilite_Compl2_2_2.pdf");
+        }
+
+        [TestMethod]
+        public void W13_TestGenerateur_2_4_03() {
+            executeGenerator("liste-fichiers_2-4-03", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkNotExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Admissibilite_Compl2+']");
         }
 
 

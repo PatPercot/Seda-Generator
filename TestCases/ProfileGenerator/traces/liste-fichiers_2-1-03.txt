@@ -1,7 +1,7 @@
 informationsDatabase='Server=VM-PSQL02\OUTILS_P;Database=BW_DEV;User=App-Blueway-Exploitation;Password=Pi=3.14159;'
 ServerVersion: 10.00.5500
 State: Open
-CG56_TESTS_CARDINALITES, 30        , ../../../TestCases/ProfileGenerator/profiles/profil_Marches_Publics_schema.rng, 225600014_122
+CG56_TESTS_CARDINALITES, 78        , ../../../TestCases/ProfileGenerator/profiles/profil_Marches_Publics_schema.rng, 225600014_122
 ArchiveDocuments.LoadFile
 ,#TransferName,Marché de fournitures 12/07/2012
 field: '' field: '#TransferName' field: 'Marché de fournitures 12/07/2012' 
@@ -8234,11 +8234,11 @@ MP_OetD_DAD_2.pdf: ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
 ArchiveDocuments.getFileName
-MP_OetD_DAD_DocsExts_1.pdf: ArchiveDocuments.getFileName
+ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
 ArchiveDocuments.getFileName
-MP_OetD_DAD_DocsExts_2.pdf: ArchiveDocuments.getFileName
+ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 recurseDefine visiting 'rng:element'[name='Contains']
 lookupForContainsIdentifier trouve currentDocumentTypeId root en passe 2
@@ -8564,10 +8564,10 @@ ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
-Size computed = '1465318'
+Size computed = '1437768'
 lookupForAttribute attributeStep = 'rng:attribute'
 lookupForAttribute valueStep = 'rng:value' = '4L'
-Size formated = '1428'
+Size formated = '1401'
 recurseDefine visiting 'rng:attribute'[name='unitCode']
 recurseDefine visiting 'rng:element'[name='Size']
 genElement (rng:element, Size, /ArchiveTransfer/Contains/ContentDescription)
@@ -8843,9 +8843,9 @@ ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
-Size computed = '1465318'
+Size computed = '1437768'
 lookupForAttribute attributeName 'unitCode' non trouvé.
-Size formated = '1465318'
+Size formated = '1437768'
 recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/ContentDescription/Size on defineNode Size_N66105
 recurseDefine visiting 'rng:element'[name='Size']
@@ -9122,9 +9122,9 @@ ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
-Size computed = '1465318'
+Size computed = '1437768'
 lookupForAttribute attributeName 'unitCode' non trouvé.
-Size formated = '1465318'
+Size formated = '1437768'
 recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/ContentDescription/Size on defineNode Size_N66119
 recurseDefine visiting 'rng:element'[name='OriginatingAgency']
@@ -16037,4 +16037,13 @@ recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer on defineNod
 Fin de génération du bordereau
 
 -----------------------------------------
+
+
+---------- ERREURS ----------
+
+Integrity: Fichier '../../../TestCases/ProfileGenerator/datafiles/2_Cardinalite_UD/liste-fichiers_2-2-03_DEPOT/depot_DCE_horodatage_2.xml' inexistant. Impossible de trouver le fichier 'D:\DEV_PPE\CsProjects\Seda-Generator\TestCases\ProfileGenerator\datafiles\2_Cardinalite_UD\liste-fichiers_2-2-03_DEPOT\depot_DCE_horodatage_2.xml'.
+Integrity: Fichier '../../../TestCases/ProfileGenerator/datafiles/2_Cardinalite_UD/liste-fichiers_2-2-03_DEPOT/MP_OetD_DAD_DocsExts_1.pdf' inexistant. Impossible de trouver le fichier 'D:\DEV_PPE\CsProjects\Seda-Generator\TestCases\ProfileGenerator\datafiles\2_Cardinalite_UD\liste-fichiers_2-2-03_DEPOT\MP_OetD_DAD_DocsExts_1.pdf'.
+Integrity: Fichier '../../../TestCases/ProfileGenerator/datafiles/2_Cardinalite_UD/liste-fichiers_2-2-03_DEPOT/MP_OetD_DAD_DocsExts_2.pdf' inexistant. Impossible de trouver le fichier 'D:\DEV_PPE\CsProjects\Seda-Generator\TestCases\ProfileGenerator\datafiles\2_Cardinalite_UD\liste-fichiers_2-2-03_DEPOT\MP_OetD_DAD_DocsExts_2.pdf'.
+
+---------- ^^^^^^^ ----------
 
