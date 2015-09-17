@@ -543,6 +543,80 @@ namespace SedaSummaryGeneratorUnitTest {
             checkAttribute("//s:Document[1]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_AncDCE_Fichier']/../s:Attachment", "filename", "DCE_v0.1.pdf");
         }
 
+        [TestMethod]
+        public void W30_TestGenerateur_4_3_01() {
+            executeGenerator("liste-fichiers_4-3-01", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Acte']");
+            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Signature']");
+            // On vérifie qu'il y a bien une unité documentaire avec le document
+            checkAttribute("//s:Document[1]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Acte']/../s:Attachment", "filename", "MP_OetD_Analyse_Recept_ONR1_AE_Acte_1_1.pdf");
+            checkAttribute("//s:Document[2]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Signature']/../s:Attachment", "filename", "MP_OetD_Analyse_Recept_ONR1_AE_Signature_1_1.xml");
+        }
+
+        [TestMethod]
+        public void W31_TestGenerateur_4_3_02() {
+            executeGenerator("liste-fichiers_4-3-02", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Acte']");
+            checkNotExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Signature']");
+            // On vérifie qu'il y a bien une unité documentaire avec le document
+            checkAttribute("//s:Document[1]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Acte']/../s:Attachment", "filename", "MP_OetD_Analyse_Recept_ONR1_AE_Acte_1_1.pdf");
+        }
+
+        [TestMethod]
+        public void W32_TestGenerateur_4_3_03() {
+            executeGenerator("liste-fichiers_4-3-03", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkNotExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Acte']");
+            checkNotExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Signature']");
+        }
+
+        [TestMethod]
+        public void W33_TestGenerateur_4_3_04() {
+            executeGenerator("liste-fichiers_4-3-04", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Acte']");
+            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Signature']");
+            // On vérifie qu'il y a bien une unité documentaire avec le document
+            checkAttribute("//s:Document[1]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Acte']/../s:Attachment", "filename", "MP_OetD_Analyse_Recept_ONR1_AE_Acte_1_1.pdf");
+            checkAttribute("//s:Document[2]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Acte']/../s:Attachment", "filename", "MP_OetD_Analyse_Recept_ONR1_AE_Acte_2_1.pdf");
+            checkAttribute("//s:Document[3]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Signature']/../s:Attachment", "filename", "MP_OetD_Analyse_Recept_ONR1_AE_Signature_1_1.xml");
+        }
+
+        [TestMethod]
+        public void W34_TestGenerateur_4_3_05() {
+            executeGenerator("liste-fichiers_4-3-05", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Acte']");
+            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Signature']");
+            // On vérifie qu'il y a bien une unité documentaire avec le document
+            checkAttribute("//s:Document[1]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Acte']/../s:Attachment", "filename", "MP_OetD_Analyse_Recept_ONR1_AE_Acte_1_1.pdf");
+            checkAttribute("//s:Document[2]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Acte']/../s:Attachment", "filename", "MP_OetD_Analyse_Recept_ONR1_AE_Acte_2_1.pdf");
+            checkAttribute("//s:Document[3]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Signature']/../s:Attachment", "filename", "MP_OetD_Analyse_Recept_ONR1_AE_Signature_1_1.xml");
+            checkAttribute("//s:Document[4]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_AE_Signature']/../s:Attachment", "filename", "MP_OetD_Analyse_Recept_ONR1_AE_Signature_2_1.xml");
+        }
+
 
     }
 }
