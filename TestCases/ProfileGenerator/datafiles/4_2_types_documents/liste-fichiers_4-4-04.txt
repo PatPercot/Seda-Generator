@@ -1,0 +1,211 @@
+﻿,#TransferName,Marché de fournitures 12/07/2012
+,#OriginatingAgency_Identification,CG56_MP_001
+,#OriginatingAgency_Name,Service des Marchés Publics (SMP)
+
+,#KeywordContent#1,Vannes
+,#KeywordContent#2,Marché de fournitures
+,#KeywordContent#3,Consommables
+,#KeywordContent#4,Papeterie
+
+
+,depot_DCE_horodatage.xml,MP_Cons_Dossier{MP_Cons_Dossier_Horodatage},Jeton d'horodatage du dépôt du DCE,01/12/2014 12:00:00
+,RC.pdf,MP_Cons_Dossier{MP_Cons_Dossier_RC},Règlement de consultation,01/12/2014 12:00:00
+,depot_RC_horodatage.xml,MP_Cons_Dossier{MP_Cons_Dossier_RC_Horodatage},Jeton d'horodatage du dépôt du RC,01/12/2014 12:00:00
+,DCE.pdf,MP_Cons_Dossier{MP_Cons_Dossier_DCE},Dossier de consultation des entreprises (DCE),01/12/2014 12:00:00
+
+,DCE_v0.1.pdf,MP_Cons_Dossier_AncDCE{MP_Cons_Dossier_AncDCE_Fichier},Version O.1 du DCE,01/12/2014 12:00:00
+,DCE_v0.2.pdf,MP_Cons_Dossier_AncDCE{MP_Cons_Dossier_AncDCE_Fichier},Version O.2 du DCE,20/12/2014 12:00:00
+,DCE_v0.1_horodatage.xml,MP_Cons_Dossier_AncDCE{MP_Cons_Dossier_AncDCE_Horodatage},Jeton d'horodatage de la version O.1 du DCE,01/12/2014 12:00:00
+,DCE_v0.2_horodatage.xml,MP_Cons_Dossier_AncDCE{MP_Cons_Dossier_AncDCE_Horodatage},Jeton d'horodatage de la version O.2 du DCE,20/12/2014 12:00:00
+
+,RC_v0.1.pdf,MP_Cons_Dossier_AncRC{MP_Cons_Dossier_AncRC_Fichier},Version O.1 du RC,01/12/2014 12:00:00
+,RC_v0.2.pdf,MP_Cons_Dossier_AncRC{MP_Cons_Dossier_AncRC_Fichier},Version O.2 du RC,20/12/2014 12:00:00
+,RC_v0.1_horodatage.xml,MP_Cons_Dossier_AncRC{MP_Cons_Dossier_AncRC_Horodatage},Jeton d'horodatage de la version O.1 du RC,01/12/2014 12:00:00
+,RC_v0.2_horodatage.xml,MP_Cons_Dossier_AncRC{MP_Cons_Dossier_AncRC_Horodatage},Jeton d'horodatage de la version O.2 du RC,20/12/2014 12:00:00
+
+,MP_Cons_Dossier_Compl_1.pdf,MP_Cons_Dossier_Compl{MP_Cons_Dossier_Compl_Fichier},Pièces complémentaires - 1,05/12/2014 12:00:00
+,MP_Cons_Dossier_Compl_2.pdf,MP_Cons_Dossier_Compl{MP_Cons_Dossier_Compl_Fichier},Pièces complémentaires - 2,07/12/2014 12:00:00
+,MP_Cons_Dossier_Compl_1_Horodatage.xml,MP_Cons_Dossier_Compl{MP_Cons_Dossier_Compl_Horodatage},Horodatage des pièces complémentaires - 1,05/12/2014 12:00:00
+,MP_Cons_Dossier_Compl_2_Horodatage.xml,MP_Cons_Dossier_Compl{MP_Cons_Dossier_Compl_Horodatage},Horodatage des pièces complémentaires - 2,07/12/2014 12:00:00
+
+,MP_Cons_Dossier_Docs_Ext_1.pdf,MP_Cons_Dossier_Docs_Ext,Documents externes 1,07/12/2014 12:00:00
+,MP_Cons_Dossier_Docs_Ext_2.pdf,MP_Cons_Dossier_Docs_Ext,Documents externes 2,07/12/2014 12:00:00
+
+,publicite_1.pdf,MP_Cons_Pub,Publicité pour le marché de fourniture,01/12/2014 12:00:00
+,publicite_2.pdf,MP_Cons_Pub,Publicité pour le marché de fourniture,03/12/2014 12:00:00
+,MP_Cons_Pub_DocsExt_1.pdf,MP_Cons_Pub_DocsExt,Documents Externes de publicités - 1,05/12/2014 12:00:00
+,MP_Cons_Pub_DocsExt_2.pdf,MP_Cons_Pub_DocsExt,Documents Externes de publicités - 2,10/12/2014 12:00:00
+
+,MP_Cons_Msg_Echange_PJ_1_1.pdf,MP_Cons_Msg_Echange[#1]//MP_Cons_Msg_Echange_PJ,Pièce jointe du message 1,11/12/2014 12:00:00
+,MP_Cons_Msg_Echange_PJ_1_2.pdf,MP_Cons_Msg_Echange[#1]//MP_Cons_Msg_Echange_PJ,Pièce jointe du message 2,16/12/2014 12:00:00
+
+
+,MP_Cons_Msg_Echange_PJ_2_1.pdf,MP_Cons_Msg_Echange[#2]//MP_Cons_Msg_Echange_PJ,Pièce jointe du message 1,11/12/2014 12:00:00
+,MP_Cons_Msg_Echange_PJ_2_2.pdf,MP_Cons_Msg_Echange[#2]//MP_Cons_Msg_Echange_PJ,Pièce jointe du message 2,16/12/2014 12:00:00
+
+,MP_Cons_Msg_DocsExt_1.pdf,MP_Cons_Msg_DocsExt,Documents externes 1,14/12/2014 12:00:00
+,MP_Cons_Msg_DocsExt_2.pdf,MP_Cons_Msg_DocsExt,Documents externes 2,18/12/2014 12:00:00
+
+,registre_questions.pdf,MP_Cons_Reg{MP_Cons_Reg_Questions},Registre des questions,20/12/2014 12:00:00
+,registre_retraits.pdf,MP_Cons_Reg{MP_Cons_Reg_Retraits},Registre des retraits,20/12/2014 12:00:00
+,registre_depots.pdf,MP_Cons_Reg{MP_Cons_Reg_Depots},Registre des dépôts,20/12/2014 12:00:00
+,registre_suivi_msg_echanges.pdf,MP_Cons_Reg{MP_Cons_Reg_Msg},Registre du suivi des messages échangés,20/12/2014 12:00:00
+
+,MP_Cons_Reg_DocsExt_1.pdf,MP_Cons_Reg_DocsExt,Document Externe 1 lié aux registre,20/12/2014 12:00:00
+,MP_Cons_Reg_DocsExt_2.pdf,MP_Cons_Reg_DocsExt,Document Externe 2 lié aux registre,20/12/2014 12:00:00
+
+,#ContainsName[MP_OetD_Cand_Retenues1[#1]],offre de l'entreprise 1 pour le lot 1
+,MP_OetD_Cand_Retenues1_1_1.pdf,MP_OetD_Cand_Retenues1[#1],Candidature de l'entreprise X,19/12/2014 12:00:00
+,MP_OetD_Cand_Retenues1_1_2.pdf,MP_OetD_Cand_Retenues1[#1],Docs complémentaires de l'entreprise X,19/12/2014 12:00:00
+,MP_OetD_Cand_Retenues1_2_1.pdf,MP_OetD_Cand_Retenues1[#2],Candidature de l'entreprise Y,19/12/2014 12:00:00
+,MP_OetD_Cand_Retenues1_2_2.pdf,MP_OetD_Cand_Retenues1[#2],Docs complémentaires de l'entreprise Y,19/12/2014 12:00:00
+
+,#ContainsName[MP_OetD_Cand_NRetenues1[#1],offre de l'entreprise 2 pour le lot 1
+,MP_OetD_Cand_NRetenues1_1_1.pdf,MP_OetD_Cand_NRetenues1[#1],Candidature de l'entreprise A,20/12/2014 12:00:00
+,MP_OetD_Cand_NRetenues1_1_2.pdf,MP_OetD_Cand_NRetenues1[#1],Docs complémentaires de l'entreprise A,20/12/2014 12:00:00
+,MP_OetD_Cand_NRetenues1_2_1.pdf,MP_OetD_Cand_NRetenues1[#2],Candidature de l'entreprise B,20/12/2014 12:00:00
+,MP_OetD_Cand_NRetenues1_2_2.pdf,MP_OetD_Cand_NRetenues1[#2],Docs complémentaires de l'entreprise B,20/12/2014 12:00:00
+
+,MP_OetD_Admissibilite_Compl1_Msg_1.pdf,MP_OetD_Admissibilite_Compl1[#1]{MP_OetD_Admissibilite_Compl1_Msg},Message,11/12/2014 12:00:00
+,MP_OetD_Admissibilite_Compl1_Msg_1_horodatage.xml,MP_OetD_Admissibilite_Compl1[#1]{MP_OetD_Admissibilite_Compl1_Horodatage},Jeton d'horodage,11/12/2014 12:00:00
+,MP_OetD_Admissibilite_Compl1_PJ_1_1.pdf,MP_OetD_Admissibilite_Compl1[#1]//MP_OetD_Admissibilite_Compl1_PJ,Pièce jointe 1,11/12/2014 12:00:00
+,MP_OetD_Admissibilite_Compl1_PJ_1_2.pdf,MP_OetD_Admissibilite_Compl1[#1]//MP_OetD_Admissibilite_Compl1_PJ,Pièce jointe 2,11/12/2014 12:00:00
+,MP_OetD_Admissibilite_Compl1_Msg_2.pdf,MP_OetD_Admissibilite_Compl1[#2]{MP_OetD_Admissibilite_Compl1_Msg},Message,11/12/2014 12:00:00
+,MP_OetD_Admissibilite_Compl1_Msg_2_horodatage.xml,MP_OetD_Admissibilite_Compl1[#2]{MP_OetD_Admissibilite_Compl1_Horodatage},Jeton d'horodage,11/12/2014 12:00:00
+,MP_OetD_Admissibilite_Compl1_PJ_2_1.pdf,MP_OetD_Admissibilite_Compl1[#2]//MP_OetD_Admissibilite_Compl1_PJ,Pièce jointe 1,11/12/2014 12:00:00
+,MP_OetD_Admissibilite_Compl1_PJ_2_2.pdf,MP_OetD_Admissibilite_Compl1[#2]//MP_OetD_Admissibilite_Compl1_PJ,Pièce jointe 2,11/12/2014 12:00:00
+
+,MP_OetD_Admissibilite_Compl2_1_1.pdf,MP_OetD_Admissibilite_Compl2[#1],Documents Externes Lot 1,16/12/2014 12:00:00
+,MP_OetD_Admissibilite_Compl2_1_2.pdf,MP_OetD_Admissibilite_Compl2[#1],Documents Externes Lot 1,16/12/2014 12:00:00
+,MP_OetD_Admissibilite_Compl2_2_1.pdf,MP_OetD_Admissibilite_Compl2[#2],Documents Externes Lot 2,17/12/2014 12:00:00
+,MP_OetD_Admissibilite_Compl2_2_2.pdf,MP_OetD_Admissibilite_Compl2[#2],Documents Externes Lot 2,17/12/2014 12:00:00
+
+,MP_OetD_Admissibilite_Rejet_Echange_Msg_1.pdf,MP_OetD_Admissibilite_Rejet_Echange[#1]{MP_OetD_Admissibilite_Rejet_Echange_Msg},Message de rejet,27/12/2014 12:00:00
+,MP_OetD_Admissibilite_Rejet_Echange_Horodatage_1.xml,MP_OetD_Admissibilite_Rejet_Echange[#1]{MP_OetD_Admissibilite_Rejet_Echange_Horodatage},Jeton d'horodatage,27/12/2014 12:00:00
+,MP_OetD_Admissibilite_Rejet_Echange_PJ_1_1.pdf,MP_OetD_Admissibilite_Rejet_Echange[#1]//MP_OetD_Admissibilite_Rejet_Echange_PJ,Pièce jointe 1,27/12/2014 12:00:00
+,MP_OetD_Admissibilite_Rejet_Echange_PJ_1_2.pdf,MP_OetD_Admissibilite_Rejet_Echange[#1]//MP_OetD_Admissibilite_Rejet_Echange_PJ,Pièce jointe 2,27/12/2014 12:00:00
+,MP_OetD_Admissibilite_Rejet_Echange_Msg_2.pdf,MP_OetD_Admissibilite_Rejet_Echange[#2]{MP_OetD_Admissibilite_Rejet_Echange_Msg},Message de rejet,27/12/2014 12:00:00
+,MP_OetD_Admissibilite_Rejet_Echange_Horodatage_2.xml,MP_OetD_Admissibilite_Rejet_Echange[#2]{MP_OetD_Admissibilite_Rejet_Echange_Horodatage},Jeton d'horodatage,27/12/2014 12:00:00
+,MP_OetD_Admissibilite_Rejet_Echange_PJ_2_1.pdf,MP_OetD_Admissibilite_Rejet_Echange[#2]//MP_OetD_Admissibilite_Rejet_Echange_PJ,Pièce jointe 1,27/12/2014 12:00:00
+,MP_OetD_Admissibilite_Rejet_Echange_PJ_2_2.pdf,MP_OetD_Admissibilite_Rejet_Echange[#2]//MP_OetD_Admissibilite_Rejet_Echange_PJ,Pièce jointe 2,27/12/2014 12:00:00
+
+,MP_OetD_Admissibilite_Lettre_1.pdf,MP_OetD_Admissibilite_Lettre_Fichier[#1]{MP_OetD_Admissibilite_Lettre_Fichier_Msg},Message,27/12/2014 12:00:00
+,MP_OetD_Admissibilite_Lettre_1_horodatage.xml,MP_OetD_Admissibilite_Lettre_Fichier[#1]{MP_OetD_Admissibilite_Lettre_Fichier_Horodatage},Jeton d'horodatage,27/12/2014 12:00:00
+,MP_OetD_Admissibilite_Lettre_Fichier_PJ_1_1.pdf,MP_OetD_Admissibilite_Lettre_Fichier[#1]//MP_OetD_Admissibilite_Lettre_Fichier_PJ,Piece jointe 1,27/12/2014 12:00:00
+,MP_OetD_Admissibilite_Lettre_Fichier_PJ_1_2.pdf,MP_OetD_Admissibilite_Lettre_Fichier[#1]//MP_OetD_Admissibilite_Lettre_Fichier_PJ,Piece jointe 2,27/12/2014 12:00:00
+,MP_OetD_Admissibilite_Lettre_2.pdf,MP_OetD_Admissibilite_Lettre_Fichier[#2]{MP_OetD_Admissibilite_Lettre_Fichier_Msg},Message,27/12/2014 12:00:00
+,MP_OetD_Admissibilite_Lettre_2_horodatage.xml,MP_OetD_Admissibilite_Lettre_Fichier[#2]{MP_OetD_Admissibilite_Lettre_Fichier_Horodatage},Jeton d'horodatage,27/12/2014 12:00:00
+,MP_OetD_Admissibilite_Lettre_Fichier_PJ_2_1.pdf,MP_OetD_Admissibilite_Lettre_Fichier[#2]//MP_OetD_Admissibilite_Lettre_Fichier_PJ,Piece jointe 1,27/12/2014 12:00:00
+,MP_OetD_Admissibilite_Lettre_Fichier_PJ_2_2.pdf,MP_OetD_Admissibilite_Lettre_Fichier[#2]//MP_OetD_Admissibilite_Lettre_Fichier_PJ,Piece jointe 2,27/12/2014 12:00:00
+
+,MP_OetD_Cand_DocsExt_1.pdf,MP_OetD_Cand_DocsExt,Document Externe 1,15/12/2014 12:00:00
+,MP_OetD_Cand_DocsExt_2.pdf,MP_OetD_Cand_DocsExt,Document Externe 2,15/12/2014 12:00:00
+
+
+,MP_OetD_Analyse_Recept_ONR1_AE_Acte_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#1]//MP_OetD_Analyse_Recept_ONR1_AE{MP_OetD_Analyse_Recept_ONR1_AE_Acte},Acte d'engagement,20/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_ONR1_AE_Signature_1_1.xml,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#1]//MP_OetD_Analyse_Recept_ONR1_AE{MP_OetD_Analyse_Recept_ONR1_AE_Signature},Fichier de signature,20/12/2014 12:00:00
+
+,MP_OetD_Analyse_Recept_ONR1_Reponse_1_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#1]//MP_OetD_Analyse_Recept_ONR1_Reponse,Document 1 composant l'offre,15/12/2014 12:00:00
+
+
+,MP_OetD_Analyse_Recept_ONR1_Reponse_1_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#1]//MP_OetD_Analyse_Recept_ONR1_Reponse,Document 2 composant l'offre,15/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_ONR1_Rapport_Signature_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#1]//MP_OetD_Analyse_Recept_ONR1_Enveloppe{MP_OetD_Analyse_Recept_ONR1_Rapport_Signature},Rapport de vérification de la signature,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_ONR1_Enveloppe_XML_1_1.xml,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#1]//MP_OetD_Analyse_Recept_ONR1_Enveloppe{MP_OetD_Analyse_Recept_ONR1_Enveloppe_XML},Enveloppe XML de l'offre,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_ONR1_Envel_Horodatage_1_1.xml,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#1]//MP_OetD_Analyse_Recept_ONR1_Enveloppe{MP_OetD_Analyse_Recept_ONR1_Envel_Horodatage},Jeton d'horodatage,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_ONR1_AE_Acte_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#2]//MP_OetD_Analyse_Recept_ONR1_AE{MP_OetD_Analyse_Recept_ONR1_AE_Acte},Acte d'engagement,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_ONR1_AE_Signature_1_2.xml,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#2]//MP_OetD_Analyse_Recept_ONR1_AE{MP_OetD_Analyse_Recept_ONR1_AE_Signature},Fichier de signature,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_ONR1_Reponse_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#2]//MP_OetD_Analyse_Recept_ONR1_Reponse,Réponse 2,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_ONR1_Rapport_Signature_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#2]//MP_OetD_Analyse_Recept_ONR1_Enveloppe{MP_OetD_Analyse_Recept_ONR1_Rapport_Signature},Rapport de vérification de la signature,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_ONR1_Enveloppe_XML_1_2.xml,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#2]//MP_OetD_Analyse_Recept_ONR1_Enveloppe{MP_OetD_Analyse_Recept_ONR1_Enveloppe_XML},Enveloppe XML de l'offre,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_ONR1_Envel_Horodatage_1_2.xml,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#2]//MP_OetD_Analyse_Recept_ONR1_Enveloppe{MP_OetD_Analyse_Recept_ONR1_Envel_Horodatage},Enveloppe XML de l'offre,27/12/2014 12:00:00
+
+
+,MP_OetD_Analyse_Recept_ONR_DocsExt_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR_DocsExt,Fichiers ajoutés lors de l'enrichissement manuel de l'archive (1),27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_ONR_DocsExt_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR_DocsExt,Fichiers ajoutés lors de l'enrichissement manuel de l'archive (2),27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_Ouv_DocsExt_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_Ouv_DocsExt,Description du fichier ajouté lors de l'enrichissement manuel de l'archive (1),27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_Ouv_DocsExt_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_Ouv_DocsExt,Description du fichier ajouté lors de l'enrichissement manuel de l'archive (2),27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_OR1_AE_Acte_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#1]//MP_OetD_Analyse_Recept_OR1_AE{MP_OetD_Analyse_Recept_OR1_AE_Acte},Acte d'engagement,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_OR1_AE_Signature_1_1.xml,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#1]//MP_OetD_Analyse_Recept_OR1_AE{MP_OetD_Analyse_Recept_OR1_AE_Signature},Signature de l'acte d'engagement,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_OR_Rep_1_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#1]//MP_OetD_Analyse_Recept_OR_Rep,Document composant l'offre (1),27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_OR_Rep_1_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#1]//MP_OetD_Analyse_Recept_OR_Rep,Document composant l'offre (2),27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_OR1_Envel_Rapport_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#1]//MP_OetD_Analyse_Recept_OR1_Enveloppe{MP_OetD_Analyse_Recept_OR1_Envel_Rapport},Rapport de vérification de la signature,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_OR1_Envel_XML_1_1.xml,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#1]//MP_OetD_Analyse_Recept_OR1_Enveloppe{MP_OetD_Analyse_Recept_OR1_Envel_XML},Enveloppe XML de l'offre,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_OR1_Envel_Horodatage_XML_1_1.xml,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#1]//MP_OetD_Analyse_Recept_OR1_Enveloppe{MP_OetD_Analyse_Recept_OR1_Envel_Horodatage},Jeton d'horodatage,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_OR1_AE_Acte_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#2]//MP_OetD_Analyse_Recept_OR1_AE{MP_OetD_Analyse_Recept_OR1_AE_Acte},Acte d'engagement,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_OR1_AE_Signature_1_2.xml,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#2]//MP_OetD_Analyse_Recept_OR1_AE{MP_OetD_Analyse_Recept_OR1_AE_Signature},Signature de l'acte d'engagement,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_OR_Rep_1_2_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#2]//MP_OetD_Analyse_Recept_OR_Rep,Document composant l'offre (1),27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_OR_Rep_1_2_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#2]//MP_OetD_Analyse_Recept_OR_Rep,Document composant l'offre (2),27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_OR1_Envel_Rapport_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#2]//MP_OetD_Analyse_Recept_OR1_Enveloppe{MP_OetD_Analyse_Recept_OR1_Envel_Rapport},Rapport de vérification de la signature,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_OR1_Envel_XML_1_2.xml,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#2]//MP_OetD_Analyse_Recept_OR1_Enveloppe{MP_OetD_Analyse_Recept_OR1_Envel_XML},Enveloppe XML de l'offre,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_OR1_Envel_Horodatage_XML_1_2.xml,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#2]//MP_OetD_Analyse_Recept_OR1_Enveloppe{MP_OetD_Analyse_Recept_OR1_Envel_Horodatage},Jeton d'horodatage,27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_DocsExt_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_DocsExt,Fichiers ajoutés lors de l'enrichissement manuel de l'archive (1),27/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_DocsExt_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_DocsExt,Fichiers ajoutés lors de l'enrichissement manuel de l'archive (2),27/12/2014 12:00:00
+,MP_OetD_Analyse_Decision_Rejet_Docs_Exts_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Rejet_Docs_Exts,Fichiers ajoutés lors de l'enrichissement manuel de l'archive (1),27/12/2014 12:00:00
+,MP_OetD_Analyse_Decision_Rejet_Docs_Exts_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Rejet_Docs_Exts,Fichiers ajoutés lors de l'enrichissement manuel de l'archive (2),27/12/2014 12:00:00
+,MP_OetD_Analyse_Decision_Rejet_Echange_Msg_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Rejet_Echange{MP_OetD_Analyse_Decision_Rejet_Echange_Msg},Message d'attribution,27/12/2014 12:00:00
+,MP_OetD_Analyse_Decision_Rejet_Echange_Horodatage_1_1.xml,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Rejet_Echange{MP_OetD_Analyse_Decision_Rejet_Echange_Horodatage},Jeton d'horodatage,27/12/2014 12:00:00
+,MP_OetD_Analyse_Decision_Rejet_Docs_Exts_PJ_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Rejet_Docs_Exts_PJ,Pièce jointe (1),27/12/2014 12:00:00
+,MP_OetD_Analyse_Decision_Rejet_Docs_Exts_PJ_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Rejet_Docs_Exts_PJ,Pièce jointe (2),27/12/2014 12:00:00
+,MP_OetD_analyse_decision1_DocsExts_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_analyse_decision1_DocsExts,Documents relatifs à l'attribution : lettre d'attribution et tout autre document lié (1),27/12/2014 12:00:00
+,MP_OetD_analyse_decision1_DocsExts_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_analyse_decision1_DocsExts,Documents relatifs à l'attribution : lettre d'attribution et tout autre document lié (2),27/12/2014 12:00:00
+,MP_OetD_analyse_decision1_PJ2_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_analyse_decision1_PJ2,Piece jointe (1),27/12/2014 12:00:00
+,MP_OetD_analyse_decision1_PJ2_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_analyse_decision1_PJ2,Piece jointe (2),27/12/2014 12:00:00
+,MP_OetD_Analyse_Decision_Engag_AE_Msg_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Engag_AE{MP_OetD_Analyse_Decision_Engag_AE_Msg},Message de notification,27/12/2014 12:00:00
+,MP_OetD_Analyse_Decision_Engag_AE_Horodatage_1_1.xml,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Engag_AE{MP_OetD_Analyse_Decision_Engag_AE_Horodatage},Message de notification,27/12/2014 12:00:00
+,MP_OetD_Analyse_Decision_Engag_PJ_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Engag_PJ,Acte d'engagement,27/12/2014 12:00:00
+,MP_OetD_Analyse_Decision_Engag_DocsExt_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Engag_DocsExt,Fichier ajouté lors de l'enrichissement manuel de l'archive (1),27/12/2014 12:00:00
+,MP_OetD_Analyse_Decision_Engag_DocsExt_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Engag_DocsExt,Fichier ajouté lors de l'enrichissement manuel de l'archive (2),27/12/2014 12:00:00
+,MP_OetD_analyse_decision_Compl_Fichier_Msg_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_analyse_decision_Compl_Fichier[#1]{MP_OetD_analyse_decision_Compl_Fichier_Msg},Message,27/12/2014 12:00:00
+,MP_OetD_analyse_decision_Compl_Fichier_Horodatage_1_1.xml,MP_OetD_Analyse[#1]//MP_OetD_analyse_decision_Compl_Fichier[#1]{MP_OetD_analyse_decision_Compl_Fichier_Horodatage},Jeton d'horodatage,27/12/2014 12:00:00
+,MP_OetD_analyse_decision_Compl_Fichier_PJ_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_analyse_decision_Compl_Fichier[#1]//MP_OetD_analyse_decision_Compl_Fichier_PJ,Pièce jointe (1),27/12/2014 12:00:00
+,MP_OetD_analyse_decision_Compl_Fichier_PJ_1_2.pdf,MP_OetD_Analyse[#1]//MP_OetD_analyse_decision_Compl_Fichier[#1]//MP_OetD_analyse_decision_Compl_Fichier_PJ,Pièce jointe (2),27/12/2014 12:00:00
+,MP_OetD_analyse_decision_Compl_Docs_Ext_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_analyse_decision_Compl_Docs_Ext,Fichiers ajoutés lors de l'enrichissement manuel de l'archive (1),27/12/2014 12:00:00
+,MP_OetD_DAD_1.pdf,MP_OetD_DAD,Registre des notifications et autres états récapitulatifs (1),27/12/2014 12:00:00
+,MP_OetD_DAD_2.pdf,MP_OetD_DAD,Registre des notifications et autres états récapitulatifs (2),27/12/2014 12:00:00
+,MP_OetD_DAD_DocsExts_1.pdf,MP_OetD_DAD_DocsExts[#1],Fichiers ajoutés lors de l'enrichissement manuel de l'archive (1),27/12/2014 12:00:00
+,MP_OetD_DAD_DocsExts_2.pdf,MP_OetD_DAD_DocsExts[#1],Fichiers ajoutés lors de l'enrichissement manuel de l'archive (2),27/12/2014 12:00:00
+
+
+
+,#ContainsName[MP_Cons_Msg_Echange[#1]],Messages échangés
+,#ContainsName[MP_Cons_Msg_Echange[#2]],Messages échangés
+,#ContainsName[MP_OetD_Cand_Retenues1[#2]],Offre de l'entreprise Y pour le lot 2
+,#ContainsName[MP_OetD_Cand_NRetenues1[#1]],Offre non-retenue lot 1
+,#ContainsName[MP_OetD_Cand_NRetenues1[#2]],Offre non-retenue lot 2
+,#ContainsName[MP_OetD_Admissibilite_Compl1[#1]],Documents complémentaires du lot 1
+,#ContainsName[MP_OetD_Admissibilite_Compl1[#2]],Documents complémentaires du lot 2
+,#ContainsName[MP_OetD_Admissibilite_Rejet_Echange[#1]],Message de rejet pour le lot 1
+,#ContainsName[MP_OetD_Admissibilite_Rejet_Echange[#2]],Message de rejet pour le lot 2
+,#ContainsName[MP_OetD_Admissibilite_Lettre_Fichier[#1]],Lettre d'admission du lot 1 (fichier)
+,#ContainsName[MP_OetD_Admissibilite_Lettre_Fichier[#2]],Lettre d'admmission du lot 2 (fichier)
+,#ContainsName[MP_OetD_Analyse[#1]],Analyse des offres du lot 1
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#1]],Fichiers de candidatures non retenues
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#2]],Fichiers de candidatures non retenues
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#1]],Fichiers de candidature retenue pour le lot 1
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#2]],Fichiers de candidature retenue pour le lot 2
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Rejet_Echange],Messages d'attribution
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_analyse_decision1],Documents liés à l'attribution
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_analyse_decision1_PJ1],Pièces jointes liées à l'attribution
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Engag],Documents d'engagement
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Engag_AE],Actes d'engagement
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_analyse_decision_Compl_Fichier[#1]],Messages complémentaires
+
+
+,#KeywordContent_MP_OetD_Analyse[#1]#1,petite fourniture
+,#KeywordContent_MP_OetD_Analyse[#1]#2,papier imprimante
+,#KeywordContent_MP_OetD_Analyse[#1]#3,stylos bille
+,#KeywordContent_MP_OetD_Analyse[#1]#4,crayons de couleur
+
+
+
+
+
+
+
+
+
+
+
+
+
+

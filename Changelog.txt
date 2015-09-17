@@ -1,4 +1,9 @@
 -------------------------
+Changements du 2015-09-17
+
+- Ajout de testcases du générateur de bordereaux
+
+-------------------------
 Changements du 2015-09-16
 
 - Ajout des testcases du contrôleur de profils

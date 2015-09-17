@@ -389,6 +389,55 @@ namespace SedaSummaryGeneratorUnitTest {
             checkNotExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_OetD_Admissibilite_Compl2+']");
         }
 
+        [TestMethod]
+        public void W20_TestGenerateur_4_1_01() {
+            executeGenerator("liste-fichiers_4-1-01", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Horodatage']");
+            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_RC']");
+            // On vérifie qu'il y a bien une unité documentaire avec le document
+            checkAttribute("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Horodatage']/../s:Attachment", "filename", "depot_DCE_horodatage.xml");
+            checkAttribute("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_RC']/../s:Attachment", "filename", "RC.pdf");
+        }
+
+        [TestMethod]
+        public void W21_TestGenerateur_4_1_02() {
+            executeGenerator("liste-fichiers_4-1-02", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkExists("//s:Document[1]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Horodatage']");
+            checkExists("//s:Document[2]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Horodatage']");
+            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_RC']");
+            // On vérifie qu'il y a bien une unité documentaire avec le document
+            checkAttribute("//s:Document[1]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Horodatage']/../s:Attachment", "filename", "depot_DCE_horodatage.xml");
+            checkAttribute("//s:Document[2]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Horodatage']/../s:Attachment", "filename", "depot_DCE_horodatage_2.xml");
+            checkAttribute("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_RC']/../s:Attachment", "filename", "RC.pdf");
+        }
+
+        [TestMethod]
+        public void W22_TestGenerateur_4_1_03() {
+            executeGenerator("liste-fichiers_4-1-03", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que l'unité documentaire existe
+            checkExists("//s:Document/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Horodatage']");
+            checkExists("//s:Document[2]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_RC']");
+            checkExists("//s:Document[3]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_RC']");
+            // On vérifie qu'il y a bien une unité documentaire avec le document
+            checkAttribute("//s:Document/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Horodatage']/../s:Attachment", "filename", "depot_DCE_horodatage.xml");
+            checkAttribute("//s:Document[2]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_RC']/../s:Attachment", "filename", "RC.pdf");
+            checkAttribute("//s:Document[3]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_RC']/../s:Attachment", "filename", "RC_2.pdf");
+        }
+
 
     }
 }
