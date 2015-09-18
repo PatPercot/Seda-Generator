@@ -3,7 +3,49 @@ Roadmap
 Éléments prioritaires
 
 - Faciliter l'exécution des programmes de contrôle avec un fichier de configuration qui définit
-  les fichiers sur lesquels l'archiviste ou l'éditeur de l'applciation métier travaille
+  les fichiers sur lesquels l'archiviste ou l'éditeur de l'application métier travaille
   Permettre de conserver plusieurs configurations et de choisir celle que l'on traite
   Le fichier de configuration doit servir aux trois programmes de contrôle
   
+- Fournir une version release des programmes sur GitHub et Codeplex
+
+- Finaliser le contrôle des profils d'archivage
+	- Ajouter un contrôle sur la cardinalité de la balise "ArchivalAgencyObjectIdentifier" 
+		(la balise doit avoir une cardinalité 1,1)
+	- Ajouter un contrôle pour les mots-clés, la description du contenu doit être obligatoire pour que le mot-clé soit généré
+	- Coder les test prévus par Maud sur les contrôles (les précédents doivent en faire partie)
+
+- Réaliser un contrôleur de données métier
+	- Données métier seules (voir TODO.txt)
+	- Données confrontées au profil d'archivage
+		- Tags utilisés non référencés par le profil
+		- Tags utilisés comme des tags répétables alors qu'ils ne le sont pas
+		- Tags utilisés comme des tags fixes alors qu'ils osnt répétables
+
+- Ajout d'informations complémentaires dans les profils
+	- langue dans la description du contenu de l’archive et des unités documentaires
+	- des dates de départ pour la communicabilité et le sort final sur l’archive, les unités documentaires et les mots-clés
+		Ces dates peuvent être celles des documents ou venir de données métier (date de naissance ou de décès, …).
+			1) Calcul par défaut (dates des documents) 
+					Commentaire : ça me paraît le plus simple en mise en œuvre et le plus sûr, puisque basé sur les documents eux-mêmes = je pense que ça répondra à la grande majorité des cas ( ? )
+				- On ajoute dans l’arbre des unités documentaires une information date que l’on calcule à partir des dates les plus récentes des documents qu’elle contient directement ;
+				- À la fin de la première passe, on calcule les dates les plus récentes en tenant compte des unités documentaires filles.
+			2) Fourniture des dates par l’application métier 
+			        Commentaire : ça suppose d’aller loin dans l’appli métier non ? (j’ai l’impression qu’on peut vite oublier un tag + quid du maintien dans le temps lorsqu’il y aura évolution de l’appli ?)
+				- On prévoit les tags nécessaires pour que l’application métier fournisse ces dates (archive, unités documentaires et mots-clés).
+			3) Utilisation des dates en passe 2 (ne concerne que l’archive et les unités documentaires) 
+					Commentaire : c’est pas un peu usine à gaz ça ? (bon, c’est lié aux trois options, j’avoue que ça fait un peu peur)
+				- Si aucune date n’est fournie par l’application métier, on utilise le calcul réalisé en passe 1 ;
+				- Option 1 : si la date d’une unité documentaire est fournie par le métier, les dates des unités filles doivent aussi être fournies. Conséquence on produit un bordereau non conforme si des dates manquent ;
+				- Option 2 : on utilise les dates fournies par le métier ou à défaut celles qui sont calculées en passe 1. À mon sens il y a un risque de produire des dates non conformes aux attentes, mais un bordereau conforme.
+				- Option 3 : on utilise les dates fournies par le métier ou à défaut la date de l’unité documentaire parente qui a été fournie plus tôt.
+
+
+Éléments secondaires
+
+- Finaliser les « petits » problèmes (TODO.txt)
+	- bug SaeUrl
+	- capter les exceptions non gérées sur répertoire du bordereau
+
+- Permettre d'ajouter un tag sur les mots-clés pour faciliter leur gestion
+
