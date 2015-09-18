@@ -786,6 +786,86 @@ namespace SedaSummaryGeneratorUnitTest {
             checkNotExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_AncDCE_Fichier']");
         }
 
+        [TestMethod]
+        public void W45_TestGenerateur_3_3_01() {
+            executeGenerator("liste-fichiers_3-3-01", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que le document existe
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_Echange+']");
+
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_Echange+']/../s:Document/s:Attachment[@filename='MP_Cons_Msg_Echange_Msg_1_1_Horodatage.xml']");
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_Echange+']/../s:Document[2]/s:Attachment[@filename='MP_Cons_Msg_Echange_Msg_2_1_Horodatage.xml']");
+        }
+
+        [TestMethod]
+        public void W46_TestGenerateur_3_3_02() {
+            executeGenerator("liste-fichiers_3-3-02", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que le document existe
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_Echange+']");
+
+            checkNotExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_Echange+']/../s:Document/s:Attachment[@filename='MP_Cons_Msg_Echange_Msg_1_1_Horodatage.xml']");
+        }
+
+        [TestMethod]
+        public void W47_TestGenerateur_3_3_03() {
+            executeGenerator("liste-fichiers_3-3-03", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que le document existe
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_Echange+']");
+
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_Echange+']/../s:Document/s:Attachment[@filename='MP_Cons_Msg_Echange_Msg_1_1_Horodatage.xml']");
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_Echange+']/../s:Document/s:Attachment[@filename='MP_Cons_Msg_Echange_Msg_1_2_Horodatage.xml']");
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_Echange+']/../s:Document[2]/s:Attachment[@filename='MP_Cons_Msg_Echange_Msg_2_1_Horodatage.xml']");
+        }
+
+        [TestMethod]
+        public void W48_TestGenerateur_3_4_01() {
+            executeGenerator("liste-fichiers_3-4-01", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que le document existe
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_DocsExt']");
+
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_DocsExt']/../s:Document/s:Attachment[@filename='MP_Cons_Msg_DocsExt_1.pdf']");
+        }
+
+        [TestMethod]
+        public void W49_TestGenerateur_3_4_02() {
+            executeGenerator("liste-fichiers_3-4-02", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que le document existe
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_DocsExt']");
+
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_DocsExt']/../s:Document/s:Attachment[@filename='MP_Cons_Msg_DocsExt_1.pdf']");
+            checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_DocsExt']/../s:Document/s:Attachment[@filename='MP_Cons_Msg_DocsExt_2.pdf']");
+        }
+
+        [TestMethod]
+        public void W50_TestGenerateur_3_4_03() {
+            executeGenerator("liste-fichiers_3-4-03", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que le document existe
+            checkNotExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_DocsExt']");
+        }
+
 
     }
 }
