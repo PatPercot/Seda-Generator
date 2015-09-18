@@ -322,11 +322,6 @@ namespace SedaSummaryGeneratorUnitTest {
             checkNotExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_Docs_Ext']");
         }
 
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // TODO: À rediscuter, ce test est en échec, mais il me semble que le résultat attendu ne
-        // TODO: peut pas être obtenu, car le générateur recherche un tag non numéroté or il l'est
-        // TODO: dans les données.
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         [TestMethod]
         public void W10_TestGenerateur_2_3_03() {
             executeGenerator("liste-fichiers_2-3-03", "0.2");
