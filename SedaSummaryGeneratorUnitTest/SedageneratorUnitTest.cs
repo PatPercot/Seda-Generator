@@ -704,6 +704,88 @@ namespace SedaSummaryGeneratorUnitTest {
             checkExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_Echange+']");
         }
 
+        [TestMethod]
+        public void W39_TestGenerateur_3_1_01() {
+            executeGenerator("liste-fichiers_3-1-01", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que le document existe
+            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_RC']");
+            // On vérifie que le nom de fichier est le bon
+            checkAttribute("//s:Document[2]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_RC']/../s:Attachment"
+                , "filename", "RC.pdf");
+        }
+
+        [TestMethod]
+        public void W40_TestGenerateur_3_1_02() {
+            executeGenerator("liste-fichiers_3-1-02", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que le document existe
+            checkNotExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_RC']");
+        }
+
+        [TestMethod]
+        public void W41_TestGenerateur_3_1_03() {
+            executeGenerator("liste-fichiers_3-1-03", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que le document existe
+            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_RC']");
+            // On vérifie qu'il y a bien deux fichiers
+            checkAttribute("//s:Document[2]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_RC']/../s:Attachment"
+                , "filename", "RC.pdf");
+            checkAttribute("//s:Document[3]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_RC']/../s:Attachment"
+                , "filename", "RC2.pdf");
+        }
+
+        [TestMethod]
+        public void W42_TestGenerateur_3_2_01() {
+            executeGenerator("liste-fichiers_3-2-01", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que le document existe
+            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_AncDCE_Fichier']");
+            // On vérifie que le nom de fichier est le bon
+            checkAttribute("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_AncDCE_Fichier']/../s:Attachment"
+                , "filename", "DCE_v0.1.pdf");
+        }
+
+        [TestMethod]
+        public void W43_TestGenerateur_3_2_02() {
+            executeGenerator("liste-fichiers_3-2-02", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que le document existe
+            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_AncDCE_Fichier']");
+            // On vérifie que les deux fichiers existent
+            checkAttribute("//s:Document[1]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_AncDCE_Fichier']/../s:Attachment"
+                , "filename", "DCE_v0.1.pdf");
+            checkAttribute("//s:Document[2]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_AncDCE_Fichier']/../s:Attachment"
+                , "filename", "DCE_v0.2.pdf");
+        }
+
+        [TestMethod]
+        public void W44_TestGenerateur_3_2_03() {
+            executeGenerator("liste-fichiers_3-2-03", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
+            // On vérifie que le document existe
+            checkNotExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_AncDCE_Fichier']");
+        }
+
 
     }
 }
