@@ -1,7 +1,7 @@
 informationsDatabase='Server=VM-PSQL02\OUTILS_P;Database=BW_DEV;User=App-Blueway-Exploitation;Password=Pi=3.14159;'
 ServerVersion: 10.00.5500
 State: Open
-CG56_TESTS_CARDINALITES, 180       , ../../../TestCases/ProfileGenerator/profiles/profil_Marches_Publics_schema.rng, 225600014_122
+CG56_TESTS_CARDINALITES, 213       , ../../../TestCases/ProfileGenerator/profiles/profil_Marches_Publics_schema.rng, 225600014_122
 ArchiveDocuments.LoadFile
 ,#TransferName,Marché de fournitures 12/07/2012
 field: '' field: '#TransferName' field: 'Marché de fournitures 12/07/2012' 
@@ -8670,7 +8670,7 @@ ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
-Size computed = '1479590'
+Size computed = '1479591'
 lookupForAttribute attributeStep = 'rng:attribute'
 lookupForAttribute valueStep = 'rng:value' = '4L'
 Size formated = '1442'
@@ -8951,9 +8951,9 @@ ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
-Size computed = '1479590'
+Size computed = '1479591'
 lookupForAttribute attributeName 'unitCode' non trouvé.
-Size formated = '1479590'
+Size formated = '1479591'
 recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/ContentDescription/Size on defineNode Size_N66105
 recurseDefine visiting 'rng:element'[name='Size']
@@ -9232,9 +9232,9 @@ ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
-Size computed = '1479590'
+Size computed = '1479591'
 lookupForAttribute attributeName 'unitCode' non trouvé.
-Size formated = '1479590'
+Size formated = '1479591'
 recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/ContentDescription/Size on defineNode Size_N66119
 recurseDefine visiting 'rng:element'[name='OriginatingAgency']
