@@ -1,7 +1,7 @@
 informationsDatabase='Server=VM-PSQL02\OUTILS_P;Database=BW_DEV;User=App-Blueway-Exploitation;Password=Pi=3.14159;'
 ServerVersion: 10.00.5500
 State: Open
-CG56_TESTS_CARDINALITES, 145       , ../../../TestCases/ProfileGenerator/profiles/profil_Marches_Publics_schema.rng, 225600014_122
+CG56_TESTS_CARDINALITES, 180       , ../../../TestCases/ProfileGenerator/profiles/profil_Marches_Publics_schema.rng, 225600014_122
 ArchiveDocuments.LoadFile
 ,#TransferName,Marché de fournitures 12/07/2012
 field: '' field: '#TransferName' field: 'Marché de fournitures 12/07/2012' 
@@ -22,8 +22,6 @@ field: '' field: '#KeywordContent#4' field: 'Papeterie'
 
 ,depot_DCE_horodatage.xml,MP_Cons_Dossier{MP_Cons_Dossier_Horodatage},Jeton d'horodatage du dépôt du DCE,01/12/2014 12:00:00
 field: '' field: 'depot_DCE_horodatage.xml' field: 'MP_Cons_Dossier{MP_Cons_Dossier_Horodatage}' field: 'Jeton d'horodatage du dépôt du DCE' field: '01/12/2014 12:00:00' 
-,depot_DCE_horodatage_2.xml,MP_Cons_Dossier{MP_Cons_Dossier_Horodatage},Jeton d'horodatage du dépôt du DCE,01/12/2014 12:00:00
-field: '' field: 'depot_DCE_horodatage_2.xml' field: 'MP_Cons_Dossier{MP_Cons_Dossier_Horodatage}' field: 'Jeton d'horodatage du dépôt du DCE' field: '01/12/2014 12:00:00' 
 ,RC.pdf,MP_Cons_Dossier{MP_Cons_Dossier_RC},Règlement de consultation,01/12/2014 12:00:00
 field: '' field: 'RC.pdf' field: 'MP_Cons_Dossier{MP_Cons_Dossier_RC}' field: 'Règlement de consultation' field: '01/12/2014 12:00:00' 
 ,depot_RC_horodatage.xml,MP_Cons_Dossier{MP_Cons_Dossier_RC_Horodatage},Jeton d'horodatage du dépôt du RC,01/12/2014 12:00:00
@@ -76,10 +74,14 @@ field: '' field: 'MP_Cons_Pub_DocsExt_2.pdf' field: 'MP_Cons_Pub_DocsExt' field:
 field: '' field: 'MP_Cons_Msg_Echange_PJ_1_1.pdf' field: 'MP_Cons_Msg_Echange[#1]//MP_Cons_Msg_Echange_PJ' field: 'Pièce jointe du message 1' field: '11/12/2014 12:00:00' 
 ,MP_Cons_Msg_Echange_PJ_1_2.pdf,MP_Cons_Msg_Echange[#1]//MP_Cons_Msg_Echange_PJ,Pièce jointe du message 2,16/12/2014 12:00:00
 field: '' field: 'MP_Cons_Msg_Echange_PJ_1_2.pdf' field: 'MP_Cons_Msg_Echange[#1]//MP_Cons_Msg_Echange_PJ' field: 'Pièce jointe du message 2' field: '16/12/2014 12:00:00' 
-,MP_Cons_Msg_Echange_Msg_1_1.pdf,MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_PJ_Msg},Message 1,11/12/2014 12:00:00
-field: '' field: 'MP_Cons_Msg_Echange_Msg_1_1.pdf' field: 'MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_PJ_Msg}' field: 'Message 1' field: '11/12/2014 12:00:00' 
+,MP_Cons_Msg_Echange_Msg_1_1.pdf,MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_PJ_Msg},Message 2,11/12/2014 12:00:00
+field: '' field: 'MP_Cons_Msg_Echange_Msg_1_1.pdf' field: 'MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_PJ_Msg}' field: 'Message 2' field: '11/12/2014 12:00:00' 
+,MP_Cons_Msg_Echange_Msg_1_2.pdf,MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_PJ_Msg},Message 2,11/12/2014 12:00:00
+field: '' field: 'MP_Cons_Msg_Echange_Msg_1_2.pdf' field: 'MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_PJ_Msg}' field: 'Message 2' field: '11/12/2014 12:00:00' 
 ,MP_Cons_Msg_Echange_Msg_1_1_Horodatage.xml,MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_Horodatage},Jeton d'horodatage du message 1,11/12/2014 12:00:00
 field: '' field: 'MP_Cons_Msg_Echange_Msg_1_1_Horodatage.xml' field: 'MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_Horodatage}' field: 'Jeton d'horodatage du message 1' field: '11/12/2014 12:00:00' 
+,MP_Cons_Msg_Echange_Msg_1_2_Horodatage.xml,MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_Horodatage},Jeton d'horodatage du message 2,11/12/2014 12:00:00
+field: '' field: 'MP_Cons_Msg_Echange_Msg_1_2_Horodatage.xml' field: 'MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_Horodatage}' field: 'Jeton d'horodatage du message 2' field: '11/12/2014 12:00:00' 
 
 ,MP_Cons_Msg_Echange_PJ_2_1.pdf,MP_Cons_Msg_Echange[#2]//MP_Cons_Msg_Echange_PJ,Pièce jointe du message 1,11/12/2014 12:00:00
 field: '' field: 'MP_Cons_Msg_Echange_PJ_2_1.pdf' field: 'MP_Cons_Msg_Echange[#2]//MP_Cons_Msg_Echange_PJ' field: 'Pièce jointe du message 1' field: '11/12/2014 12:00:00' 
@@ -726,7 +728,7 @@ recurseDefine visiting 'rng:element'[name='Contains']
 lookupForContainsIdentifier trouve currentDocumentTypeId MP_Cons_Dossier en passe 1
 création nouveau containsNode(MP_Cons_Dossier)
 ArchiveDocuments.prepareListForType('MP_Cons_Dossier')
-ArchiveDocuments.prepareListForType found '5' documents
+ArchiveDocuments.prepareListForType found '4' documents
 genElement (rng:element, Contains, /ArchiveTransfer/Contains/Contains)
 recurseDefine ('Contains_N66925', '/ArchiveTransfer/Contains/Contains/Contains', 'MP_Cons_Dossier')
 recurseDefine visiting 'rng:element'[name='ArchivalAgencyObjectIdentifier']
@@ -774,8 +776,8 @@ recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Appraisal on defineNode Appraisal_N67021
 recurseDefine visiting 'rng:element'[name='Document']
 ArchiveDocuments.prepareListForType('MP_Cons_Dossier{MP_Cons_Dossier_Horodatage}')
-ArchiveDocuments.prepareListForType found '2' documents
-genElement Document : typeId MP_Cons_Dossier{MP_Cons_Dossier_Horodatage} has 2 documents
+ArchiveDocuments.prepareListForType found '1' documents
+genElement Document : typeId MP_Cons_Dossier{MP_Cons_Dossier_Horodatage} has 1 documents
 ArchiveDocuments.nextDocument
 genElement (rng:element, Document, /ArchiveTransfer/Contains/Contains/Contains)
 recurseDefine ('Document_N67060', '/ArchiveTransfer/Contains/Contains/Contains/Document', 'MP_Cons_Dossier')
@@ -787,35 +789,6 @@ recurseDefine visiting 'rng:attribute'[name='mimeCode']
 recurseDefine visiting 'rng:attribute'[name='filename']
 ArchiveDocuments.getFileName
 recurseDefine generating filename 'depot_DCE_horodatage.xml' for DOCLIST 'MP_Cons_Dossier'
-recurseDefine visiting 'rng:optional'
-recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Document on defineNode Document_N67060
-recurseDefine visiting 'rng:optional'
-recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Document on defineNode Document_N67060
-recurseDefine visiting 'rng:element'[name='Description']
-genElement (rng:element, Description, /ArchiveTransfer/Contains/Contains/Contains/Document)
-recurseDefine ('Description_N67112', '/ArchiveTransfer/Contains/Contains/Contains/Document/Description', 'MP_Cons_Dossier')
-recurseDefine visiting 'rng:value'
-recurseDefine visiting 'rng:element'[name='Identification']
-genElement (rng:element, Identification, /ArchiveTransfer/Contains/Contains/Contains/Document)
-recurseDefine ('Identification_N67124', '/ArchiveTransfer/Contains/Contains/Contains/Document/Identification', 'MP_Cons_Dossier')
-recurseDefine visiting 'rng:data'
-recurseDefine visiting 'rng:attribute'[name='schemeID']
-recurseDefine visiting 'rng:element'[name='Type']
-genElement (rng:element, Type, /ArchiveTransfer/Contains/Contains/Contains/Document)
-recurseDefine ('Type_N67156', '/ArchiveTransfer/Contains/Contains/Contains/Document/Type', 'MP_Cons_Dossier')
-recurseDefine visiting 'rng:value'
-recurseDefine visiting 'rng:attribute'[name='listVersionID']
-ArchiveDocuments.nextDocument
-genElement (rng:element, Document, /ArchiveTransfer/Contains/Contains/Contains)
-recurseDefine ('Document_N67060', '/ArchiveTransfer/Contains/Contains/Contains/Document', 'MP_Cons_Dossier')
-recurseDefine visiting 'rng:element'[name='Attachment']
-genElement (rng:element, Attachment, /ArchiveTransfer/Contains/Contains/Contains/Document)
-recurseDefine ('Attachment_N67065', '/ArchiveTransfer/Contains/Contains/Contains/Document/Attachment', 'MP_Cons_Dossier')
-recurseDefine visiting 'rng:data'
-recurseDefine visiting 'rng:attribute'[name='mimeCode']
-recurseDefine visiting 'rng:attribute'[name='filename']
-ArchiveDocuments.getFileName
-recurseDefine generating filename 'depot_DCE_horodatage_2.xml' for DOCLIST 'MP_Cons_Dossier'
 recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Document on defineNode Document_N67060
 recurseDefine visiting 'rng:optional'
@@ -1774,7 +1747,7 @@ ArchiveDocuments.IsThereDocumentsReferringToType('MP_Cons_Msg_Echange[#1]')
 ArchiveDocuments.IsThereDocumentsReferringToType('MP_Cons_Msg_Echange[#1]') réfère à des documents
 création nouveau containsNode(MP_Cons_Msg_Echange[#1])
 ArchiveDocuments.prepareListForType('MP_Cons_Msg_Echange[#1]')
-ArchiveDocuments.prepareListForType found '2' documents
+ArchiveDocuments.prepareListForType found '4' documents
 genElement (rng:element, Contains, /ArchiveTransfer/Contains/Contains/Contains)
 recurseDefine ('Contains_N69156', '/ArchiveTransfer/Contains/Contains/Contains/Contains', 'MP_Cons_Msg_Echange[#1]')
 recurseDefine visiting 'rng:element'[name='ArchivalAgencyObjectIdentifier']
@@ -1809,8 +1782,8 @@ recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Con
 recurseDefine visiting 'rng:zeroOrMore'
 recurseDefine ??OrMore for rng:zeroOrMore in context /ArchiveTransfer/Contains/Contains/Contains/Contains on defineNode Contains_N69156
 ArchiveDocuments.prepareListForType('MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_PJ_Msg}')
-ArchiveDocuments.prepareListForType found '1' documents
-genElement Document : typeId MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_PJ_Msg} has 1 documents
+ArchiveDocuments.prepareListForType found '2' documents
+genElement Document : typeId MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_PJ_Msg} has 2 documents
 ArchiveDocuments.nextDocument
 genElement (rng:element, Document, /ArchiveTransfer/Contains/Contains/Contains/Contains)
 recurseDefine ('Document_N69253', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document', 'MP_Cons_Msg_Echange[#1]')
@@ -1840,11 +1813,40 @@ genElement (rng:element, Type, /ArchiveTransfer/Contains/Contains/Contains/Conta
 recurseDefine ('Type_N69350', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Type', 'MP_Cons_Msg_Echange[#1]')
 recurseDefine visiting 'rng:value'
 recurseDefine visiting 'rng:attribute'[name='listVersionID']
+ArchiveDocuments.nextDocument
+genElement (rng:element, Document, /ArchiveTransfer/Contains/Contains/Contains/Contains)
+recurseDefine ('Document_N69253', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:element'[name='Attachment']
+genElement (rng:element, Attachment, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Attachment_N69258', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Attachment', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:data'
+recurseDefine visiting 'rng:attribute'[name='mimeCode']
+recurseDefine visiting 'rng:attribute'[name='filename']
+ArchiveDocuments.getFileName
+recurseDefine generating filename 'MP_Cons_Msg_Echange_Msg_1_2.pdf' for DOCLIST 'MP_Cons_Msg_Echange[#1]'
+recurseDefine visiting 'rng:optional'
+recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Contains/Document on defineNode Document_N69253
+recurseDefine visiting 'rng:optional'
+recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Contains/Document on defineNode Document_N69253
+recurseDefine visiting 'rng:element'[name='Description']
+genElement (rng:element, Description, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Description_N69305', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Description', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:data'
+recurseDefine visiting 'rng:element'[name='Identification']
+genElement (rng:element, Identification, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Identification_N69318', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Identification', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:data'
+recurseDefine visiting 'rng:attribute'[name='schemeID']
+recurseDefine visiting 'rng:element'[name='Type']
+genElement (rng:element, Type, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Type_N69350', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Type', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:value'
+recurseDefine visiting 'rng:attribute'[name='listVersionID']
 recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Contains on defineNode Contains_N69156
 ArchiveDocuments.prepareListForType('MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_Horodatage}')
-ArchiveDocuments.prepareListForType found '1' documents
-genElement Document : typeId MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_Horodatage} has 1 documents
+ArchiveDocuments.prepareListForType found '2' documents
+genElement Document : typeId MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_Horodatage} has 2 documents
 ArchiveDocuments.nextDocument
 genElement (rng:element, Document, /ArchiveTransfer/Contains/Contains/Contains/Contains)
 recurseDefine ('Document_N69369', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document', 'MP_Cons_Msg_Echange[#1]')
@@ -1856,6 +1858,35 @@ recurseDefine visiting 'rng:attribute'[name='mimeCode']
 recurseDefine visiting 'rng:attribute'[name='filename']
 ArchiveDocuments.getFileName
 recurseDefine generating filename 'MP_Cons_Msg_Echange_Msg_1_1_Horodatage.xml' for DOCLIST 'MP_Cons_Msg_Echange[#1]'
+recurseDefine visiting 'rng:optional'
+recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Contains/Document on defineNode Document_N69369
+recurseDefine visiting 'rng:optional'
+recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Contains/Document on defineNode Document_N69369
+recurseDefine visiting 'rng:element'[name='Description']
+genElement (rng:element, Description, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Description_N69421', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Description', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:data'
+recurseDefine visiting 'rng:element'[name='Identification']
+genElement (rng:element, Identification, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Identification_N69434', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Identification', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:data'
+recurseDefine visiting 'rng:attribute'[name='schemeID']
+recurseDefine visiting 'rng:element'[name='Type']
+genElement (rng:element, Type, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Type_N69466', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Type', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:value'
+recurseDefine visiting 'rng:attribute'[name='listVersionID']
+ArchiveDocuments.nextDocument
+genElement (rng:element, Document, /ArchiveTransfer/Contains/Contains/Contains/Contains)
+recurseDefine ('Document_N69369', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:element'[name='Attachment']
+genElement (rng:element, Attachment, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Attachment_N69374', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Attachment', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:data'
+recurseDefine visiting 'rng:attribute'[name='mimeCode']
+recurseDefine visiting 'rng:attribute'[name='filename']
+ArchiveDocuments.getFileName
+recurseDefine generating filename 'MP_Cons_Msg_Echange_Msg_1_2_Horodatage.xml' for DOCLIST 'MP_Cons_Msg_Echange[#1]'
 recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Contains/Document on defineNode Document_N69369
 recurseDefine visiting 'rng:optional'
@@ -7441,17 +7472,17 @@ Fin de l'évaluation du nombre de documents
 
 -----------------------------------------
 
-	root docs : '134'
-		MP_Cons docs : '39'
-			MP_Cons_Dossier docs : '19'
+	root docs : '135'
+		MP_Cons docs : '40'
+			MP_Cons_Dossier docs : '18'
 				MP_Cons_Dossier_AncDCE docs : '4'
 				MP_Cons_Dossier_AncRC docs : '4'
 				MP_Cons_Dossier_Compl docs : '4'
 				MP_Cons_Dossier_Docs_Ext docs : '2'
 			MP_Cons_Pub docs : '4'
 				MP_Cons_Pub_DocsExt docs : '2'
-			MP_Cons_Msg docs : '10'
-				MP_Cons_Msg_Echange[#1] docs : '4'
+			MP_Cons_Msg docs : '12'
+				MP_Cons_Msg_Echange[#1] docs : '6'
 					MP_Cons_Msg_Echange_PJ docs : '2'
 				MP_Cons_Msg_Echange[#2] docs : '4'
 					MP_Cons_Msg_Echange_PJ docs : '2'
@@ -7529,17 +7560,17 @@ Fin de l'évaluation du nombre de documents
 			MP_OetD_DAD docs : '4'
 				MP_OetD_DAD_DocsExts[#1] docs : '2'
 
-next node = root docs = 134 mandatory = True
-next node = MP_Cons docs = 39 mandatory = True
-next node = MP_Cons_Dossier docs = 19 mandatory = True
+next node = root docs = 135 mandatory = True
+next node = MP_Cons docs = 40 mandatory = True
+next node = MP_Cons_Dossier docs = 18 mandatory = True
 next node = MP_Cons_Dossier_AncDCE docs = 4 mandatory = True
 next node = MP_Cons_Dossier_AncRC docs = 4 mandatory = False
 next node = MP_Cons_Dossier_Compl docs = 4 mandatory = False
 next node = MP_Cons_Dossier_Docs_Ext docs = 2 mandatory = False
 next node = MP_Cons_Pub docs = 4 mandatory = True
 next node = MP_Cons_Pub_DocsExt docs = 2 mandatory = False
-next node = MP_Cons_Msg docs = 10 mandatory = False
-next node = MP_Cons_Msg_Echange[#1] docs = 4 mandatory = False
+next node = MP_Cons_Msg docs = 12 mandatory = False
+next node = MP_Cons_Msg_Echange[#1] docs = 6 mandatory = False
 next node = MP_Cons_Msg_Echange_PJ docs = 2 mandatory = False
 next node = MP_Cons_Msg_Echange[#2] docs = 4 mandatory = False
 next node = MP_Cons_Msg_Echange_PJ docs = 2 mandatory = False
@@ -7616,17 +7647,17 @@ next node = MP_OetD_analyse_decision_Compl_Fichier_PJ docs = 2 mandatory = False
 next node = MP_OetD_analyse_decision_Compl_Docs_Ext docs = 1 mandatory = False
 next node = MP_OetD_DAD docs = 4 mandatory = True
 next node = MP_OetD_DAD_DocsExts[#1] docs = 2 mandatory = True
-	root docs : '134'
-		MP_Cons docs : '39'
-			MP_Cons_Dossier docs : '19'
+	root docs : '135'
+		MP_Cons docs : '40'
+			MP_Cons_Dossier docs : '18'
 				MP_Cons_Dossier_AncDCE docs : '4'
 				MP_Cons_Dossier_AncRC docs : '4'
 				MP_Cons_Dossier_Compl docs : '4'
 				MP_Cons_Dossier_Docs_Ext docs : '2'
 			MP_Cons_Pub docs : '4'
 				MP_Cons_Pub_DocsExt docs : '2'
-			MP_Cons_Msg docs : '10'
-				MP_Cons_Msg_Echange[#1] docs : '4'
+			MP_Cons_Msg docs : '12'
+				MP_Cons_Msg_Echange[#1] docs : '6'
 					MP_Cons_Msg_Echange_PJ docs : '2'
 				MP_Cons_Msg_Echange[#2] docs : '4'
 					MP_Cons_Msg_Echange_PJ docs : '2'
@@ -7779,10 +7810,6 @@ depot_DCE_horodatage.xml: ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
 ArchiveDocuments.getFileName
-depot_DCE_horodatage_2.xml: ArchiveDocuments.getFileName
-ArchiveDocuments.nextDocument
-ArchiveDocuments.getFileName
-ArchiveDocuments.getFileName
 RC.pdf: ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
@@ -7879,7 +7906,15 @@ MP_Cons_Msg_Echange_Msg_1_1.pdf: ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
 ArchiveDocuments.getFileName
+MP_Cons_Msg_Echange_Msg_1_2.pdf: ArchiveDocuments.getFileName
+ArchiveDocuments.nextDocument
+ArchiveDocuments.getFileName
+ArchiveDocuments.getFileName
 MP_Cons_Msg_Echange_Msg_1_1_Horodatage.xml: ArchiveDocuments.getFileName
+ArchiveDocuments.nextDocument
+ArchiveDocuments.getFileName
+ArchiveDocuments.getFileName
+MP_Cons_Msg_Echange_Msg_1_2_Horodatage.xml: ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
 ArchiveDocuments.getFileName
@@ -8311,8 +8346,8 @@ MP_OetD_DAD_DocsExts_2.pdf: ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 recurseDefine visiting 'rng:element'[name='Contains']
 lookupForContainsIdentifier trouve currentDocumentTypeId root en passe 2
-Selecting next currentContainsNode root that contains 134 documents
-DOCLIST docs root contains 134 documents
+Selecting next currentContainsNode root that contains 135 documents
+DOCLIST docs root contains 135 documents
 genElement (rng:element, Contains, /ArchiveTransfer)
 recurseDefine ('Contains_N65900', '/ArchiveTransfer/Contains', 'root')
 recurseDefine visiting 'rng:optional'
@@ -8633,10 +8668,12 @@ ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
-Size computed = '1465398'
+ArchiveDocuments.getFileName
+ArchiveDocuments.nextDocument
+Size computed = '1479590'
 lookupForAttribute attributeStep = 'rng:attribute'
 lookupForAttribute valueStep = 'rng:value' = '4L'
-Size formated = '1428'
+Size formated = '1442'
 recurseDefine visiting 'rng:attribute'[name='unitCode']
 recurseDefine visiting 'rng:element'[name='Size']
 genElement (rng:element, Size, /ArchiveTransfer/Contains/ContentDescription)
@@ -8912,9 +8949,11 @@ ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
-Size computed = '1465398'
+ArchiveDocuments.getFileName
+ArchiveDocuments.nextDocument
+Size computed = '1479590'
 lookupForAttribute attributeName 'unitCode' non trouvé.
-Size formated = '1465398'
+Size formated = '1479590'
 recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/ContentDescription/Size on defineNode Size_N66105
 recurseDefine visiting 'rng:element'[name='Size']
@@ -9191,9 +9230,11 @@ ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
 ArchiveDocuments.getFileName
 ArchiveDocuments.nextDocument
-Size computed = '1465398'
+ArchiveDocuments.getFileName
+ArchiveDocuments.nextDocument
+Size computed = '1479590'
 lookupForAttribute attributeName 'unitCode' non trouvé.
-Size formated = '1465398'
+Size formated = '1479590'
 recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/ContentDescription/Size on defineNode Size_N66119
 recurseDefine visiting 'rng:element'[name='OriginatingAgency']
@@ -9369,8 +9410,8 @@ recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/AccessRestriction on defineNode AccessRestriction_N66799
 recurseDefine visiting 'rng:element'[name='Contains']
 lookupForContainsIdentifier trouve currentDocumentTypeId MP_Cons en passe 2
-Selecting next currentContainsNode MP_Cons that contains 39 documents
-DOCLIST docs MP_Cons contains 39 documents
+Selecting next currentContainsNode MP_Cons that contains 40 documents
+DOCLIST docs MP_Cons contains 40 documents
 genElement (rng:element, Contains, /ArchiveTransfer/Contains)
 recurseDefine ('Contains_N66833', '/ArchiveTransfer/Contains/Contains', 'MP_Cons')
 recurseDefine visiting 'rng:element'[name='ArchivalAgencyObjectIdentifier']
@@ -9401,8 +9442,8 @@ recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/AccessRestriction on defineNode AccessRestriction_N66893
 recurseDefine visiting 'rng:element'[name='Contains']
 lookupForContainsIdentifier trouve currentDocumentTypeId MP_Cons_Dossier en passe 2
-Selecting next currentContainsNode MP_Cons_Dossier that contains 19 documents
-DOCLIST docs MP_Cons_Dossier contains 19 documents
+Selecting next currentContainsNode MP_Cons_Dossier that contains 18 documents
+DOCLIST docs MP_Cons_Dossier contains 18 documents
 genElement (rng:element, Contains, /ArchiveTransfer/Contains/Contains)
 recurseDefine ('Contains_N66925', '/ArchiveTransfer/Contains/Contains/Contains', 'MP_Cons_Dossier')
 recurseDefine visiting 'rng:element'[name='ArchivalAgencyObjectIdentifier']
@@ -9450,8 +9491,8 @@ recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Appraisal on defineNode Appraisal_N67021
 recurseDefine visiting 'rng:element'[name='Document']
 ArchiveDocuments.prepareListForType('MP_Cons_Dossier{MP_Cons_Dossier_Horodatage}')
-ArchiveDocuments.prepareListForType found '2' documents
-genElement Document : typeId MP_Cons_Dossier{MP_Cons_Dossier_Horodatage} has 2 documents
+ArchiveDocuments.prepareListForType found '1' documents
+genElement Document : typeId MP_Cons_Dossier{MP_Cons_Dossier_Horodatage} has 1 documents
 ArchiveDocuments.nextDocument
 genElement (rng:element, Document, /ArchiveTransfer/Contains/Contains/Contains)
 recurseDefine ('Document_N67060', '/ArchiveTransfer/Contains/Contains/Contains/Document', 'MP_Cons_Dossier')
@@ -9464,36 +9505,6 @@ recurseDefine visiting 'rng:attribute'[name='mimeCode']
 recurseDefine visiting 'rng:attribute'[name='filename']
 ArchiveDocuments.getFileName
 recurseDefine generating filename 'depot_DCE_horodatage.xml' for DOCLIST 'MP_Cons_Dossier'
-recurseDefine visiting 'rng:optional'
-recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Document on defineNode Document_N67060
-recurseDefine visiting 'rng:optional'
-recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Document on defineNode Document_N67060
-recurseDefine visiting 'rng:element'[name='Description']
-genElement (rng:element, Description, /ArchiveTransfer/Contains/Contains/Contains/Document)
-recurseDefine ('Description_N67112', '/ArchiveTransfer/Contains/Contains/Contains/Document/Description', 'MP_Cons_Dossier')
-recurseDefine visiting 'rng:value'
-recurseDefine visiting 'rng:element'[name='Identification']
-genElement (rng:element, Identification, /ArchiveTransfer/Contains/Contains/Contains/Document)
-recurseDefine ('Identification_N67124', '/ArchiveTransfer/Contains/Contains/Contains/Document/Identification', 'MP_Cons_Dossier')
-recurseDefine visiting 'rng:data'
-recurseDefine visiting 'rng:attribute'[name='schemeID']
-recurseDefine visiting 'rng:element'[name='Type']
-genElement (rng:element, Type, /ArchiveTransfer/Contains/Contains/Contains/Document)
-recurseDefine ('Type_N67156', '/ArchiveTransfer/Contains/Contains/Contains/Document/Type', 'MP_Cons_Dossier')
-recurseDefine visiting 'rng:value'
-recurseDefine visiting 'rng:attribute'[name='listVersionID']
-ArchiveDocuments.nextDocument
-genElement (rng:element, Document, /ArchiveTransfer/Contains/Contains/Contains)
-recurseDefine ('Document_N67060', '/ArchiveTransfer/Contains/Contains/Contains/Document', 'MP_Cons_Dossier')
-recurseDefine visiting 'rng:element'[name='Attachment']
-genElement (rng:element, Attachment, /ArchiveTransfer/Contains/Contains/Contains/Document)
-recurseDefine ('Attachment_N67065', '/ArchiveTransfer/Contains/Contains/Contains/Document/Attachment', 'MP_Cons_Dossier')
-recurseDefine visiting 'rng:data'
-getData  ----  !!!! context '/ArchiveTransfer/Contains/Contains/Contains/Document/Attachment' Unhandled in 'rng:data'
-recurseDefine visiting 'rng:attribute'[name='mimeCode']
-recurseDefine visiting 'rng:attribute'[name='filename']
-ArchiveDocuments.getFileName
-recurseDefine generating filename 'depot_DCE_horodatage_2.xml' for DOCLIST 'MP_Cons_Dossier'
 recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Document on defineNode Document_N67060
 recurseDefine visiting 'rng:optional'
@@ -10411,8 +10422,8 @@ recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Con
 recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains on defineNode Contains_N66833
 lookupForContainsIdentifier trouve currentDocumentTypeId MP_Cons_Msg en passe 2
-Selecting next currentContainsNode MP_Cons_Msg that contains 10 documents
-DOCLIST docs MP_Cons_Msg contains 10 documents
+Selecting next currentContainsNode MP_Cons_Msg that contains 12 documents
+DOCLIST docs MP_Cons_Msg contains 12 documents
 genElement (rng:element, Contains, /ArchiveTransfer/Contains/Contains)
 recurseDefine ('Contains_N69021', '/ArchiveTransfer/Contains/Contains/Contains', 'MP_Cons_Msg')
 recurseDefine visiting 'rng:element'[name='ArchivalAgencyObjectIdentifier']
@@ -10464,8 +10475,8 @@ lookupForContainsIdentifier trouve currentDocumentTypeId MP_Cons_Msg_Echange+ en
 currentDocumentTypeId à répétition : MP_Cons_Msg_Echange[#1]
 ArchiveDocuments.IsThereDocumentsReferringToType('MP_Cons_Msg_Echange[#1]')
 ArchiveDocuments.IsThereDocumentsReferringToType('MP_Cons_Msg_Echange[#1]') réfère à des documents
-Selecting next currentContainsNode MP_Cons_Msg_Echange[#1] that contains 4 documents
-DOCLIST docs MP_Cons_Msg_Echange[#1] contains 4 documents
+Selecting next currentContainsNode MP_Cons_Msg_Echange[#1] that contains 6 documents
+DOCLIST docs MP_Cons_Msg_Echange[#1] contains 6 documents
 genElement (rng:element, Contains, /ArchiveTransfer/Contains/Contains/Contains)
 recurseDefine ('Contains_N69156', '/ArchiveTransfer/Contains/Contains/Contains/Contains', 'MP_Cons_Msg_Echange[#1]')
 recurseDefine visiting 'rng:element'[name='ArchivalAgencyObjectIdentifier']
@@ -10500,8 +10511,8 @@ recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Con
 recurseDefine visiting 'rng:zeroOrMore'
 recurseDefine ??OrMore for rng:zeroOrMore in context /ArchiveTransfer/Contains/Contains/Contains/Contains on defineNode Contains_N69156
 ArchiveDocuments.prepareListForType('MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_PJ_Msg}')
-ArchiveDocuments.prepareListForType found '1' documents
-genElement Document : typeId MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_PJ_Msg} has 1 documents
+ArchiveDocuments.prepareListForType found '2' documents
+genElement Document : typeId MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_PJ_Msg} has 2 documents
 ArchiveDocuments.nextDocument
 genElement (rng:element, Document, /ArchiveTransfer/Contains/Contains/Contains/Contains)
 recurseDefine ('Document_N69253', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document', 'MP_Cons_Msg_Echange[#1]')
@@ -10532,11 +10543,41 @@ genElement (rng:element, Type, /ArchiveTransfer/Contains/Contains/Contains/Conta
 recurseDefine ('Type_N69350', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Type', 'MP_Cons_Msg_Echange[#1]')
 recurseDefine visiting 'rng:value'
 recurseDefine visiting 'rng:attribute'[name='listVersionID']
+ArchiveDocuments.nextDocument
+genElement (rng:element, Document, /ArchiveTransfer/Contains/Contains/Contains/Contains)
+recurseDefine ('Document_N69253', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:element'[name='Attachment']
+genElement (rng:element, Attachment, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Attachment_N69258', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Attachment', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:data'
+getData  ----  !!!! context '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Attachment' Unhandled in 'rng:data'
+recurseDefine visiting 'rng:attribute'[name='mimeCode']
+recurseDefine visiting 'rng:attribute'[name='filename']
+ArchiveDocuments.getFileName
+recurseDefine generating filename 'MP_Cons_Msg_Echange_Msg_1_2.pdf' for DOCLIST 'MP_Cons_Msg_Echange[#1]'
+recurseDefine visiting 'rng:optional'
+recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Contains/Document on defineNode Document_N69253
+recurseDefine visiting 'rng:optional'
+recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Contains/Document on defineNode Document_N69253
+recurseDefine visiting 'rng:element'[name='Description']
+genElement (rng:element, Description, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Description_N69305', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Description', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:data'
+recurseDefine visiting 'rng:element'[name='Identification']
+genElement (rng:element, Identification, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Identification_N69318', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Identification', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:data'
+recurseDefine visiting 'rng:attribute'[name='schemeID']
+recurseDefine visiting 'rng:element'[name='Type']
+genElement (rng:element, Type, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Type_N69350', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Type', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:value'
+recurseDefine visiting 'rng:attribute'[name='listVersionID']
 recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Contains on defineNode Contains_N69156
 ArchiveDocuments.prepareListForType('MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_Horodatage}')
-ArchiveDocuments.prepareListForType found '1' documents
-genElement Document : typeId MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_Horodatage} has 1 documents
+ArchiveDocuments.prepareListForType found '2' documents
+genElement Document : typeId MP_Cons_Msg_Echange[#1]{MP_Cons_Msg_Echange_Horodatage} has 2 documents
 ArchiveDocuments.nextDocument
 genElement (rng:element, Document, /ArchiveTransfer/Contains/Contains/Contains/Contains)
 recurseDefine ('Document_N69369', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document', 'MP_Cons_Msg_Echange[#1]')
@@ -10549,6 +10590,36 @@ recurseDefine visiting 'rng:attribute'[name='mimeCode']
 recurseDefine visiting 'rng:attribute'[name='filename']
 ArchiveDocuments.getFileName
 recurseDefine generating filename 'MP_Cons_Msg_Echange_Msg_1_1_Horodatage.xml' for DOCLIST 'MP_Cons_Msg_Echange[#1]'
+recurseDefine visiting 'rng:optional'
+recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Contains/Document on defineNode Document_N69369
+recurseDefine visiting 'rng:optional'
+recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Contains/Document on defineNode Document_N69369
+recurseDefine visiting 'rng:element'[name='Description']
+genElement (rng:element, Description, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Description_N69421', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Description', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:data'
+recurseDefine visiting 'rng:element'[name='Identification']
+genElement (rng:element, Identification, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Identification_N69434', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Identification', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:data'
+recurseDefine visiting 'rng:attribute'[name='schemeID']
+recurseDefine visiting 'rng:element'[name='Type']
+genElement (rng:element, Type, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Type_N69466', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Type', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:value'
+recurseDefine visiting 'rng:attribute'[name='listVersionID']
+ArchiveDocuments.nextDocument
+genElement (rng:element, Document, /ArchiveTransfer/Contains/Contains/Contains/Contains)
+recurseDefine ('Document_N69369', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:element'[name='Attachment']
+genElement (rng:element, Attachment, /ArchiveTransfer/Contains/Contains/Contains/Contains/Document)
+recurseDefine ('Attachment_N69374', '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Attachment', 'MP_Cons_Msg_Echange[#1]')
+recurseDefine visiting 'rng:data'
+getData  ----  !!!! context '/ArchiveTransfer/Contains/Contains/Contains/Contains/Document/Attachment' Unhandled in 'rng:data'
+recurseDefine visiting 'rng:attribute'[name='mimeCode']
+recurseDefine visiting 'rng:attribute'[name='filename']
+ArchiveDocuments.getFileName
+recurseDefine generating filename 'MP_Cons_Msg_Echange_Msg_1_2_Horodatage.xml' for DOCLIST 'MP_Cons_Msg_Echange[#1]'
 recurseDefine visiting 'rng:optional'
 recurseDefine ??OrMore for rng:optional in context /ArchiveTransfer/Contains/Contains/Contains/Contains/Document on defineNode Document_N69369
 recurseDefine visiting 'rng:optional'
