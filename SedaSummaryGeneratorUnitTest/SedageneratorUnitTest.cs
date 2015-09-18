@@ -515,6 +515,10 @@ namespace SedaSummaryGeneratorUnitTest {
             checkAttribute("//s:Document[1]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_AncDCE_Fichier']/../s:Attachment", "filename", "DCE_v0.1.pdf");
         }
 
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // TODO: Erreur captée
+        // TODO: Il existe des unités documentaires obligatoires sans documents : MP_Cons_Dossier_AncDCE	
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         [TestMethod]
         public void W29_TestGenerateur_4_2_04() {
             executeGenerator("liste-fichiers_4-2-04", "0.2");
@@ -759,6 +763,10 @@ namespace SedaSummaryGeneratorUnitTest {
                 , "filename", "DCE_v0.2.pdf");
         }
 
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // TODO: Erreur captée
+        // TODO: Il existe des unités documentaires obligatoires sans documents : MP_Cons_Dossier_AncDCE	
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         [TestMethod]
         public void W44_TestGenerateur_3_2_03() {
             executeGenerator("liste-fichiers_3-2-03", "0.2");
