@@ -194,7 +194,22 @@ namespace SedaSummaryGenerator {
             return docId;
         }
 
-
+        protected String getSchemeIdValue(XmlNode aaoirefNode, String currentXpath, String context) {
+            String ret = null;
+            String aaoiNodeName = aaoirefNode.Attributes.GetNamedItem("name").Value;
+            if (aaoiNodeName == null) {
+                errorsList.Add("Le nœud '" + currentXpath + "' n'a pas d'attribut name.");
+            } else {
+                currentXpath = "rng:define[@name='" + aaoiNodeName + "']/rng:attribute[@name='schemeID']/rng:value";
+                XmlNode schemeIdNode = grammarNode.SelectSingleNode(currentXpath, docInXmlnsManager);
+                if (schemeIdNode == null) {
+                    errorsList.Add("Le nœud '" + currentXpath + "' n'a pas été trouvé dans le profil '" + profileFile + "'");
+                } else {
+                    ret = getDocumentTypeId(schemeIdNode.InnerText, context);
+                }
+            }
+            return ret;
+        }
         protected void recurseContainsDefine(String defineNodeName, String context, bool isRepeatable) {
             if (traceActions) tracesWriter.WriteLine("recurseContainsDefine ('" + defineNodeName + "', '" + context + "', '" + currentDocumentTypeId + "')");
             String xPath;
@@ -209,20 +224,20 @@ namespace SedaSummaryGenerator {
                 xPath = "rng:define[@name='" + defineNodeName + "']/rng:element[@name='ArchivalAgencyObjectIdentifier']/rng:ref";
                 XmlNode aaoirefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                 if (aaoirefNode == null) {
-                    errorsList.Add("Le nœud '" + xPath + "' n'a pas été trouvé dans le profil '" + profileFile + "'");
-                } else {
-                    String aaoiNodeName = aaoirefNode.Attributes.GetNamedItem("name").Value;
-                    if (aaoiNodeName == null) {
-                        errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
-                    } else {
-                        xPath = "rng:define[@name='" + aaoiNodeName + "']/rng:attribute[@name='schemeID']/rng:value";
-                        XmlNode schemeIdNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                        if (schemeIdNode == null) {
-                            errorsList.Add("Le nœud '" + xPath + "' n'a pas été trouvé dans le profil '" + profileFile + "'");
-                        } else {
-                            currentDocumentTypeId = getDocumentTypeId(schemeIdNode.InnerText, context);
+                    xPath = "rng:define[@name='" + defineNodeName + "']/rng:optional/rng:element[@name='ArchivalAgencyObjectIdentifier']/rng:ref";
+                    aaoirefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (aaoirefNode != null) {
+                        String ret = getSchemeIdValue(aaoirefNode, xPath, context);
+                        if (ret != null) {
+                            errorsList.Add("La balise ArchivalAgencyObjectIdentifier de l'unité documentaire '" + ret + "' est optionnelle. Il faut la rendre obligatoire.");
                         }
                     }
+                    else
+                        errorsList.Add("Le nœud '" + xPath + "' n'a pas été trouvé dans le profil '" + profileFile + "'");
+                } else {
+                    String ret = getSchemeIdValue(aaoirefNode, xPath, context);
+                    if (ret != null)
+                        currentDocumentTypeId = ret;
                 }
                 checkForMultipleDocument(defineNodeName, context);
             }

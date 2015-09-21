@@ -1,4 +1,11 @@
 -------------------------
+Changements du 2015-09-21
+
+- Capture d'exceptions sur les programmes de contrôle et de génération de bordereaux
+- Programmes en version release dans Programs-Releases
+- Ajout du contrôle de la cardinalité de ArchivalAgencyObjectIdentifier
+
+-------------------------
 Changements du 2015-09-18
 
 - Ajout (et presque achèvement) de testcases du générateur de bordereaux

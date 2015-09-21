@@ -1,0 +1,24 @@
+
+-----------------------------------------
+
+Début de la vérification du profil
+
+-----------------------------------------
+
+recurseContainsDefine ('Contains_N65601', '', '')
+recurseContainsDefine ('Contains_N65660', '/Contains', 'root')
+checkForMultipleDocument ('Contains_N65660', '/Contains', '!!! DOCLIST manquant !!!')
+recurseContainsDefine ('Contains_N65786', '/Contains', '!!! DOCLIST manquant !!!')
+checkForMultipleDocument ('Contains_N65786', '/Contains', 'TAGOK')
+
+-----------------------------------------
+
+Fin de la vérification du profil
+
+-----------------------------------------
+
+	root
+		!!! DOCLIST manquant !!!
+		TAGOK
+
+La balise ArchivalAgencyObjectIdentifier de l'unité documentaire 'TAGNOTOK' est optionnelle. Il faut la rendre obligatoire.

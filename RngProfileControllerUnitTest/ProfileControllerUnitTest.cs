@@ -101,7 +101,7 @@ namespace RngProfileControllerUnitTest {
 
          * */
         public void M00_TestErreursTagDoclistIdentification() {
-            String[] branchesAttendues = { "\troot", "\t\tOFFRES_RETENUES[#1]", "\t\t\tOR_ETP[#1]", "\t\tMACHIN", ""};
+            String[] branchesAttendues = { "\troot", "\t\tOFFRES_RETENUES[#1]", "\t\t\tOR_ETP[#1]", "\t\tMACHIN", "" };
             String[] erreursAttendues = 
                 { 
                 "L'unité documentaire 'OFFRES_RETENUES+' est unique ou optionnelle, mais elle possède un TAG répétable (TAG+). Il faut supprimer le '+' du tag ou changer les cardinalités", 
@@ -188,6 +188,16 @@ namespace RngProfileControllerUnitTest {
             String[] branchesAttendues = null;
             String[] erreursAttendues = { "L'unité documentaire 'MP_OetD_Analyse+' est unique ou optionnelle, mais elle possède un TAG répétable (TAG+)." };
             declencherTestProfil("profil_test_1-12", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void M12_TestErreurArchivalAgencyObjectIdentifier() {
+            String[] branchesAttendues = { "\troot", "\t\t!!! DOCLIST manquant !!!", "\t\tTAGOK", "" };
+            String[] erreursAttendues = 
+                { 
+                "La balise ArchivalAgencyObjectIdentifier de l'unité documentaire 'TAGNOTOK' est optionnelle. Il faut la rendre obligatoire.", 
+                };
+            declencherTestProfil("ArchivalAgencyObjectIdentifier", branchesAttendues, erreursAttendues);
         }
 
     }
