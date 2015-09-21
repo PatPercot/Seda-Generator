@@ -32,7 +32,7 @@ namespace SedaSummaryGeneratorTester {
             String jobName;
             if (args.Length < 1) {
                 System.Console.WriteLine("Syntaxe attendue : BusinessDataController nom-job-controle");
-                System.Console.WriteLine("nom-job-controle est une section dans le fichier jobs.config");
+                System.Console.WriteLine("nom-job-controle est une section dans le fichier job.config");
                 System.Console.WriteLine("Une section a la forme :");
                 System.Console.WriteLine("[data-control : nom-job-controle]");
                 System.Console.WriteLine("  trace = chemin/vers/fichier-de-trace.txt");
@@ -53,10 +53,14 @@ namespace SedaSummaryGeneratorTester {
 
             if (erreur != String.Empty) {
                 System.Console.WriteLine(erreur);
-                return;
+                System.Environment.Exit(-1);
             }
 
             GeneratorConfig generatorJob = config.getGeneratorConfig(jobName);
+            if (generatorJob == null) {
+                System.Console.WriteLine("Aucun job 'generator' trouvé dans le fichier job.config. Vérifiez la syntaxe ou créez une tâche.");
+                System.Environment.Exit(-1);
+            }
 
             System.Console.WriteLine("Génération bordereau du job '" + generatorJob.nomJob + "' : '" + generatorJob.dataFile + "' avec l'accord '" + generatorJob.accordVersement + "'");
 
@@ -70,7 +74,7 @@ namespace SedaSummaryGeneratorTester {
 
             Action<Exception, String> eh = (ex, str) => {
                 Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);
-                throw ex;
+                System.Environment.Exit(-1);
             };
 
             try {
