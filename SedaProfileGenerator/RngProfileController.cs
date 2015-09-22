@@ -240,6 +240,32 @@ namespace SedaSummaryGenerator {
                         currentDocumentTypeId = ret;
                 }
                 checkForMultipleDocument(defineNodeName, context);
+
+                // Tester la présence de ContentDescription dans rng:optiona avec un KeywordContent
+                // imbriqué dans un ContentDescriptive et lancer une alerte
+                xPath = "rng:define[@name='" + defineNodeName + "']/rng:optional/rng:element[@name='ContentDescription']/rng:ref";
+                XmlNode cdrefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                if (cdrefNode != null) {
+                    String cdrefNodeName = cdrefNode.Attributes.GetNamedItem("name").Value;
+                    if (cdrefNodeName == null) {
+                        errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+                    } else {
+                        xPath = "rng:define[@name='" + cdrefNodeName + "']/rng:element[@name='ContentDescriptive']/rng:ref";
+                        XmlNode cdeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                        if (cdeNode != null) {
+                            String cdeNodeName = cdeNode.Attributes.GetNamedItem("name").Value;
+                            if (cdeNodeName == null) {
+                                errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+                            } else {
+                                xPath = "rng:define[@name='" + cdeNodeName + "']/rng:element[@name='KeywordContent']";
+                                XmlNode kwNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                if (kwNode != null) {
+                                    errorsList.Add("Les mots-clés de l'unité documentaire '" + currentDocumentTypeId + "' ne pourront pas produits car la description du contenu est optionnelle.");
+                                }
+                            }
+                        }
+                    }
+                }
             }
             if (currentDocumentTypeId == "root") {
                 rootContainsNode = new ContainsNode(currentDocumentTypeId, null, true);
