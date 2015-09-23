@@ -1,0 +1,21 @@
+
+-----------------------------------------
+
+Début de la vérification du profil
+
+-----------------------------------------
+
+recurseContainsDefine ('Contains_N65645', '', '')
+recurseContainsDefine ('Contains_N65763', '/Contains', 'root')
+checkForMultipleDocument ('Contains_N65763', '/Contains', 'OFFRES_RETENUES+')
+recurseContainsDefine ('Contains_N65823', '/Contains/Contains', 'OFFRES_RETENUES+')
+checkForMultipleDocument ('Contains_N65823', '/Contains/Contains', 'OR_ETP+')
+recurseContainsDefine ('Contains_N66152', '/Contains', 'OR_ETP+')
+checkForMultipleDocument ('Contains_N66152', '/Contains', 'MACHIN')
+
+-----------------------------------------
+
+Fin de la vérification du profil
+
+-----------------------------------------
+

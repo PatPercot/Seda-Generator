@@ -147,3 +147,79 @@ Fin de la vérification du profil
 
 -----------------------------------------
 
+-------------------------------
+Arbre des unités documentaires.
+	root
+		!!! DOCLIST manquant !!!
+			MP_Cons_Dossier
+				MP_Cons_Dossier_AncDCE
+				MP_Cons_Dossier_AncRC
+				MP_Cons_Dossier_Compl
+				MP_Cons_Dossier_Docs_Ext
+			MP_Cons_Pub
+				MP_Cons_Pub_DocsExt
+			MP_Cons_Msg
+				MP_Cons_Msg_Echange[#1]
+					MP_Cons_Msg_Echange_PJ
+				MP_Cons_Msg_DocsExt
+			MP_Cons_Reg
+				MP_Cons_Reg_DocsExt
+		MP_OetD
+			MP_OetD_Cand
+				MP_OetD_Cand_Retenues
+					MP_OetD_Cand_Retenues1[#1]
+				MP_OetD_Cand_NRetenues
+					MP_OetD_Cand_NRetenues1[#1]
+				MP_OetD_Admissibilite
+					MP_OetD_Admissibilite_Compl
+						MP_OetD_Admissibilite_Compl1[#1]
+							MP_OetD_Admissibilite_Compl1_PJ
+						MP_OetD_Admissibilite_Compl2[#1]
+					MP_OetD_Admissibilite_Rejet
+						MP_OetD_Admissibilite_Rejet_Echange[#1]
+							MP_OetD_Admissibilite_Rejet_Echange_PJ
+					MP_OetD_Admissibilite_Lettre
+						MP_OetD_Admissibilite_Lettre_Fichier[#1]
+							MP_OetD_Admissibilite_Lettre_Fichier_PJ
+				MP_OetD_Cand_DocsExt
+			MP_OetD_Analyse[#1]
+				MP_OetD_Analyse_Recept
+					MP_OetD_Analyse_Recept_Ouv
+						MP_OetD_Analyse_Recept_Ouv_DocsExt
+					MP_OetD_Analyse_Recept_ONR
+						MP_OetD_Analyse_Recept_ONR1[#1]
+							MP_OetD_Analyse_Recept_ONR1_AE
+							MP_OetD_Analyse_Recept_ONR1_Reponse
+							MP_OetD_Analyse_Recept_ONR1_Enveloppe
+						MP_OetD_Analyse_Recept_ONR_DocsExt
+					MP_OetD_Analyse_Recept_OR
+						MP_OetD_Analyse_Recept_OR1[#1]
+							MP_OetD_Analyse_Recept_OR1_AE
+							MP_OetD_Analyse_Recept_OR_Rep
+							MP_OetD_Analyse_Recept_OR1_Enveloppe
+						MP_OetD_Analyse_Recept_DocsExt
+				MP_OetD_analyse_decision
+					MP_OetD_Analyse_Decision_Rejet
+						MP_OetD_Analyse_Decision_Rejet_Docs_Exts
+						MP_OetD_Analyse_Decision_Rejet_Echange
+							MP_OetD_Analyse_Decision_Rejet_Docs_Exts_PJ
+					MP_OetD_analyse_decision1
+						MP_OetD_analyse_decision1_DocsExts
+						MP_OetD_analyse_decision1_PJ1
+							MP_OetD_analyse_decision1_PJ2
+					MP_OetD_Analyse_Decision_Engag
+						MP_OetD_Analyse_Decision_Engag_AE
+							MP_OetD_Analyse_Decision_Engag_PJ
+						MP_OetD_Analyse_Decision_Engag_DocsExt
+					MP_OetD_analyse_decision_Compl
+						MP_OetD_analyse_decision_Compl_Fichier[#1]
+							MP_OetD_analyse_decision_Compl_Fichier_PJ
+						MP_OetD_analyse_decision_Compl_Docs_Ext
+			MP_OetD_DAD
+				MP_OetD_DAD_DocsExts
+
+-----------------
+-----------------
+Liste des erreurs.
+La balise ArchivalAgencyObjectIdentifier de l'unité documentaire 'MP_Cons' est optionnelle. Il faut la rendre obligatoire.
+-----------------

@@ -42,6 +42,28 @@ namespace RngProfileControllerUnitTest {
             rpc.setTracesWriter(streamWriter);
 
             rpc.controlProfileFile(profileFile);
+            {
+                streamWriter.WriteLine("-------------------------------");
+                streamWriter.WriteLine("Arbre des unités documentaires.");
+                StringCollection arbre = rpc.getTreeList();
+                if (arbre != null && arbre.Count != 0) {
+                    foreach (String str in arbre) {
+                        streamWriter.WriteLine(str);
+                    }
+                }
+                streamWriter.WriteLine("-----------------");
+
+                streamWriter.WriteLine("-----------------");
+                streamWriter.WriteLine("Liste des erreurs.");
+                StringCollection erreurs = rpc.getErrorsList();
+                if (erreurs != null && erreurs.Count != 0) {
+                    foreach (String str in erreurs) {
+                        streamWriter.WriteLine(str);
+                    }
+                }
+                streamWriter.WriteLine("-----------------");
+            }
+            streamWriter.Flush();
 
             if (branchesAttendues != null) {
                 StringCollection arbre = rpc.getTreeList();
@@ -170,28 +192,28 @@ namespace RngProfileControllerUnitTest {
         }
 
         [TestMethod]
-        public void M09_TestProfil10() {
+        public void M10_TestProfil10() {
             String[] branchesAttendues = null;
-            String[] erreursAttendues = { "Le nœud 'rng:define[@name='Contains_N66833']/rng:element[@name='ArchivalAgencyObjectIdentifier']/rng:ref' n'a pas été trouvé dans le profil" };
+            String[] erreursAttendues = { "La balise ArchivalAgencyObjectIdentifier de l'unité documentaire 'MP_Cons' est optionnelle. Il faut la rendre obligatoire." };
             declencherTestProfil("profil_test_1-10", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
-        public void M10_TestProfil11() {
+        public void M11_TestProfil11() {
             String[] branchesAttendues = null;
             String[] erreursAttendues = { "L'unité documentaire 'MP_OetD_Analyse' peut être répétée, mais elle ne possède pas de TAG répétable (TAG+)." };
             declencherTestProfil("profil_test_1-11", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
-        public void M11_TestProfil12() {
+        public void M12_TestProfil12() {
             String[] branchesAttendues = null;
             String[] erreursAttendues = { "L'unité documentaire 'MP_OetD_Analyse+' est unique ou optionnelle, mais elle possède un TAG répétable (TAG+)." };
             declencherTestProfil("profil_test_1-12", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
-        public void M12_TestErreurArchivalAgencyObjectIdentifier() {
+        public void M13_TestErreurArchivalAgencyObjectIdentifier() {
             String[] branchesAttendues = { "\troot", "\t\t!!! DOCLIST manquant !!!", "\t\tTAGOK", "" };
             String[] erreursAttendues = 
                 { 
@@ -201,13 +223,28 @@ namespace RngProfileControllerUnitTest {
         }
 
         [TestMethod]
-        public void M13_TestErreurArchivalAgencyObjectIdentifier() {
+        public void M14_TestErreurArchivalAgencyObjectIdentifier() {
             String[] branchesAttendues = { "\troot", "\t\tKEYWORDUNIT_OK", "\t\tKEYWORDUNIT_NOTOK", "" };
             String[] erreursAttendues = 
                 { 
                 "Les mots-clés de l'unité documentaire 'KEYWORDUNIT_NOTOK' ne pourront pas produits car la description du contenu est optionnelle.", 
                 };
             declencherTestProfil("KeywordInOptionalDesciption", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void M15_TestErreurFilenameCdoLangueTypeDocNivdesc() {
+            String[] branchesAttendues = { "\troot", "\t\tFILENAME_NOTOKINTERDIT", "\t\tFILENAME_NOTOKFACULTATIF", "\t\tTYPEDOCUMENT_INEXISTANT", "\t\tLANGUE_INEXISTANTE", "\t\tNIVEAUDESCRIPTION_INEXISTANT", "\t\tLANGUESMULTIPLES", "" };
+            String[] erreursAttendues = 
+                { 
+                "L'attribut filename de la balise Document/Attachment de l'unité documentaire 'FILENAME_NOTOKINTERDIT' est interdit alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.", 
+                "L'attribut filename de la balise Document/Attachment de l'unité documentaire 'FILENAME_NOTOKFACULTATIF' est facultatif alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.", 
+                "Le type de document de la balise Document de l'unité documentaire 'TYPEDOCUMENT_INEXISTANT' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.", 
+                "La langue de la description de l'unité documentaire 'LANGUE_INEXISTANTE' n'a pas de valeur. C'est une donnée qui dans cette version doit être fournie par le profil.", 
+                "Le niveau de description de l'unité documentaire 'NIVEAUDESCRIPTION_INEXISTANT' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.", 
+                "La langue de la description de l'unité documentaire 'LANGUESMULTIPLES' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.", 
+                };
+            declencherTestProfil("filenameCdoTypedocNivdesc", branchesAttendues, erreursAttendues);
         }
 
     }

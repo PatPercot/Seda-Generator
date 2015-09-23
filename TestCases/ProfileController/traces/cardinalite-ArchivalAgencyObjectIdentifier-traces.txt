@@ -17,8 +17,3 @@ Fin de la vérification du profil
 
 -----------------------------------------
 
-	root
-		!!! DOCLIST manquant !!!
-		TAGOK
-
-La balise ArchivalAgencyObjectIdentifier de l'unité documentaire 'TAGNOTOK' est optionnelle. Il faut la rendre obligatoire.

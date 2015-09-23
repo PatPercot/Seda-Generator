@@ -239,33 +239,14 @@ namespace SedaSummaryGenerator {
                     if (ret != null)
                         currentDocumentTypeId = ret;
                 }
-                checkForMultipleDocument(defineNodeName, context);
 
-                // Tester la présence de ContentDescription dans rng:optiona avec un KeywordContent
-                // imbriqué dans un ContentDescriptive et lancer une alerte
-                xPath = "rng:define[@name='" + defineNodeName + "']/rng:optional/rng:element[@name='ContentDescription']/rng:ref";
-                XmlNode cdrefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                if (cdrefNode != null) {
-                    String cdrefNodeName = cdrefNode.Attributes.GetNamedItem("name").Value;
-                    if (cdrefNodeName == null) {
-                        errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
-                    } else {
-                        xPath = "rng:define[@name='" + cdrefNodeName + "']/rng:element[@name='ContentDescriptive']/rng:ref";
-                        XmlNode cdeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                        if (cdeNode != null) {
-                            String cdeNodeName = cdeNode.Attributes.GetNamedItem("name").Value;
-                            if (cdeNodeName == null) {
-                                errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
-                            } else {
-                                xPath = "rng:define[@name='" + cdeNodeName + "']/rng:element[@name='KeywordContent']";
-                                XmlNode kwNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                                if (kwNode != null) {
-                                    errorsList.Add("Les mots-clés de l'unité documentaire '" + currentDocumentTypeId + "' ne pourront pas produits car la description du contenu est optionnelle.");
-                                }
-                            }
-                        }
-                    }
-                }
+                checkForMultipleDocument(defineNodeName, context);
+                checkForContentDescription(defineNodeName, context);
+                checkForFilename(defineNodeName, context);
+                checkForDocType(defineNodeName, context);
+                checkForLanguage(defineNodeName, context);
+                checkForDescriptionLevel(defineNodeName, context);
+
             }
             if (currentDocumentTypeId == "root") {
                 rootContainsNode = new ContainsNode(currentDocumentTypeId, null, true);
@@ -316,7 +297,148 @@ namespace SedaSummaryGenerator {
             }
         }
 
+        protected void checkForDescriptionLevel(String defineNodeName, String context) {
+            // Tester la présence de l'attribut filename de Attachment
+            String xPath = "rng:define[@name='" + defineNodeName + "']/rng:element[@name='DescriptionLevel']/rng:ref";
+            XmlNode descNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (descNode != null) {
+                String descNodeName = descNode.Attributes.GetNamedItem("name").Value;
+                if (descNodeName == null) {
+                    errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+                } else {
+                    xPath = "rng:define[@name='" + descNodeName + "']/rng:value";
+                    XmlNode levelNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (levelNode == null) {
+                        errorsList.Add("Le niveau de description de l'unité documentaire '" + currentDocumentTypeId + "' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.");
+                    }
+                }
+            }
+        }
 
+        protected void checkForLanguage(String defineNodeName, String context) {
+            // Tester la présence de l'attribut filename de Attachment
+            String xPath = "rng:define[@name='" + defineNodeName + "']/rng:element[@name='ContentDescription']/rng:ref";
+            XmlNode descNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (descNode != null) {
+                String descNodeName = descNode.Attributes.GetNamedItem("name").Value;
+                if (descNodeName == null) {
+                    errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+                } else {
+                    xPath = "rng:define[@name='" + descNodeName + "']/rng:element[@name='Language']/rng:ref";
+                    XmlNode langNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (langNode == null) {
+                        xPath = "rng:define[@name='" + descNodeName + "']/rng:oneOrMore/rng:element[@name='Language']/rng:ref";
+                        langNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                        if (langNode != null) {
+                            errorsList.Add("La langue de la description de l'unité documentaire '" + currentDocumentTypeId + "' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.");
+                        }
+                    } else {
+                        String langNodeName = langNode.Attributes.GetNamedItem("name").Value;
+                        if (langNodeName == null) {
+                            errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+                        } else {
+                            xPath = "rng:define[@name='" + langNodeName + "']/rng:value";
+                            XmlNode attrNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (attrNode == null) {
+                                errorsList.Add("La langue de la description de l'unité documentaire '" + currentDocumentTypeId + "' n'a pas de valeur. C'est une donnée qui dans cette version doit être fournie par le profil.");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void checkForDocType(String defineNodeName, String context) {
+            // Tester la présence de l'attribut filename de Attachment
+            String xPath = "rng:define[@name='" + defineNodeName + "']/rng:element[@name='Document']/rng:ref";
+            XmlNode docNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (docNode != null) {
+                String docNodeName = docNode.Attributes.GetNamedItem("name").Value;
+                if (docNodeName == null) {
+                    errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+                } else {
+                    xPath = "rng:define[@name='" + docNodeName + "']/rng:element[@name='Type']/rng:ref";
+                    XmlNode typeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (typeNode != null) {
+                        String typeNodeName = typeNode.Attributes.GetNamedItem("name").Value;
+                        if (typeNodeName == null) {
+                            errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+                        } else {
+                            xPath = "rng:define[@name='" + typeNodeName + "']/rng:value";
+                            XmlNode attrNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (attrNode == null) {
+                                errorsList.Add("Le type de document de la balise Document de l'unité documentaire '" + currentDocumentTypeId + "' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void checkForFilename(String defineNodeName, String context) {
+            // Tester la présence de l'attribut filename de Attachment
+            String xPath = "rng:define[@name='" + defineNodeName + "']/rng:element[@name='Document']/rng:ref";
+            XmlNode docNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (docNode != null) {
+                String docNodeName = docNode.Attributes.GetNamedItem("name").Value;
+                if (docNodeName == null) {
+                    errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+                } else {
+                    xPath = "rng:define[@name='" + docNodeName + "']/rng:element[@name='Attachment']/rng:ref";
+                    XmlNode attachNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (attachNode != null) {
+                        String attachNodeName = attachNode.Attributes.GetNamedItem("name").Value;
+                        if (attachNodeName == null) {
+                            errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+                        } else {
+                            xPath = "rng:define[@name='" + attachNodeName + "']/rng:optional/rng:attribute[@name='filename']";
+                            XmlNode attrNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (attrNode != null) {
+                                errorsList.Add("L'attribut filename de la balise Document/Attachment de l'unité documentaire '" + currentDocumentTypeId + "' est facultatif alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.");
+                            } else {
+                                xPath = "rng:define[@name='" + attachNodeName + "']/rng:attribute[@name='filename']";
+                                attrNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                if (attrNode == null) {
+                                    errorsList.Add("L'attribut filename de la balise Document/Attachment de l'unité documentaire '" + currentDocumentTypeId + "' est interdit alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.");
+                                } else {
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void checkForContentDescription(String defineNodeName, String context) {
+            // Tester la présence de ContentDescription dans rng:optiona avec un KeywordContent
+            // imbriqué dans un ContentDescriptive et lancer une alerte
+            String xPath = "rng:define[@name='" + defineNodeName + "']/rng:optional/rng:element[@name='ContentDescription']/rng:ref";
+            XmlNode cdrefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (cdrefNode != null) {
+                String cdrefNodeName = cdrefNode.Attributes.GetNamedItem("name").Value;
+                if (cdrefNodeName == null) {
+                    errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+                } else {
+                    xPath = "rng:define[@name='" + cdrefNodeName + "']/rng:element[@name='ContentDescriptive']/rng:ref";
+                    XmlNode cdeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (cdeNode != null) {
+                        String cdeNodeName = cdeNode.Attributes.GetNamedItem("name").Value;
+                        if (cdeNodeName == null) {
+                            errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+                        } else {
+                            xPath = "rng:define[@name='" + cdeNodeName + "']/rng:element[@name='KeywordContent']";
+                            XmlNode kwNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (kwNode != null) {
+                                errorsList.Add("Les mots-clés de l'unité documentaire '" + currentDocumentTypeId + "' ne pourront pas produits car la description du contenu est optionnelle.");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        
         /*
          * Génération d'alertes si des Document multiples existent et qu'il n'y a psa de balise Identification
          */

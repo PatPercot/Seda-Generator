@@ -1,4 +1,10 @@
 -------------------------
+Changements du 2015-09-23
+
+- Ajout de contrôles sur les profils (attribut filename, type de document, langue; niveau des description)
+- Ajout des testa automatisés pour vérifier ces contrôles
+
+-------------------------
 Changements du 2015-09-21
 
 - Capture d'exceptions sur les programmes de contrôle et de génération de bordereaux
