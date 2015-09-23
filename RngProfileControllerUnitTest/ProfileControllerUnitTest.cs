@@ -223,13 +223,13 @@ namespace RngProfileControllerUnitTest {
         }
 
         [TestMethod]
-        public void M14_TestErreurArchivalAgencyObjectIdentifier() {
+        public void M14_TestErreurDescriptionContenuKeyword() {
             String[] branchesAttendues = { "\troot", "\t\tKEYWORDUNIT_OK", "\t\tKEYWORDUNIT_NOTOK", "" };
             String[] erreursAttendues = 
                 { 
                 "Les mots-clés de l'unité documentaire 'KEYWORDUNIT_NOTOK' ne pourront pas produits car la description du contenu est optionnelle.", 
                 };
-            declencherTestProfil("KeywordInOptionalDesciption", branchesAttendues, erreursAttendues);
+            declencherTestProfil("KeywordInOptionalDescription", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]

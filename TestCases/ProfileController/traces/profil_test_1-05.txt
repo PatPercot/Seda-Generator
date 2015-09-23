@@ -16,3 +16,10 @@ Fin de la vérification du profil
 
 -----------------------------------------
 
+-------------------------------
+Arbre des unités documentaires.
+-----------------
+-----------------
+Liste des erreurs.
+Erreur lors de la préparation du profil d'archivage '../../../TestCases/ProfileController/profiles/profil_test_1-05.rng' XmlException : Fin de fichier inattendue. Les éléments suivants ne sont pas fermés : rng:choice, rng:zeroOrMore, rng:element, rng:zeroOrMore, rng:define, rng:grammar. Ligne 7572, position 1.
+-----------------

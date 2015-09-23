@@ -222,4 +222,27 @@ Arbre des unités documentaires.
 -----------------
 Liste des erreurs.
 La balise ArchivalAgencyObjectIdentifier de l'unité documentaire 'MP_Cons' est optionnelle. Il faut la rendre obligatoire.
+La langue de la description de l'unité documentaire 'MP_Cons_Dossier' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_Cons_Dossier_Compl' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_Cons_Dossier_Docs_Ext' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_Cons_Pub' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_Cons_Pub_DocsExt' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_Cons_Msg' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_Cons_Msg_Echange+' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_Cons_Msg_DocsExt' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_Cons_Reg' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_Cons_Reg_DocsExt' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_OetD_Analyse+' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_OetD_Analyse_Recept_Ouv' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_OetD_Analyse_Recept_Ouv_DocsExt' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_OetD_Analyse_Recept_ONR1_AE' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_OetD_Analyse_Recept_ONR1_Reponse' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_OetD_Analyse_Recept_OR1_AE' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_OetD_Analyse_Recept_OR_Rep' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_OetD_Analyse_Recept_DocsExt' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_OetD_Analyse_Decision_Rejet' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_OetD_Analyse_Decision_Engag_AE' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_OetD_Analyse_Decision_Engag_PJ' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_OetD_Analyse_Decision_Engag_DocsExt' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
+La langue de la description de l'unité documentaire 'MP_OetD_DAD' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.
 -----------------
