@@ -206,7 +206,7 @@ namespace SedaSummaryGenerator {
             if (lastError == "") {
                 String[] tabCurrent = partialDocumentsListEnumerator.Current;
                 if (tabCurrent == null) {
-                    addActionError("getFileName");
+                    addActionError("#DATAERR: Le nom de fichier du document n'a pas été trouvé dans : '" + tabCurrent.ToString() + "'");
                     return "Error not found";
                 }
                 return tabCurrent[1];
@@ -223,7 +223,7 @@ namespace SedaSummaryGenerator {
             if (lastError == "") {
                 String[] tabCurrent = partialDocumentsListEnumerator.Current;
                 if (tabCurrent == null) {
-                    addActionError("getName");
+                    addActionError("#DATAERR: Le nom du document n'a pas été trouvé dans : '" + tabCurrent.ToString() + "'");
                     return "Error not found";
                 }
                 return tabCurrent[3];
@@ -240,7 +240,7 @@ namespace SedaSummaryGenerator {
             if (lastError == "") {
                 String[] tabCurrent = partialDocumentsListEnumerator.Current;
                 if (tabCurrent == null) {
-                    addActionError("getCreationDate");
+                    addActionError("#DATAERR: La date du document n'a pas été trouvée dans : '" + tabCurrent.ToString() + "'");
                     return "Error not found";
                 }
                 return tabCurrent[4];
@@ -274,15 +274,20 @@ namespace SedaSummaryGenerator {
          * */
         override public String getKeyValue(String key) {
             key = "#" + key;
-            String value = "ERR: key '" + key + "' not found";
+            bool bFound = false;
+            String value = "#DATAERR: Le tag : '" + key + "' n'a pas été trouvé dans les données métier";
             if (keyList == null) {
-                addActionError("getKeyValue " + key);
+                addActionError(value);
             } else {
                 foreach (String[] elements in keyList) {
                     if (elements[1].CompareTo(key) == 0) {
                         value = elements[2];
+                        bFound = true;
                     }
                 }
+            }
+            if (!bFound) {
+                addActionError(value);
             }
             return value;
         }
@@ -338,15 +343,20 @@ namespace SedaSummaryGenerator {
             } else
                 currentKey2searchCounter++;
             key = key2search + "#" + currentKey2searchCounter.ToString("D");
-            String value = "ERR: key '" + key + "' not found";
+            bool bFound = false;
+            String value = "#DATAERR: Le tag : '" + key + "' n'a pas été trouvé dans les données métier";
             if (keyList == null) {
-                addActionError("getKeyValue " + key);
+                addActionError(value);
             } else {
                 foreach (String[] elements in keyList) {
                     if (elements[1].CompareTo(key) == 0) {
                         value = elements[2];
+                        bFound = true;
                     }
                 }
+            }
+            if (!bFound) {
+                addActionError(value);
             }
             return value;
         }

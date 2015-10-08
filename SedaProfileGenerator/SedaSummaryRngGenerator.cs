@@ -23,6 +23,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Security.Cryptography;
 using System.Web;
+using System.Collections.Specialized;
 
 namespace SedaSummaryGenerator {
     /*
@@ -372,8 +373,8 @@ namespace SedaSummaryGenerator {
                 docId = value.Substring(pos + 3);
             } else { // pos != -1
                 if (context != String.Empty)
-                    errorsList.Add("DOCLIST identifier malformed, expected 'DOCLIST / identifier' got '"
-                        + value + "' in context '" + context + "'");
+                    errorsList.Add("L'identifiant DOCLIST est malformé, on attend : 'DOCLIST / identifier', on a : '"
+                        + value + "' dans le contexte '" + context + "'");
             }
             return docId;
         }
@@ -888,8 +889,8 @@ namespace SedaSummaryGenerator {
                         date = DateTime.Parse(dateTraitee, new System.Globalization.CultureInfo("fr-FR", false));
                         dateString = date.Date.ToString("o");
                     } catch (FormatException e) {
-                        dateString = "#ERR date " + dateTraitee;
-                        errorsList.Add("La date '" + dateTraitee + "' du document '" + archiveDocuments.getFileName() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
+                        dateString = "#DATAERR: date " + dateTraitee;
+                        errorsList.Add("#DATAERR: La date '" + dateTraitee + "' du document '" + archiveDocuments.getFileName() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
                     }
                     return dateString;
                 case "OldestDate":
@@ -902,8 +903,8 @@ namespace SedaSummaryGenerator {
                         else
                             dateString = date.ToString("o");
                     } catch (FormatException e) {
-                        dateString = "#ERR date " + dateTraitee;
-                        errorsList.Add("La date '" + dateTraitee + "' du document '" + archiveDocuments.getFileName() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
+                        dateString = "#DATAERR: date " + dateTraitee;
+                        errorsList.Add("#DATAERR: La date '" + dateTraitee + "' du document '" + archiveDocuments.getFileName() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
                     }
                     return dateString;
                 case "StartDate":
@@ -917,8 +918,8 @@ namespace SedaSummaryGenerator {
                         else
                             dateString = date.ToString("o");
                     } catch (FormatException e) {
-                        dateString = "#ERR date " + dateTraitee;
-                        errorsList.Add("La date '" + dateTraitee + "' du document '" + archiveDocuments.getFileName() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
+                        dateString = "#DATAERR: date " + dateTraitee;
+                        errorsList.Add("#DATAERR: La date '" + dateTraitee + "' du document '" + archiveDocuments.getFileName() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
                     }
                     return dateString;
                 case "Date":
@@ -992,9 +993,9 @@ namespace SedaSummaryGenerator {
                 if (traceActions) tracesWriter.Write(archiveDocuments.getFileName() + ": ");
                 fileStream.Close();
             } catch (DirectoryNotFoundException e) {
-                errorsList.Add("Integrity: répertoire '" + SAE_FilePath + "' inexistant. " + e.Message);
+                errorsList.Add("#DATAERR: Integrity: répertoire '" + SAE_FilePath + "' inexistant. " + e.Message);
             } catch (FileNotFoundException e) {
-                errorsList.Add("Integrity: Fichier '" + SAE_FilePath + "/" + archiveDocuments.getFileName() + "' inexistant. " + e.Message);
+                errorsList.Add("#DATAERR: Integrity: Fichier '" + SAE_FilePath + "/" + archiveDocuments.getFileName() + "' inexistant. " + e.Message);
             }
             return retour;
         }

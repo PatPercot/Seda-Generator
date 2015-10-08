@@ -132,8 +132,8 @@ namespace SedaSummaryGenerator {
         /*
          * Permet d'ajouter une erreur
          * */
-        protected void addActionError(String action) {
-            errorsList.Add("Unable to perform action '" + action + "'. No matching element found in ArchiveDocuments");
+        protected void addActionError(String actionError) {
+            errorsList.Add(actionError);
         }
 
         /* 
