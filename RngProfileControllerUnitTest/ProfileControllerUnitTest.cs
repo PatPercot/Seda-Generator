@@ -87,7 +87,7 @@ namespace RngProfileControllerUnitTest {
                 if (errors != null && errors.Count != 0) {
                     int erreur = 0;
                     foreach (String str in errors) {
-                        StringAssert.StartsWith(str, erreursAttendues[erreur], "Comparaison es erreurs");
+                        StringAssert.StartsWith(str, erreursAttendues[erreur], "Comparaison des erreurs");
                         erreur++;
                     }
                 }
@@ -246,6 +246,21 @@ namespace RngProfileControllerUnitTest {
                 };
             declencherTestProfil("filenameCdoTypedocNivdesc", branchesAttendues, erreursAttendues);
         }
+
+        [TestMethod]
+        public void M16_TestProfilChapitre06() {
+            String[] branchesAttendues = null;
+            String[] erreursAttendues = { };
+            declencherTestProfil("profil_test_chapitre_06", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void M17_TestProfilMarches() {
+            String[] branchesAttendues = null;
+            String[] erreursAttendues = { };
+            declencherTestProfil("profil_test_marches", branchesAttendues, erreursAttendues);
+        }
+
 
     }
 }

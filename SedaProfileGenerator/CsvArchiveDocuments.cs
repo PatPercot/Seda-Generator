@@ -209,7 +209,7 @@ namespace SedaSummaryGenerator {
                     addActionError("#DATAERR: Le nom de fichier du document n'a pas été trouvé dans : '" + tabCurrent.ToString() + "'");
                     return "Error not found";
                 }
-                return tabCurrent[1];
+                return tabCurrent.Length > 0 ? tabCurrent[1] : String.Empty;
             }
             return lastError;
         }
@@ -226,7 +226,7 @@ namespace SedaSummaryGenerator {
                     addActionError("#DATAERR: Le nom du document n'a pas été trouvé dans : '" + tabCurrent.ToString() + "'");
                     return "Error not found";
                 }
-                return tabCurrent[3];
+                return tabCurrent.Length > 2 ? tabCurrent[3] : String.Empty;
             }
             return lastError;
         }
@@ -243,7 +243,7 @@ namespace SedaSummaryGenerator {
                     addActionError("#DATAERR: La date du document n'a pas été trouvée dans : '" + tabCurrent.ToString() + "'");
                     return "Error not found";
                 }
-                return tabCurrent[4];
+                return tabCurrent.Length > 3 ? tabCurrent[4] : String.Empty;
             }
             return lastError;
         }

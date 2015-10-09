@@ -1,0 +1,16 @@
+,#TransferName,Test Onglet 6 - Chapitre 1
+,#Comment,Commentaire sur les tests de l'onglet 6
+
+,#OriginatingAgency_BusinessType,5422C
+,#OriginatingAgency_Identification,CG56_MP_001
+,#OriginatingAgency_Description,Service ayant la charge de la constitution et du suivi administratif des marchés publics
+,#OriginatingAgency_LegalClassification,3636277
+
+
+,#CustodialHistory,Les documents ont été créés dans la GED Alfresco
+
+,#KeywordContent#1,Mot-clé Archive
+
+,#KeywordContent_O6_Chapitre1[#1],Mot-clé Unité documentaire
+,#ContainsName[O6_Chapitre1],1ère unité documentaire
+,Document1.pdf,O6_Chapitre1,Document du test,01/06/2013 12:00:00

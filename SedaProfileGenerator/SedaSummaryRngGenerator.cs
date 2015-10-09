@@ -874,6 +874,8 @@ namespace SedaSummaryGenerator {
             DateTime date;
             String dateString = String.Empty;
             String dateTraitee;
+            if (currentPass == 1)
+                return String.Empty;
             switch (tag) {
                 case "Receipt":
                     return "TODO: Receipt";
@@ -932,40 +934,38 @@ namespace SedaSummaryGenerator {
                     }
                     break;
                 case "Integrity":
-                    if (currentPass == 2) {
-                        switch (context) {
-                            // À partir de la version 1.0 du SEDA, la balise Integrity est dans Document
-                            default:
-                                break;
-                            // Version 0.2 du SEDA : la balise Integrity se trouve au niveau de ArchiveTransfer
-                            // et son contenu n'est pas précisé
-                            case "/ArchiveTransfer":
-                                /*
-                                <Contains algorithme="http://www.w3.org/2000/09/xmldsig#sha1">52a354f92d4d8a1e1c714ec6cd6a6f1ae51f4a14</Contains>
-                                <UnitIdentifier>056-225600014-20130924-0000008888-DE-1-1_1.PDF</UnitIdentifier>
-                                */
-                                // C'est pas très propre, mais s'il y a plus d'un document, on doit générer la balise "Integrity"
-                                // autant de fois qu'il y a de documents, MAIS on doit tenir compte du fait que cette balise
-                                // est générée une fois par le code appelant...
-                                int nbDocuments = archiveDocuments.prepareCompleteList();
-                                int curDocument = 0;
-                                while (archiveDocuments.nextDocument()) {
-                                    docOut.WriteStartElement("Contains");
-                                    docOut.WriteAttributeString("algorithme", "http://www.w3.org/2000/09/xmldsig#sha1");
-                                    docOut.WriteString(computeHash(archiveDocuments.getFileName()));
+                    switch (context) {
+                        // À partir de la version 1.0 du SEDA, la balise Integrity est dans Document
+                        default:
+                            break;
+                        // Version 0.2 du SEDA : la balise Integrity se trouve au niveau de ArchiveTransfer
+                        // et son contenu n'est pas précisé
+                        case "/ArchiveTransfer":
+                            /*
+                            <Contains algorithme="http://www.w3.org/2000/09/xmldsig#sha1">52a354f92d4d8a1e1c714ec6cd6a6f1ae51f4a14</Contains>
+                            <UnitIdentifier>056-225600014-20130924-0000008888-DE-1-1_1.PDF</UnitIdentifier>
+                            */
+                            // C'est pas très propre, mais s'il y a plus d'un document, on doit générer la balise "Integrity"
+                            // autant de fois qu'il y a de documents, MAIS on doit tenir compte du fait que cette balise
+                            // est générée une fois par le code appelant...
+                            int nbDocuments = archiveDocuments.prepareCompleteList();
+                            int curDocument = 0;
+                            while (archiveDocuments.nextDocument()) {
+                                docOut.WriteStartElement("Contains");
+                                docOut.WriteAttributeString("algorithme", "http://www.w3.org/2000/09/xmldsig#sha1");
+                                docOut.WriteString(computeHash(archiveDocuments.getFileName()));
+                                docOut.WriteEndElement();
+                                docOut.WriteStartElement("UnitIdentifier");
+                                docOut.WriteString(archiveDocuments.getFileName());
+                                docOut.WriteEndElement();
+                                ++curDocument;
+                                if (curDocument < nbDocuments) {
                                     docOut.WriteEndElement();
-                                    docOut.WriteStartElement("UnitIdentifier");
-                                    docOut.WriteString(archiveDocuments.getFileName());
-                                    docOut.WriteEndElement();
-                                    ++curDocument;
-                                    if (curDocument < nbDocuments) {
-                                        docOut.WriteEndElement();
-                                        docOut.WriteStartElement("Integrity");
-                                    }
+                                    docOut.WriteStartElement("Integrity");
                                 }
-                                break;
+                            }
+                            break;
                         }
-                    }
                     return "";
                 default:
                     if (traceActions) tracesWriter.WriteLineFlush("getTag  ----  !!!! tag Unhandled '" + tag + "'");

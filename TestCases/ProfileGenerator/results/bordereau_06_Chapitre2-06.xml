@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArchiveTransfer xmlns="fr:gouv:ae:archive:draft:standard_echange_v0.2">
+  <Comment>Commentaire sur les tests de l'onglet 6</Comment>
+  <Date>2015-10-09T10:15:17.0027521Z</Date>
+  <TransferIdentifier>CG56_TESTS_TAGS0000000533</TransferIdentifier>
+  <TransferringAgency>
+    <Identification>253514491</Identification>
+  </TransferringAgency>
+  <ArchivalAgency>
+    <Identification>377762752</Identification>
+  </ArchivalAgency>
+  <Contains>
+    <ArchivalAgreement>EMEG_ACCORD_MP_0001_LANG</ArchivalAgreement>
+    <ArchivalProfile>EMEG_PROFIL_MP_0002_LANG</ArchivalProfile>
+    <DescriptionLanguage listVersionID="edition 2009">fr</DescriptionLanguage>
+    <DescriptionLevel listVersionID="edition 2009">recordgrp</DescriptionLevel>
+    <Name>Test Onglet 6 - Chapitre 1</Name>
+    <ContentDescription>
+      <CustodialHistory>Les documents ont �t� cr��s dans la GED Alfresco</CustodialHistory>
+      <Language listVersionID="edition 2009">fr</Language>
+      <OriginatingAgency>
+        <BusinessType>5422C</BusinessType>
+        <Description>Service ayant la charge de la constitution et du suivi administratif des march�s publics</Description>
+        <Identification>CG56_MP_001</Identification>
+        <LegalClassification>#DATAERR: Le tag : '#OriginatingAgency_LegalClassification' n'a pas été trouvé dans les données métier</LegalClassification>
+        <Name>Service des March�s Publics (SMP)2</Name>
+      </OriginatingAgency>
+      <ContentDescriptive>
+        <KeywordContent>Mot-cl� Archive</KeywordContent>
+      </ContentDescriptive>
+    </ContentDescription>
+    <Contains>
+      <ArchivalAgencyObjectIdentifier schemeID="CG56_DOCLIST_2015 / O6_Chapitre1">CG56_TESTS_TAGS0000000533_00001</ArchivalAgencyObjectIdentifier>
+      <DescriptionLevel listVersionID="edition 2009">series</DescriptionLevel>
+      <Name>1�re unit� documentaire</Name>
+      <ContentDescription>
+        <Language listVersionID="edition 2009">fr</Language>
+        <ContentDescriptive />
+      </ContentDescription>
+      <Document>
+        <Attachment filename="Document1.pdf" />
+        <Creation>2013-06-01T00:00:00.0000000</Creation>
+        <Type listVersionID="edition 2009">CDO</Type>
+      </Document>
+    </Contains>
+  </Contains>
+</ArchiveTransfer>

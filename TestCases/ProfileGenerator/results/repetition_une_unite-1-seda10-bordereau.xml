@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArchiveTransfer xmlns="fr:gouv:culture:archivesdefrance:seda:v1.0">
-  <Comment>ERR: key '#Comment' not found</Comment>
-  <Date>2015-09-23T14:51:08.9143864Z</Date>
-  <TransferIdentifier>CG56_MARCHE_0000000064</TransferIdentifier>
+  <Comment>Test des unités documentaires répétées (structure simple un seul niveau)</Comment>
+  <Date>2015-10-09T10:21:22.9907291Z</Date>
+  <TransferIdentifier>CG56_MARCHE_0000000069</TransferIdentifier>
   <ArchivalAgency>
     <Description>Le service d'archives bla bla bla</Description>
     <Identification>377 762 752</Identification>
@@ -39,7 +39,7 @@
       <StartDate>1970-01-01T00:00:00.0000000</StartDate>
     </AccessRestrictionRule>
     <ArchiveObject>
-      <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OFFRES_RETENUES">CG56_MARCHE_0000000064_00001</ArchivalAgencyObjectIdentifier>
+      <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OFFRES_RETENUES">CG56_MARCHE_0000000069_00001</ArchivalAgencyObjectIdentifier>
       <Name>Offres retenues</Name>
       <ContentDescription>
         <DescriptionLevel>file</DescriptionLevel>
@@ -49,7 +49,7 @@
         </Keyword>
       </ContentDescription>
       <ArchiveObject>
-        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000064_00002</ArchivalAgencyObjectIdentifier>
+        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000069_00002</ArchivalAgencyObjectIdentifier>
         <Name>Offre retenue de l'entreprise 1</Name>
         <ContentDescription>
           <DescriptionLevel>file</DescriptionLevel>
@@ -73,7 +73,7 @@
         </Document>
       </ArchiveObject>
       <ArchiveObject>
-        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000064_00003</ArchivalAgencyObjectIdentifier>
+        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000069_00003</ArchivalAgencyObjectIdentifier>
         <Name>Offre retenue de l'entreprise 2</Name>
         <ContentDescription>
           <DescriptionLevel>file</DescriptionLevel>
@@ -105,7 +105,7 @@
         </Document>
       </ArchiveObject>
       <ArchiveObject>
-        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000064_00004</ArchivalAgencyObjectIdentifier>
+        <ArchivalAgencyObjectIdentifier schemeID="DOCLIST / OR_ETP+">CG56_MARCHE_0000000069_00004</ArchivalAgencyObjectIdentifier>
         <Name>Offre retenue de l'entreprise 33333</Name>
         <ContentDescription>
           <DescriptionLevel>file</DescriptionLevel>

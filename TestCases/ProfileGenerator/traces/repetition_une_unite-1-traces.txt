@@ -1,8 +1,12 @@
 informationsDatabase='Server=VM-PSQL02\OUTILS_P;Database=BW_DEV;User=App-Blueway-Exploitation;Password=Pi=3.14159;'
 ServerVersion: 10.00.5500
 State: Open
-CG56_MARCHE_, 63        , ../../../TestCases/ProfileGenerator/profiles/repetition_une_unite-1-v1_0_schema.rng, 225600014_122
+CG56_MARCHE_, 68        , ../../../TestCases/ProfileGenerator/profiles/repetition_une_unite-1-v1_0_schema.rng, 225600014_122
 ArchiveDocuments.LoadFile
+,#Comment,Test des unités documentaires répétées (structure simple un seul niveau)
+field: '' field: '#Comment' field: 'Test des unités documentaires répétées (structure simple un seul niveau)' 
+,#CustodialHistory,Historique de conservation
+field: '' field: '#CustodialHistory' field: 'Historique de conservation' 
 ,#OriginatingAgency_Description,Service support chargé de la fourniture et de la maintenance des systèmes d'information
 field: '' field: '#OriginatingAgency_Description' field: 'Service support chargé de la fourniture et de la maintenance des systèmes d'information' 
 ,#OriginatingAgency_Identification,225600014_007
@@ -146,7 +150,6 @@ recurseDefine visiting 'rng:element'[name='OldestDate']
 genElement (rng:element, OldestDate, /ArchiveTransfer/Archive/ContentDescription)
 recurseDefine visiting 'rng:element'[name='CustodialHistory']
 genElement (rng:element, CustodialHistory, /ArchiveTransfer/Archive/ContentDescription)
-getTag  ----  !!!! tag Unhandled 'CustodialHistory'
 recurseDefine visiting 'rng:element'[name='Keyword']
 genElement (rng:element, Keyword, /ArchiveTransfer/Archive/ContentDescription)
 recurseDefine ('Keyword_N65868', '/ArchiveTransfer/Archive/ContentDescription/Keyword', 'root')

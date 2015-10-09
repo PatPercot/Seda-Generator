@@ -45,6 +45,18 @@ namespace SedaSummaryGeneratorUnitTest {
             return config.getGeneratorConfig(configName);
         }
 
+        protected void checkForErrors(String[] erreursAttendues) {
+            // Début de vérification de bon déroulement
+            errors = ssg.getErrorsList();
+            Assert.IsNotNull(errors, "La liste d'erreurs rencontrées doit exister");
+            Assert.AreEqual(erreursAttendues.Length, errors.Count, "Le nombre d'erreurs attendues et rencontrées ne correspond pas");
+            int numerror = 0;
+            foreach (String error in errors) {
+                Assert.AreEqual(erreursAttendues[numerror], error, "Comparaison des erreurs");
+                numerror++;
+            }
+        }
+
         protected void checkForNoErrors() {
             // Début de vérification de bon déroulement
             errors = ssg.getErrorsList();
@@ -856,6 +868,132 @@ namespace SedaSummaryGeneratorUnitTest {
                , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
             // On vérifie que le document existe
             checkNotExists("//s:ArchivalAgencyObjectIdentifier[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Msg_DocsExt']");
+        }
+
+        [TestMethod]
+        public void W51_TestGenerateur_6_1() {
+            executeGenerator("06_Chapitre1", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Commentaire sur les tests de l'onglet 6");
+        }
+
+        [TestMethod]
+        public void W52_TestGenerateur_6_2_01() {
+            executeGenerator("06_Chapitre2-01", "0.2");
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#TransferName' n'a pas été trouvé dans les données métier" };
+            checkForErrors(erreursAttendues);
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Commentaire sur les tests de l'onglet 6");
+        }
+
+        [TestMethod]
+        public void W53_TestGenerateur_6_2_02() {
+            executeGenerator("06_Chapitre2-02", "0.2");
+
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#Comment' n'a pas été trouvé dans les données métier" };
+            checkForErrors(erreursAttendues);
+        }
+
+        [TestMethod]
+        public void W54_TestGenerateur_6_2_03() {
+            executeGenerator("06_Chapitre2-03", "0.2");
+
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency_BusinessType' n'a pas été trouvé dans les données métier" };
+            checkForErrors(erreursAttendues);
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Commentaire sur les tests de l'onglet 6");
+        }
+
+        [TestMethod]
+        public void W55_TestGenerateur_6_2_04() {
+            executeGenerator("06_Chapitre2-04", "0.2");
+
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency_Identification' n'a pas été trouvé dans les données métier" };
+            checkForErrors(erreursAttendues);
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Commentaire sur les tests de l'onglet 6");
+        }
+
+        [TestMethod]
+        public void W56_TestGenerateur_6_2_05() {
+            executeGenerator("06_Chapitre2-05", "0.2");
+
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency_Description' n'a pas été trouvé dans les données métier" };
+            checkForErrors(erreursAttendues);
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Commentaire sur les tests de l'onglet 6");
+        }
+
+        [TestMethod]
+        public void W57_TestGenerateur_6_2_06() {
+            executeGenerator("06_Chapitre2-06", "0.2");
+
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency_LegalClassification' n'a pas été trouvé dans les données métier" };
+            checkForErrors(erreursAttendues);
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Commentaire sur les tests de l'onglet 6");
+        }
+
+        [TestMethod]
+        public void W58_TestGenerateur_6_2_07() {
+            executeGenerator("06_Chapitre2-07", "0.2");
+
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency_Name' n'a pas été trouvé dans les données métier" };
+            checkForErrors(erreursAttendues);
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Commentaire sur les tests de l'onglet 6");
+        }
+
+        [TestMethod]
+        public void W59_TestGenerateur_6_2_08() {
+            executeGenerator("06_Chapitre2-08", "0.2");
+
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#CustodialHistory' n'a pas été trouvé dans les données métier" };
+            checkForErrors(erreursAttendues);
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Commentaire sur les tests de l'onglet 6");
+        }
+
+        [TestMethod]
+        public void W60_TestGenerateur_6_2_09() {
+            executeGenerator("06_Chapitre2-09", "0.2");
+
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#KeywordContent#1' n'a pas été trouvé dans les données métier" };
+            checkForErrors(erreursAttendues);
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Commentaire sur les tests de l'onglet 6");
+        }
+
+        [TestMethod]
+        public void W61_TestGenerateur_6_2_10() {
+            executeGenerator("06_Chapitre2-10", "0.2");
+
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#KeywordContent_O6_Chapitre1' n'a pas été trouvé dans les données métier" };
+            checkForErrors(erreursAttendues);
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Commentaire sur les tests de l'onglet 6");
+        }
+
+        [TestMethod]
+        public void W62_TestGenerateur_6_2_11() {
+            executeGenerator("06_Chapitre2-11", "0.2");
+
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#ContainsName[O6_Chapitre1]' n'a pas été trouvé dans les données métier" };
+            checkForErrors(erreursAttendues);
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Commentaire sur les tests de l'onglet 6");
+        }
+
+        [TestMethod]
+        public void W63_TestGenerateur_6_2_12() {
+            executeGenerator("06_Chapitre2-12", "0.2");
+
+            String[] erreursAttendues = { "#DATAERR: La date '1er juin 2013 12:00:00' du document 'Document1.pdf' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss" };
+            checkForErrors(erreursAttendues);
+            checkInnerText("/s:ArchiveTransfer/s:Comment"
+               , "Commentaire sur les tests de l'onglet 6");
         }
 
 
