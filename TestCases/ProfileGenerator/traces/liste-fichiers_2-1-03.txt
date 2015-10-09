@@ -1,7 +1,7 @@
 informationsDatabase='Server=VM-PSQL02\OUTILS_P;Database=BW_DEV;User=App-Blueway-Exploitation;Password=Pi=3.14159;'
 ServerVersion: 10.00.5500
 State: Open
-CG56_TESTS_CARDINALITES, 473       , ../../../TestCases/ProfileGenerator/profiles/profil_Marches_Publics_schema.rng, 225600014_122
+CG56_TESTS_CARDINALITES, 477       , ../../../TestCases/ProfileGenerator/profiles/profil_Marches_Publics_schema.rng, 225600014_122
 ArchiveDocuments.LoadFile
 ,#TransferName,Marché de fournitures 12/07/2012
 field: '' field: '#TransferName' field: 'Marché de fournitures 12/07/2012' 
@@ -14,10 +14,10 @@ field: '' field: '#OriginatingAgency_Name' field: 'Service des Marchés Publics 
 field: '' field: '#KeywordContent#1' field: 'Vannes' 
 ,#KeywordContent#2,Marché de fournitures
 field: '' field: '#KeywordContent#2' field: 'Marché de fournitures' 
-,#KeywordContent#1,Consommables
-field: '' field: '#KeywordContent#1' field: 'Consommables' 
-,#KeywordContent#1,Papeterie
-field: '' field: '#KeywordContent#1' field: 'Papeterie' 
+,#KeywordContent#3,Consommables
+field: '' field: '#KeywordContent#3' field: 'Consommables' 
+,#KeywordContent#4,Papeterie
+field: '' field: '#KeywordContent#4' field: 'Papeterie' 
 
 
 ,depot_DCE_horodatage.xml,MP_Cons_Dossier[#1]{MP_Cons_Dossier_Horodatage},Jeton d'horodatage du dépôt du DCE,01/12/2014 12:00:00
@@ -16041,8 +16041,6 @@ Fin de génération du bordereau
 
 ---------- ERREURS ----------
 
-#DATAERR: Le tag : '#KeywordContent#3' n'a pas été trouvé dans les données métier
-#DATAERR: Le tag : '#KeywordContent#4' n'a pas été trouvé dans les données métier
 
 ---------- ^^^^^^^ ----------
 

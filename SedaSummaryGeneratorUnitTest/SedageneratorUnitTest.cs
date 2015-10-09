@@ -527,22 +527,12 @@ namespace SedaSummaryGeneratorUnitTest {
             checkAttribute("//s:Document[1]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_AncDCE_Fichier']/../s:Attachment", "filename", "DCE_v0.1.pdf");
         }
 
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // TODO: Erreur captée
-        // TODO: Il existe des unités documentaires obligatoires sans documents : MP_Cons_Dossier_AncDCE	
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         [TestMethod]
         public void W29_TestGenerateur_4_2_04() {
             executeGenerator("liste-fichiers_4-2-04", "0.2");
 
-            checkForNoErrors();
-            checkInnerText("/s:ArchiveTransfer/s:Comment"
-               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
-            // On vérifie que l'unité documentaire existe
-            checkExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_AncDCE_Fichier']");
-            checkNotExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_AncDCE_Horodatage']");
-            // On vérifie qu'il y a bien une unité documentaire avec le document
-            checkAttribute("//s:Document[1]/s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_AncDCE_Fichier']/../s:Attachment", "filename", "DCE_v0.1.pdf");
+            String[] erreursAttendues = { "Il existe des unités documentaires obligatoires sans documents : MP_Cons_Dossier_AncDCE\t" };
+            checkForErrors(erreursAttendues);
         }
 
         [TestMethod]
@@ -775,19 +765,12 @@ namespace SedaSummaryGeneratorUnitTest {
                 , "filename", "DCE_v0.2.pdf");
         }
 
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // TODO: Erreur captée
-        // TODO: Il existe des unités documentaires obligatoires sans documents : MP_Cons_Dossier_AncDCE	
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         [TestMethod]
         public void W44_TestGenerateur_3_2_03() {
             executeGenerator("liste-fichiers_3-2-03", "0.2");
 
-            checkForNoErrors();
-            checkInnerText("/s:ArchiveTransfer/s:Comment"
-               , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
-            // On vérifie que le document existe
-            checkNotExists("//s:Identification[@schemeID='CG56_DOCLIST_2015 / MP_Cons_Dossier_AncDCE_Fichier']");
+            String[] erreursAttendues = { "Il existe des unités documentaires obligatoires sans documents : MP_Cons_Dossier_AncDCE\t" };
+            checkForErrors(erreursAttendues);
         }
 
         [TestMethod]

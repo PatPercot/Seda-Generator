@@ -4,8 +4,8 @@
 
 ,#KeywordContent#1,Vannes
 ,#KeywordContent#2,Marché de fournitures
-,#KeywordContent#1,Consommables
-,#KeywordContent#1,Papeterie
+,#KeywordContent#3,Consommables
+,#KeywordContent#4,Papeterie
 
 
 ,depot_DCE_horodatage.xml,MP_Cons_Dossier[#1]{MP_Cons_Dossier_Horodatage},Jeton d'horodatage du dépôt du DCE,01/12/2014 12:00:00
