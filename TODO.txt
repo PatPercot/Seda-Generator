@@ -1,4 +1,20 @@
 **************************
+2016-01-27
+	Lorsque la date est absente des fichiers dans les données métier, on a une erreur non gérée NullPointerException
+		- Soit générer une erreur explicite
+		- Soit calculer la date du document
+	
+	Supprimer la partie HMS de LatestDate et OldesDate
+	
+	Prévoir rapidement LatestDate te OldestDate dans les données métier (plus gestion des dates de départ communicabilité et sort final)
+	
+	Supprimer la base de données et la remplacer par :
+		- un fichier de configuration pour les données SAE (préfixe, fichier de profil, service d'archives et versant)
+		- un calcul de l'identifiant unique à l'aide de préfixe + hash des données métier + date courante
+		
+	Lors du passage au SEDA 2.0 considérer la notation TAG{DOC] équivalente à la notation TAG/DOC
+
+**************************
 2015-09-08
 	Contrôle des profils (voir aussi 2015-07-06)
 	Ajouter un contrôle sur la cardinalité de la balise "ArchivalAgencyObjectIdentifier" 

@@ -1,5 +1,10 @@
 # Configurations de test de profils
 
+# Les sections sont profile-control, generator, data-control
+# data-control n'est pas encore opérationnelle
+
+# Chaque section peut contenir une tâche par défait nommée default
+
 [profile-control : default]
   trace = ../TestCases/ProfileController/traces/trace-description_contenu_keyword.txt
   profil = ../TestCases/ProfileController/profiles/description_contenu_keyword_schema.rng
@@ -8,7 +13,7 @@
   trace = ./work/trace-control.txt
   profil = ./profiles-and-data-examples/repetition_une_unite-trois_documents-optionnels_schema.rng
   
-[data-control : exaeple1]
+[data-control : exemple1]
   trace = ./work/fichier-de-trace.txt
   profil = ./profiles-and-data-examples/repetition_une_unite-trois_documents-optionnels_schema.rng
   data = ./profiles-and-data-examples/fichier-de-donnees-metier.txt
