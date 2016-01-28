@@ -1,4 +1,9 @@
 **************************
+2016-01-28
+	Contrôleur de profils : déclencher une erreur si la balise Document de l'archive est utilisée
+		(aucun Attachment ne lui sera associé)
+	
+**************************
 2016-01-27
 	Lorsque la date est absente des fichiers dans les données métier, on a une erreur non gérée NullPointerException
 		- Soit générer une erreur explicite
