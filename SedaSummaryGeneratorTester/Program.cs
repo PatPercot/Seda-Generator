@@ -22,6 +22,7 @@ using System.Collections.Specialized;
 using System.Configuration;
 using SedaSummaryGenerator;
 using CommonClassesLibrary;
+using System.Security.Cryptography;
 
 namespace SedaSummaryGeneratorTester {
     class Program {
@@ -89,7 +90,27 @@ namespace SedaSummaryGeneratorTester {
             SedaSummaryGenerator.SedaSummaryGenerator ssg = new SedaSummaryRngGenerator();
             ssg.setTracesWriter(streamWriter);
 
-            ssg.prepareInformationsWithDatabase(informationsDatabase, baseURI, accordVersement);
+            if (config.hasAccordVersementConfig()) {
+                AccordVersementConfig accordVersementConfig = config.getAccordVersementConfig(accordVersement, baseURI);
+                if (accordVersementConfig == null) {
+                    Console.WriteLine("ATTENTION : Impossible de trouver l'accord de versement '" + accordVersement + "' dans la configuration");
+                } else {
+                    if (accordVersementConfig.SAE_ProfilArchivage.Length == 0)
+                        Console.WriteLine("ATTENTION : Le profil d'archivage n'a pas de nom de fichier");
+                }
+
+                String dataSha1 = String.Empty;
+                try {
+                    dataSha1 = Utils.computeSha1Hash(fichier_donnees);
+                } catch (IOException e) {
+                    // Ignorer les exceptions, car si le fichier de données n'est pas accessible, 
+                    // une exception sera générée plus tard avec un contexte plus explicatif
+                }
+
+                ssg.prepareInformationsWithConfigFile(config, baseURI, accordVersement, dataSha1);
+            } else {
+                ssg.prepareInformationsWithDatabase(informationsDatabase, baseURI, accordVersement);
+            }
 
             ssg.prepareArchiveDocumentsWithFile(repertoire_documents, fichier_donnees);
 

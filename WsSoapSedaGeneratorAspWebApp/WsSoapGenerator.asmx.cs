@@ -22,6 +22,7 @@ using System.Web;
 using System.Web.Services;
 using System.Configuration;
 using SedaSummaryGenerator;
+using CommonClassesLibrary;
 
 namespace WsSoapSedaGeneratorAspWebApp {
     /// <summary>
@@ -149,7 +150,32 @@ namespace WsSoapSedaGeneratorAspWebApp {
             SedaSummaryGenerator.SedaSummaryGenerator ssg = new SedaSummaryRngGenerator();
             ssg.setTracesWriter(streamWriter);
 
-            ssg.prepareInformationsWithDatabase(informationsDatabase, baseURI, accordVersement);
+            SimpleConfig config = new SimpleConfig();
+            String erreurFichierConfig = config.loadFile("../../job.config");
+
+             // On a trouvé un fichier de config pour remplacer la base de données
+            if (erreurFichierConfig == String.Empty && config.hasAccordVersementConfig()) {
+                AccordVersementConfig accordVersementConfig = config.getAccordVersementConfig(accordVersement, baseURI);
+                if (accordVersementConfig == null) {
+                    streamWriter.WriteLineFlush("ATTENTION : Impossible de trouver l'accord de versement '" + accordVersement + "' dans la configuration");
+                } else {
+                    if (accordVersementConfig.SAE_ProfilArchivage.Length == 0)
+                        streamWriter.WriteLineFlush("ATTENTION : Le profil d'archivage n'a pas de nom de fichier");
+                }
+
+                String dataSha1 = String.Empty;
+                try {
+                    dataSha1 = Utils.computeSha1Hash(documentsFile);
+                } catch (IOException e) {
+                    // Ignorer les exceptions, car si le fichier de données n'est pas accessible, 
+                    // une exception sera générée plus tard avec un contexte plus explicatif
+                }
+
+                ssg.prepareInformationsWithConfigFile(config, baseURI, accordVersement, dataSha1);
+
+            } else {
+                ssg.prepareInformationsWithDatabase(informationsDatabase, baseURI, accordVersement);
+            }
 
             ssg.prepareArchiveDocumentsWithFile(repDocuments, documentsFile);
 

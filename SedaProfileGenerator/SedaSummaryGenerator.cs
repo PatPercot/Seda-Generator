@@ -18,6 +18,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Collections.Specialized;
+using CommonClassesLibrary;
 
 /*
  * SedaSummaryGenerator est une classe abstraite qui offre les méthodes
@@ -99,6 +100,13 @@ namespace SedaSummaryGenerator {
          * accordVersement + baseURI permettent de trouver toutes les informations relatives au versement (profil, producteur, ...)
          * */
         abstract public void prepareInformationsWithDatabase(String informationsDatabase, String baseURI, String accordVersement);
+
+
+        /*
+         * accordVersementConfig contient une configuration d'accord de versement
+         * qui définit toutes les informations relatives au versement (profil, producteur, ...)
+         * */
+        abstract public void prepareInformationsWithConfigFile(SimpleConfig config, String baseURI, String accordVersement, String dataSha1);
 
 
         /*

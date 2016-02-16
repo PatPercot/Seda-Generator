@@ -21,9 +21,9 @@ using System.Xml.XPath;
 using System.IO;
 using System.Data.SqlClient;
 using System.Data;
-using System.Security.Cryptography;
 using System.Web;
 using System.Collections.Specialized;
+using CommonClassesLibrary;
 
 namespace SedaSummaryGenerator {
     /*
@@ -195,6 +195,32 @@ namespace SedaSummaryGenerator {
                 prepareProfileWithFile(profileFile);
             }
         }
+
+        /*
+         * accordVersementConfig contient une configuration d'accord de versement
+         * qui définit toutes les informations relatives au versement (profil, producteur, ...)
+         * */
+        override public void prepareInformationsWithConfigFile(SimpleConfig config, String baseURI, String accordVersement, String dataSha1) {
+            AccordVersementConfig accordVersementConfig = config.getAccordVersementConfig(accordVersement, baseURI);
+            if (accordVersementConfig == null) {
+                errorsList.Add("Impossible de trouver l'accord de versement '" + accordVersement + "' dans la configuration");
+            } else {
+                TransferId = accordVersementConfig.TransferIdPrefix + dataSha1 + "@" + DateTime.UtcNow.ToString("o");
+                profileFile = accordVersementConfig.SAE_ProfilArchivage;
+                TransferringAgencyId = accordVersementConfig.TransferringAgencyId;
+                TransferringAgencyName = accordVersementConfig.TransferringAgencyName;
+                TransferringAgencyDesc = accordVersementConfig.TransferringAgencyDesc;
+                ArchivalAgencyId = accordVersementConfig.ArchivalAgencyId;
+                ArchivalAgencyName = accordVersementConfig.ArchivalAgencyName;
+                ArchivalAgencyDesc = accordVersementConfig.ArchivalAgencyDesc;
+                if (traceActions) tracesWriter.WriteLineFlush(String.Format("{0}, {1}, {2}"
+                    , accordVersementConfig.TransferIdPrefix, TransferId, accordVersementConfig.SAE_ProfilArchivage));
+
+                informationsLoaded = true;
+                prepareProfileWithFile(profileFile);
+            }
+        }
+
 
         /*
          * C'est le fichier de sortie qui contient le bordereau de transfert construit avec :
@@ -979,23 +1005,15 @@ namespace SedaSummaryGenerator {
          * */
         private String computeHash(String documentFileName) {
             String retour = String.Empty;
-            SHA1 sha1 = SHA1CryptoServiceProvider.Create();
-            // Create a fileStream for the file.
+            String file = SAE_FilePath + "/" + documentFileName;
             try {
-                byte[] hashValue;
-                FileStream fileStream = new FileStream(SAE_FilePath + "/" + documentFileName, FileMode.Open);
-                // Be sure it's positioned to the beginning of the stream.
-                fileStream.Position = 0;
-                // Compute the hash of the fileStream.
-                hashValue = sha1.ComputeHash(fileStream);
-                retour = getReadableByteArray(hashValue).ToLower();
-                // Write the name of the file to the Console.
-                if (traceActions) tracesWriter.Write(archiveDocuments.getFileName() + ": ");
-                fileStream.Close();
+                retour = Utils.computeSha1Hash(file);
             } catch (DirectoryNotFoundException e) {
                 errorsList.Add("#DATAERR: Integrity: répertoire '" + SAE_FilePath + "' inexistant. " + e.Message);
+                if (traceActions) tracesWriter.WriteLineFlush("#DATAERR: Integrity: répertoire '" + SAE_FilePath + "' inexistant. " + e.Message);
             } catch (FileNotFoundException e) {
-                errorsList.Add("#DATAERR: Integrity: Fichier '" + SAE_FilePath + "/" + archiveDocuments.getFileName() + "' inexistant. " + e.Message);
+                errorsList.Add("#DATAERR: Integrity: Fichier '" + file + "' inexistant. " + e.Message);
+                if (traceActions) tracesWriter.WriteLineFlush("#DATAERR: Integrity: Fichier '" + file + "' inexistant. " + e.Message);
             }
             return retour;
         }
@@ -1003,19 +1021,6 @@ namespace SedaSummaryGenerator {
         private String formatContainsIdentifier(String containsIdentifier, int numeroTag) {
             // TODO: containsIdentifier - '+' + '[' + numéro d'ordre + ']'
             return containsIdentifier.Substring(0, containsIdentifier.Length - 1) + "[#" + numeroTag.ToString("D") + "]";
-        }
-
-
-        /*
-         * Donne un affichage lisible du contenu du tableau d'octets
-         * */
-        private String getReadableByteArray(byte[] array) {
-            StringBuilder strArray = new StringBuilder();
-            int i;
-            for (i = 0; i < array.Length; i++) {
-                strArray.Append(String.Format("{0:X2}", array[i]));
-            }
-            return strArray.ToString();
         }
 
         override public void close() {

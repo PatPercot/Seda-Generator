@@ -22,7 +22,9 @@ J'ai glissé des (TODO) là où j'ai vu des améliorations à apporter au code
 
 En résumé :
 1) Configuration du serveur du SAE
-2) Configuration de la base de données
+2) Configuration des données du SAE
+	2-a) Configuration de la base de données
+	2-b) Configuration des fichiers de job
 3) Comment tester la conformité du profil d'archivage avec les contraintes imposées
 4) Comment tester et débugger la production du bordereau
 5) Générer un profil et produire des données métier
@@ -48,8 +50,17 @@ Attention, il faut d'abord se connecter une fois avec cet utilisateur afin de ch
 
   </appSettings>
 
+2) Configuration des données du SAE
 
-2) Configuration de la base de données
+Certaines informations de configuration du SAE sont ncéessaires pour que le générateur fonctionne.
+La plus évidente d'entre elles est le profil d'archivage (le profil utilisé pour générer le bordereau doit être le même
+que celui que le SAE utilise pour ocntrôler les bordereaux de transfert.
+
+Ce sont ces données dont nous parlons ici.
+
+Elle speuvent être dans une base de données ou dans les fichiers de jobs.
+
+2-a) Configuration de la base de données
 
 Vous devrez créer une base de données pour stocker les informations de configuration du SAE que vous devrez donc recopier.
 Ces informations, idéalement, devraient être fournies par le SAE. À venir bientôt, on en discutera avec l'adullact qui
@@ -92,14 +103,14 @@ La configuration proprement dite après cette entrée en matière :
 En plus ce n'est pas paramétrable (TODO) ! On respire par le nez, là j'ai franchement pas été bon... ;-(
 
 
-2-a) Le premier endroit, ce sont les fichiers de configuration 
+2-a-a) Le premier endroit, ce sont les fichiers de configuration 
 	- App.config dans SedaSummaryGeneratorTester qu(il faut créer à partir de App.config.example
 	- Web.config dans WsSoapSedaGeneratorAspWebApp qu(il faut créer à partir de Web.config.example
 
 	Modifier dans la section appSettings la clé databaseConnexion pour configurer la chaîne de connexion à la base
 
 
-2-b) Le second endroit, c'est dans le projet SedaProfileGenerator, le fichier SedaSummaryRngGenerator.cs dans la méthode prepareInformationsWithDatabase
+2-a-b) Le second endroit, c'est dans le projet SedaProfileGenerator, le fichier SedaSummaryRngGenerator.cs dans la méthode prepareInformationsWithDatabase
      On y trouve la requête proprement dite pour aller chercher les données de paramétrage.
 
                         command.CommandText = "SELECT TransferIdPrefix, TransferIdValue, SAE_ProfilArchivage, "
@@ -107,13 +118,31 @@ En plus ce n'est pas paramétrable (TODO) ! On respire par le nez, là j'ai franch
                             + " "
                             + " FROM SAE WHERE SAE_AccordVersement='" + accordVersement + "' and SAE_Serveur='" + baseURI + "'";
 
-2-c) Le troisième endroit, c'est dans la même méthode qu ci-dessus.
+2-a-c) Le troisième endroit, c'est dans la même méthode qu ci-dessus.
      C'est la requête de mise à jour. Normalement on n'y touche pas... sauf si on crée une base de données avec un nom différent et des champs différents (TODO).
 
                         command.CommandText = "UPDATE SAE SET TransferIdValue='" + Id + "' WHERE SAE_AccordVersement='" + accordVersement + "' and SAE_Serveur='" + baseURI + "'";
 
 
 
+2-b) Configuration des fichiers de job
+
+Les fichiers job.config peuvent être utilisés pour stocker ces informations.
+Un même accord de versement (IdAccordVersement) peut exister pour plusieurs serveurs.
+La clé primaire est donc [ IdAccordVersement, SAE_Serveur ]
+
+[accord-versement : IdAccordVersement]
+	SAE_Serveur = http://test
+	TransferIdPrefix = PREFIX_
+	SAE_ProfilArchivage = chemin-vers-fichier
+	TransferringAgencyId = TA_ID
+	TransferringAgencyName = TA_NAME
+	TransferringAgencyDesc = TA_DESC
+	ArchivalAgencyId = AA_ID
+	ArchivalAgencyName = AA_NAME
+	ArchivalAgencyDesc = AA_DESC
+
+	
 3) Comment tester la conformité du profil d'archivage avec les contraintes imposées
 
 3-a) Quelles contraintes ?
@@ -129,36 +158,24 @@ Tant que les balises optionnelles ne sont pas générées, l’archiviste doit rendre
 
 3-b) Tester, puis corriger...
 
-Rien n'est paramétrable, tout est en dur, mais étant donné l'usage prévu, c'est pas trop grave. Et hop, j'ai codé ça comme un sagouin,
-mais je me rassure comme je peux ;°)
+Ça se passe dans le programme RngProfileControllerTester.
 
+Il faut créer un fichier job.config à partir du fichier job.config.sample.
 
-Ça se passe dans le projet RngProfileControllerTester et tout est dans Program.cs
-Deux chaînes de carcatères pour spécifier où vous stockez vos traces et où se trouve le profil au format RNG à tester
+Toutes les explications sont dans le fichier job.config.sample.
 
-            String traceFile = "D:/DEV_PPE/devel/RNG/trace-control.txt";
-            String profileFile = @"\\cg56.fr\dfs2\BW\DEVT\ArcEspCo\DATA\CG56_PROFIL_PES_0001_v1_schema-duplication.rng";
-
-Vérifier que l'arbre des unités documentaires produit ressemble à ce que l'on voulait décrire.
-Ne pas oublier de corriger ce que le programme considère comme incorrect.
 
 4) Comment tester et débugger la production du bordereau
 
-Ça se passe dans le projet SedaSummaryGeneratorTester et tout est dans Program.cs
-Il y a quatre paramètres à préciser.
-- On spécifie l'accord de versement (dans la base de données, on aura créé un enregistrement qui donne
-  des informations sur ceta ccord (profil, service versant, service d'archives, identifiant du versement).
-- La liste des données métier
-- Le nom du bordereau à créer
-- Le nom du fichier de traces
+Ça se passe dans le programme SedaSummaryGeneratorTester.
+Il faut créer un fichier job.config à partir du fichier job.config.sample.
 
-            string accordVersement = "cg56_accord_marche_test_5";
-            string fichier_test = @"d:\dev_ppe\tests\marches\liste_repetition_une_unite-1.txt";
-            string fichier_bordereau = @"d:\dev_ppe\tests\work\bordereau-marche-une-unite-v1_0.xml";
-            string tracefile = "d:/dev_ppe/traces/trace-marche-une-unite-v1_0.txt";
+Toutes les explications sont dans le fichier job.config.sample.
+
 
 
 5) Générer un profil et produire des données métier
 
 Là, il faut se lancer dans la lecture des deux fichiers HOWTO-profil-archivage et HOWTO-donnees-metier
+Bientôt un contrôleur de données métier...
 

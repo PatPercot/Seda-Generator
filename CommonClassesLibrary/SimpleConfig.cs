@@ -9,6 +9,23 @@ using System.Text.RegularExpressions;
 
 namespace CommonClassesLibrary {
     /*
+     * La classe AccordVersementConfig sert à contenir les paramètres d'un
+     * accord de versement dans le cas où la base de données n'est pas utilisée
+     * */
+    public class AccordVersementConfig {
+        public String accordVersement = String.Empty;
+        public String SAE_Serveur = String.Empty;
+        public String TransferIdPrefix = String.Empty;
+        public String SAE_ProfilArchivage = String.Empty;
+        public String TransferringAgencyId = String.Empty;
+        public String TransferringAgencyName = String.Empty;
+        public String TransferringAgencyDesc = String.Empty;
+        public String ArchivalAgencyId = String.Empty;
+        public String ArchivalAgencyName = String.Empty;
+        public String ArchivalAgencyDesc = String.Empty;
+    }
+
+    /*
      * Les classes Job, ProfileControlConfig, DataControlConfig et GeneratorConfig
      * contiennent les éléments nécessaires à la réalistion d'un contrôle 
      * ou d'une génération, à savoir les noms de fichiers qui sont concernés 
@@ -44,8 +61,14 @@ namespace CommonClassesLibrary {
         protected List<ProfileControlConfig> profilecontrolList;
         protected List<DataControlConfig> datacontrolList;
         protected List<GeneratorConfig> generatorList;
+        protected List<AccordVersementConfig> accordVersementConfigList;
 
-        protected String section, sectionName, traceFile, profileFile, dataFile, repDocuments, baseURI, bordereauFile, accordVersement;
+        protected String section, sectionName, traceFile, profileFile, dataFile, 
+            repDocuments, baseURI, bordereauFile, accordVersement;
+        protected String SAE_Serveur, TransferIdPrefix, SAE_ProfilArchivage, 
+            TransferringAgencyId, TransferringAgencyName, TransferringAgencyDesc, 
+            ArchivalAgencyId, ArchivalAgencyName, ArchivalAgencyDesc;
+
         protected bool inSection = false;
 
         public SimpleConfig() {
@@ -53,6 +76,21 @@ namespace CommonClassesLibrary {
             generatorList = new List<GeneratorConfig>();
             datacontrolList = new List<DataControlConfig>();
             profilecontrolList = new List<ProfileControlConfig>();
+            accordVersementConfigList = new List<AccordVersementConfig>();
+        }
+
+        // Vérifie s'il y a des accords de versement
+        public bool hasAccordVersementConfig() {
+            return accordVersementConfigList.Count > 0;
+        }
+
+        // Retourne l'accord de versement demandé pour un SAE donné
+        public AccordVersementConfig getAccordVersementConfig(String accordName, String SAE_Serveur) {
+            foreach (AccordVersementConfig a in accordVersementConfigList) {
+                if (a.accordVersement.Equals(accordName) && a.SAE_Serveur.Equals(SAE_Serveur))
+                    return a;
+            }
+            return null;
         }
 
         // Retourne la configuration demandée ou la première si le nom de config est vide
@@ -88,6 +126,20 @@ namespace CommonClassesLibrary {
         protected void doSection() {
             if (inSection) {
                 switch (section) {
+                    case "accord-versement":
+                        AccordVersementConfig paccord = new AccordVersementConfig();
+                        paccord.accordVersement = sectionName;
+                        paccord.SAE_Serveur = SAE_Serveur;
+                        paccord.TransferIdPrefix = TransferIdPrefix;
+                        paccord.SAE_ProfilArchivage = SAE_ProfilArchivage;
+                        paccord.TransferringAgencyId = TransferringAgencyId;
+                        paccord.TransferringAgencyName = TransferringAgencyName;
+                        paccord.TransferringAgencyDesc = TransferringAgencyDesc;
+                        paccord.ArchivalAgencyId = ArchivalAgencyId;
+                        paccord.ArchivalAgencyName = ArchivalAgencyName;
+                        paccord.ArchivalAgencyDesc = ArchivalAgencyDesc;
+                        accordVersementConfigList.Add(paccord);
+                        break;
                     case "profile-control":
                         ProfileControlConfig pcontrol = new ProfileControlConfig();
                         pcontrol.nomJob = sectionName;
@@ -145,11 +197,16 @@ namespace CommonClassesLibrary {
                                 if (inSection)  // Potentiellement on change de section
                                     doSection();
                                 section = m.Groups[1].ToString();
-                                String authorizedFiles = String.Empty;
+                                String authorizedKeys = String.Empty;
                                 inSection = true;
-                                if (section.Equals("profile-control"))    authorizedFiles = "trace|profil";
-                                else if (section.Equals("data-control"))  authorizedFiles = "trace|profil|data";
-                                else if (section.Equals("generator"))     authorizedFiles = "trace|accord|data|rep_documents|baseURI|bordereau";
+                                if (section.Equals("profile-control"))    
+                                    authorizedKeys = "trace|profil";
+                                else if (section.Equals("data-control"))  
+                                    authorizedKeys = "trace|profil|data";
+                                else if (section.Equals("generator")) 
+                                    authorizedKeys = "trace|accord|data|rep_documents|baseURI|bordereau";
+                                else if (section.Equals("accord-versement")) 
+                                    authorizedKeys = "SAE_Serveur|TransferIdPrefix|SAE_ProfilArchivage|TransferringAgencyId|TransferringAgencyName|TransferringAgencyDesc|ArchivalAgencyId|ArchivalAgencyName|ArchivalAgencyDesc";
                                 else {
                                     String errMsg = "Le nom de section '" + section + "' n'existe pas (choix entre profile-control, data-control ou generator).";
                                     if (traceActions) tracesWriter.WriteLine(errMsg);
@@ -159,7 +216,9 @@ namespace CommonClassesLibrary {
                                 if (inSection) {
                                     sectionName = m.Groups[2].ToString();
                                     traceFile = profileFile = dataFile = bordereauFile = repDocuments = baseURI = accordVersement = String.Empty;
-                                    fileRegex = new Regex(@"^\s*(" + authorizedFiles + @")\s*=\s*([-a-zA-Z0-9_./:]+)\s*$");
+                                    SAE_Serveur = TransferIdPrefix = SAE_ProfilArchivage = TransferringAgencyId = TransferringAgencyName =
+                                        TransferringAgencyDesc = ArchivalAgencyId = ArchivalAgencyName = ArchivalAgencyDesc = String.Empty;
+                                    fileRegex = new Regex(@"^\s*(" + authorizedKeys + @")\s*=\s*([-a-zA-Z0-9_./:]+)\s*$");
                                 }
                             } else { // if (m.Success) 
                                 if (inSection == true) {
@@ -180,6 +239,25 @@ namespace CommonClassesLibrary {
                                             dataFile = m.Groups[2].ToString();
                                         if (g.ToString().Equals("bordereau"))
                                             bordereauFile = m.Groups[2].ToString();
+
+                                        if (g.ToString().Equals("SAE_Serveur"))
+                                            SAE_Serveur = m.Groups[2].ToString();
+                                        if (g.ToString().Equals("TransferIdPrefix"))
+                                            TransferIdPrefix = m.Groups[2].ToString();
+                                        if (g.ToString().Equals("SAE_ProfilArchivage"))
+                                            SAE_ProfilArchivage = m.Groups[2].ToString();
+                                        if (g.ToString().Equals("TransferringAgencyId"))
+                                            TransferringAgencyId = m.Groups[2].ToString();
+                                        if (g.ToString().Equals("TransferringAgencyName"))
+                                            TransferringAgencyName = m.Groups[2].ToString();
+                                        if (g.ToString().Equals("TransferringAgencyDesc"))
+                                            TransferringAgencyDesc = m.Groups[2].ToString();
+                                        if (g.ToString().Equals("ArchivalAgencyId"))
+                                            ArchivalAgencyId = m.Groups[2].ToString();
+                                        if (g.ToString().Equals("ArchivalAgencyName"))
+                                            ArchivalAgencyName = m.Groups[2].ToString();
+                                        if (g.ToString().Equals("ArchivalAgencyDesc"))
+                                            ArchivalAgencyDesc = m.Groups[2].ToString();                                   
                                     }
                                 }
                             } // if (line.Length > 0 || ! line.StartsWith("#")) 

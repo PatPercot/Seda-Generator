@@ -120,6 +120,12 @@
     <None Include="app.config" />
     <None Include="SedaProfileGenerator_CléTemporaire.pfx" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonClassesLibrary\CommonClassesLibrary.csproj">
+      <Project>{b3133d2c-981a-44bd-ab57-99c09433132c}</Project>
+      <Name>CommonClassesLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
