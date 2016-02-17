@@ -261,6 +261,16 @@ namespace RngProfileControllerUnitTest {
             declencherTestProfil("profil_test_marches", branchesAttendues, erreursAttendues);
         }
 
+        [TestMethod]
+        public void M18_TestUtilisationBaliseDocumentArchive() {
+            String[] branchesAttendues = { "\troot", "\t\tUD1[#1]", "" };
+            String[] erreursAttendues = 
+                { 
+                "La balise Document de Archive (ou Contains premier niveau) est utilisée. Les documents doivent etre dans des unités documentaires.", 
+                };
+            declencherTestProfil("UtilisationBaliseDocumentArchive", branchesAttendues, erreursAttendues);
+        }
+
 
     }
 }

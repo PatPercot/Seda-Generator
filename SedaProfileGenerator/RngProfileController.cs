@@ -141,6 +141,7 @@ namespace SedaSummaryGenerator {
                                         if (containsNodeName == null) {
                                             errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
                                         } else {
+                                            checkForDocumentInArchive(containsNodeName,"");
                                             recurseContainsDefine(containsNodeName, String.Empty, false);
                                         }
                                     }
@@ -409,6 +410,40 @@ namespace SedaSummaryGenerator {
                 }
             }
         }
+
+        protected void checkForDocumentInArchive(String defineNodeName, String context) {
+            // Tester la présence de Document dans le Contains (ou Archive) de départ 
+            // et lancer une alerte
+            bool error = false;
+            String xPath = "rng:define[@name='" + defineNodeName + "']/rng:element[@name='Document']/rng:ref";
+            XmlNode cdrefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (cdrefNode != null) {
+                error = true;
+            } else {
+                xPath = "rng:define[@name='" + defineNodeName + "']rng:optional/rng:element[@name='Document']/rng:ref";
+                cdrefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                if (cdrefNode != null) {
+                    error = true;
+                } else {
+                    xPath = "rng:define[@name='" + defineNodeName + "']rng:oneOrMore/rng:element[@name='Document']/rng:ref";
+                    cdrefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (cdrefNode != null) {
+                        error = true;
+                    } else {
+                        xPath = "rng:define[@name='" + defineNodeName + "']rng:zeroOrMore/rng:element[@name='Document']/rng:ref";
+                        cdrefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                        if (cdrefNode != null) {
+                            error = true;
+                        }
+                    }
+                }
+            }
+            if (error) {
+                errorsList.Add("La balise Document de Archive (ou Contains premier niveau) est utilisée. Les documents doivent etre dans des unités documentaires.");
+            }
+        }
+
+
 
         protected void checkForContentDescription(String defineNodeName, String context) {
             // Tester la présence de ContentDescription dans rng:optiona avec un KeywordContent

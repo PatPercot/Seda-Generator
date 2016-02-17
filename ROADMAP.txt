@@ -1,20 +1,7 @@
 Roadmap
 
 Éléments prioritaires
-
-- Faciliter l'exécution des programmes de contrôle avec un fichier de configuration qui définit
-  les fichiers sur lesquels l'archiviste ou l'éditeur de l'application métier travaille
-  Permettre de conserver plusieurs configurations et de choisir celle que l'on traite
-  Le fichier de configuration doit servir aux trois programmes de contrôle
   
-- Fournir une version release des programmes sur GitHub et Codeplex
-
-- Finaliser le contrôle des profils d'archivage
-	- Ajouter un contrôle sur la cardinalité de la balise "ArchivalAgencyObjectIdentifier" 
-		(la balise doit avoir une cardinalité 1,1)
-	- Ajouter un contrôle pour les mots-clés, la description du contenu doit être obligatoire pour que le mot-clé soit généré
-	- Coder les test prévus par Maud sur les contrôles (les précédents doivent en faire partie)
-
 - Réaliser un contrôleur de données métier
 	- Données métier seules (voir TODO.txt)
 	- Données confrontées au profil d'archivage
