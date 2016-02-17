@@ -166,6 +166,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
     <Content Include="WsSoapGenerator.asmx" />
+    <Content Include="job.config.example" />
     <None Include="Properties\PublishProfiles\Publication copie FS vm-web-services.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
