@@ -151,7 +151,12 @@ namespace WsSoapSedaGeneratorAspWebApp {
             ssg.setTracesWriter(streamWriter);
 
             SimpleConfig config = new SimpleConfig();
-            String erreurFichierConfig = config.loadFile("../../job.config");
+            String erreurFichierConfig = config.loadFile("../job.config");
+            streamWriter.WriteLineFlush("INFORMATION : retour lecture ../config '" + erreurFichierConfig + "'");
+            if (erreurFichierConfig != String.Empty) {
+                erreurFichierConfig = config.loadFile("../../job.config");
+                streamWriter.WriteLineFlush("INFORMATION : retour lecture ../../config '" + erreurFichierConfig + "'");
+            }
 
              // On a trouvé un fichier de config pour remplacer la base de données
             if (erreurFichierConfig == String.Empty && config.hasAccordVersementConfig()) {
