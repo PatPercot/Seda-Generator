@@ -2,6 +2,7 @@
 Changements du 2016-02-17
 
 - Calcul du hash en sha256 pour les empreintes de documents
+- Ajout d'un contrôle sur la présnece interdite de la balise Document dans Archive
 
 -------------------------
 Changements du 2016-02-16
