@@ -606,7 +606,7 @@ namespace SedaSummaryGenerator {
                                             }
                                         }
                                         if (context.EndsWith("Integrity") && attrName == "algorithme")
-                                            value = "http://www.w3.org/2000/09/xmldsig#sha1";
+                                            value = "http://www.w3.org/2000/09/xmldsig#sha256";
                                     }
 
                                     try {
@@ -968,7 +968,7 @@ namespace SedaSummaryGenerator {
                         // et son contenu n'est pas précisé
                         case "/ArchiveTransfer":
                             /*
-                            <Contains algorithme="http://www.w3.org/2000/09/xmldsig#sha1">52a354f92d4d8a1e1c714ec6cd6a6f1ae51f4a14</Contains>
+                            <Contains algorithme="http://www.w3.org/2000/09/xmldsig#sha256">52a354f92d4d8a1e1c714ec6cd6a6f1ae51f4a14</Contains>
                             <UnitIdentifier>056-225600014-20130924-0000008888-DE-1-1_1.PDF</UnitIdentifier>
                             */
                             // C'est pas très propre, mais s'il y a plus d'un document, on doit générer la balise "Integrity"
@@ -978,7 +978,7 @@ namespace SedaSummaryGenerator {
                             int curDocument = 0;
                             while (archiveDocuments.nextDocument()) {
                                 docOut.WriteStartElement("Contains");
-                                docOut.WriteAttributeString("algorithme", "http://www.w3.org/2000/09/xmldsig#sha1");
+                                docOut.WriteAttributeString("algorithme", "http://www.w3.org/2000/09/xmldsig#sha256");
                                 docOut.WriteString(computeHash(archiveDocuments.getFileName()));
                                 docOut.WriteEndElement();
                                 docOut.WriteStartElement("UnitIdentifier");
@@ -1007,7 +1007,7 @@ namespace SedaSummaryGenerator {
             String retour = String.Empty;
             String file = SAE_FilePath + "/" + documentFileName;
             try {
-                retour = Utils.computeSha1Hash(file);
+                retour = Utils.computeSha256Hash(file);
             } catch (DirectoryNotFoundException e) {
                 errorsList.Add("#DATAERR: Integrity: répertoire '" + SAE_FilePath + "' inexistant. " + e.Message);
                 if (traceActions) tracesWriter.WriteLineFlush("#DATAERR: Integrity: répertoire '" + SAE_FilePath + "' inexistant. " + e.Message);

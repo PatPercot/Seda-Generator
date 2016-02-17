@@ -38,5 +38,23 @@ namespace CommonClassesLibrary {
             return dataSha1;
         }
 
+        /*
+         * Calcule le hash sha256 d'un fichier dont on précise le nom
+         * Susceptible de lever une exception si le fichier ou le réperroire n'existe pas
+         * */
+        public static String computeSha256Hash(String filename) {
+            SHA256 sha256 = SHA256CryptoServiceProvider.Create();
+            // Create a fileStream for the file.
+            byte[] hashValue;
+            FileStream fileStream = new FileStream(filename, FileMode.Open);
+            // Be sure it's positioned to the beginning of the stream.
+            fileStream.Position = 0;
+            // Compute the hash of the fileStream.
+            hashValue = sha256.ComputeHash(fileStream);
+            String dataSha256 = Utils.getReadableByteArray(hashValue).ToLower();
+            fileStream.Close();
+            return dataSha256;
+        }
+
     }
 }
