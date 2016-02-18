@@ -201,12 +201,12 @@ namespace SedaSummaryGenerator {
          * (positionné par nextDocument ou prepareCompleteList 
          * ou prepareListForType
          * */
-        override public String getFileName() {
-            if (traceActions) tracesWriter.WriteLine("ArchiveDocuments.getFileName");
+        override public String getDocumentFilename() {
+            if (traceActions) tracesWriter.WriteLine("ArchiveDocuments.getDocumentFilename");
             if (lastError == "") {
                 String[] tabCurrent = partialDocumentsListEnumerator.Current;
                 if (tabCurrent == null) {
-                    addActionError("#DATAERR: Le nom de fichier du document n'a pas été trouvé dans : '" + tabCurrent.ToString() + "'");
+                    addActionError("#DATAERR: Le nom de fichier du document n'a pas été trouvé dans partialDocumentsListEnumerator");
                     return "Error not found";
                 }
                 return tabCurrent.Length > 0 ? tabCurrent[1] : String.Empty;
@@ -219,11 +219,11 @@ namespace SedaSummaryGenerator {
          * (positionné par nextDocument ou prepareCompleteList 
          * ou prepareListForType
          * */
-        override public String getName() {
+        override public String getDocumentName() {
             if (lastError == "") {
                 String[] tabCurrent = partialDocumentsListEnumerator.Current;
                 if (tabCurrent == null) {
-                    addActionError("#DATAERR: Le nom du document n'a pas été trouvé dans : '" + tabCurrent.ToString() + "'");
+                    addActionError("#DATAERR: Le nom du document n'a pas été trouvé dans partialDocumentsListEnumerator");
                     return "Error not found";
                 }
                 return tabCurrent.Length > 2 ? tabCurrent[3] : String.Empty;
@@ -240,10 +240,66 @@ namespace SedaSummaryGenerator {
             if (lastError == "") {
                 String[] tabCurrent = partialDocumentsListEnumerator.Current;
                 if (tabCurrent == null) {
-                    addActionError("#DATAERR: La date du document n'a pas été trouvée dans : '" + tabCurrent.ToString() + "'");
+                    addActionError("#DATAERR: La date du document n'a pas été trouvée dans partialDocumentsListEnumerator");
                     return "Error not found";
                 }
                 return tabCurrent.Length > 3 ? tabCurrent[4] : String.Empty;
+            }
+            return lastError;
+        }
+
+        /* 
+         * Donne l'algorithme de l'empreinte du document courant 
+         * (positionné par nextDocument ou prepareCompleteList 
+         * ou prepareListForType
+         * */
+        override public String getDocumentHashAlgorithm() {
+            if (lastError == "") {
+                String[] tabCurrent = partialDocumentsListEnumerator.Current;
+                if (tabCurrent == null) {
+                    addActionError("#DATAERR: L'algorithme du hash du document n'a pas été trouvé dans partialDocumentsListEnumerator");
+                    return "Error not found";
+                }
+                // Attention, ici on attend un algorithme et une empreinte, donc on impose la présence de deux champs à suivre
+                // D'où la comparaison de la longueur avec 6 (le sixième champ qui contient l'empreinte)
+                // On rappelle que le champ 0 est vide
+                return tabCurrent.Length >= 6 ? tabCurrent[5] : String.Empty;
+            }
+            return lastError;
+        }
+
+        /* 
+         * Donne l'empreinte du document courant 
+         * (positionné par nextDocument ou prepareCompleteList 
+         * ou prepareListForType
+         * */
+        override public String getDocumentHash() {
+            if (lastError == "") {
+                String[] tabCurrent = partialDocumentsListEnumerator.Current;
+                if (tabCurrent == null) {
+                    addActionError("#DATAERR: Le hash du document n'a pas été trouvé dans partialDocumentsListEnumerator");
+                    return "Error not found";
+                }
+                // On rappelle que le champ 0 est vide
+                return tabCurrent.Length >= 6 ? tabCurrent[6] : String.Empty;
+            }
+            return lastError;
+        }
+
+        /* 
+         * Donne la taille en octets du document courant 
+         * (positionné par nextDocument ou prepareCompleteList 
+         * ou prepareListForType
+         * */
+        override public String getDocumentSize() {
+            if (lastError == "") {
+                String[] tabCurrent = partialDocumentsListEnumerator.Current;
+                if (tabCurrent == null) {
+                    addActionError("#DATAERR: La taille du document n'a pas été trouvée dans partialDocumentsListEnumerator");
+                    return "Error not found";
+                }
+                // On rappelle que le champ 0 est vide
+                return tabCurrent.Length >= 7 ? tabCurrent[7] : String.Empty;
             }
             return lastError;
         }

@@ -24,13 +24,13 @@ namespace UnitaryTestsUnitTest {
             ContainsNode child21 = new ContainsNode("child21", child2, true);
             ContainsNode child22 = new ContainsNode("child22", child2, true);
 
-            Assert.AreEqual("child11", child11.getName(), "child11.getName()");
+            Assert.AreEqual("child11", child11.getName(), "child11.getDocumentName()");
             Assert.AreEqual("child1", child11.getParent().getName(), "child11.getParent()");
 
-            Assert.AreEqual("child22", child22.getName(), "child22.getName()");
+            Assert.AreEqual("child22", child22.getName(), "child22.getDocumentName()");
             Assert.AreEqual("child2", child22.getParent().getName(), "child22.getParent()");
 
-            Assert.AreEqual("child2", child2.getName(), "child2.getName()");
+            Assert.AreEqual("child2", child2.getName(), "child2.getDocumentName()");
             Assert.AreEqual("root", child2.getParent().getName(), "child2.getParent()");
         }
 

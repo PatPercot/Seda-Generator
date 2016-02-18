@@ -75,14 +75,14 @@ namespace SedaSummaryGenerator {
          * (positionné par nextDocument ou prepareCompleteList 
          * ou prepareListForType
          * */
-        abstract public String getFileName();
+        abstract public String getDocumentFilename();
 
         /* 
          * Donne le nom du document courant 
          * (positionné par nextDocument ou prepareCompleteList 
          * ou prepareListForType
          * */
-        abstract public String getName();
+        abstract public String getDocumentName();
 
         /* 
          * Donne le date du document courant 
@@ -90,6 +90,27 @@ namespace SedaSummaryGenerator {
          * ou prepareListForType
          * */
         abstract public String getDocumentDate();
+
+        /* 
+         * Donne l'algorithme de l'empreinte du document courant 
+         * (positionné par nextDocument ou prepareCompleteList 
+         * ou prepareListForType
+         * */
+        abstract public String getDocumentHashAlgorithm();
+
+        /* 
+         * Donne l'empreinte du document courant 
+         * (positionné par nextDocument ou prepareCompleteList 
+         * ou prepareListForType
+         * */
+        abstract public String getDocumentHash();
+
+        /* 
+         * Donne la taille en octets du document courant 
+         * (positionné par nextDocument ou prepareCompleteList 
+         * ou prepareListForType
+         * */
+        abstract public String getDocumentSize();
 
         /* 
          * Donne la date la plus récente de la liste 

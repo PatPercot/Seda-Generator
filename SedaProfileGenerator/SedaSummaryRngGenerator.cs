@@ -63,7 +63,12 @@ namespace SedaSummaryGenerator {
 
         // L'algorithme courant est SHA256
         // Pour SHA1 était : http://www.w3.org/2000/09/xmldsig#sha1
-        private String currentHashURI = "http://www.w3.org/2001/04/xmlenc#sha256";
+        private String getCurrentHashURI() {
+            String retour = archiveDocuments.getDocumentHashAlgorithm();
+            if (retour == String.Empty)
+                retour = "http://www.w3.org/2001/04/xmlenc#sha256";
+            return retour;
+        }
 
         public SedaSummaryRngGenerator() : base() {
             // rootContainsNode est marqué avec l'ID "root"
@@ -601,16 +606,19 @@ namespace SedaSummaryGenerator {
                                         if (currentDocumentTypeId != null
                                             && context.EndsWith("Document/Attachment")) {
                                             if (attrName == "filename") {
-                                                value = archiveDocuments.getFileName();
+                                                value = archiveDocuments.getDocumentFilename();
                                                 tracesWriter.WriteLineFlush("recurseDefine generating filename '" + value + "' for DOCLIST '" + currentDocumentTypeId + "'");
                                             }
                                             if (attrName == "mimeCode") {
-                                                value = MimeMapping.GetMimeMapping(archiveDocuments.getFileName());
+                                                value = MimeMapping.GetMimeMapping(archiveDocuments.getDocumentFilename());
                                                 tracesWriter.WriteLineFlush("recurseDefine generating mimeCode '" + value + "' for DOCLIST '" + currentDocumentTypeId + "'");
                                             }
                                         }
-                                        if (context.EndsWith("Integrity") && attrName == "algorithme")
-                                            value = currentHashURI;
+                                        if (context.EndsWith("Integrity") && attrName == "algorithme") {
+                                            value = archiveDocuments.getDocumentHashAlgorithm();
+                                            if (value == String.Empty)
+                                                value = getCurrentHashURI();
+                                        }
                                     }
 
                                     try {
@@ -769,31 +777,12 @@ namespace SedaSummaryGenerator {
                 // case "/ArchiveTransfer/Archive/ContentDescription/Size": // SEDA 1.0 Toutefois cette balise n'existe pas en SEDA 1.0
                 case "/ArchiveTransfer/Contains/ContentDescription/Size": // SEDA 0.2
                     {
-                        double sizeOfDocuments = 0L;
                         int nbDocuments = archiveDocuments.prepareCompleteList();
+                        double sizeOfDocuments = 0.0;
                         while (archiveDocuments.nextDocument()) {
-                            try {
-                                FileInfo f = new FileInfo(SAE_FilePath + "/" + archiveDocuments.getFileName());
-                                sizeOfDocuments += f.Length;
-                            } catch (System.IO.FileNotFoundException e) { // on se contente de ne pas calculer
-                                e.ToString();
-                                sizeOfDocuments += 0L;
-                            }
+                            sizeOfDocuments += computeSizeOfCurrentDocument();
                         }
-                        if (traceActions) tracesWriter.WriteLineFlush("Size computed = '" + sizeOfDocuments + "'");
-                        String value = lookupForAttribute("unitCode", node.ParentNode);
-                        switch (value) {
-                            case "E36": sizeOfDocuments /= (1024L ^ 5L); break; // petabyte
-                            case "E35": sizeOfDocuments /= (1024L ^ 4L); break; // terabyte
-                            case "E34": sizeOfDocuments /= (1024L ^ 3L); break; // gigabyte
-                            case "4L": sizeOfDocuments /= (1024L ^ 2L); break; // megabyte
-                            case "2P": sizeOfDocuments /= 1024L; break; // kilobyte
-                            case "null":
-                            case "AD":
-                                break;
-                        }
-                        dataString = String.Format("{0:0.##}", (long)(sizeOfDocuments + 0.5));
-                        if (traceActions) tracesWriter.WriteLineFlush("Size formated = '" + dataString + "'");
+                        dataString = formatSizeForNode(sizeOfDocuments, node);
                     }
                     break;
                 case "/ArchiveTransfer/TransferIdentifier":
@@ -852,32 +841,12 @@ namespace SedaSummaryGenerator {
                     break;
                 default:
                     if (context.EndsWith("Integrity")) {
-                        dataString = computeHash(archiveDocuments.getFileName());
+                        dataString = computeHashOfCurrentDocument();
                     } else if (context.EndsWith("Document/Size")) {
-                        double sizeOfDocuments = 0L;
-                        try {
-                            FileInfo f = new FileInfo(SAE_FilePath + "/" + archiveDocuments.getFileName());
-                            sizeOfDocuments += f.Length;
-                        }
-                        catch (System.IO.FileNotFoundException e) { // on se contente de ne pas calculer
-                            e.ToString();
-                        }
-                        if (traceActions) tracesWriter.WriteLineFlush("Size computed = '" + sizeOfDocuments + "'");
-                        String value = lookupForAttribute("unitCode", node.ParentNode);
-                        switch (value) {
-                            case "E36": sizeOfDocuments /= (1024L ^ 5L); break; // petabyte
-                            case "E35": sizeOfDocuments /= (1024L ^ 4L); break; // terabyte
-                            case "E34": sizeOfDocuments /= (1024L ^ 3L); break; // gigabyte
-                            case "4L": sizeOfDocuments /= (1024L ^ 2L); break; // megabyte
-                            case "2P": sizeOfDocuments /= 1024L; break; // kilobyte
-                            case "null":
-                            case "AD":
-                                break;
-                        }
-                        dataString = String.Format("{0:0.##}", (long) (sizeOfDocuments + 0.5));
-                        if (traceActions) tracesWriter.WriteLineFlush("Size formated = '" + dataString + "'");
+                        double sizeOfDocument = computeSizeOfCurrentDocument();
+                        dataString = formatSizeForNode(sizeOfDocument, node);
                     } else if (context.EndsWith("/Document/Description")) {
-                        dataString = archiveDocuments.getName();
+                        dataString = archiveDocuments.getDocumentName();
                     } else if (context.EndsWith("/ArchiveObject/Name") // SEDA 1.0
                         || context.EndsWith("/Contains/Contains/Name")) { // SEDA .02
                         dataString = archiveDocuments.getKeyValue("ContainsName[" + currentContainsNode.getRelativeContext() + "]");
@@ -922,7 +891,7 @@ namespace SedaSummaryGenerator {
                         dateString = date.Date.ToString("o");
                     } catch (FormatException e) {
                         dateString = "#DATAERR: date " + dateTraitee;
-                        errorsList.Add("#DATAERR: La date '" + dateTraitee + "' du document '" + archiveDocuments.getFileName() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
+                        errorsList.Add("#DATAERR: La date '" + dateTraitee + "' du document '" + archiveDocuments.getDocumentFilename() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
                     }
                     return dateString;
                 case "OldestDate":
@@ -936,7 +905,7 @@ namespace SedaSummaryGenerator {
                             dateString = date.ToString("o");
                     } catch (FormatException e) {
                         dateString = "#DATAERR: date " + dateTraitee;
-                        errorsList.Add("#DATAERR: La date '" + dateTraitee + "' du document '" + archiveDocuments.getFileName() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
+                        errorsList.Add("#DATAERR: La date '" + dateTraitee + "' du document '" + archiveDocuments.getDocumentFilename() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
                     }
                     return dateString;
                 case "StartDate":
@@ -951,7 +920,7 @@ namespace SedaSummaryGenerator {
                             dateString = date.ToString("o");
                     } catch (FormatException e) {
                         dateString = "#DATAERR: date " + dateTraitee;
-                        errorsList.Add("#DATAERR: La date '" + dateTraitee + "' du document '" + archiveDocuments.getFileName() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
+                        errorsList.Add("#DATAERR: La date '" + dateTraitee + "' du document '" + archiveDocuments.getDocumentFilename() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
                     }
                     return dateString;
                 case "Date":
@@ -982,11 +951,11 @@ namespace SedaSummaryGenerator {
                             int curDocument = 0;
                             while (archiveDocuments.nextDocument()) {
                                 docOut.WriteStartElement("Contains");
-                                docOut.WriteAttributeString("algorithme", currentHashURI);
-                                docOut.WriteString(computeHash(archiveDocuments.getFileName()));
+                                docOut.WriteAttributeString("algorithme", getCurrentHashURI());
+                                docOut.WriteString(computeHashOfCurrentDocument());
                                 docOut.WriteEndElement();
                                 docOut.WriteStartElement("UnitIdentifier");
-                                docOut.WriteString(archiveDocuments.getFileName());
+                                docOut.WriteString(archiveDocuments.getDocumentFilename());
                                 docOut.WriteEndElement();
                                 ++curDocument;
                                 if (curDocument < nbDocuments) {
@@ -1007,19 +976,71 @@ namespace SedaSummaryGenerator {
         /* 
          * Computes the hash of the current document
          * */
-        private String computeHash(String documentFileName) {
-            String retour = String.Empty;
-            String file = SAE_FilePath + "/" + documentFileName;
-            try {
-                retour = Utils.computeSha256Hash(file);
-            } catch (DirectoryNotFoundException e) {
-                errorsList.Add("#DATAERR: Integrity: répertoire '" + SAE_FilePath + "' inexistant. " + e.Message);
-                if (traceActions) tracesWriter.WriteLineFlush("#DATAERR: Integrity: répertoire '" + SAE_FilePath + "' inexistant. " + e.Message);
-            } catch (FileNotFoundException e) {
-                errorsList.Add("#DATAERR: Integrity: Fichier '" + file + "' inexistant. " + e.Message);
-                if (traceActions) tracesWriter.WriteLineFlush("#DATAERR: Integrity: Fichier '" + file + "' inexistant. " + e.Message);
+        private String computeHashOfCurrentDocument() {
+            String documentHash = String.Empty;
+            documentHash = archiveDocuments.getDocumentHash();
+            if (documentHash == String.Empty) {
+                String file = SAE_FilePath + "/" + archiveDocuments.getDocumentFilename();
+                try {
+                    documentHash = Utils.computeSha256Hash(file);
+                } catch (DirectoryNotFoundException e) {
+                    errorsList.Add("#DATAERR: Integrity: répertoire '" + SAE_FilePath + "' inexistant. " + e.Message);
+                    if (traceActions) tracesWriter.WriteLineFlush("#DATAERR: Integrity: répertoire '" + SAE_FilePath + "' inexistant. " + e.Message);
+                } catch (FileNotFoundException e) {
+                    errorsList.Add("#DATAERR: Integrity: Fichier '" + file + "' inexistant. " + e.Message);
+                    if (traceActions) tracesWriter.WriteLineFlush("#DATAERR: Integrity: Fichier '" + file + "' inexistant. " + e.Message);
+                }
             }
-            return retour;
+            return documentHash;
+        }
+
+        /*
+         * Computes the size of the current document
+         * */
+        private double computeSizeOfCurrentDocument() {
+            String dataString = String.Empty;
+            double sizeOfDocument = 0L;
+            Boolean sizeIsOK = false;
+            String sizeStr = archiveDocuments.getDocumentSize();
+            if (sizeStr != String.Empty) {
+                try {
+                    sizeOfDocument = Convert.ToDouble(sizeStr);
+                    sizeIsOK = true;
+                } catch (Exception e) {
+                    sizeIsOK = false;
+                }
+            }
+            if (sizeIsOK == false) {
+                try {
+                    FileInfo f = new FileInfo(SAE_FilePath + "/" + archiveDocuments.getDocumentFilename());
+                    sizeOfDocument = f.Length;
+                } catch (System.IO.FileNotFoundException e) { // on se contente de ne pas calculer
+                    e.ToString();
+                }
+            }
+            if (traceActions) tracesWriter.WriteLineFlush("Size computed = '" + sizeOfDocument + "'");
+            return sizeOfDocument;
+        }
+
+        /*
+         * Formats the size for an XmlNode
+         * */
+        private String formatSizeForNode(double sizeOfDocument, XmlNode node) {
+            String dataString;
+            String value = lookupForAttribute("unitCode", node.ParentNode);
+            switch (value) {
+                case "E36": sizeOfDocument /= (1024L ^ 5L); break; // petabyte
+                case "E35": sizeOfDocument /= (1024L ^ 4L); break; // terabyte
+                case "E34": sizeOfDocument /= (1024L ^ 3L); break; // gigabyte
+                case "4L": sizeOfDocument /= (1024L ^ 2L); break; // megabyte
+                case "2P": sizeOfDocument /= 1024L; break; // kilobyte
+                case "null":
+                case "AD":
+                    break;
+            }
+            dataString = String.Format("{0:0.##}", (long)(sizeOfDocument + 0.5));
+
+            return dataString;
         }
 
         private String formatContainsIdentifier(String containsIdentifier, int numeroTag) {
