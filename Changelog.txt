@@ -1,4 +1,9 @@
 -------------------------
+Changements du 2016-02-18
+
+- Correction bug sur l'URI de l'algorithme sha256 "http://www.w3.org/2001/04/xmlenc#sha256"
+
+-------------------------
 Changements du 2016-02-17
 
 - Calcul du hash en sha256 pour les empreintes de documents

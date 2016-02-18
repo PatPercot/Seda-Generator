@@ -61,6 +61,10 @@ namespace SedaSummaryGenerator {
         private String ArchivalAgencyName = String.Empty;
         private String ArchivalAgencyDesc = String.Empty;
 
+        // L'algorithme courant est SHA256
+        // Pour SHA1 était : http://www.w3.org/2000/09/xmldsig#sha1
+        private String currentHashURI = "http://www.w3.org/2001/04/xmlenc#sha256";
+
         public SedaSummaryRngGenerator() : base() {
             // rootContainsNode est marqué avec l'ID "root"
             rootContainsNode = new ContainsNode("root", null, true);
@@ -606,7 +610,7 @@ namespace SedaSummaryGenerator {
                                             }
                                         }
                                         if (context.EndsWith("Integrity") && attrName == "algorithme")
-                                            value = "http://www.w3.org/2000/09/xmldsig#sha256";
+                                            value = currentHashURI;
                                     }
 
                                     try {
@@ -968,7 +972,7 @@ namespace SedaSummaryGenerator {
                         // et son contenu n'est pas précisé
                         case "/ArchiveTransfer":
                             /*
-                            <Contains algorithme="http://www.w3.org/2000/09/xmldsig#sha256">52a354f92d4d8a1e1c714ec6cd6a6f1ae51f4a14</Contains>
+                            <Contains algorithme="[currentHashURI]">52a354f92d4d8a1e1c714ec6cd6a6f1ae51f4a14</Contains>
                             <UnitIdentifier>056-225600014-20130924-0000008888-DE-1-1_1.PDF</UnitIdentifier>
                             */
                             // C'est pas très propre, mais s'il y a plus d'un document, on doit générer la balise "Integrity"
@@ -978,7 +982,7 @@ namespace SedaSummaryGenerator {
                             int curDocument = 0;
                             while (archiveDocuments.nextDocument()) {
                                 docOut.WriteStartElement("Contains");
-                                docOut.WriteAttributeString("algorithme", "http://www.w3.org/2000/09/xmldsig#sha256");
+                                docOut.WriteAttributeString("algorithme", currentHashURI);
                                 docOut.WriteString(computeHash(archiveDocuments.getFileName()));
                                 docOut.WriteEndElement();
                                 docOut.WriteStartElement("UnitIdentifier");
