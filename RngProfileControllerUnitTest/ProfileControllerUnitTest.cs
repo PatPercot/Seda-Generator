@@ -65,32 +65,34 @@ namespace RngProfileControllerUnitTest {
             }
             streamWriter.Flush();
 
-            if (branchesAttendues != null) {
-                StringCollection arbre = rpc.getTreeList();
-
-                Assert.AreEqual(branchesAttendues.Length, arbre.Count, "La taille des arbres diffère");
-
-                if (arbre != null && arbre.Count != 0) {
-                    int branche = 0;
-                    foreach (String str in arbre) {
-                        Assert.AreEqual(branchesAttendues[branche], str, "Comparaison du nom des branches");
-                        branche++;
-                    }
-                }
-            }
-
             if (erreursAttendues != null) {
                 StringCollection errors = rpc.getErrorsList();
 
-                Assert.AreEqual(erreursAttendues.Length, errors.Count, "Le nombre d'erreurs attendues et obtenues diffère");
-
+                int erreur = 0;
                 if (errors != null && errors.Count != 0) {
-                    int erreur = 0;
                     foreach (String str in errors) {
-                        StringAssert.StartsWith(str, erreursAttendues[erreur], "Comparaison des erreurs");
+                        if (erreursAttendues.Length > erreur)
+                            StringAssert.StartsWith(str, erreursAttendues[erreur], "Comparaison des erreurs");
                         erreur++;
                     }
                 }
+
+                Assert.AreEqual(erreursAttendues.Length, errors.Count, "Le nombre d'erreurs attendues et obtenues diffère");
+            }
+
+            if (branchesAttendues != null) {
+                StringCollection arbre = rpc.getTreeList();
+
+                int branche = 0;
+                if (arbre != null && arbre.Count != 0) {
+                    foreach (String str in arbre) {
+                        if (branchesAttendues.Length > branche)
+                            Assert.AreEqual(branchesAttendues[branche], str, "Comparaison du nom des branches");
+                        branche++;
+                    }
+                }
+
+                Assert.AreEqual(branchesAttendues.Length, arbre.Count, "La taille des arbres diffère");
             }
 
             streamWriter.Close();

@@ -194,7 +194,7 @@ namespace SedaSummaryGeneratorUnitTest {
                 , "document1e1.txt");
 
             checkInnerText("/s:ArchiveTransfer/s:Integrity[1]/s:Contains"
-                , "fb20d26a36b8368ea31695298ca0222a31968847");
+                , "f81ba5573d70bb23c5510237208e2965bd87a389623c985cff341879e373c4b7");
 
         }
 
@@ -213,7 +213,7 @@ namespace SedaSummaryGeneratorUnitTest {
                 , "filename", "document1e1.txt");
 
             checkInnerText("/s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ArchiveObject[1]/s:Document[1]/s:Integrity"
-                , "fb20d26a36b8368ea31695298ca0222a31968847");
+                , "f81ba5573d70bb23c5510237208e2965bd87a389623c985cff341879e373c4b7");
         }
 
         [TestMethod]
