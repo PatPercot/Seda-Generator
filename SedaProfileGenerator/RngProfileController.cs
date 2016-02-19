@@ -155,6 +155,7 @@ namespace SedaSummaryGenerator {
                 if (traceActions) tracesWriter.WriteLine(e.Message);
                 Console.WriteLine("Exception XPath...");
                 Console.WriteLine(e.Message);
+                errorsList.Add("Exception XPath... " + e.Message);
             }
 
             if (traceActions) tracesWriter.WriteLine("\n-----------------------------------------\n");
@@ -245,7 +246,8 @@ namespace SedaSummaryGenerator {
                 checkForContentDescription(defineNodeName, context);
                 checkForFilename(defineNodeName, context);
                 checkForDocType(defineNodeName, context);
-                checkForLanguage(defineNodeName, context);
+                // TODO: Désactivation du contrôle de la langue en attendant une meilleure gestion
+                // checkForLanguage(defineNodeName, context);
                 checkForDescriptionLevel(defineNodeName, context);
 
             }
@@ -420,17 +422,17 @@ namespace SedaSummaryGenerator {
             if (cdrefNode != null) {
                 error = true;
             } else {
-                xPath = "rng:define[@name='" + defineNodeName + "']rng:optional/rng:element[@name='Document']/rng:ref";
+                xPath = "rng:define[@name='" + defineNodeName + "']/rng:optional/rng:element[@name='Document']/rng:ref";
                 cdrefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                 if (cdrefNode != null) {
                     error = true;
                 } else {
-                    xPath = "rng:define[@name='" + defineNodeName + "']rng:oneOrMore/rng:element[@name='Document']/rng:ref";
+                    xPath = "rng:define[@name='" + defineNodeName + "']/rng:oneOrMore/rng:element[@name='Document']/rng:ref";
                     cdrefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                     if (cdrefNode != null) {
                         error = true;
                     } else {
-                        xPath = "rng:define[@name='" + defineNodeName + "']rng:zeroOrMore/rng:element[@name='Document']/rng:ref";
+                        xPath = "rng:define[@name='" + defineNodeName + "']/rng:zeroOrMore/rng:element[@name='Document']/rng:ref";
                         cdrefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                         if (cdrefNode != null) {
                             error = true;
