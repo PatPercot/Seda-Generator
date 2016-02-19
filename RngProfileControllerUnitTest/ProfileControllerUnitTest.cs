@@ -242,9 +242,11 @@ namespace RngProfileControllerUnitTest {
                 "L'attribut filename de la balise Document/Attachment de l'unité documentaire 'FILENAME_NOTOKINTERDIT' est interdit alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.", 
                 "L'attribut filename de la balise Document/Attachment de l'unité documentaire 'FILENAME_NOTOKFACULTATIF' est facultatif alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.", 
                 "Le type de document de la balise Document de l'unité documentaire 'TYPEDOCUMENT_INEXISTANT' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.", 
-                "La langue de la description de l'unité documentaire 'LANGUE_INEXISTANTE' n'a pas de valeur. C'est une donnée qui dans cette version doit être fournie par le profil.", 
+                // TODO: gestion de la langue à améliorer
+                // "La langue de la description de l'unité documentaire 'LANGUE_INEXISTANTE' n'a pas de valeur. C'est une donnée qui dans cette version doit être fournie par le profil.", 
                 "Le niveau de description de l'unité documentaire 'NIVEAUDESCRIPTION_INEXISTANT' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.", 
-                "La langue de la description de l'unité documentaire 'LANGUESMULTIPLES' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.", 
+                // TODO: gestion de la langue à améliorer
+                // "La langue de la description de l'unité documentaire 'LANGUESMULTIPLES' peut être répétée plusieurs fois. Le générateur ne permet pas de donner une valeur à ces éléments. Le bordereau ne sera pas conforme.", 
                 };
             declencherTestProfil("filenameCdoTypedocNivdesc", branchesAttendues, erreursAttendues);
         }

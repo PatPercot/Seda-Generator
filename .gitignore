@@ -8,9 +8,9 @@ SedaSummaryGeneratorUnitTest/App.config
 BusinessDataController/job.config
 RngProfileControllerTester/job.config
 SedaSummaryGeneratorTester/job.config
-TestCases/ProfileGenerator/traces/
-TestCases/ProfileController/traces/
-TestCases/ProfileGenerator/results/
+TestCases/ProfileGenerator/traces/*.txt
+TestCases/ProfileController/traces/*.txt
+TestCases/ProfileGenerator/results/*.xml
 
 #################
 ## Eclipse
