@@ -842,7 +842,16 @@ namespace SedaSummaryGenerator {
                 default:
                     if (context.EndsWith("Integrity")) {
                         dataString = computeHashOfCurrentDocument();
-                    } else if (context.EndsWith("Document/Size")) {
+                    } else if (context.EndsWith("Contains/ContentDescription/Size")) {
+                    {
+                        int nbDocuments = archiveDocuments.prepareListForType(currentContainsNode.getRelativeContext());
+                        double sizeOfDocuments = 0.0;
+                        while (archiveDocuments.nextDocument()) {
+                            sizeOfDocuments += computeSizeOfCurrentDocument();
+                        }
+                        dataString = formatSizeForNode(sizeOfDocuments, node);
+                    }
+                    } else if (context.EndsWith("Document/Size")) { // SEDA 1.0
                         double sizeOfDocument = computeSizeOfCurrentDocument();
                         dataString = formatSizeForNode(sizeOfDocument, node);
                     } else if (context.EndsWith("/Document/Description")) {

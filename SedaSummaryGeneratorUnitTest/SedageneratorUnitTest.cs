@@ -979,6 +979,39 @@ namespace SedaSummaryGeneratorUnitTest {
                , "Commentaire sur les tests de l'onglet 6");
         }
 
+        [TestMethod]
+        public void W64_TestGenerateur_empreinte_taille_seda02() {
+            executeGenerator("empreinte_taille_seda02", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("/s:ArchiveTransfer/s:Integrity[1]/s:UnitIdentifier"
+                , "document1e1.txt");
+
+            checkInnerText("/s:ArchiveTransfer/s:Integrity[1]/s:Contains"
+                , "Integrity en provenance application 1");
+
+            checkInnerText("/s:ArchiveTransfer/s:Contains/s:ContentDescription/s:Size"
+                , "3999996");
+
+            checkInnerText("/s:ArchiveTransfer/s:Contains/s:Contains[1]/s:Contains[1]/s:ContentDescription/s:Size"
+                , "333333");
+        }
+
+        [TestMethod]
+        public void W65_TestGenerateur_empreinte_taille_seda10() {
+            executeGenerator("empreinte_taille_seda10", "1.0");
+
+            checkForNoErrors();
+            checkAttribute("/s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ArchiveObject[1]/s:Document[1]/s:Attachment"
+                , "filename", "document1e1.txt");
+
+            checkInnerText("/s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ArchiveObject[1]/s:Document[1]/s:Integrity"
+                , "Integrity en provenance application 1");
+
+            checkInnerText("/s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ArchiveObject[1]/s:Document[1]/s:Size"
+                , "111111");
+        }
+
 
     }
 }

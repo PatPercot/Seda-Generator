@@ -1,4 +1,10 @@
 **************************
+2016-02-19
+	Pour le développement en cours
+	Calcul de la taille des documents (dans les UD, ajouter un calcul contextuel)
+	Le seul calcul qui existe est celui de la taille totale des documents
+
+**************************
 2016-01-28
 	Contrôleur de profils : déclencher une erreur si la balise Document de l'archive est utilisée
 		(aucun Attachment ne lui sera associé)
