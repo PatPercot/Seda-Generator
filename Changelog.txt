@@ -1,4 +1,12 @@
 -------------------------
+Changements du 2016-02-19
+
+- Correction des divers tests en erreur à cause des évolutions précédentes
+- ATTENTION : les contrôles sur la langue ont été neutralisés en attendant une meilleure gestion
+              rechercher les TODO pour localiser les points à corriger
+- suppressions des fichiers de traces et de résultats de la gestion par GIT
+
+-------------------------
 Changements du 2016-02-18
 
 - Correction bug sur l'URI de l'algorithme sha256 "http://www.w3.org/2001/04/xmlenc#sha256"

@@ -86,6 +86,10 @@ namespace SedaSummaryGenerator {
             catch (IOException e) { eh(e); } 
             catch (XmlException e) { eh(e);  }
 
+            // Annuler les opérations si le fichier n'existe pas
+            if (errorsList.Count > 0)
+                return;
+
             if (traceActions) tracesWriter.WriteLine("\n-----------------------------------------\n");
             if (traceActions) tracesWriter.WriteLine("Début de la vérification du profil");
             if (traceActions) tracesWriter.WriteLine("\n-----------------------------------------\n");
