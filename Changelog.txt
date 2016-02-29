@@ -1,4 +1,9 @@
 -------------------------
+Changements du 2016-02-29
+
+- Correction exception NullPointerException quand la date est absente des données métier
+
+-------------------------
 Changements du 2016-02-19
 
 - Correction des divers tests en erreur à cause des évolutions précédentes

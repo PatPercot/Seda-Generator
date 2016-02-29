@@ -894,15 +894,7 @@ namespace SedaSummaryGenerator {
                 case "Duration":
                     return "TODO: Duration";
                 case "Creation":
-                    dateTraitee = archiveDocuments.getDocumentDate();
-                    try {
-                        date = DateTime.Parse(dateTraitee, new System.Globalization.CultureInfo("fr-FR", false));
-                        dateString = date.Date.ToString("o");
-                    } catch (FormatException e) {
-                        dateString = "#DATAERR: date " + dateTraitee;
-                        errorsList.Add("#DATAERR: La date '" + dateTraitee + "' du document '" + archiveDocuments.getDocumentFilename() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
-                    }
-                    return dateString;
+                    return computeDateOfCurrentDocument();
                 case "OldestDate":
                     dateTraitee = archiveDocuments.getOldestDate();
                     try {
@@ -914,7 +906,7 @@ namespace SedaSummaryGenerator {
                             dateString = date.ToString("o");
                     } catch (FormatException e) {
                         dateString = "#DATAERR: date " + dateTraitee;
-                        errorsList.Add("#DATAERR: La date '" + dateTraitee + "' du document '" + archiveDocuments.getDocumentFilename() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
+                        errorsList.Add("#DATAERR: La date '" + dateTraitee + "' '" + tag + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
                     }
                     return dateString;
                 case "StartDate":
@@ -929,7 +921,7 @@ namespace SedaSummaryGenerator {
                             dateString = date.ToString("o");
                     } catch (FormatException e) {
                         dateString = "#DATAERR: date " + dateTraitee;
-                        errorsList.Add("#DATAERR: La date '" + dateTraitee + "' du document '" + archiveDocuments.getDocumentFilename() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
+                        errorsList.Add("#DATAERR: La date '" + dateTraitee + "' '" + tag + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
                     }
                     return dateString;
                 case "Date":
@@ -1016,7 +1008,10 @@ namespace SedaSummaryGenerator {
                     sizeOfDocument = Convert.ToDouble(sizeStr);
                     sizeIsOK = true;
                 } catch (Exception e) {
-                    sizeIsOK = false;
+                    String errorMsg = "#DATAERR: la taille '" + sizeStr + "' du fichier '" +
+                        archiveDocuments.getDocumentFilename() + "' n'est pas une taille conforme. " + e.Message;
+                    errorsList.Add(errorMsg);
+                    if (traceActions) tracesWriter.WriteLineFlush(errorMsg);
                 }
             }
             if (sizeIsOK == false) {
@@ -1029,6 +1024,40 @@ namespace SedaSummaryGenerator {
             }
             if (traceActions) tracesWriter.WriteLineFlush("Size computed = '" + sizeOfDocument + "'");
             return sizeOfDocument;
+        }
+
+        /*
+         * Computes the date of the current document
+         * */
+        private String computeDateOfCurrentDocument() {
+            String dateString = String.Empty;
+            DateTime date;
+            Boolean dateIsOK = false;
+            String dateStrTemp = archiveDocuments.getDocumentDate();
+            if (dateStrTemp != String.Empty) {
+                try {
+                    date = DateTime.Parse(dateStrTemp, new System.Globalization.CultureInfo("fr-FR", false));
+                    dateString = date.Date.ToString("o");
+                    dateIsOK = true;
+                } catch (FormatException e) {
+                    String errorMsg = "#DATAERR: La date '" + dateStrTemp + "' du document '" +
+                        archiveDocuments.getDocumentFilename() + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss";
+                    errorsList.Add(errorMsg);
+                    if (traceActions) tracesWriter.WriteLineFlush(errorMsg);
+                }
+            }
+            if (dateIsOK == false) {
+                try {
+                    FileInfo f = new FileInfo(SAE_FilePath + "/" + archiveDocuments.getDocumentFilename());
+                    date = f.CreationTime;
+                    dateString = date.Date.ToString("o");
+                    dateIsOK = true;
+                } catch (System.IO.FileNotFoundException e) { // on se contente de ne pas calculer
+                    e.ToString();
+                }
+            }
+            if (traceActions) tracesWriter.WriteLineFlush("Size computed = '" + dateString + "'");
+            return dateString;
         }
 
         /*

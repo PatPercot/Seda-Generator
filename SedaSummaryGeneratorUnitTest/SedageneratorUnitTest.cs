@@ -1012,6 +1012,17 @@ namespace SedaSummaryGeneratorUnitTest {
                 , "111111");
         }
 
+        // Ce test correspond à la génération d'un bordereau au format SEDA 0.2, 
+        // le test suivant vérifie avec les mêmes données la génération d'un bordereau au format SEDA 1.0
+        [TestMethod]
+        public void W66_TestDateManquanteSansErreur() {
+            executeGenerator("date_manquante_sans_erreur", "0.2");
+
+            checkForNoErrors();
+
+        }
+
+
 
     }
 }

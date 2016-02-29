@@ -209,7 +209,7 @@ namespace SedaSummaryGenerator {
                     addActionError("#DATAERR: Le nom de fichier du document n'a pas été trouvé dans partialDocumentsListEnumerator");
                     return "Error not found";
                 }
-                return tabCurrent.Length > 0 ? tabCurrent[1] : String.Empty;
+                return tabCurrent.Length > 1 ? tabCurrent[1] : String.Empty;
             }
             return lastError;
         }
@@ -226,7 +226,7 @@ namespace SedaSummaryGenerator {
                     addActionError("#DATAERR: Le nom du document n'a pas été trouvé dans partialDocumentsListEnumerator");
                     return "Error not found";
                 }
-                return tabCurrent.Length > 2 ? tabCurrent[3] : String.Empty;
+                return tabCurrent.Length > 3 ? tabCurrent[3] : String.Empty;
             }
             return lastError;
         }
@@ -243,7 +243,7 @@ namespace SedaSummaryGenerator {
                     addActionError("#DATAERR: La date du document n'a pas été trouvée dans partialDocumentsListEnumerator");
                     return "Error not found";
                 }
-                return tabCurrent.Length > 3 ? tabCurrent[4] : String.Empty;
+                return tabCurrent.Length > 4 ? tabCurrent[4] : String.Empty;
             }
             return lastError;
         }
@@ -263,7 +263,7 @@ namespace SedaSummaryGenerator {
                 // Attention, ici on attend un algorithme et une empreinte, donc on impose la présence de deux champs à suivre
                 // D'où la comparaison de la longueur avec 6 (le sixième champ qui contient l'empreinte)
                 // On rappelle que le champ 0 est vide
-                return tabCurrent.Length >= 6 ? tabCurrent[5] : String.Empty;
+                return tabCurrent.Length > 6 ? tabCurrent[5] : String.Empty;
             }
             return lastError;
         }
@@ -281,7 +281,7 @@ namespace SedaSummaryGenerator {
                     return "Error not found";
                 }
                 // On rappelle que le champ 0 est vide
-                return tabCurrent.Length >= 6 ? tabCurrent[6] : String.Empty;
+                return tabCurrent.Length > 6 ? tabCurrent[6] : String.Empty;
             }
             return lastError;
         }
@@ -299,7 +299,7 @@ namespace SedaSummaryGenerator {
                     return "Error not found";
                 }
                 // On rappelle que le champ 0 est vide
-                return tabCurrent.Length >= 7 ? tabCurrent[7] : String.Empty;
+                return tabCurrent.Length > 7 ? tabCurrent[7] : String.Empty;
             }
             return lastError;
         }
@@ -422,11 +422,13 @@ namespace SedaSummaryGenerator {
             latestDate = "1970-01-01";
             String date;
             foreach (String[] elements in documentsList) {
-                date = elements[4];
-                if (date.CompareTo(oldestDate) < 0)
-                    oldestDate = date;
-                if (date.CompareTo(latestDate) > 0)
-                    latestDate = date;
+                if (elements.Length > 4) {
+                    date = elements[4];
+                    if (date.CompareTo(oldestDate) < 0)
+                        oldestDate = date;
+                    if (date.CompareTo(latestDate) > 0)
+                        latestDate = date;
+                }
             }
         }
     }
