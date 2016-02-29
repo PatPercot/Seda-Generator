@@ -65,9 +65,13 @@ Documents à produire dans l'unité documentaire :
 - le premier champ contient le nom du fichier ;
 - le second champ contient le TAG de l'unité documentaire ;
 - le troisième champ contient la description du document ;
-- le quatrième champ contient la date de création du document.
+- le quatrième champ contient la date de création du document ;
+[ les champs qui suivent peuvent ne pas exister, dans ce cas, ces métadonnées sont calculées par le générateur ]
+- le cinquième champ contient le type d'algorithme utilisé pour le calcul d'empreinte ;
+- le sixième champ contient l'empreinte du document ;
+- le septième champ contient la taille en octets du document.
 Exemple :
-,PESALR120710560900020141201121403628-sig.xml,PES,Flux des mandats transférés à la DgFIP,2014-12-01
+,PESALR120710560900020141201121403628-sig.xml,PES,Flux des mandats transférés à la DgFIP,2014-12-01;http://www.w3.org/2001/04/xmlenc#sha256;f81ba5573d70bb23c5510237208e2965bd87a389623c985cff341879e373c4b7;12345
 
 
 2) Unités documentaires répétées
