@@ -6,12 +6,6 @@
 	Lors du passage au SEDA 2.0 considérer la notation TAG{DOC] équivalente à la notation TAG/DOC
 
 **************************
-2015-09-08
-	Contrôle des profils (voir aussi 2015-07-06)
-	Ajouter un contrôle sur la cardinalité de la balise "ArchivalAgencyObjectIdentifier" 
-		(la balise doit avoir une cardinalité 1,1)
-
-**************************
 2015-09-07
 	Créer un outil de contrôle des données métier (confrontées au prodil d'archivage)
 	Points à vérifier :
@@ -30,20 +24,8 @@
 			Nombre de champs insuffisant
 			
 **************************
-2015-09-07
-	Rendre les outils de contrôle exécutables.
-	Soit par une interface utilisateur avec choix des fichiers
-	Soit par fichier de configuration
-		Cette option semble la plus pratique dans un processus de développement
-		car facilement répétable sans avoir à sélectionner des fichiers dans un répertoire
-
-**************************
 2015-07-09
 	Bug si SAEUrl est différent entre BDD et code WS
-
-**************************
-2015-07-06
-	Ajouter un contrôle pour les mots-clés, la description du contenu doit être obligatoire pour que le mot-clé soit généré
 
 **************************
 2015-06-19 
