@@ -1,0 +1,24 @@
+,#TransferName,Test de documents sans date
+,#OriginatingAgency_BusinessType,0123456789
+,#OriginatingAgency_LegalClassification,0123456789
+,#Comment,Test des unités documentaires répétées (structure simple un seul niveau)
+,#CustodialHistory,Historique de conservation
+,#OriginatingAgency_Description,Service support chargé de la fourniture et de la maintenance des systèmes d'information
+,#OriginatingAgency_Identification,225600014_007
+,#OriginatingAgency_Name,Département du Morbihan - Direction des systèmes d'information
+
+,#ContainsName[O6_Chapitre1],Offre retenue de l'entreprise 1
+,document1e1.txt,O6_Chapitre1,Document 1 E1
+,document2e1.txt,O6_Chapitre1,Document 2 E1,
+,document1e2.txt,O6_Chapitre1,Document 1 E2,,
+,document_inexistant1.txt,O6_Chapitre1,Document 2 E2
+,document_inexistant2.txt,O6_Chapitre1,Document 3 E2,
+,document_inexistant3.txt,O6_Chapitre1,Document réponse  1 E2,,
+
+,#KeywordContent#1,mot-clé à voir apparaître si un mot-clé a été demandé
+,#KeywordContent_OFFRES_RETENUES#1,mot-clé 1 pour l'offre retenue
+,#KeywordContent_OFFRES_RETENUES#2,mot-clé 2 pour l'offre retenue
+,#KeywordContent_O6_Chapitre1#1,mot-clé pour l'offre retenue 1
+,#KeywordContent_O6_Chapitre1#1,mot-clé pour l'offre retenue 2
+,#KeywordContent_O6_Chapitre1#1,mot-clé 1 pour l'offre retenue 3
+,#KeywordContent_O6_Chapitre1#2,mot-clé 2 pour l'offre retenue 3
