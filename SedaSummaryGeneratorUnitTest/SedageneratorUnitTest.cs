@@ -31,20 +31,6 @@ namespace SedaSummaryGeneratorUnitTest {
         String namespaceSEDA02 = "fr:gouv:ae:archive:draft:standard_echange_v0.2";
         String namespaceSEDA10 = "fr:gouv:culture:archivesdefrance:seda:v1.0";
 
-        GeneratorConfig configLoader(String configName) {
-            SimpleConfig config = new SimpleConfig();
-            String erreur = config.loadFile("./job.config");
-            if (erreur != String.Empty) // on tient compte du fait qu'en environnement de développement, l'exe est dans bin/Release
-                erreur = config.loadFile("../../job.config");
-
-            if (erreur != String.Empty) {
-                System.Console.WriteLine(erreur);
-                Assert.Fail(erreur);
-            }
-
-            return config.getGeneratorConfig(configName);
-        }
-
         protected void checkForErrors(String[] erreursAttendues) {
             // Début de vérification de bon déroulement
             errors = ssg.getErrorsList();
@@ -120,7 +106,17 @@ namespace SedaSummaryGeneratorUnitTest {
                 streamWriter.WriteLine("Erreur lors de la préparation du bordereau pour le test '" + fichier_bordereau + "' " + ex.GetType().Name);
             };
 
-            GeneratorConfig control = configLoader(jobName);
+            SimpleConfig config = new SimpleConfig();
+            String erreur = config.loadFile("./job.config");
+            if (erreur != String.Empty) // on tient compte du fait qu'en environnement de développement, l'exe est dans bin/Release
+                erreur = config.loadFile("../../job.config");
+
+            if (erreur != String.Empty) {
+                System.Console.WriteLine(erreur);
+                Assert.Fail(erreur);
+            }
+
+            GeneratorConfig control = config.getGeneratorConfig(jobName);
 
             accordVersement = control.accordVersement;
             fichier_metier = control.dataFile;
@@ -129,8 +125,6 @@ namespace SedaSummaryGeneratorUnitTest {
             traceFile = control.traceFile;
             baseURI = control.baseURI;
 
-            informationsDatabase = ConfigurationManager.AppSettings["databaseConnexion"];
-
             try {
                 streamWriter = new StreamWriter(traceFile);
             } catch (IOException e) { eh(e, "Mauvaise syntaxe de nom de fichier"); } catch (UnauthorizedAccessException e) { eh(e, "Droits d'accès à corriger"); } catch (System.Security.SecurityException e) { eh(e, "Droits d'accès à corriger"); }
@@ -138,7 +132,28 @@ namespace SedaSummaryGeneratorUnitTest {
             ssg = new SedaSummaryRngGenerator();
             ssg.setTracesWriter(streamWriter);
 
-            ssg.prepareInformationsWithDatabase(informationsDatabase, baseURI, accordVersement);
+            if (config.hasAccordVersementConfig()) {
+                AccordVersementConfig accordVersementConfig = config.getAccordVersementConfig(accordVersement, baseURI);
+                if (accordVersementConfig == null) {
+                    Console.WriteLine("ATTENTION : Impossible de trouver l'accord de versement '" + accordVersement + "' dans la configuration");
+                } else {
+                    if (accordVersementConfig.SAE_ProfilArchivage.Length == 0)
+                        Console.WriteLine("ATTENTION : Le profil d'archivage n'a pas de nom de fichier");
+                }
+
+                String dataSha1 = String.Empty;
+                try {
+                    dataSha1 = Utils.computeSha1Hash(fichier_metier);
+                } catch (IOException e) {
+                    // Ignorer les exceptions, car si le fichier de données n'est pas accessible, 
+                    // une exception sera générée plus tard avec un contexte plus explicatif
+                }
+
+                ssg.prepareInformationsWithConfigFile(config, baseURI, accordVersement, dataSha1);
+            } else {
+                informationsDatabase = ConfigurationManager.AppSettings["databaseConnexion"];
+                ssg.prepareInformationsWithDatabase(informationsDatabase, baseURI, accordVersement);
+            }
 
             ssg.prepareArchiveDocumentsWithFile(path_datafiles, fichier_metier);
 
