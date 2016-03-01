@@ -1,4 +1,9 @@
 -------------------------
+Changements du 2016-03-01
+
+- Suppression de l'utilisation de la base de données pour les testscases
+
+-------------------------
 Changements du 2016-02-29
 
 - Correction exception NullPointerException quand la date est absente des données métier
