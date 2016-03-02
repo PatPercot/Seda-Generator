@@ -1,4 +1,10 @@
 -------------------------
+Changements du 2016-03-02
+
+- Correction d'un profil RNG mal généré par Agape
+- Mise en cohérences des numérotations des mots-clés (présence de [] autour du numéro)
+
+-------------------------
 Changements du 2016-03-01
 
 - Suppression de l'utilisation de la base de données pour les testscases

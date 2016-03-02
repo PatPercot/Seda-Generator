@@ -141,18 +141,18 @@ Exemples de documents:
 4) Mots-clés
 
 Les mots-clés de la description du contenu de l'archive sont produits en fonction de leur numéro d'ordre.
-Le mot #KeywordContent est simplement postfxé d'un # suivi du numéro d'ordre.
+Le mot #KeywordContent est simplement postfixé d'un # suivi du numéro d'ordre encadrés par des crochets droits [].
 
-,#KeywordContent#1,Département du Morbihan
-,#KeywordContent#2,07100
-,#KeywordContent#3,SIRET : 22560001400016
+,#KeywordContent[#1],Département du Morbihan
+,#KeywordContent[#2],07100
+,#KeywordContent[#3],SIRET : 22560001400016
 
 Les mots-clés des unités documentaires sont produits en fonction de leur numéro d'ordre.
-Le TAG de l'unité documentaire est concaténé au mot #KeywordContent suivi d'un _ postfxé d'un # suivi 
-du numéro d'ordre.
+Le TAG de l'unité documentaire est concaténé au mot #KeywordContent suivi d'un _ postfixé d'un # suivi 
+du numéro d'ordre encadrés par des crochets droits [].
 
-,#KeywordContent_PES#1,Bordereau 0701
-,#KeywordContent_PES#2,Pièce 5003
-,#KeywordContent_OFFRE_ETP[#3]#1,mot-clé 1 pour l'offre d'entreprise 3
-,#KeywordContent_OFFRE_ETP[#3]#2,mot-clé 2 pour l'offre d'entreprise 3
+,#KeywordContent_PES[#1],Bordereau 0701
+,#KeywordContent_PES[#2],Pièce 5003
+,#KeywordContent_OFFRE_ETP[#3][#1],mot-clé 1 pour l'offre d'entreprise 3
+,#KeywordContent_OFFRE_ETP[#3][#2],mot-clé 2 pour l'offre d'entreprise 3
 

@@ -398,7 +398,7 @@ namespace SedaSummaryGenerator {
                 currentKey2searchCounter = 1;
             } else
                 currentKey2searchCounter++;
-            key = key2search + "#" + currentKey2searchCounter.ToString("D");
+            key = key2search + "[#" + currentKey2searchCounter.ToString("D") + "]";
             bool bFound = false;
             String value = "#DATAERR: Le tag : '" + key + "' n'a pas été trouvé dans les données métier";
             if (keyList == null) {

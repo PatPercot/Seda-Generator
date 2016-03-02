@@ -94,3 +94,9 @@ obligatoire.
 
 Des mots-clés peuvent être laissés avec un contenu vide à la fois dans la description du
 contenu de l'archive et dans les unités documentaires.
+
+ATTENTION : TOUJOURS mettre un Type au mot-clé.
+Un bug de Agape peut parfois empêcher la création d'un RNG correct si le mot-clé n'est pas 
+associé à un type. Normalement on doit avoir ContentDescriptive/KeywordContent pour que le 
+mot-clé soit généré. Si ContentDescriptive/Type n'existe pas, parfois on n'a que 
+ContentDescriptive avec un contenu de type texte.

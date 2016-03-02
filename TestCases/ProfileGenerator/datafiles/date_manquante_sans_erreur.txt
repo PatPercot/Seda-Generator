@@ -15,10 +15,10 @@
 ,document_inexistant2.txt,O6_Chapitre1,Document 3 E2,
 ,document_inexistant3.txt,O6_Chapitre1,Document réponse  1 E2,,
 
-,#KeywordContent#1,mot-clé à voir apparaître si un mot-clé a été demandé
+,#KeywordContent[#1],mot-clé à voir apparaître si un mot-clé a été demandé
 ,#KeywordContent_OFFRES_RETENUES#1,mot-clé 1 pour l'offre retenue
-,#KeywordContent_OFFRES_RETENUES#2,mot-clé 2 pour l'offre retenue
-,#KeywordContent_O6_Chapitre1#1,mot-clé pour l'offre retenue 1
-,#KeywordContent_O6_Chapitre1#1,mot-clé pour l'offre retenue 2
-,#KeywordContent_O6_Chapitre1#1,mot-clé 1 pour l'offre retenue 3
-,#KeywordContent_O6_Chapitre1#2,mot-clé 2 pour l'offre retenue 3
+,#KeywordContent_OFFRES_RETENUES[#2],mot-clé 2 pour l'offre retenue
+,#KeywordContent_O6_Chapitre1[#1],mot-clé pour l'offre retenue 1
+,#KeywordContent_O6_Chapitre1[#1],mot-clé pour l'offre retenue 2
+,#KeywordContent_O6_Chapitre1[#1],mot-clé 1 pour l'offre retenue 3
+,#KeywordContent_O6_Chapitre1[#2],mot-clé 2 pour l'offre retenue 3
