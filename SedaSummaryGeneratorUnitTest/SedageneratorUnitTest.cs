@@ -898,7 +898,7 @@ namespace SedaSummaryGeneratorUnitTest {
         public void W54_TestGenerateur_6_2_03() {
             executeGenerator("06_Chapitre2-03", "0.2");
 
-            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency_BusinessType' n'a pas été trouvé dans les données métier" };
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency.BusinessType' n'a pas été trouvé dans les données métier" };
             checkForErrors(erreursAttendues);
             checkInnerText("/s:ArchiveTransfer/s:Comment"
                , "Commentaire sur les tests de l'onglet 6");
@@ -908,7 +908,7 @@ namespace SedaSummaryGeneratorUnitTest {
         public void W55_TestGenerateur_6_2_04() {
             executeGenerator("06_Chapitre2-04", "0.2");
 
-            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency_Identification' n'a pas été trouvé dans les données métier" };
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency.Identification' n'a pas été trouvé dans les données métier" };
             checkForErrors(erreursAttendues);
             checkInnerText("/s:ArchiveTransfer/s:Comment"
                , "Commentaire sur les tests de l'onglet 6");
@@ -918,7 +918,7 @@ namespace SedaSummaryGeneratorUnitTest {
         public void W56_TestGenerateur_6_2_05() {
             executeGenerator("06_Chapitre2-05", "0.2");
 
-            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency_Description' n'a pas été trouvé dans les données métier" };
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency.Description' n'a pas été trouvé dans les données métier" };
             checkForErrors(erreursAttendues);
             checkInnerText("/s:ArchiveTransfer/s:Comment"
                , "Commentaire sur les tests de l'onglet 6");
@@ -928,7 +928,7 @@ namespace SedaSummaryGeneratorUnitTest {
         public void W57_TestGenerateur_6_2_06() {
             executeGenerator("06_Chapitre2-06", "0.2");
 
-            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency_LegalClassification' n'a pas été trouvé dans les données métier" };
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency.LegalClassification' n'a pas été trouvé dans les données métier" };
             checkForErrors(erreursAttendues);
             checkInnerText("/s:ArchiveTransfer/s:Comment"
                , "Commentaire sur les tests de l'onglet 6");
@@ -938,7 +938,7 @@ namespace SedaSummaryGeneratorUnitTest {
         public void W58_TestGenerateur_6_2_07() {
             executeGenerator("06_Chapitre2-07", "0.2");
 
-            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency_Name' n'a pas été trouvé dans les données métier" };
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#OriginatingAgency.Name' n'a pas été trouvé dans les données métier" };
             checkForErrors(erreursAttendues);
             checkInnerText("/s:ArchiveTransfer/s:Comment"
                , "Commentaire sur les tests de l'onglet 6");

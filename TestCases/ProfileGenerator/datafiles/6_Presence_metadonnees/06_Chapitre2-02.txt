@@ -1,11 +1,11 @@
 ,#TransferName,Test Onglet 6 - Chapitre 1
 
 
-,#OriginatingAgency_BusinessType,5422C
-,#OriginatingAgency_Identification,CG56_MP_001
-,#OriginatingAgency_Description,Service ayant la charge de la constitution et du suivi administratif des marchés publics
-,#OriginatingAgency_LegalClassification,3636277
-,#OriginatingAgency_Name,Service des Marchés Publics (SMP)2
+,#OriginatingAgency.BusinessType,5422C
+,#OriginatingAgency.Identification,CG56_MP_001
+,#OriginatingAgency.Description,Service ayant la charge de la constitution et du suivi administratif des marchés publics
+,#OriginatingAgency.LegalClassification,3636277
+,#OriginatingAgency.Name,Service des Marchés Publics (SMP)2
 
 ,#CustodialHistory,Les documents ont été créés dans la GED Alfresco
 

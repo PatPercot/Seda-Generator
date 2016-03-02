@@ -825,7 +825,7 @@ namespace SedaSummaryGenerator {
                 case "/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/Name":
                     int posLastSlash = context.LastIndexOf('/') + 1;
                     String balise = context.Substring(posLastSlash, context.Length - posLastSlash);
-                    dataString = archiveDocuments.getKeyValue("OriginatingAgency_" + balise);
+                    dataString = archiveDocuments.getKeyValue("OriginatingAgency." + balise);
                     break;
                 case "/ArchiveTransfer/Archive/ContentDescription/CustodialHistory": // SEDA 1.0
                 case "/ArchiveTransfer/Contains/ContentDescription/CustodialHistory": // SEDA 0.2

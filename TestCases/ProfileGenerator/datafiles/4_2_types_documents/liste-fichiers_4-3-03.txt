@@ -1,6 +1,6 @@
 ﻿,#TransferName,Marché de fournitures 12/07/2012
-,#OriginatingAgency_Identification,CG56_MP_001
-,#OriginatingAgency_Name,Service des Marchés Publics (SMP)
+,#OriginatingAgency.Identification,CG56_MP_001
+,#OriginatingAgency.Name,Service des Marchés Publics (SMP)
 
 ,#KeywordContent[#1],Vannes
 ,#KeywordContent[#2],Marché de fournitures

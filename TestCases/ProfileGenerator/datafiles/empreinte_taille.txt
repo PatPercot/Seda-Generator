@@ -1,8 +1,8 @@
 ,#Comment,Test des unités documentaires répétées (structure simple un seul niveau)
 ,#CustodialHistory,Historique de conservation
-,#OriginatingAgency_Description,Service support chargé de la fourniture et de la maintenance des systèmes d'information
-,#OriginatingAgency_Identification,225600014_007
-,#OriginatingAgency_Name,Département du Morbihan - Direction des systèmes d'information
+,#OriginatingAgency.Description,Service support chargé de la fourniture et de la maintenance des systèmes d'information
+,#OriginatingAgency.Identification,225600014_007
+,#OriginatingAgency.Name,Département du Morbihan - Direction des systèmes d'information
 
 ,#ContainsName[OR_ETP[#1]],Offre retenue de l'entreprise 1
 ,document1e1.txt,OR_ETP[#1],Document 1 E1,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 1,111111

@@ -3,6 +3,9 @@ Changements du 2016-03-02
 
 - Correction d'un profil RNG mal généré par Agape
 - Mise en cohérences des numérotations des mots-clés (présence de [] autour du numéro)
+- Changement du caractère de séparation pour le nom des balises préfixées par leur balise englobante
+  Le carcatère "_" est remplacé par le caractère "." (OriginatingAgency.Name) pour éviter une confusion 
+  avec la concaténation d'un TAG avec une balise (Keyword_TAG)
 
 -------------------------
 Changements du 2016-03-01
