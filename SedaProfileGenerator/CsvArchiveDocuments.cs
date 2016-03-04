@@ -512,27 +512,21 @@ namespace SedaSummaryGenerator {
         }
 
         /* 
-         * Donne la valeur de la clé pour un tag de document (#cle_tag#num)
-         * Si documentTag est vide ou null, seule la clé est cherchée (#cle#num)
+         * Donne la valeur de la clé pour un tag de document (#cle[tag[#num]])
+         * Si documentTag est vide ou null, seule la clé est cherchée (#cle[#num])
          * */
         override public int getNbkeys(String key, String documentTag) {
             key = "#" + key;
             int nbKeys = 0;
-            String key2search = key;
+            String key2search = key, reKey2search = key;
             if (documentTag != null && String.Empty != documentTag) {
-                key2search += "_" + documentTag;
+                key2search += "[" + documentTag;
+                reKey2search += @"\[" + documentTag;
             }
-            // On cherche la clé non suivie de _ pour s'assurer que la clé n'existe pas sous une forme
-            // où elle est concaténée avec un nom d'unité documentaire
-            // Ex : #KeywordContent#1 à différencier de #KeywordContent_UNITE#1
-            Regex r = new Regex(key2search + @"[^_]");
+            // On cherche la clé suivie de [#compteur]
+            Regex r = new Regex("^" + reKey2search + @"\[#\d+\]");
             if (keyList != null) {
                 foreach (String[] elements in keyList) {
-                    /* Ce test simple non fonctionnel remplacé par la suite
-                    if (elements[1].StartsWith(key2search)) {
-                        nbKeys++;
-                    }
-                     * */
                     Match m = r.Match(elements[1]);
                     if (m.Success)
                         nbKeys++;
@@ -547,21 +541,28 @@ namespace SedaSummaryGenerator {
         }
 
         /* 
-         * Donne la valeur de la clé pour un tag de document (#cle_tag#num)
-         * Si documentTag est vide ou null, seule la clé est cherchée (#cle#num)
+         * Donne la valeur de la clé pour un tag de document (#cle[tag[#num]])
+         * Si documentTag est vide ou null, seule la clé est cherchée (#cle[#num])
          * */
         override public String getNextKeyValue(string key, string documentTag) {
             key = "#" + key;
             String key2search = key;
             if (documentTag != null && String.Empty != documentTag) {
-                key2search += "_" + documentTag;
+                key2search += "[" + documentTag;
             }
+
             if (key2search != currentKey2search) {
                 currentKey2search = key2search;
                 currentKey2searchCounter = 1;
             } else
                 currentKey2searchCounter++;
-            key = key2search + "[#" + currentKey2searchCounter.ToString("D") + "]";
+
+            if (documentTag != null && String.Empty != documentTag) {
+                key = key2search + "[#" + currentKey2searchCounter.ToString("D") + "]]";
+            } else {
+                key = key2search + "[#" + currentKey2searchCounter.ToString("D") + "]";
+            }
+
             bool bFound = false;
             String value = "#DATAERR: Le tag : '" + key + "' n'a pas été trouvé dans les données métier";
             if (keyList == null) {

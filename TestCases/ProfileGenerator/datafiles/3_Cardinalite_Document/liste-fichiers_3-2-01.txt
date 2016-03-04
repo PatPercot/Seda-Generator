@@ -191,10 +191,10 @@
 ,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_analyse_decision_Compl_Fichier[#1]],Messages complémentaires
 
 
-,#KeywordContent_MP_OetD_Analyse[#1][#1],petite fourniture
-,#KeywordContent_MP_OetD_Analyse[#1][#2],papier imprimante
-,#KeywordContent_MP_OetD_Analyse[#1][#3],stylos bille
-,#KeywordContent_MP_OetD_Analyse[#1][#4],crayons de couleur
+,#KeywordContent[MP_OetD_Analyse[#1][#1]],petite fourniture
+,#KeywordContent[MP_OetD_Analyse[#1][#2]],papier imprimante
+,#KeywordContent[MP_OetD_Analyse[#1][#3]],stylos bille
+,#KeywordContent[MP_OetD_Analyse[#1][#4]],crayons de couleur
 
 
 
