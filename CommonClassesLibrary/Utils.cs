@@ -56,5 +56,16 @@ namespace CommonClassesLibrary {
             return dataSha256;
         }
 
+        /*
+         * Compte le nombre d'occurrences d'un caractère dans une chaîne
+         * */
+        public static int nbOccur(char ch, String str) {
+            int nbChars = 0;
+            foreach (char caractere in str) {
+                if (caractere == ch)
+                    ++nbChars;
+            }
+            return nbChars;
+        }
     }
 }

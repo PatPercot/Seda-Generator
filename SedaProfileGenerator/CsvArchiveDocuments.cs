@@ -18,7 +18,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
-
+using System.Collections.Specialized;
+using CommonClassesLibrary;
 
 namespace SedaSummaryGenerator {
     /*
@@ -106,6 +107,168 @@ namespace SedaSummaryGenerator {
             catch (IOException e) { eh(e); }
         }
 
+
+        public StringCollection checkFile(String csvFile) {
+            Action<Exception> eh = (ex) => {
+                if (traceActions) tracesWriter.WriteLine(ex.GetType().Name + " while reading: " + csvFile);
+                if (traceActions) tracesWriter.WriteLine(ex.Message);
+                throw (ex);
+            };
+
+            StringCollection listeAvertissements;
+            listeAvertissements = new StringCollection();
+
+            Dictionary<string, int> balisesUniques = new Dictionary<string, int>();
+            balisesUniques.Add("TransferName", 0);
+            balisesUniques.Add("Comment", 0);
+            balisesUniques.Add("CustodialHistory", 0);
+            balisesUniques.Add("OriginatingAgency.BusinessType", 0);
+            balisesUniques.Add("OriginatingAgency.LegalClassification", 0);
+            balisesUniques.Add("OriginatingAgency.Description", 0);
+            balisesUniques.Add("OriginatingAgency.Identification", 0);
+            balisesUniques.Add("OriginatingAgency.Name", 0);
+
+            Dictionary<string, int> balisesMultiples = new Dictionary<string, int>();
+            balisesMultiples.Add("ContainsName", 0);
+            balisesMultiples.Add("ContainsDescription", 0);
+            balisesMultiples.Add("KeywordContent", 0);
+
+            if (traceActions) tracesWriter.WriteLine("ArchiveDocuments.checkFile");
+            Regex rgxSeperator;
+            String line;
+            int linenumber = 0;
+            string[] elements;
+            try {
+                using (StreamReader reader = new StreamReader(csvFile)) {
+                    while (reader.Peek() > -1) {
+                        ++linenumber;
+                        line = reader.ReadLine();
+                        if (traceActions) tracesWriter.WriteLine(line);
+                        if (line.Length > 0) {
+
+                            // Check: comptage du nombre de séparateurs
+                            int nbSeparator = Utils.nbOccur(line[0], line);
+                            switch (nbSeparator) {
+                                case 2:
+                                case 4:
+                                case 7:
+                                    break;
+                                default:
+                                    listeAvertissements.Add("ERR: La ligne '" + linenumber + "' contient '" + nbSeparator +
+                                        "' séparateurs (" + line[0] + ") alors qu'elle ne peut en contenir que 2, 4 ou 7");
+                                    break;
+                            }
+
+                            rgxSeperator = new Regex("" + line[0]);
+                            elements = rgxSeperator.Split(line);
+
+                            if (elements[1].Length == 0)
+                                listeAvertissements.Add("ERR: le 1er champ de la ligne '" + linenumber +
+                                    "' ne doit pas être vide");
+                            if (nbSeparator == 4 || nbSeparator == 7) {
+                                if (elements[2].Length == 0)
+                                    listeAvertissements.Add("ERR: le 2ème champ de la ligne '" + linenumber +
+                                        "' ne doit pas être vide");
+                            }
+
+                            if (nbSeparator == 2) {
+                                // Check: vérification du premier caractère du nom de balise
+                                if (elements[1].Length != 0 && elements[1][0] != '#')
+                                    listeAvertissements.Add("ERR: le 1er champ de la ligne '" + linenumber + 
+                                        "' commence par '" + elements[1][0] + "' alors qu'il devrait commencer par #");
+                                // Check: vérification de la validité du nom de balise
+                                Regex baliseExtract = new Regex("^#([^_[]+)");
+                                MatchCollection matches = baliseExtract.Matches(elements[1]);
+                                if (matches.Count > 0) {
+                                    foreach (Match match in matches) { // un seul passage
+                                        System.Console.WriteLine("Recherche balise '" + match.Groups[1].Value + "'");
+                                        int nbOccurrences;
+                                        if (balisesUniques.TryGetValue(match.Groups[1].Value, out nbOccurrences)) {
+                                            balisesUniques[match.Groups[1].Value] = nbOccurrences + 1;
+                                        } else {
+                                            if (balisesMultiples.TryGetValue(match.Groups[1].Value, out nbOccurrences)) {
+                                                balisesMultiples[match.Groups[1].Value] = nbOccurrences + 1;
+                                            } else {
+                                                listeAvertissements.Add("ERR: la ligne '" + linenumber + 
+                                                    "' contient une balise '" + elements[1] + 
+                                                    "' qui n'est pas reconnue et ne sera pas traitée");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (nbSeparator == 4 || nbSeparator == 7) {
+                                // Check: format de la date
+                                try {
+                                    DateTime date = DateTime.Parse(elements[4], new System.Globalization.CultureInfo("fr-FR", false));
+                                } catch (Exception e) {
+                                    listeAvertissements.Add("ERR: dans la ligne '" + linenumber +
+                                        "' la date '" + elements[4] + "' a un format non reconnu");
+                                }
+
+                            }
+
+                            if (nbSeparator == 7) {
+                                // Check: format numérique de la taille
+                                try {
+                                    long size = long.Parse(elements[7]);
+                                } catch (Exception e) {
+                                    listeAvertissements.Add("ERR: dans la ligne '" + linenumber +
+                                        "' la taille '" + elements[7] + "' a un format non reconnu");
+                                }
+
+                            }
+
+                            foreach (string match in elements) {
+                                if (traceActions) tracesWriter.Write("field: '" + match + "' ");
+                            }
+                            if (elements[1] != "" && elements[1][0] == '#') {
+                                keyList.Add(elements);
+                            } else {
+                                documentsList.Add(elements);
+                            }
+                            if (traceActions) tracesWriter.WriteLine();
+                        }
+                        lastError = "";
+                    }
+                    reader.Close();
+                }
+            } catch (ArgumentException e) { eh(e); } catch (DirectoryNotFoundException e) { eh(e); } catch (FileNotFoundException e) { eh(e); } catch (OutOfMemoryException e) { eh(e); } catch (IOException e) { eh(e); }
+
+            foreach (KeyValuePair<string, int> kvp in balisesUniques) {
+                if (kvp.Value > 1) {
+                    listeAvertissements.Add("ERR: la balise '" + kvp.Key +
+                        "' a été trouvée '" + kvp.Value + "' fois alors qu'elle ne doit être présente qu'une seule fois");
+                }
+            }
+
+            foreach (String error in errorsList) {
+                listeAvertissements.Add(error);
+            }
+
+            return listeAvertissements;
+        }
+
+        /*
+         * Réalise une vérification complète du format d'un TAG pour une balise
+         * #ContainsName[TAG] pour TAG non répétable
+         * #ContainsName{TAG[#1]] pour TAG répétable
+         * #KeywordContent_
+         * */
+        protected void checkTagFormat(String tag, StringCollection listeAvertissements) {
+
+        }
+
+        /*
+         * Réalise une vérification complète du format d'un TAG pour un document
+         * TAG
+         * TAG[#1]
+         * TAG[#1]{DOC}
+         * */
+        protected void checkDocumentTagFormat(String tag, StringCollection listeAvertissements) {
+
+        }
 
         protected String getTagWithoutDocumentIdentification(String part) {
             if (part.Contains("{")) { // marqueur des Identification de Document

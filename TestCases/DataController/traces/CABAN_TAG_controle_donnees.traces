@@ -1,0 +1,67 @@
+ArchiveDocuments.checkFile
+,#Lignepourrie
+field: '' field: '#Lignepourrie' 
+,#Lignepourrie,1,
+field: '' field: '#Lignepourrie' field: '1' field: '' 
+,#Lignepourrie,2,,,,,,,,,,
+field: '' field: '#Lignepourrie' field: '2' field: '' field: '' field: '' field: '' field: '' field: '' field: '' field: '' field: '' field: '' 
+
+,TransferName,Balise sans #
+field: '' field: 'TransferName' field: 'Balise sans #' 
+,#TransferName,Balise doubl�e
+field: '' field: '#TransferName' field: 'Balise doubl�e' 
+;#TransferName;Concours bagad cat�gorie 1 du 02/03/2014 � BREST
+field: '' field: '#TransferName' field: 'Concours bagad cat�gorie 1 du 02/03/2014 � BREST' 
+
+,#KeywordContent[#1],BREST
+field: '' field: '#KeywordContent[#1]' field: 'BREST' 
+,#KeywordContent[#2],CONCOURS
+field: '' field: '#KeywordContent[#2]' field: 'CONCOURS' 
+
+;2014-xx-xx-xxxxx-kbx-ordre.pdf;DESC_EVT;fichier .pdf descriptif g�n�ral de l'�v�nement;01/12/2014 12:00:00
+field: '' field: '2014-xx-xx-xxxxx-kbx-ordre.pdf' field: 'DESC_EVT' field: 'fichier .pdf descriptif g�n�ral de l'�v�nement' field: '01/12/2014 12:00:00' 
+;2014-xx-xx-xxxxx-kbx-ordre.ppt;DESC_EVT;fichier .ppt descriptif g�n�ral de l'�v�nement;32/12/2014 12:00:00
+field: '' field: '2014-xx-xx-xxxxx-kbx-ordre.ppt' field: 'DESC_EVT' field: 'fichier .ppt descriptif g�n�ral de l'�v�nement' field: '32/12/2014 12:00:00' 
+;2014-xx-xx-xxxxx-kbx-ordre.tpt;DESC_EVT;fichier .tpt descriptif g�n�ral de l'�v�nement;
+field: '' field: '2014-xx-xx-xxxxx-kbx-ordre.tpt' field: 'DESC_EVT' field: 'fichier .tpt descriptif g�n�ral de l'�v�nement' field: '' 
+
+,#BlaBlaBla[ENRSON[#1]],Bec'h d'al leur !
+field: '' field: '#BlaBlaBla[ENRSON[#1]]' field: 'Bec'h d'al leur !' 
+,,Bec'h d'al leur !
+field: '' field: '' field: 'Bec'h d'al leur !' 
+,#ContainsName[ENRSON[#1]],Bec'h d'al leur !
+field: '' field: '#ContainsName[ENRSON[#1]]' field: 'Bec'h d'al leur !' 
+,#ContainsDescription[ENRSON[#1]],2009;2009-11-bbcs-29500-cd01;1;Briec �cole-E;Briec �cole-E;;Suite compos�e;;;;2mn 50s;Concours;;E;;;;;
+field: '' field: '#ContainsDescription[ENRSON[#1]]' field: '2009;2009-11-bbcs-29500-cd01;1;Briec �cole-E;Briec �cole-E;;Suite compos�e;;;;2mn 50s;Concours;;E;;;;;' 
+,2009-11-bbcs-29500-cd01-p1.pdf,ENRSON[#1]{PDF},fichier PDF,01/12/2014 12:00:00
+field: '' field: '2009-11-bbcs-29500-cd01-p1.pdf' field: 'ENRSON[#1]{PDF}' field: 'fichier PDF' field: '01/12/2014 12:00:00' 
+,2009-11-bbcs-29500-cd01-p1.wav,ENRSON[#1]{WAV}, fichier WAV,01/12/2014 12:00:00
+field: '' field: '2009-11-bbcs-29500-cd01-p1.wav' field: 'ENRSON[#1]{WAV}' field: ' fichier WAV' field: '01/12/2014 12:00:00' 
+,2009-11-bbcs-29500-cd01-p1.mp3,ENRSON[#1]{MP3},fichier MP3,01/12/2014 12:00:00
+field: '' field: '2009-11-bbcs-29500-cd01-p1.mp3' field: 'ENRSON[#1]{MP3}' field: 'fichier MP3' field: '01/12/2014 12:00:00' 
+
+,#ContainsName[ENRSON[#2]],Penhars �cole-E;Penhars �cole-E;;Suite compos�e
+field: '' field: '#ContainsName[ENRSON[#2]]' field: 'Penhars �cole-E;Penhars �cole-E;;Suite compos�e' 
+,#ContainsDescription[ENRSON[#2]],2009;2009-11-bbcs-29500-cd01;2;Penhars �cole-E;Penhars �cole-E;;Suite compos�e;;;;4mn 9s;Concours;;E;;;;;;
+field: '' field: '#ContainsDescription[ENRSON[#2]]' field: '2009;2009-11-bbcs-29500-cd01;2;Penhars �cole-E;Penhars �cole-E;;Suite compos�e;;;;4mn 9s;Concours;;E;;;;;;' 
+,2009-11-bbcs-29500-cd01-p2.pdf,ENRSON[#2]{PDF},fichier PDF,01/12/2014 12:00:00
+field: '' field: '2009-11-bbcs-29500-cd01-p2.pdf' field: 'ENRSON[#2]{PDF}' field: 'fichier PDF' field: '01/12/2014 12:00:00' 
+,2009-11-bbcs-29500-cd01-p2.xml,ENRSON[#2]{PDF},fichier XML,01/12/2014 12:00:00,type-empreinte,empreinte,150 Ko
+field: '' field: '2009-11-bbcs-29500-cd01-p2.xml' field: 'ENRSON[#2]{PDF}' field: 'fichier XML' field: '01/12/2014 12:00:00' field: 'type-empreinte' field: 'empreinte' field: '150 Ko' 
+,2009-11-bbcs-29500-cd01-p2.abs,,fichier ABS,01/12/2014 12:00:00,type-empreinte,empreinte,150000
+field: '' field: '2009-11-bbcs-29500-cd01-p2.abs' field: '' field: 'fichier ABS' field: '01/12/2014 12:00:00' field: 'type-empreinte' field: 'empreinte' field: '150000' 
+
+-----------------
+Liste des erreurs.
+ERR: La ligne '1' contient '1' séparateurs (,) alors qu'elle ne peut en contenir que 2, 4 ou 7
+ERR: La ligne '2' contient '3' séparateurs (,) alors qu'elle ne peut en contenir que 2, 4 ou 7
+ERR: La ligne '3' contient '12' séparateurs (,) alors qu'elle ne peut en contenir que 2, 4 ou 7
+ERR: le 1er champ de la ligne '5' commence par 'T' alors qu'il devrait commencer par #
+ERR: dans la ligne '13' la date '32/12/2014 12:00:00' a un format non reconnu
+ERR: dans la ligne '14' la date '' a un format non reconnu
+ERR: la ligne '16' contient une balise '#BlaBlaBla[ENRSON[#1]]' qui n'est pas reconnue et ne sera pas traitée
+ERR: le 1er champ de la ligne '17' ne doit pas être vide
+ERR: dans la ligne '27' la taille '150 Ko' a un format non reconnu
+ERR: le 2ème champ de la ligne '28' ne doit pas être vide
+ERR: la balise 'TransferName' a été trouvée '2' fois alors qu'elle ne doit être présente qu'une seule fois
+-----------------

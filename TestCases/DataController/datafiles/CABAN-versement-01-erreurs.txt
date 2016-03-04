@@ -1,0 +1,29 @@
+,#Lignepourrie
+,#Lignepourrie,1,
+,#Lignepourrie,2,,,,,,,,,,
+
+,TransferName,Balise sans #
+,#TransferName,Balise doublée
+;#TransferName;Concours bagad catégorie 1 du 02/03/2014 à BREST
+
+,#KeywordContent[#1],BREST
+,#KeywordContent[#2],CONCOURS
+
+;2014-xx-xx-xxxxx-kbx-ordre.pdf;DESC_EVT;fichier .pdf descriptif général de l'événement;01/12/2014 12:00:00
+;2014-xx-xx-xxxxx-kbx-ordre.ppt;DESC_EVT;fichier .ppt descriptif général de l'événement;32/12/2014 12:00:00
+;2014-xx-xx-xxxxx-kbx-ordre.tpt;DESC_EVT;fichier .tpt descriptif général de l'événement;
+
+,#BlaBlaBla[ENRSON[#1]],Bec'h d'al leur !
+,,Bec'h d'al leur !
+,#ContainsName[ENRSON[#1]],Bec'h d'al leur !
+,#ContainsDescription[ENRSON[#1]],2009;2009-11-bbcs-29500-cd01;1;Briec école-E;Briec école-E;;Suite composée;;;;2mn 50s;Concours;;E;;;;;
+,2009-11-bbcs-29500-cd01-p1.pdf,ENRSON[#1]{PDF},fichier PDF,01/12/2014 12:00:00
+,2009-11-bbcs-29500-cd01-p1.wav,ENRSON[#1]{WAV}, fichier WAV,01/12/2014 12:00:00
+,2009-11-bbcs-29500-cd01-p1.mp3,ENRSON[#1]{MP3},fichier MP3,01/12/2014 12:00:00
+
+,#ContainsName[ENRSON[#2]],Penhars école-E;Penhars école-E;;Suite composée
+,#ContainsDescription[ENRSON[#2]],2009;2009-11-bbcs-29500-cd01;2;Penhars école-E;Penhars école-E;;Suite composée;;;;4mn 9s;Concours;;E;;;;;;
+,2009-11-bbcs-29500-cd01-p2.pdf,ENRSON[#2]{PDF},fichier PDF,01/12/2014 12:00:00
+,2009-11-bbcs-29500-cd01-p2.xml,ENRSON[#2]{PDF},fichier XML,01/12/2014 12:00:00,type-empreinte,empreinte,150 Ko
+,2009-11-bbcs-29500-cd01-p2.abs,,fichier ABS,01/12/2014 12:00:00,type-empreinte,empreinte,150000
+

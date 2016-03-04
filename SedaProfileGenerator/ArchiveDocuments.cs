@@ -31,7 +31,7 @@ namespace SedaSummaryGenerator {
      * La liste de couples clés et valeur peut être utilisée avec des compteurs lorsque 
      * plusieurs éléments peuvent se succéder (exemple plusieurs KeywordContent)
      * Dans ce cas la forme de la clé est #cle#num où num vaut 1, 2... 10, 11...
-     * De plus des tags de documents peuvent y être attachés pour les balises apparaissant
+     * De plus des tags de documents peuvent y être attachés pour les balisesUniques apparaissant
      * dans les unités documentaires
      * Dans ce cas, la forme de la clé est #cle_tag#num où num vaut 1, 2... 10, 11...
      * 

@@ -271,7 +271,7 @@ namespace SedaSummaryGenerator {
             if (containsNode == null) {
                 errorsList.Add("Le nœud '" + xPath + "' n'a pas été trouvé dans le profil '" + profileFile + "'");
             } else {
-                // Parcourir récursivement toutes les balises Contains filles
+                // Parcourir récursivement toutes les balisesUniques Contains filles
                 xPath = "descendant::rng:element[@name='" + descendantContains + "']/rng:ref";
                 XmlNodeList containsNodesList = containsNode.SelectNodes(xPath, docInXmlnsManager);
                 if (containsNodesList != null) {

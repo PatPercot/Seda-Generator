@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SedaSummaryGenerator;
 using CommonClassesLibrary;
+using System.Collections.Specialized;
 
 /* Premiers éléments à contrôler
  * 
@@ -14,16 +16,16 @@ Document/Attachment 				filename			Métier			Champ Nom (position 1)
 /ArchiveTransfer/Archive/Name															Métier			#TransferName								1.0
 /ArchiveTransfer/Contains/Name															Métier			#TransferName								0.2
 /ArchiveTransfer/Comment																Métier			#Comment
-/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/BusinessType				Métier			#OriginatingAgency_BusinessType				1.0	
-/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/Identification			Métier			#OriginatingAgency_Identification			1.0	
-/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/Description				Métier			#OriginatingAgency_Description				1.0	
-/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/LegalClassification		Métier			#OriginatingAgency_LegalClassification		1.0	
-/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/Name						Métier			#OriginatingAgency_Name						1.0	
-/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/BusinessType				Métier			#OriginatingAgency_BusinessType				0.2	
-/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/Identification			Métier			#OriginatingAgency_Identification			0.2	
-/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/Description				Métier			#OriginatingAgency_Description				0.2
-/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/LegalClassification		Métier			#OriginatingAgency_LegalClassification		0.2
-/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/Name						Métier			#OriginatingAgency_Name						0.2
+/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/BusinessType				Métier			#OriginatingAgency.BusinessType				1.0	
+/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/Identification			Métier			#OriginatingAgency.Identification			1.0	
+/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/Description				Métier			#OriginatingAgency.Description				1.0	
+/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/LegalClassification		Métier			#OriginatingAgency.LegalClassification		1.0	
+/ArchiveTransfer/Archive/ContentDescription/OriginatingAgency/Name						Métier			#OriginatingAgency.Name						1.0	
+/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/BusinessType				Métier			#OriginatingAgency.BusinessType				0.2	
+/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/Identification			Métier			#OriginatingAgency.Identification			0.2	
+/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/Description				Métier			#OriginatingAgency.Description				0.2
+/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/LegalClassification		Métier			#OriginatingAgency.LegalClassification		0.2
+/ArchiveTransfer/Contains/ContentDescription/OriginatingAgency/Name						Métier			#OriginatingAgency.Name						0.2
 /ArchiveTransfer/Archive/ContentDescription/CustodialHistory							Métier			#CustodialHistory							1.0
 /ArchiveTransfer/Contains/ContentDescription/CustodialHistory							Métier			#CustodialHistory							0.2
 /ArchiveTransfer/Archive/ContentDescription/Keyword/KeywordContent						Métier			#KeywordContent[#x]							1.0
@@ -38,12 +40,12 @@ Contains/ContentDescription/ContentDescriptive/KeywordContent							Métier			#K
  * 
  * */
 
-namespace BusinessDataController {
+namespace BusinessDataControllerLauncher {
     class Program {
         static void Main(string[] args) {
             String jobName;
             if (args.Length < 1) {
-                System.Console.WriteLine("Syntaxe attendue : BusinessDataController nom-job-controle");
+                System.Console.WriteLine("Syntaxe attendue : BusinessDataControllerLauncher nom-job-controle");
                 System.Console.WriteLine("nom-job-controle est une section dans le fichier job.config");
                 System.Console.WriteLine("Une section a la forme :");
                 System.Console.WriteLine("[data-control : nom-job-controle]");
@@ -75,6 +77,18 @@ namespace BusinessDataController {
             }
 
             System.Console.WriteLine("Contrôle métier du job '" + datacontrol.nomJob + "' : '" + datacontrol.dataFile + "' avec le profil '" + datacontrol.profileFile + "'");
+
+            BusinessDataController bdc = new BusinessDataController();
+            //bdc.setTracesWriter(tracesWriter)
+            StringCollection errors = bdc.controlDataFormat(datacontrol.dataFile);
+
+            if (errors.Count > 0) {
+                System.Console.WriteLine("\nDes erreurs ont été rencontrées\n\n");
+                foreach (String str in errors) {
+                    System.Console.WriteLine(str);
+                }
+                System.Console.WriteLine("\n\n");
+            }
 
             System.Console.WriteLine("hitakey");
             System.Console.ReadKey();

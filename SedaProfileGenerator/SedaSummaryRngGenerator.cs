@@ -646,7 +646,7 @@ namespace SedaSummaryGenerator {
         }
 
         /*
-         * Écriture des balises d'un rng:element
+         * Écriture des balisesUniques d'un rng:element
          * Si le contenu fait appel à des rng:define peut appeler recurseDefine
          * 
          * */
@@ -766,7 +766,7 @@ namespace SedaSummaryGenerator {
             return null;
         }
         /*
-         * Traitement associé aux balises rng:data
+         * Traitement associé aux balisesUniques rng:data
          * nodeName est utile seulement pour tracer les actions et situer le contexte
          * */
         private String getData(String context, XmlNode node) {
