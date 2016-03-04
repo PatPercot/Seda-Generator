@@ -220,7 +220,7 @@ namespace SedaSummaryGenerator {
             if (traceActions) tracesWriter.WriteLine("recurseContainsDefine ('" + defineNodeName + "', '" + context + "', '" + currentDocumentTypeId + "')");
             String xPath;
 
-            // Récupérer l'attribut schemeID de la balise ArchivalAgencyObjectIdentifier
+            // Récupérer l'attribut schemeID de la tagname ArchivalAgencyObjectIdentifier
             // et la mettre dans un arbre
             currentDocumentTypeId = missingString;
             if (context.Equals(String.Empty)) {
@@ -235,7 +235,7 @@ namespace SedaSummaryGenerator {
                     if (aaoirefNode != null) {
                         String ret = getSchemeIdValue(aaoirefNode, xPath, context);
                         if (ret != null) {
-                            errorsList.Add("La balise ArchivalAgencyObjectIdentifier de l'unité documentaire '" + ret + "' est optionnelle. Il faut la rendre obligatoire.");
+                            errorsList.Add("La tagname ArchivalAgencyObjectIdentifier de l'unité documentaire '" + ret + "' est optionnelle. Il faut la rendre obligatoire.");
                         }
                     }
                     else
@@ -374,7 +374,7 @@ namespace SedaSummaryGenerator {
                             xPath = "rng:define[@name='" + typeNodeName + "']/rng:value";
                             XmlNode attrNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                             if (attrNode == null) {
-                                errorsList.Add("Le type de document de la balise Document de l'unité documentaire '" + currentDocumentTypeId + "' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.");
+                                errorsList.Add("Le type de document de la tagname Document de l'unité documentaire '" + currentDocumentTypeId + "' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.");
                             }
                         }
                     }
@@ -401,12 +401,12 @@ namespace SedaSummaryGenerator {
                             xPath = "rng:define[@name='" + attachNodeName + "']/rng:optional/rng:attribute[@name='filename']";
                             XmlNode attrNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                             if (attrNode != null) {
-                                errorsList.Add("L'attribut filename de la balise Document/Attachment de l'unité documentaire '" + currentDocumentTypeId + "' est facultatif alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.");
+                                errorsList.Add("L'attribut filename de la tagname Document/Attachment de l'unité documentaire '" + currentDocumentTypeId + "' est facultatif alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.");
                             } else {
                                 xPath = "rng:define[@name='" + attachNodeName + "']/rng:attribute[@name='filename']";
                                 attrNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                                 if (attrNode == null) {
-                                    errorsList.Add("L'attribut filename de la balise Document/Attachment de l'unité documentaire '" + currentDocumentTypeId + "' est interdit alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.");
+                                    errorsList.Add("L'attribut filename de la tagname Document/Attachment de l'unité documentaire '" + currentDocumentTypeId + "' est interdit alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.");
                                 } else {
 
                                 }
@@ -445,7 +445,7 @@ namespace SedaSummaryGenerator {
                 }
             }
             if (error) {
-                errorsList.Add("La balise Document de Archive (ou Contains premier niveau) est utilisée. Les documents doivent etre dans des unités documentaires.");
+                errorsList.Add("La tagname Document de Archive (ou Contains premier niveau) est utilisée. Les documents doivent etre dans des unités documentaires.");
             }
         }
 
@@ -481,13 +481,13 @@ namespace SedaSummaryGenerator {
 
         
         /*
-         * Génération d'alertes si des Document multiples existent et qu'il n'y a psa de balise Identification
+         * Génération d'alertes si des Document multiples existent et qu'il n'y a psa de tagname Identification
          */
         protected void checkForMultipleDocument(String defineNodeName, String context) {
             if (traceActions) tracesWriter.WriteLine("checkForMultipleDocument ('" + defineNodeName + "', '" + context + "', '" + currentDocumentTypeId + "')");
             String xPath;
             // TODO
-            // Tester l'existence de balise Document multiples et signaler l'absence de Attachment/Identification
+            // Tester l'existence de tagname Document multiples et signaler l'absence de Attachment/Identification
             xPath = "rng:define[@name='" + defineNodeName + "']";
             XmlNode containsNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
             if (containsNode == null) {
@@ -512,7 +512,7 @@ namespace SedaSummaryGenerator {
                                 xPath = "rng:element[@name='Identification']/rng:ref";
                                 XmlNode identificationNode = documentNode.SelectSingleNode(xPath, docInXmlnsManager);
                                 if (identificationNode == null) {
-                                    errorsList.Add("Erreur dans le contexte '" + context + "' sur le DOCLIST '" + currentDocumentTypeId + "', la balise Document n°'" + compteur + "' doit contenir une balise Identification");
+                                    errorsList.Add("Erreur dans le contexte '" + context + "' sur le DOCLIST '" + currentDocumentTypeId + "', la tagname Document n°'" + compteur + "' doit contenir une tagname Identification");
                                 } else {
                                     String identificationName = identificationNode.Attributes.GetNamedItem("name").Value;
                                     if (identificationName == null) {

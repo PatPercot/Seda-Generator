@@ -11,7 +11,7 @@ SedaSummaryGeneratorTester/job.config
 TestCases/ProfileGenerator/traces/*.txt
 TestCases/ProfileController/traces/*.txt
 TestCases/ProfileGenerator/results/*.xml
-TestCases/BusinessDataController/traces/*.txt
+TestCases/DataController/traces/*.txt
 
 #################
 ## Eclipse

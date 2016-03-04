@@ -1,4 +1,10 @@
 -------------------------
+Changements du 2016-03-04
+
+- Mise en cohérences des TAG sur les KeywordContent (utilisation de [] au lieu de _)
+- Mise en œuvre des test de format sur les données métier (reste à faire conformité avec le profil)
+
+-------------------------
 Changements du 2016-03-02
 
 - Correction d'un profil RNG mal généré par Agape

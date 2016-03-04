@@ -43,7 +43,7 @@ namespace SedaSummaryGenerator {
         private ContainsNode rootContainsNode;
         private ContainsNode currentContainsNode;
         // Le premier nœud Contains doit être généré indépendamment du fait qu'il y ait ou pas des documents
-        // Ce premier nœud ne contient pas de balise ArchivalAgencyObjectIdentifier et doit être traité de façon exceptionnelle
+        // Ce premier nœud ne contient pas de tagname ArchivalAgencyObjectIdentifier et doit être traité de façon exceptionnelle
         private bool firstContainsNode = true;
         private String currentDocumentTypeId;
 
@@ -343,8 +343,8 @@ namespace SedaSummaryGenerator {
             
         }
 
-        // Cette méthode recherche le contenu de l'attribut schemeID de la balise ArchivalAgencyObjectIdentifier
-        // de la balise containsNode
+        // Cette méthode recherche le contenu de l'attribut schemeID de la tagname ArchivalAgencyObjectIdentifier
+        // de la tagname containsNode
         /* Arborescence dans laquelle on recherche le ArchivalAgencyObjectIdentifier
             <rng:optional>
               <rng:element name="Contains">             => on part d'ici
@@ -774,7 +774,7 @@ namespace SedaSummaryGenerator {
                 return String.Empty;
             String dataString = null;
             switch (context) {
-                // case "/ArchiveTransfer/Archive/ContentDescription/Size": // SEDA 1.0 Toutefois cette balise n'existe pas en SEDA 1.0
+                // case "/ArchiveTransfer/Archive/ContentDescription/Size": // SEDA 1.0 Toutefois cette tagname n'existe pas en SEDA 1.0
                 case "/ArchiveTransfer/Contains/ContentDescription/Size": // SEDA 0.2
                     {
                         int nbDocuments = archiveDocuments.prepareCompleteList();
@@ -935,18 +935,18 @@ namespace SedaSummaryGenerator {
                     break;
                 case "Integrity":
                     switch (context) {
-                        // À partir de la version 1.0 du SEDA, la balise Integrity est dans Document
+                        // À partir de la version 1.0 du SEDA, la tagname Integrity est dans Document
                         default:
                             break;
-                        // Version 0.2 du SEDA : la balise Integrity se trouve au niveau de ArchiveTransfer
+                        // Version 0.2 du SEDA : la tagname Integrity se trouve au niveau de ArchiveTransfer
                         // et son contenu n'est pas précisé
                         case "/ArchiveTransfer":
                             /*
                             <Contains algorithme="[currentHashURI]">52a354f92d4d8a1e1c714ec6cd6a6f1ae51f4a14</Contains>
                             <UnitIdentifier>056-225600014-20130924-0000008888-DE-1-1_1.PDF</UnitIdentifier>
                             */
-                            // C'est pas très propre, mais s'il y a plus d'un document, on doit générer la balise "Integrity"
-                            // autant de fois qu'il y a de documents, MAIS on doit tenir compte du fait que cette balise
+                            // C'est pas très propre, mais s'il y a plus d'un document, on doit générer la tagname "Integrity"
+                            // autant de fois qu'il y a de documents, MAIS on doit tenir compte du fait que cette tagname
                             // est générée une fois par le code appelant...
                             int nbDocuments = archiveDocuments.prepareCompleteList();
                             int curDocument = 0;

@@ -86,12 +86,26 @@ namespace BusinessDataControllerUnitTest {
                 "ERR: dans la ligne '13' la date '32/12/2014 12:00:00' a un format non reconnu",
                 "ERR: dans la ligne '14' la date '' a un format non reconnu",
                 "ERR: la ligne '16' contient une balise '#BlaBlaBla[ENRSON[#1]]' qui n'est pas reconnue et ne sera pas traitée",
-                "ERR: le 1er champ de la ligne '17' ne doit pas être vide",
+                "ERR: dans la ligne '17' le 1er champ ne contient pas de nom de balise",
                 "ERR: dans la ligne '27' la taille '150 Ko' a un format non reconnu",
-                "ERR: le 2ème champ de la ligne '28' ne doit pas être vide",
-                "ERR: la balise 'TransferName' a été trouvée '2' fois alors qu'elle ne doit être présente qu'une seule fois",
+                "ERR: dans la ligne '28' le 2ème champ ne contient pas de nom de tag",
+                "ERR: dans la ligne '33' le 2ème champ ne correspond pas à un des formats possibles : tagname, tagname{doc}, tagname[#num] ou tagname{#num]{doc}",
+                "ERR: dans la ligne '34' le 2ème champ ne correspond pas à un des formats possibles : tagname, tagname{doc}, tagname[#num] ou tagname{#num]{doc}",
+                "ERR: dans la ligne '43' la date '1er juin 2013 12:00:00' a un format non reconnu",
+                "ERR: la tagname 'TransferName' a été trouvée '2' fois alors qu'elle ne doit être présente qu'une seule fois",
                 };
             declencherControleDonnees("caban_erreurs", erreursAttendues);
+        }
+
+        [TestMethod]
+        /*
+         *  Utiliser ce test pour analyser des erreurs non répertoriées
+         * */
+        public void H01_TestSansErreursFormatDonnees() {
+            String[] erreursAttendues = 
+                { 
+                };
+            declencherControleDonnees("sans_erreurs", erreursAttendues);
         }
 
     }

@@ -57,6 +57,9 @@ namespace SedaSummaryGenerator {
         private String currentKey2search = String.Empty;
         private int currentKey2searchCounter = 1;
 
+        Dictionary<string, int> balisesUniques;
+        Dictionary<string, int> balisesMultiples;
+
         public CsvArchiveDocuments() {
             documentsList = new List<String[]>();
             keyList = new List<String[]>();
@@ -118,7 +121,7 @@ namespace SedaSummaryGenerator {
             StringCollection listeAvertissements;
             listeAvertissements = new StringCollection();
 
-            Dictionary<string, int> balisesUniques = new Dictionary<string, int>();
+            balisesUniques = new Dictionary<string, int>();
             balisesUniques.Add("TransferName", 0);
             balisesUniques.Add("Comment", 0);
             balisesUniques.Add("CustodialHistory", 0);
@@ -128,7 +131,7 @@ namespace SedaSummaryGenerator {
             balisesUniques.Add("OriginatingAgency.Identification", 0);
             balisesUniques.Add("OriginatingAgency.Name", 0);
 
-            Dictionary<string, int> balisesMultiples = new Dictionary<string, int>();
+            balisesMultiples = new Dictionary<string, int>();
             balisesMultiples.Add("ContainsName", 0);
             balisesMultiples.Add("ContainsDescription", 0);
             balisesMultiples.Add("KeywordContent", 0);
@@ -161,7 +164,7 @@ namespace SedaSummaryGenerator {
 
                             rgxSeperator = new Regex("" + line[0]);
                             elements = rgxSeperator.Split(line);
-
+                            /*
                             if (elements[1].Length == 0)
                                 listeAvertissements.Add("ERR: le 1er champ de la ligne '" + linenumber +
                                     "' ne doit pas être vide");
@@ -170,35 +173,13 @@ namespace SedaSummaryGenerator {
                                     listeAvertissements.Add("ERR: le 2ème champ de la ligne '" + linenumber +
                                         "' ne doit pas être vide");
                             }
-
-                            if (nbSeparator == 2) {
-                                // Check: vérification du premier caractère du nom de balise
-                                if (elements[1].Length != 0 && elements[1][0] != '#')
-                                    listeAvertissements.Add("ERR: le 1er champ de la ligne '" + linenumber + 
-                                        "' commence par '" + elements[1][0] + "' alors qu'il devrait commencer par #");
-                                // Check: vérification de la validité du nom de balise
-                                Regex baliseExtract = new Regex("^#([^_[]+)");
-                                MatchCollection matches = baliseExtract.Matches(elements[1]);
-                                if (matches.Count > 0) {
-                                    foreach (Match match in matches) { // un seul passage
-                                        System.Console.WriteLine("Recherche balise '" + match.Groups[1].Value + "'");
-                                        int nbOccurrences;
-                                        if (balisesUniques.TryGetValue(match.Groups[1].Value, out nbOccurrences)) {
-                                            balisesUniques[match.Groups[1].Value] = nbOccurrences + 1;
-                                        } else {
-                                            if (balisesMultiples.TryGetValue(match.Groups[1].Value, out nbOccurrences)) {
-                                                balisesMultiples[match.Groups[1].Value] = nbOccurrences + 1;
-                                            } else {
-                                                listeAvertissements.Add("ERR: la ligne '" + linenumber + 
-                                                    "' contient une balise '" + elements[1] + 
-                                                    "' qui n'est pas reconnue et ne sera pas traitée");
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            */
+                            if (nbSeparator == 2)
+                                checkTagFormat(elements[1], listeAvertissements, line, linenumber);
 
                             if (nbSeparator == 4 || nbSeparator == 7) {
+                                checkDocumentTagFormat(elements[2], listeAvertissements, line, linenumber);
+
                                 // Check: format de la date
                                 try {
                                     DateTime date = DateTime.Parse(elements[4], new System.Globalization.CultureInfo("fr-FR", false));
@@ -238,7 +219,7 @@ namespace SedaSummaryGenerator {
 
             foreach (KeyValuePair<string, int> kvp in balisesUniques) {
                 if (kvp.Value > 1) {
-                    listeAvertissements.Add("ERR: la balise '" + kvp.Key +
+                    listeAvertissements.Add("ERR: la tagname '" + kvp.Key +
                         "' a été trouvée '" + kvp.Value + "' fois alors qu'elle ne doit être présente qu'une seule fois");
                 }
             }
@@ -251,13 +232,87 @@ namespace SedaSummaryGenerator {
         }
 
         /*
-         * Réalise une vérification complète du format d'un TAG pour une balise
+         * Réalise une vérification complète du format d'un TAG pour une tagname
+         * #TransferName pour TAG non répétable
          * #ContainsName[TAG] pour TAG non répétable
-         * #ContainsName{TAG[#1]] pour TAG répétable
-         * #KeywordContent_
+         * #ContainsName[TAG[#1]] pour TAG répétable
          * */
-        protected void checkTagFormat(String tag, StringCollection listeAvertissements) {
+        protected void checkTagFormat(String tag, StringCollection listeAvertissements, String line, int linenumber) {
+            // Check: vérification du premier caractère du nom de tagname
+            if (tag.Length != 0 && tag[0] != '#') {
+                listeAvertissements.Add("ERR: le 1er champ de la ligne '" + linenumber +
+                    "' commence par '" + tag[0] + "' alors qu'il devrait commencer par #");
+                return;
+            }
 
+            String balisename = String.Empty;
+            Regex extractname = new Regex(@"^#(\w[\w\d_.]+)");
+            MatchCollection matches = extractname.Matches(tag);
+            if (matches.Count == 0) { // Pas de tagname trouvée
+                listeAvertissements.Add("ERR: dans la ligne '" + linenumber +
+                    "' le 1er champ ne contient pas de nom de balise");
+                return;
+            }
+            if (matches.Count == 1) {
+                foreach (Match match in matches) { // un seul passage
+                    balisename = match.Groups[1].Value;
+                }
+            }
+            Regex simpleOrIndexedformat = new Regex ("^#" + balisename + @"(\[#\d+\])?$");
+            /*
+            Regex taggedFormat = new Regex("^#" + balisename + @"\[\w([\w\d_]+)?\]$");
+            Regex taggedIndexedFormat = new Regex("^#" + balisename + @"\[\w([\w\d_]+)\[#\d+\]\]$");
+            Regex taggedIndexedIndexedFormat = new Regex("^#" + balisename + @"\[\w([\w\d_]+)\[#\d+\]\[#\d+\]\]$");
+            */
+
+            String fullTagformat = @"(\w[\w\d_]+)(\[#\d+\])?((//\w[\w\d_]+)(\[#\d+\])?)*({\w[\w\d_]+})?";
+            Regex globalFormat = new Regex("^#" + balisename + @"\[" + fullTagformat + @"(\[#\d+\])?\]$");
+            bool formatOK = false;
+            matches = simpleOrIndexedformat.Matches(tag);
+            if (matches.Count == 1)
+                formatOK = true;
+            else {
+                matches = globalFormat.Matches(tag);
+                if (matches.Count == 1)
+                    formatOK = true;
+            }
+            /*
+            matches = simpleOrIndexedformat.Matches(tag);
+            if (matches.Count == 1) 
+                formatOK = true;
+            else {
+                matches = taggedFormat.Matches(tag);
+                if (matches.Count == 1)
+                    formatOK = true;
+                else {
+                    matches = taggedIndexedFormat.Matches(tag);
+                    if (matches.Count == 1)
+                        formatOK = true;
+                    else {
+                        matches = taggedIndexedIndexedFormat.Matches(tag);
+                        if (matches.Count == 1)
+                            formatOK = true;
+                    }
+                }
+            }
+             * */
+            if (formatOK != true) {
+                listeAvertissements.Add("ERR: dans la ligne '" + linenumber +
+                    "' le 1er champ ne correspond pas à un des formats possibles : #tagname, #tagname[TAG] ou #tagname{TAG[#num]]");
+            }
+
+            int nbOccurrences;
+            if (balisesUniques.TryGetValue(balisename, out nbOccurrences)) {
+                balisesUniques[balisename] = nbOccurrences + 1;
+            } else {
+                if (balisesMultiples.TryGetValue(balisename, out nbOccurrences)) {
+                    balisesMultiples[balisename] = nbOccurrences + 1;
+                } else {
+                    listeAvertissements.Add("ERR: la ligne '" + linenumber +
+                        "' contient une balise '" + tag +
+                        "' qui n'est pas reconnue et ne sera pas traitée");
+                }
+            }
         }
 
         /*
@@ -266,8 +321,29 @@ namespace SedaSummaryGenerator {
          * TAG[#1]
          * TAG[#1]{DOC}
          * */
-        protected void checkDocumentTagFormat(String tag, StringCollection listeAvertissements) {
-
+        protected void checkDocumentTagFormat(String tag, StringCollection listeAvertissements, String line, int linenumber) {
+            String tagname = String.Empty;
+            Regex extractname = new Regex(@"^(\w[\w\d_]+)");
+            MatchCollection matches = extractname.Matches(tag);
+            if (matches.Count == 0) { // Pas de tagname trouvée
+                listeAvertissements.Add("ERR: dans la ligne '" + linenumber +
+                    "' le 2ème champ ne contient pas de nom de tag");
+                return;
+            }
+            if (matches.Count == 1) {
+                foreach (Match match in matches) { // un seul passage
+                    tagname = match.Groups[1].Value;
+                }
+            }
+            Regex tagformat = new Regex("^" + tagname + @"(\[#\d+\])?((//\w[\w\d_]+)(\[#\d+\])?)*({\w[\w\d_]+})?$");
+            bool formatOK = false;
+            matches = tagformat.Matches(tag);
+            if (matches.Count == 1)
+                formatOK = true;
+            if (formatOK != true) {
+                listeAvertissements.Add("ERR: dans la ligne '" + linenumber +
+                    "' le 2ème champ ne correspond pas à un des formats possibles : tagname, tagname{doc}, tagname[#num] ou tagname{#num]{doc}");
+            }
         }
 
         protected String getTagWithoutDocumentIdentification(String part) {

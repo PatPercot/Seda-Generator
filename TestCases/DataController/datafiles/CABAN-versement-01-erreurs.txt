@@ -27,3 +27,28 @@
 ,2009-11-bbcs-29500-cd01-p2.xml,ENRSON[#2]{PDF},fichier XML,01/12/2014 12:00:00,type-empreinte,empreinte,150 Ko
 ,2009-11-bbcs-29500-cd01-p2.abs,,fichier ABS,01/12/2014 12:00:00,type-empreinte,empreinte,150000
 
+,2009-11-bbcs-29500-cd01-p2.truc,TAG{DOCUMENT},fichier TRUC,01/12/2014 12:00:00,type-empreinte,empreinte,150000
+,2009-11-bbcs-29500-cd01-p2.truc,TAG[#1]{DOCUMENT},fichier TRUC,01/12/2014 12:00:00,type-empreinte,empreinte,150000
+
+,2009-11-bbcs-29500-cd01-p2.truc,TAG{DOCUMENT],fichier TRUC,01/12/2014 12:00:00,type-empreinte,empreinte,150000
+,2009-11-bbcs-29500-cd01-p2.truc,TAG[#1}[DOCUMENT},fichier TRUC,01/12/2014 12:00:00,type-empreinte,empreinte,150000
+
+,#KeywordContent[OFFRES_RETENUES[#2]],mot-clé 2 pour l'offre retenue
+,#KeywordContent[OR_ETP[#3][#2]],mot-clé 2 pour l'offre retenue 3
+
+,MP_Cons_Msg_Echange_PJ_1_1.pdf,MP_Cons_Msg_Echange[#1]//MP_Cons_Msg_Echange_PJ,Pièce jointe du message 1,11/12/2014 12:00:00
+,MP_OetD_Analyse_Recept_ONR1_AE_Acte_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#1]//MP_OetD_Analyse_Recept_ONR1_AE{MP_OetD_Analyse_Recept_ONR1_AE_Acte},Acte d'engagement,20/12/2014 12:00:00
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#1]],Fichiers de candidatures non retenues
+
+,Document1.pdf,O6_Chapitre1,Document du test,1er juin 2013 12:00:00
+
+,#Comment,Commentaire sur les tests de l'onglet 6
+
+,#OriginatingAgency.BusinessType,5422C
+,#OriginatingAgency.Identification,CG56_MP_001
+,#OriginatingAgency.Description,Service ayant la charge de la constitution et du suivi administratif des marchés publics
+,#OriginatingAgency.LegalClassification,3636277
+,#OriginatingAgency.Name,Service des Marchés Publics (SMP)2
+
+,#CustodialHistory,Les documents ont été créés dans la GED Alfresco
+

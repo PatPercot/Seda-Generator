@@ -116,10 +116,10 @@ namespace RngProfileControllerUnitTest {
             cardinalités
             Identifiant DOCLIST malformé, on attend 'DOCLIST / identifier' et on a 'DOCLIST
             /OR_ETP_DOCA' dans le contexte '/Contains/Contains/Document[1]'
-            Erreur dans le contexte '/Contains/Contains' sur le DOCLIST 'OR_ETP+', la balise
-             Document n°'2' doit contenir une balise Identification
-            Erreur dans le contexte '/Contains' sur le DOCLIST 'MACHIN', la balise Document
-            n°'1' doit contenir une balise Identification
+            Erreur dans le contexte '/Contains/Contains' sur le DOCLIST 'OR_ETP+', la tagname
+             Document n°'2' doit contenir une tagname Identification
+            Erreur dans le contexte '/Contains' sur le DOCLIST 'MACHIN', la tagname Document
+            n°'1' doit contenir une tagname Identification
             L'unité documentaire 'MACHIN' peut être répétée, mais elle ne possède pas de TAG
              répétable (TAG+). Il faut ajouter un '+' au tag ou changer les cardinalités
 
@@ -130,8 +130,8 @@ namespace RngProfileControllerUnitTest {
                 { 
                 "L'unité documentaire 'OFFRES_RETENUES+' est unique ou optionnelle, mais elle possède un TAG répétable (TAG+). Il faut supprimer le '+' du tag ou changer les cardinalités", 
                 "Identifiant DOCLIST malformé, on attend 'DOCLIST / identifier' et on a 'DOCLIST /OR_ETP_DOCA' dans le contexte '/Contains/Contains/Document[1]'", 
-                "Erreur dans le contexte '/Contains/Contains' sur le DOCLIST 'OR_ETP+', la balise Document n°'2' doit contenir une balise Identification", 
-                "Erreur dans le contexte '/Contains' sur le DOCLIST 'MACHIN', la balise Document n°'1' doit contenir une balise Identification",
+                "Erreur dans le contexte '/Contains/Contains' sur le DOCLIST 'OR_ETP+', la tagname Document n°'2' doit contenir une tagname Identification", 
+                "Erreur dans le contexte '/Contains' sur le DOCLIST 'MACHIN', la tagname Document n°'1' doit contenir une tagname Identification",
                 "L'unité documentaire 'MACHIN' peut être répétée, mais elle ne possède pas de TAG répétable (TAG+). Il faut ajouter un '+' au tag ou changer les cardinalités"
                 };
             declencherTestProfil("tag_doclist", branchesAttendues, erreursAttendues);
@@ -196,7 +196,7 @@ namespace RngProfileControllerUnitTest {
         [TestMethod]
         public void M10_TestProfil10() {
             String[] branchesAttendues = null;
-            String[] erreursAttendues = { "La balise ArchivalAgencyObjectIdentifier de l'unité documentaire 'MP_Cons' est optionnelle. Il faut la rendre obligatoire." };
+            String[] erreursAttendues = { "La tagname ArchivalAgencyObjectIdentifier de l'unité documentaire 'MP_Cons' est optionnelle. Il faut la rendre obligatoire." };
             declencherTestProfil("profil_test_1-10", branchesAttendues, erreursAttendues);
         }
 
@@ -219,7 +219,7 @@ namespace RngProfileControllerUnitTest {
             String[] branchesAttendues = { "\troot", "\t\t!!! DOCLIST manquant !!!", "\t\tTAGOK", "" };
             String[] erreursAttendues = 
                 { 
-                "La balise ArchivalAgencyObjectIdentifier de l'unité documentaire 'TAGNOTOK' est optionnelle. Il faut la rendre obligatoire.", 
+                "La tagname ArchivalAgencyObjectIdentifier de l'unité documentaire 'TAGNOTOK' est optionnelle. Il faut la rendre obligatoire.", 
                 };
             declencherTestProfil("ArchivalAgencyObjectIdentifier", branchesAttendues, erreursAttendues);
         }
@@ -239,9 +239,9 @@ namespace RngProfileControllerUnitTest {
             String[] branchesAttendues = { "\troot", "\t\tFILENAME_NOTOKINTERDIT", "\t\tFILENAME_NOTOKFACULTATIF", "\t\tTYPEDOCUMENT_INEXISTANT", "\t\tLANGUE_INEXISTANTE", "\t\tNIVEAUDESCRIPTION_INEXISTANT", "\t\tLANGUESMULTIPLES", "" };
             String[] erreursAttendues = 
                 { 
-                "L'attribut filename de la balise Document/Attachment de l'unité documentaire 'FILENAME_NOTOKINTERDIT' est interdit alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.", 
-                "L'attribut filename de la balise Document/Attachment de l'unité documentaire 'FILENAME_NOTOKFACULTATIF' est facultatif alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.", 
-                "Le type de document de la balise Document de l'unité documentaire 'TYPEDOCUMENT_INEXISTANT' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.", 
+                "L'attribut filename de la tagname Document/Attachment de l'unité documentaire 'FILENAME_NOTOKINTERDIT' est interdit alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.", 
+                "L'attribut filename de la tagname Document/Attachment de l'unité documentaire 'FILENAME_NOTOKFACULTATIF' est facultatif alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.", 
+                "Le type de document de la tagname Document de l'unité documentaire 'TYPEDOCUMENT_INEXISTANT' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.", 
                 // TODO: gestion de la langue à améliorer
                 // "La langue de la description de l'unité documentaire 'LANGUE_INEXISTANTE' n'a pas de valeur. C'est une donnée qui dans cette version doit être fournie par le profil.", 
                 "Le niveau de description de l'unité documentaire 'NIVEAUDESCRIPTION_INEXISTANT' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.", 
@@ -270,7 +270,7 @@ namespace RngProfileControllerUnitTest {
             String[] branchesAttendues = { "\troot", "\t\tUD1[#1]", "" };
             String[] erreursAttendues = 
                 { 
-                "La balise Document de Archive (ou Contains premier niveau) est utilisée. Les documents doivent etre dans des unités documentaires.", 
+                "La tagname Document de Archive (ou Contains premier niveau) est utilisée. Les documents doivent etre dans des unités documentaires.", 
                 };
             declencherTestProfil("UtilisationBaliseDocumentArchive", branchesAttendues, erreursAttendues);
         }
