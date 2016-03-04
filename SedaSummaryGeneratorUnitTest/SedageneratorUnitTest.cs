@@ -968,7 +968,7 @@ namespace SedaSummaryGeneratorUnitTest {
         public void W61_TestGenerateur_6_2_10() {
             executeGenerator("06_Chapitre2-10", "0.2");
 
-            String[] erreursAttendues = { "#DATAERR: Le tag : '#KeywordContent_O6_Chapitre1[#1]' n'a pas été trouvé dans les données métier" };
+            String[] erreursAttendues = { "#DATAERR: Le tag : '#KeywordContent[O6_Chapitre1[#1]]' n'a pas été trouvé dans les données métier" };
             checkForErrors(erreursAttendues);
             checkInnerText("/s:ArchiveTransfer/s:Comment"
                , "Commentaire sur les tests de l'onglet 6");
