@@ -342,7 +342,7 @@ namespace SedaSummaryGenerator {
                 formatOK = true;
             if (formatOK != true) {
                 listeAvertissements.Add("ERR: dans la ligne '" + linenumber +
-                    "' le 2ème champ ne correspond pas à un des formats possibles : tagname, tagname{doc}, tagname[#num] ou tagname{#num]{doc}");
+                    "' le 2ème champ ne correspond pas à un des formats possibles : tagname, tagname{doc}, tagname[#num] ou tagname[#num]{doc}");
             }
         }
 

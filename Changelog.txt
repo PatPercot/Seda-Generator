@@ -1,4 +1,9 @@
 -------------------------
+Changements du 2016-03-08
+
+- Correction message d'erreur du contrôleur de données utilisant le caractère '{' au lie de '['
+
+-------------------------
 Changements du 2016-03-04
 
 - Mise en cohérences des TAG sur les KeywordContent (utilisation de [] au lieu de _)

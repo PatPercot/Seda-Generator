@@ -89,8 +89,8 @@ namespace BusinessDataControllerUnitTest {
                 "ERR: dans la ligne '17' le 1er champ ne contient pas de nom de balise",
                 "ERR: dans la ligne '27' la taille '150 Ko' a un format non reconnu",
                 "ERR: dans la ligne '28' le 2ème champ ne contient pas de nom de tag",
-                "ERR: dans la ligne '33' le 2ème champ ne correspond pas à un des formats possibles : tagname, tagname{doc}, tagname[#num] ou tagname{#num]{doc}",
-                "ERR: dans la ligne '34' le 2ème champ ne correspond pas à un des formats possibles : tagname, tagname{doc}, tagname[#num] ou tagname{#num]{doc}",
+                "ERR: dans la ligne '33' le 2ème champ ne correspond pas à un des formats possibles : tagname, tagname{doc}, tagname[#num] ou tagname[#num]{doc}",
+                "ERR: dans la ligne '34' le 2ème champ ne correspond pas à un des formats possibles : tagname, tagname{doc}, tagname[#num] ou tagname[#num]{doc}",
                 "ERR: dans la ligne '43' la date '1er juin 2013 12:00:00' a un format non reconnu",
                 "ERR: la tagname 'TransferName' a été trouvée '2' fois alors qu'elle ne doit être présente qu'une seule fois",
                 };
