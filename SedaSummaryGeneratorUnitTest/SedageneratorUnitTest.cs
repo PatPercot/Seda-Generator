@@ -239,6 +239,10 @@ namespace SedaSummaryGeneratorUnitTest {
             checkInnerText("/s:ArchiveTransfer/s:Comment"
                , "Transfert de pièces de marché public de la salle régionale des marchés publics marches.e-megalisbretagne.org. La procédure dématérialisée pouvant ne pas être complète, certaines pièces du dossier n'existent qu'au format papier (notification, registres, courriers, offres, etc.)");
 
+            checkInnerText("/s:ArchiveTransfer/s:Contains/s:ContentDescription/s:LatestDate", "2014-12-27");
+            checkInnerText("/s:ArchiveTransfer/s:Contains/s:ContentDescription/s:OldestDate", "2014-12-01");
+            checkInnerText("/s:ArchiveTransfer/s:Contains/s:Appraisal/s:StartDate", "2014-12-27");
+            
             /* Ce test et le suivant sont identiques */
             checkAttributeInList("//s:ArchivalAgencyObjectIdentifier"
                 , "schemeID", "CG56_DOCLIST_2015 / MP_OetD_Analyse_Recept_ONR1_Reponse");

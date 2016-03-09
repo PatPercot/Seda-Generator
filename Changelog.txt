@@ -2,6 +2,7 @@
 Changements du 2016-03-09
 
 - Correction erreur de format de date sur les balises OldestDate, LatestDate et StartDate
+- Ajout d'un test case pour la vérification du format des dates OldestDate, LatestDate et StartDate
 
 -------------------------
 Changements du 2016-03-08
