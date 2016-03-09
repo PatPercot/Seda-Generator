@@ -1,4 +1,9 @@
 -------------------------
+Changements du 2016-03-09
+
+- Correction erreur de format de date sur les balises OldestDate, LatestDate et StartDate
+
+-------------------------
 Changements du 2016-03-08
 
 - Correction message d'erreur du contrôleur de données utilisant le caractère '{' au lie de '['

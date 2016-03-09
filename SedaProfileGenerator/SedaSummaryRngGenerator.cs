@@ -899,11 +899,10 @@ namespace SedaSummaryGenerator {
                     dateTraitee = archiveDocuments.getOldestDate();
                     try {
                         date = DateTime.Parse(dateTraitee, new System.Globalization.CultureInfo("fr-FR", false));
+                        dateString = date.ToString("o");
                         int posT = dateString.IndexOf("T");
                         if (posT > 0)
-                            dateString = date.ToString("o").Substring(0, posT);
-                        else
-                            dateString = date.ToString("o");
+                            dateString = dateString.Substring(0, posT);
                     } catch (FormatException e) {
                         dateString = "#DATAERR: date " + dateTraitee;
                         errorsList.Add("#DATAERR: La date '" + dateTraitee + "' '" + tag + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
@@ -914,11 +913,10 @@ namespace SedaSummaryGenerator {
                     dateTraitee = archiveDocuments.getLatestDate();
                     try {
                         date = DateTime.Parse(archiveDocuments.getLatestDate(), new System.Globalization.CultureInfo("fr-FR", false));
+                        dateString = date.ToString("o");
                         int posT = dateString.IndexOf("T");
                         if (posT > 0)
-                            dateString = date.ToString("o").Substring(0, posT);
-                        else
-                            dateString = date.ToString("o");
+                            dateString = dateString.Substring(0, posT);
                     } catch (FormatException e) {
                         dateString = "#DATAERR: date " + dateTraitee;
                         errorsList.Add("#DATAERR: La date '" + dateTraitee + "' '" + tag + "' ne correspond pas à une date réelle ou son format est incorrect. Format attendu JJ/MM/AAAA hh:mm:ss");
