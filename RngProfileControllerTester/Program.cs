@@ -24,7 +24,7 @@ using CommonClassesLibrary;
 
 namespace RngProfileControllerTester {
     class Program {
-        static void Main(string[] args) {
+        static int Main(string[] args) {
             StreamWriter streamWriter = null;
 
             String jobName;
@@ -123,9 +123,7 @@ namespace RngProfileControllerTester {
 
             streamWriter.Close();
 
-            Console.WriteLine("Tapez une touche pour arrêter");
-            Console.ReadKey();
-
+            return errors.Count;
         }
 
     }

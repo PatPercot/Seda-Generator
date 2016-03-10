@@ -42,7 +42,7 @@ Contains/ContentDescription/ContentDescriptive/KeywordContent							Métier			#K
 
 namespace BusinessDataControllerLauncher {
     class Program {
-        static void Main(string[] args) {
+        static int Main(string[] args) {
             String jobName;
             if (args.Length < 1) {
                 System.Console.WriteLine("Syntaxe attendue : BusinessDataControllerLauncher nom-job-controle");
@@ -90,9 +90,7 @@ namespace BusinessDataControllerLauncher {
                 System.Console.WriteLine("\n\n");
             }
 
-            System.Console.WriteLine("hitakey");
-            System.Console.ReadKey();
-
+            return errors.Count;
         }
     }
 }

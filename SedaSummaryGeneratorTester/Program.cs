@@ -27,7 +27,7 @@ using System.Security.Cryptography;
 namespace SedaSummaryGeneratorTester {
     class Program {
 
-        static void Main(string[] args) {
+        static int Main(string[] args) {
             StreamWriter streamWriter = null;
 
             String jobName;
@@ -128,8 +128,8 @@ namespace SedaSummaryGeneratorTester {
                 }
             }
             Console.WriteLine("Fin de la liste des erreurs du programme de génération du bordereau");
-            Console.WriteLine("Tapez une touche pour arrêter");
-            Console.ReadKey();
+
+            return errors.Count;
         }
 
         static void genererMarcheUneUnite() {

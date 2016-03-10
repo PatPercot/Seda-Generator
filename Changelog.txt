@@ -1,4 +1,9 @@
 -------------------------
+Changements du 2016-03-10
+
+- Les programmes sont rendus scriptables (plus d'attente de saisie clavier et code de retour)
+
+-------------------------
 Changements du 2016-03-09
 
 - Correction erreur de format de date sur les balises OldestDate, LatestDate et StartDate
