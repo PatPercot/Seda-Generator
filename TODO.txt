@@ -1,4 +1,9 @@
 **************************
+2016-03-10
+
+	Prévoir un mode silent (pas d'affichage sur console) pour les exécutables
+
+**************************
 2016-01-27
 
 	Prévoir rapidement LatestDate te OldestDate dans les données métier (plus gestion des dates de départ communicabilité et sort final)

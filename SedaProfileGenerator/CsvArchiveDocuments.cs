@@ -185,7 +185,7 @@ namespace SedaSummaryGenerator {
                                     DateTime date = DateTime.Parse(elements[4], new System.Globalization.CultureInfo("fr-FR", false));
                                 } catch (Exception e) {
                                     listeAvertissements.Add("ERR: dans la ligne '" + linenumber +
-                                        "' la date '" + elements[4] + "' a un format non reconnu");
+                                        "' la date '" + elements[4] + "' a un format non reconnu (formats autorisés AAA/MM/JJ ou AAAA/MM/JJ HH:MM:SS)");
                                 }
 
                             }
@@ -196,7 +196,7 @@ namespace SedaSummaryGenerator {
                                     long size = long.Parse(elements[7]);
                                 } catch (Exception e) {
                                     listeAvertissements.Add("ERR: dans la ligne '" + linenumber +
-                                        "' la taille '" + elements[7] + "' a un format non reconnu");
+                                        "' la taille '" + elements[7] + "' a un format non reconnu (format attendu champ numérique sans espaces)");
                                 }
 
                             }

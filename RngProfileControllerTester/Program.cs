@@ -22,7 +22,7 @@ using System.Collections.Specialized;
 using SedaSummaryGenerator;
 using CommonClassesLibrary;
 
-namespace RngProfileControllerTester {
+namespace RngProfileControllerLauncher {
     class Program {
         static int Main(string[] args) {
             StreamWriter streamWriter = null;

@@ -5,9 +5,9 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SedaProfileGenerator", "SedaProfileGenerator\SedaProfileGenerator.csproj", "{02FE45D7-4311-4D32-8488-FEE19C30BEDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RngProfileControllerTester", "RngProfileControllerTester\RngProfileControllerTester.csproj", "{F062AA42-812B-46B2-83BD-C82D3D5296A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RngProfileControllerLauncher", "RngProfileControllerTester\RngProfileControllerLauncher.csproj", "{F062AA42-812B-46B2-83BD-C82D3D5296A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SedaSummaryGeneratorTester", "SedaSummaryGeneratorTester\SedaSummaryGeneratorTester.csproj", "{D33262FE-4647-44DA-A97F-2CDDB47EA08D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SedaSummaryGeneratorLauncher", "SedaSummaryGeneratorTester\SedaSummaryGeneratorLauncher.csproj", "{D33262FE-4647-44DA-A97F-2CDDB47EA08D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WsSoapSedaGeneratorAspWebApp", "WsSoapSedaGeneratorAspWebApp\WsSoapSedaGeneratorAspWebApp.csproj", "{8D3DF048-770D-49E6-BF89-9E8F6D85BE7E}"
 EndProject

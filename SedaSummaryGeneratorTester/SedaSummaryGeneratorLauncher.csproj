@@ -7,8 +7,8 @@
     <ProjectGuid>{D33262FE-4647-44DA-A97F-2CDDB47EA08D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SedaSummaryGeneratorTester</RootNamespace>
-    <AssemblyName>SedaSummaryGeneratorTester</AssemblyName>
+    <RootNamespace>SedaSummaryGeneratorLauncher</RootNamespace>
+    <AssemblyName>SedaSummaryGeneratorLauncher</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

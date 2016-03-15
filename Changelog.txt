@@ -1,7 +1,21 @@
 -------------------------
+Changements du 2016-03-15
+
+- Contrôleur de profils : 
+		Le message d'erreur quand l'attribut schemeID de la balise ArchivalAgencyObjectIdentifier est absent ou optionnel a été rendu compréhensible
+		La présence de l'attribut filename et de la balise Type est testée pour tous les documents lorsqu'une UD a plusieurs documents
+- Contrôleur de données indiquer des formats de date attendus lorsque le format est incorrect
+- Les job.config sélectionnent le job default quand aucun job n'est spécifié. Si default n'existe pas, sélection du premier job
+- Renommage des programmes Tester en Launcher
+
+-------------------------
 Changements du 2016-03-10
 
 - Les programmes sont rendus scriptables (plus d'attente de saisie clavier et code de retour)
+- Contrôleur de profils : 
+		Remplacement de  "la tagname" par "la balise" dans les messages d'erreur et les unités de test
+		Le message d'erreur en absence de balise ArchivalAgencyObjectIdentifier a été rendu compréhensible
+		Le message d'erreur en absence de l'attribut schemeID de la balise Identification a été rendu compréhensible
 
 -------------------------
 Changements du 2016-03-09

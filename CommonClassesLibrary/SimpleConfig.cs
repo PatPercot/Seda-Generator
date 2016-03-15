@@ -93,34 +93,43 @@ namespace CommonClassesLibrary {
             return null;
         }
 
-        // Retourne la configuration demandée ou la première si le nom de config est vide
+        // Retourne la configuration demandée (ou la configuration default sinon la première si le nom de config est vide)
         public ProfileControlConfig getProfileConfig(String configName) {
-            ProfileControlConfig config = null;
+            if (configName == String.Empty)
+                configName = "default";
             foreach (ProfileControlConfig c in profilecontrolList) {
-                if (configName == String.Empty || c.nomJob.Equals(configName))
+                if (c.nomJob.Equals(configName))
                     return c;
             }
-            return config;
+            if (profilecontrolList.Count >= 1)
+                return profilecontrolList.ElementAt(0);
+            return null;
         }
 
         // Retourne la configuration demandée ou la première si le nom de config est vide
         public DataControlConfig getDatacontrolConfig(String configName) {
-            DataControlConfig config = null;
+            if (configName == String.Empty)
+                configName = "default";
             foreach (DataControlConfig c in datacontrolList) {
-                if (configName == String.Empty || c.nomJob.Equals(configName))
+                if (c.nomJob.Equals(configName))
                     return c;
             }
-            return config;
+            if (datacontrolList.Count >= 1)
+                return datacontrolList.ElementAt(0);
+            return null;
         }
 
         // Retourne la configuration demandée ou la première si le nom de config est vide
         public GeneratorConfig getGeneratorConfig(String configName) {
-            GeneratorConfig config = null;
+            if (configName == String.Empty)
+                configName = "default";
             foreach (GeneratorConfig c in generatorList) {
-                if (configName == String.Empty || c.nomJob.Equals(configName))
+                if (c.nomJob.Equals(configName))
                     return c;
             }
-            return config;
+            if (generatorList.Count >= 1)
+                return generatorList.ElementAt(0);
+            return null;
         }
 
         protected void doSection() {

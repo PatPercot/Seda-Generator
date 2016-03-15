@@ -24,7 +24,7 @@ using SedaSummaryGenerator;
 using CommonClassesLibrary;
 using System.Security.Cryptography;
 
-namespace SedaSummaryGeneratorTester {
+namespace SedaSummaryGeneratorLauncher {
     class Program {
 
         static int Main(string[] args) {
