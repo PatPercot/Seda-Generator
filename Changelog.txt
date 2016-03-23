@@ -1,4 +1,9 @@
 -------------------------
+Changements du 2016-03-23
+
+- Ajout d'un répertoire documentation
+
+-------------------------
 Changements du 2016-03-15
 
 - Contrôleur de profils : 

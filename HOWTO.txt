@@ -14,6 +14,9 @@
 
 Informations sur la configuration du système de production de bordereaux de versements
 
+Visiter aussi le répertoire Documentation
+
+
 La responsabilité de tous les dysfonctionnements et de toutes les inepties que vous pourrez trouver dans ce code et
 dans ces documents revient à Patrick Percot, direction des systèmes d'information, service études du conseil départemental du Morbihan
 
