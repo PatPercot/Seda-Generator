@@ -71,6 +71,82 @@ namespace BusinessDataControllerUnitTest {
             streamWriter.Close();
         }
 
+        void declencherAnalyseProfil(String jobName, String[] erreursAttendues, String[] tagsAttendus) {
+            StreamWriter streamWriter = null;
+            DataControlConfig control = configLoader(jobName);
+            String traceFile = control.traceFile;
+            String profileFile = control.profileFile;
+            String dataFile = control.dataFile;
+
+            Action<Exception, String> eh = (ex, str) => {
+                Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);
+                throw ex;
+            };
+
+            try {
+                streamWriter = new StreamWriter(traceFile);
+            } catch (IOException e) { eh(e, "Mauvaise syntaxe de nom de fichier"); } catch (UnauthorizedAccessException e) { eh(e, "Droits d'accès à corriger"); } catch (System.Security.SecurityException e) { eh(e, "Droits d'accès à corriger"); }
+
+            RngProfileController rpc = new RngProfileController();
+            rpc.setTracesWriter(streamWriter);
+            rpc.controlProfileFile(profileFile);
+
+            StringCollection erreurs = rpc.getErrorsList();
+            {
+                streamWriter.WriteLine("-----------------");
+                streamWriter.WriteLine("Liste des erreurs.");
+                if (erreurs != null && erreurs.Count != 0) {
+                    foreach (String str in erreurs) {
+                        streamWriter.WriteLine(str);
+                    }
+                }
+                streamWriter.WriteLine("-----------------");
+            }
+            streamWriter.Flush();
+
+            if (erreursAttendues != null) {
+                int erreur = 0;
+                if (erreurs != null && erreurs.Count != 0) {
+                    foreach (String str in erreurs) {
+                        if (erreursAttendues.Length > erreur)
+                            StringAssert.StartsWith(str, erreursAttendues[erreur], "Comparaison des erreurs");
+                        erreur++;
+                    }
+                }
+
+                Assert.AreEqual(erreursAttendues.Length, erreurs.Count, "Le nombre d'erreurs attendues et obtenues diffère");
+            }
+
+            StringCollection tags = rpc.getExpectedTagsListList();
+            {
+                streamWriter.WriteLine("-----------------");
+                streamWriter.WriteLine("Liste des tags.");
+                if (tags != null && tags.Count != 0) {
+                    foreach (String str in tags) {
+                        streamWriter.WriteLine(str);
+                    }
+                }
+                streamWriter.WriteLine("-----------------");
+            }
+            streamWriter.Flush();
+
+            if (erreursAttendues != null) {
+                int tag = 0;
+                if (tags != null && tags.Count != 0) {
+                    foreach (String str in tags) {
+                        if (tagsAttendus.Length > tag)
+                            StringAssert.StartsWith(str, tagsAttendus[tag], "Comparaison des tags");
+                        tag++;
+                    }
+                }
+
+                Assert.AreEqual(tagsAttendus.Length, tags.Count, "Le nombre de tags attendus et obtenus diffère");
+            }
+
+
+            streamWriter.Close();
+        }
+
 
         [TestMethod]
         /*
@@ -106,6 +182,130 @@ namespace BusinessDataControllerUnitTest {
                 { 
                 };
             declencherControleDonnees("sans_erreurs", erreursAttendues);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void H02_TestTagsProfil() {
+            String[] erreursAttendues = 
+                { 
+                };
+            String[] tagsAttendus = 
+                { 
+                "TransferName",
+                "OriginatingAgency.Identification"
+                };
+            declencherAnalyseProfil("tags_profil", erreursAttendues, tagsAttendus);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void H03_TestTagsProfilComplet() {
+            String[] erreursAttendues = 
+                { 
+                };
+            String[] tagsAttendus = 
+                { 
+                "Comment",
+                "TransferName",
+                "CustodialHistory",
+                "OriginatingAgency.BusinessType",
+                "OriginatingAgency.Description",
+                "OriginatingAgency.LegalClassification",
+                "OriginatingAgency.Name",
+                "OriginatingAgency.Identification",
+                "ContainsName[#ENRSON[#1]]",
+                "ContainsDescription[#ENRSON[#1]]",
+                "KeywordContent[#ENRSON[#1]]",
+                "document[#ENRSON[#1]]{PDF}",
+                "document[#ENRSON[#1]]{MP3}",
+                "document[#ENRSON[#1]]{WAV}",
+                "ContainsName[#ENRSON[#1]//SAMPLES[#1]]",
+                "ContainsDescription[#ENRSON[#1]//SAMPLES[#1]]",
+                "KeywordContent[#ENRSON[#1]//SAMPLES[#1]]",
+                "document[#ENRSON[#1]//SAMPLES[#1]]",
+                "ContainsName[#ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
+                "ContainsDescription[#ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
+                "KeywordContent[#ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
+                "document[#ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
+                "ContainsName[#ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
+                "ContainsDescription[#ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
+                "KeywordContent[#ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
+                "document[#ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
+                };
+            declencherAnalyseProfil("tags_profil_complet", erreursAttendues, tagsAttendus);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void H04_TestContenuFichierDonnees() {
+            String[] tagsListeClesAttendus = 
+                { 
+                "#Comment",
+                "#TransferName",
+                "#CustodialHistory",
+                "#OriginatingAgency.BusinessType",
+                "#OriginatingAgency.Description",
+                "#OriginatingAgency.LegalClassification",
+                "#OriginatingAgency.Name",
+                "#OriginatingAgency.Identification",
+                "#ContainsName[#ENRSON[#1]]",
+                "#ContainsDescription[#ENRSON[#1]]",
+                "#KeywordContent[#ENRSON[#1]]",
+                "#ContainsName[#ENRSON[#1]//SAMPLES[#1]]",
+                "#ContainsDescription[#ENRSON[#1]//SAMPLES[#1]]",
+                "#KeywordContent[#ENRSON[#1]//SAMPLES[#1]]",
+                "#ContainsName[#ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
+                "#ContainsDescription[#ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
+                "#KeywordContent[#ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
+                "#ContainsName[#ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
+                "#ContainsDescription[#ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
+                "#KeywordContent[#ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
+                };
+            String[] tagsListeDocumentsAttendus = 
+                { 
+                "[#ENRSON[#1]]{PDF}",
+                "[#ENRSON[#1]]{MP3}",
+                "[#ENRSON[#1]]{WAV}",
+                "[#ENRSON[#1]//SAMPLES[#1]]",
+                "[#ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
+                "[#ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
+                };
+            DataControlConfig control = configLoader("tags_profil_complet");
+
+            CsvArchiveDocuments ad = new CsvArchiveDocuments();
+            ad.loadFile(control.dataFile);
+            StringCollection listForKeys = ad.getTagsListForKeys();
+            StringCollection listForDocuments = ad.getTagsListForDocuments();
+
+            int key = 0;
+            if (listForKeys != null && listForKeys.Count != 0) {
+                foreach (String str in listForKeys) {
+                    if (tagsListeClesAttendus.Length > key)
+                        StringAssert.StartsWith(str, tagsListeClesAttendus[key], "Comparaison des tags de clés");
+                    key++;
+                }
+            }
+
+            Assert.AreEqual(tagsListeClesAttendus.Length, listForKeys.Count, "Le nombre de clés attendues et obtenues diffère");
+
+            key = 0;
+            if (listForDocuments != null && listForDocuments.Count != 0) {
+                foreach (String str in listForDocuments) {
+                    if (tagsListeClesAttendus.Length > key)
+                        StringAssert.StartsWith(str, tagsListeDocumentsAttendus[key], "Comparaison des tags de documents");
+                    key++;
+                }
+            }
+
+            Assert.AreEqual(tagsListeDocumentsAttendus.Length, listForDocuments.Count, "Le nombre de documents attendus et obtenus diffère");
+
         }
 
     }

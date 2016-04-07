@@ -14,8 +14,20 @@ namespace SedaSummaryGenerator {
             return ad.checkFile(dataFile);
         }
 
+        public StringCollection controlMatchingBetweenDataAndProfile(String dataFile, String profileFile) {
+            StringCollection errors = new StringCollection();
+            CsvArchiveDocuments ad = new CsvArchiveDocuments();
+            if (traceActions)
+                ad.setTracesWriter(tracesWriter);
+            ad.loadFile(dataFile);
+
+            StringCollection tagsForKeys = ad.getTagsListForKeys();
+            StringCollection tagsForDocs = ad.getTagsListForDocuments();
+
+            return errors;
+        }
         /*
-         * Gestion des traces de débigage
+         * Gestion des traces de débogage
          * */
         public void setTracesWriter(TextWriter tracesWriter) {
             if (tracesWriter != null) {
@@ -26,7 +38,7 @@ namespace SedaSummaryGenerator {
         }
 
         /*
-         * Gestion des traces de débigage
+         * Gestion des traces de débogage
          * */
         public void unsetTracesWriter() {
             tracesWriter = null;

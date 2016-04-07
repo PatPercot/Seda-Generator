@@ -43,6 +43,8 @@ Contains/ContentDescription/ContentDescriptive/KeywordContent							Métier			#K
 namespace BusinessDataControllerLauncher {
     class Program {
         static int Main(string[] args) {
+            System.IO.StreamWriter streamWriter = null;
+
             String jobName;
             if (args.Length < 1) {
                 System.Console.WriteLine("Syntaxe attendue : BusinessDataControllerLauncher nom-job-controle");
@@ -78,16 +80,68 @@ namespace BusinessDataControllerLauncher {
 
             System.Console.WriteLine("Contrôle métier du job '" + datacontrol.nomJob + "' : '" + datacontrol.dataFile + "' avec le profil '" + datacontrol.profileFile + "'");
 
+            Action<Exception, String> eh = (ex, str) => {
+                Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + datacontrol.traceFile + ". Complementary message: " + str);
+                System.Environment.Exit(-1);
+            };
+
+            try {
+                streamWriter = new System.IO.StreamWriter(datacontrol.traceFile);
+            } catch (System.IO.IOException e) { eh(e, "Mauvaise syntaxe de nom de fichier"); } catch (UnauthorizedAccessException e) { eh(e, "Droits d'accès à corriger"); } catch (System.Security.SecurityException e) { eh(e, "Droits d'accès à corriger"); }
+
             BusinessDataController bdc = new BusinessDataController();
-            //bdc.setTracesWriter(tracesWriter)
+            bdc.setTracesWriter(streamWriter);
             StringCollection errors = bdc.controlDataFormat(datacontrol.dataFile);
 
             if (errors.Count > 0) {
                 System.Console.WriteLine("\nDes erreurs ont été rencontrées\n\n");
                 foreach (String str in errors) {
                     System.Console.WriteLine(str);
+                    streamWriter.WriteLine(str);
                 }
                 System.Console.WriteLine("\n\n");
+                streamWriter.WriteLine("\n\n");
+            }
+
+            RngProfileController rpc = new RngProfileController();
+            rpc.setTracesWriter(streamWriter);
+
+            rpc.controlProfileFile(datacontrol.profileFile);
+            /*
+            StringCollection arbre = rpc.getTreeList();
+
+            if (arbre != null && arbre.Count != 0) {
+                Console.WriteLine("\nArbre des unités documentaires.\n");
+                Console.WriteLine("Les unités répétées sont présentées sous la forme UNITE[#1].");
+                foreach (String str in arbre) {
+                    Console.WriteLine(str);
+                    streamWriter.WriteLine(str);
+                }
+                streamWriter.WriteLine("\n\n");
+            }
+            */
+            StringCollection expectedTags = rpc.getExpectedTagsListList();
+
+            if (expectedTags != null && expectedTags.Count != 0) {
+                Console.WriteLine("\nTags attendus.\n");
+                Console.WriteLine("Les unités répétées sont présentées sous la forme UNITE[#1].");
+                foreach (String str in expectedTags) {
+                    Console.WriteLine(str);
+                    streamWriter.WriteLine(str);
+                }
+                streamWriter.WriteLine("\n\n");
+            }
+
+            errors = rpc.getErrorsList();
+
+            if (errors != null && errors.Count != 0) {
+                Console.WriteLine("\n!!!!!!!!!!!!!!!!!!!!!!\nIl y a eu des erreurs.\n");
+                foreach (String str in errors) {
+                    Console.WriteLine(str);
+                    streamWriter.WriteLine(str);
+                }
+            } else {
+                Console.WriteLine("\nAucune erreur détectée\n");
             }
 
             return errors.Count;

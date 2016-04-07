@@ -110,6 +110,21 @@ namespace SedaSummaryGenerator {
             catch (IOException e) { eh(e); }
         }
 
+        public StringCollection getTagsListForKeys() {
+            StringCollection liste = new StringCollection();
+            foreach (string[] elements in keyList) {
+                liste.Add(elements[1]);
+            }
+            return liste;
+        }
+
+        public StringCollection getTagsListForDocuments() {
+            StringCollection liste = new StringCollection();
+            foreach (string[] elements in documentsList) {
+                liste.Add(elements[2]);
+            }
+            return liste;
+        }
 
         public StringCollection checkFile(String csvFile) {
             Action<Exception> eh = (ex) => {

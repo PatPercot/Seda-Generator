@@ -50,10 +50,14 @@ namespace SedaSummaryGenerator {
         protected StringCollection treeList;
         protected bool treeListCompleted = false;
 
+        protected StringCollection expectedTagsList;
+        protected bool expectedTagsListCompleted = false;
+
         public RngProfileController() {
             errorsList = new StringCollection();
             unsetTracesWriter();
             treeList = new StringCollection();
+            expectedTagsList = new StringCollection();
         }
 
 
@@ -137,6 +141,7 @@ namespace SedaSummaryGenerator {
                                 if (archiveNodeName == null) {
                                     errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
                                 } else {
+                                    loadExpectedTagsInArchiveNode( archiveNodeName );
                                     xPath = "rng:define[@name='" + archiveNodeName + "']/descendant::rng:element[@name='" + rootContains + "']/rng:ref";
                                     XmlNode containsNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                                     if (containsNode == null) {
@@ -146,7 +151,8 @@ namespace SedaSummaryGenerator {
                                         if (containsNodeName == null) {
                                             errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
                                         } else {
-                                            checkForDocumentInArchive(containsNodeName,"");
+                                            loadExpectedTagsInMainContainsNode( containsNodeName );
+                                            checkForDocumentInArchive(containsNodeName, "");
                                             recurseContainsDefine(containsNodeName, String.Empty, false);
                                         }
                                     }
@@ -182,6 +188,173 @@ namespace SedaSummaryGenerator {
 
         }
 
+
+        private void loadExpectedTagsInArchiveNode(String activeNodeName) {
+            XmlNode node;
+            String xPath, nodeName, nodeContent;
+
+            // Recherche du commentaire
+            nodeName = "Comment";
+            xPath = "rng:define[@name='" + activeNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
+            node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (node != null) {
+                nodeContent = node.Attributes.GetNamedItem("name").Value;
+                if (nodeContent != null) {
+                    xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
+                    node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (node != null) {
+                        expectedTagsList.Add(nodeName);
+                    }
+                }
+            }
+        }
+
+        private void loadExpectedTagsInMainContainsNode(String activeNodeName) {
+            XmlNode node, parentNode;
+            String xPath, nodeName, parentNodeName, nodeContent;
+
+            // Recherche du nom du transfert
+            xPath = "rng:define[@name='" + activeNodeName + "']/descendant::rng:element[@name='" + "Name" + "']/rng:ref";
+            node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (node != null) {
+                nodeContent = node.Attributes.GetNamedItem("name").Value;
+                if (nodeContent != null) {
+                    xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
+                    node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (node != null) {
+                        expectedTagsList.Add("TransferName");
+                    }
+                }
+            }
+
+            // Recherche de CustodialHistory et des OriginatingAgency des unités documentaires
+            xPath = "rng:define[@name='" + activeNodeName + "']/descendant::rng:element[@name='" + "ContentDescription" + "']/rng:ref";
+            parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (parentNode != null) {
+                parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
+                if (parentNodeName != null) {
+                    nodeName = "CustodialHistory";
+                    xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
+                    node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (node != null) {
+                        expectedTagsList.Add(nodeName);
+                    }
+                    nodeName = "OriginatingAgency";
+                    xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
+                    parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (parentNode != null) {
+                        parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
+                        if (parentNodeName != null) {
+                            String[] nodes = { "BusinessType", "Description", "LegalClassification", "Name", "Identification" };
+                            foreach (String name in nodes) {
+                                xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + name + "']/rng:ref";
+                                node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                if (node != null) {
+                                    expectedTagsList.Add("OriginatingAgency." + name);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void loadExpectedTagsInContainsNode(String activeNodeName, String docTypeId) {
+            XmlNode node, parentNode;
+            String xPath, parentNodeName, nodeContent;
+
+            // Recherche du nom des unités documentaires
+            xPath = "rng:define[@name='" + activeNodeName + "']/descendant::rng:element[@name='" + "Name" + "']/rng:ref";
+            node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (node != null) {
+                nodeContent = node.Attributes.GetNamedItem("name").Value;
+                if (nodeContent != null) {
+                    xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
+                    node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (node != null) {
+                        expectedTagsList.Add("ContainsName[#" + currentContainsNode.getRelativeContext() + "]");
+                    }
+                }
+            }
+
+            // Recherche de la description des unités documentaires
+            xPath = "rng:define[@name='" + activeNodeName + "']/descendant::rng:element[@name='" + "ContentDescription" + "']/rng:ref";
+            parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (parentNode != null) {
+                parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
+                if (parentNodeName != null) {
+                    String oldParentNodeName = parentNodeName;
+                    // Recherche de Description
+                    xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + "Description" + "']/rng:ref";
+                    parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (parentNode != null) {
+                        parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
+                        if (parentNodeName != null) {
+                            xPath = "rng:define[@name='" + parentNodeName + "']/rng:data[@type='string']";
+                            node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (node != null) {
+                                expectedTagsList.Add("ContainsDescription[#" + currentContainsNode.getRelativeContext() + "]");
+                            }
+                        }
+                    }
+
+                    // Recherche de KeywordContent
+                    xPath = "rng:define[@name='" + oldParentNodeName + "']/descendant::rng:element[@name='" + "ContentDescriptive" + "']/rng:ref";
+                    parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (parentNode != null) {
+                        parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
+                        if (parentNodeName != null) {
+                            xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + "KeywordContent" + "']/rng:ref";
+                            parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (parentNode != null) {
+                                parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
+                                if (parentNodeName != null) {
+                                    xPath = "rng:define[@name='" + parentNodeName + "']/rng:data[@type='string']";
+                                    node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                    if (node != null) {
+                                        expectedTagsList.Add("KeywordContent[#" + currentContainsNode.getRelativeContext() + "]");
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            // Recherche des documents des unités documentaires
+            xPath = "rng:define[@name='" + activeNodeName + "']";
+            XmlNode containsNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (containsNode != null) {
+                xPath = "descendant::rng:element[@name='Document']/rng:ref";
+                XmlNodeList documentNodesList = containsNode.SelectNodes(xPath, docInXmlnsManager);
+                // On peut ne pas avoir de Document
+                if (documentNodesList != null) {
+                    int compteur = 0;
+                    foreach (XmlNode docNode in documentNodesList) {
+                        compteur++;
+                        parentNodeName = docNode.Attributes.GetNamedItem("name").Value;
+                        if (parentNodeName != null) {
+                            xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + "Identification" + "']/rng:ref";
+                            parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (parentNode != null) {
+                                parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
+                                if (parentNodeName != null) {
+                                    xPath = "rng:define[@name='" + parentNodeName + "']/rng:attribute[@name='schemeID']/rng:value";
+                                    parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                    if (parentNode != null) {
+                                        expectedTagsList.Add("document[#" + currentContainsNode.getRelativeContext() + "]" +
+                                            "{" + getDocumentTypeId(parentNode.InnerText, String.Empty) + "}");
+                                    }
+                                }
+                            } else {
+                                expectedTagsList.Add("document[#" + currentContainsNode.getRelativeContext() + "]");
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         /*
          * Méthode utilitaire pour récupérer le DOCLIST
@@ -273,7 +446,9 @@ namespace SedaSummaryGenerator {
                     errorsList.Add("L'unité documentaire '" + currentDocumentTypeId + "' peut être répétée, mais elle ne possède pas de TAG répétable (TAG+). Il faut ajouter un '+' au tag ou changer les cardinalités");
                 if (! isRepeatable &&   currentDocumentTypeId.EndsWith("+"))
                     errorsList.Add("L'unité documentaire '" + currentDocumentTypeId + "' est unique ou optionnelle, mais elle possède un TAG répétable (TAG+). Il faut supprimer le '+' du tag ou changer les cardinalités");
+                loadExpectedTagsInContainsNode(defineNodeName, currentDocumentTypeId);
             }
+
 
             xPath = "rng:define[@name='" + defineNodeName + "']";
             XmlNode containsNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
@@ -624,6 +799,14 @@ namespace SedaSummaryGenerator {
         public StringCollection getTreeList() {
             return treeList;
         }
+
+        /*
+         * La structure de l'arbre peut être récupéré dans la liste
+         * */
+        public StringCollection getExpectedTagsListList() {
+            return expectedTagsList;
+        }
+
 
         /*
          * Gestion des traces de débigage
