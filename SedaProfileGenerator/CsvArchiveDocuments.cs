@@ -66,6 +66,34 @@ namespace SedaSummaryGenerator {
             lastError = "Pas de données chargées";
         }
 
+        /*
+         * Indique si la ligne est une ligne de données ou une ligne de commentaires
+         * Les lignes de commentaires commencent par une espace ou une tabulation
+         * */
+        private bool isThisLineALineOfData(String line) {
+            return line.Length > 0 && line[0] != ' ' && line[0] != '\t';
+        }
+
+        private int getNumberOfSeparator(String line) {
+            return Utils.nbOccur(line[0], line);
+        }
+        /*
+         * Vérifie si le nombre de séparateurs dans la ligne est correcte
+         * La ligne doit être une ligne de données isThisLineALineOfData
+         * */
+        private bool isNumberOfSeparatorCorrect(String line) {
+            // Check: comptage du nombre de séparateurs
+            int nbSeparator = getNumberOfSeparator(line);
+            switch (nbSeparator) {
+                case 2:
+                case 4:
+                case 7:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
         /* 
          * Chargement des informations à partir du fichier
          * */
@@ -79,22 +107,28 @@ namespace SedaSummaryGenerator {
             if (traceActions) tracesWriter.WriteLine("ArchiveDocuments.LoadFile");
             Regex rgxSeperator;
             String line;
+            int nbLine = 0;
             string[] elements;
             try {
                 using (StreamReader reader = new StreamReader(csvFile)) {
                     while (reader.Peek() > -1) {
+                        nbLine++;
                         line = reader.ReadLine();
                         if (traceActions) tracesWriter.WriteLine(line);
-                        if (line.Length > 0) {
-                            rgxSeperator = new Regex("" + line[0]);
-                            elements = rgxSeperator.Split(line);
-                            foreach (string match in elements) {
-                                if (traceActions) tracesWriter.Write("field: '" + match + "' ");
-                            }
-                            if (elements[1] != "" && elements[1][0] == '#') {
-                                keyList.Add(elements);
+                        if ( isThisLineALineOfData(line) ) {
+                            if (! isNumberOfSeparatorCorrect(line)) {
+                                addActionError("#DATAERR: Nombre de séparateurs incorrect en ligne '" + nbLine + "'");
                             } else {
-                                documentsList.Add(elements);
+                                rgxSeperator = new Regex("" + line[0]);
+                                elements = rgxSeperator.Split(line);
+                                foreach (string match in elements) {
+                                    if (traceActions) tracesWriter.Write("field: '" + match + "' ");
+                                }
+                                if (elements[1] != "" && elements[1][0] == '#') {
+                                    keyList.Add(elements);
+                                } else {
+                                    documentsList.Add(elements);
+                                }
                             }
                             if (traceActions) tracesWriter.WriteLine();
                         }
@@ -162,20 +196,12 @@ namespace SedaSummaryGenerator {
                         ++linenumber;
                         line = reader.ReadLine();
                         if (traceActions) tracesWriter.WriteLine(line);
-                        if (line.Length > 0) {
 
-                            // Check: comptage du nombre de séparateurs
-                            int nbSeparator = Utils.nbOccur(line[0], line);
-                            switch (nbSeparator) {
-                                case 2:
-                                case 4:
-                                case 7:
-                                    break;
-                                default:
+                        if (isThisLineALineOfData(line)) {
+                            int nbSeparator = getNumberOfSeparator(line);
+                            if (isNumberOfSeparatorCorrect(line) == false)
                                     listeAvertissements.Add("ERR: La ligne '" + linenumber + "' contient '" + nbSeparator +
                                         "' séparateurs (" + line[0] + ") alors qu'elle ne peut en contenir que 2, 4 ou 7");
-                                    break;
-                            }
 
                             rgxSeperator = new Regex("" + line[0]);
                             elements = rgxSeperator.Split(line);
@@ -200,7 +226,7 @@ namespace SedaSummaryGenerator {
                                     DateTime date = DateTime.Parse(elements[4], new System.Globalization.CultureInfo("fr-FR", false));
                                 } catch (Exception e) {
                                     listeAvertissements.Add("ERR: dans la ligne '" + linenumber +
-                                        "' la date '" + elements[4] + "' a un format non reconnu (formats autorisés AAA/MM/JJ ou AAAA/MM/JJ HH:MM:SS)");
+                                        "' la date '" + elements[4] + "' a un format non reconnu (formats autorisés AAAA-MM-JJ ou AAAA-MM-JJ HH:MM:SS)");
                                 }
 
                             }
@@ -313,7 +339,7 @@ namespace SedaSummaryGenerator {
              * */
             if (formatOK != true) {
                 listeAvertissements.Add("ERR: dans la ligne '" + linenumber +
-                    "' le 1er champ ne correspond pas à un des formats possibles : #tagname, #tagname[TAG] ou #tagname{TAG[#num]]");
+                    "' le 1er champ ne correspond pas à un des formats possibles : #tagname, #tagname[TAG] ou #tagname[TAG[#num]]");
             }
 
             int nbOccurrences;
