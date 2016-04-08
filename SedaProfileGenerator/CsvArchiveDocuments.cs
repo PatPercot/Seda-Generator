@@ -71,7 +71,7 @@ namespace SedaSummaryGenerator {
          * Les lignes de commentaires commencent par une espace ou une tabulation
          * */
         private bool isThisLineALineOfData(String line) {
-            return line.Length > 0 && line[0] != ' ' && line[0] != '\t';
+            return line.Length > 0 && line[0] != '#';
         }
 
         private int getNumberOfSeparator(String line) {
