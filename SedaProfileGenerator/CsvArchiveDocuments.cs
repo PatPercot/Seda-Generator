@@ -78,7 +78,7 @@ namespace SedaSummaryGenerator {
             return Utils.nbOccur(line[0], line);
         }
         /*
-         * Vérifie si le nombre de séparateurs dans la ligne est correcte
+         * Vérifie si le nombre de séparateurs dans la ligne est correct
          * La ligne doit être une ligne de données isThisLineALineOfData
          * */
         private bool isNumberOfSeparatorCorrect(String line) {

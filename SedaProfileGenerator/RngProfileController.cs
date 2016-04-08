@@ -203,7 +203,7 @@ namespace SedaSummaryGenerator {
                     xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
                     node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                     if (node != null) {
-                        expectedTagsList.Add(nodeName);
+                        expectedTagsList.Add("#" + nodeName);
                     }
                 }
             }
@@ -222,7 +222,7 @@ namespace SedaSummaryGenerator {
                     xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
                     node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                     if (node != null) {
-                        expectedTagsList.Add("TransferName");
+                        expectedTagsList.Add("#TransferName");
                     }
                 }
             }
@@ -237,7 +237,7 @@ namespace SedaSummaryGenerator {
                     xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
                     node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                     if (node != null) {
-                        expectedTagsList.Add(nodeName);
+                        expectedTagsList.Add("#" + nodeName);
                     }
                     nodeName = "OriginatingAgency";
                     xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
@@ -250,7 +250,7 @@ namespace SedaSummaryGenerator {
                                 xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + name + "']/rng:ref";
                                 node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                                 if (node != null) {
-                                    expectedTagsList.Add("OriginatingAgency." + name);
+                                    expectedTagsList.Add("#OriginatingAgency." + name);
                                 }
                             }
                         }
@@ -272,7 +272,7 @@ namespace SedaSummaryGenerator {
                     xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
                     node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                     if (node != null) {
-                        expectedTagsList.Add("ContainsName[#" + currentContainsNode.getRelativeContext() + "]");
+                        expectedTagsList.Add("#ContainsName[" + currentContainsNode.getRelativeContext() + "]");
                     }
                 }
             }
@@ -293,7 +293,7 @@ namespace SedaSummaryGenerator {
                             xPath = "rng:define[@name='" + parentNodeName + "']/rng:data[@type='string']";
                             node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                             if (node != null) {
-                                expectedTagsList.Add("ContainsDescription[#" + currentContainsNode.getRelativeContext() + "]");
+                                expectedTagsList.Add("#ContainsDescription[" + currentContainsNode.getRelativeContext() + "]");
                             }
                         }
                     }
@@ -312,7 +312,7 @@ namespace SedaSummaryGenerator {
                                     xPath = "rng:define[@name='" + parentNodeName + "']/rng:data[@type='string']";
                                     node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                                     if (node != null) {
-                                        expectedTagsList.Add("KeywordContent[#" + currentContainsNode.getRelativeContext() + "]");
+                                        expectedTagsList.Add("#KeywordContent[" + currentContainsNode.getRelativeContext() + "]");
                                     }
                                 }
                             }
@@ -343,12 +343,12 @@ namespace SedaSummaryGenerator {
                                     xPath = "rng:define[@name='" + parentNodeName + "']/rng:attribute[@name='schemeID']/rng:value";
                                     parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                                     if (parentNode != null) {
-                                        expectedTagsList.Add("document[#" + currentContainsNode.getRelativeContext() + "]" +
+                                        expectedTagsList.Add("document[" + currentContainsNode.getRelativeContext() + "]" +
                                             "{" + getDocumentTypeId(parentNode.InnerText, String.Empty) + "}");
                                     }
                                 }
                             } else {
-                                expectedTagsList.Add("document[#" + currentContainsNode.getRelativeContext() + "]");
+                                expectedTagsList.Add("document[" + currentContainsNode.getRelativeContext() + "]");
                             }
                         }
                     }
