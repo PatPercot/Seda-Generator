@@ -6,8 +6,8 @@
 ,#KeywordContent[#2],Marché de fournitures
 ,#KeywordContent[#3],Consommables
 ,#KeywordContent[#4],Papeterie
-			Cette ligne est un commentaire et ne posera pas de problèmes lors de la lecture du fichier de données
-   Cette ligne est un commentaire et ne posera pas de problèmes lors de la lecture du fichier de données
+#			Cette ligne est un commentaire et ne posera pas de problèmes lors de la lecture du fichier de données
+#   Cette ligne est un commentaire et ne posera pas de problèmes lors de la lecture du fichier de données
 ,depot_DCE_horodatage.xml,MP_Cons_Dossier{MP_Cons_Dossier_Horodatage},Jeton d'horodatage du dépôt du DCE,01/12/2014 12:00:00
 ,RC.pdf,MP_Cons_Dossier{MP_Cons_Dossier_RC},Règlement de consultation,01/12/2014 12:00:00
 ,depot_RC_horodatage.xml,MP_Cons_Dossier{MP_Cons_Dossier_RC_Horodatage},Jeton d'horodatage du dépôt du RC,01/12/2014 12:00:00
