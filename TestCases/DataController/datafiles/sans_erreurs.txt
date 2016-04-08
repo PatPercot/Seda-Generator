@@ -8,5 +8,5 @@
 ,#OriginatingAgency.Identification,CG56_MP_001
 ,#OriginatingAgency.Name,Service des Marchés Publics (SMP)
 
-			Cette ligne est un commentaire et ne posera pas de problèmes lors de la lecture du fichier de données
-   Cette ligne est un commentaire et ne posera pas de problèmes lors de la lecture du fichier de données
+#			Cette ligne est un commentaire et ne posera pas de problèmes lors de la lecture du fichier de données
+#   Cette ligne est un commentaire et ne posera pas de problèmes lors de la lecture du fichier de données
