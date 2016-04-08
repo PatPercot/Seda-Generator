@@ -1,4 +1,12 @@
 -------------------------
+Changements du 2016-04-08
+
+- Contrôleur de données métier (croisement des données avec le profil)
+- Ajout de commentaires dans les données métier (ligne débutant par #)
+- Corrections erreurs de messages
+- Ajout d'un contrôle sur le nombre de séparateurs dans les données métier
+
+-------------------------
 Changements du 2016-03-23
 
 - Ajout d'un répertoire documentation
