@@ -57,13 +57,13 @@
 ,MP_Cons_Reg_DocsExt_1.pdf,MP_Cons_Reg_DocsExt,Document Externe 1 lié aux registre,20/12/2014 12:00:00
 ,MP_Cons_Reg_DocsExt_2.pdf,MP_Cons_Reg_DocsExt,Document Externe 2 lié aux registre,20/12/2014 12:00:00
 
-,#ContainsName[MP_OetD_Cand_Retenues1[#1]],offre de l'entreprise 1 pour le lot 1,22/12/2014 12:00:00
+,#ContainsName[MP_OetD_Cand_Retenues1[#1]],offre de l'entreprise 1 pour le lot 1
 ,MP_OetD_Cand_Retenues1_1_1.pdf,MP_OetD_Cand_Retenues1[#1],Candidature de l'entreprise X,19/12/2014 12:00:00
 ,MP_OetD_Cand_Retenues1_1_2.pdf,MP_OetD_Cand_Retenues1[#1],Docs complémentaires de l'entreprise X,19/12/2014 12:00:00
 ,MP_OetD_Cand_Retenues1_2_1.pdf,MP_OetD_Cand_Retenues1[#2],Candidature de l'entreprise Y,19/12/2014 12:00:00
 ,MP_OetD_Cand_Retenues1_2_2.pdf,MP_OetD_Cand_Retenues1[#2],Docs complémentaires de l'entreprise Y,19/12/2014 12:00:00
 
-,#ContainsName[MP_OetD_Cand_NRetenues1[#1],offre de l'entreprise 2 pour le lot 1,23/12/2014 12:00:00
+,#ContainsName[MP_OetD_Cand_NRetenues1[#1],offre de l'entreprise 2 pour le lot 1
 ,MP_OetD_Cand_NRetenues1_1_1.pdf,MP_OetD_Cand_NRetenues1[#1],Candidature de l'entreprise A,20/12/2014 12:00:00
 ,MP_OetD_Cand_NRetenues1_1_2.pdf,MP_OetD_Cand_NRetenues1[#1],Docs complémentaires de l'entreprise A,20/12/2014 12:00:00
 ,MP_OetD_Cand_NRetenues1_2_1.pdf,MP_OetD_Cand_NRetenues1[#2],Candidature de l'entreprise B,20/12/2014 12:00:00
@@ -164,28 +164,28 @@
 ,MP_OetD_DAD_DocsExts_1.pdf,MP_OetD_DAD_DocsExts[#1],Fichiers ajoutés lors de l'enrichissement manuel de l'archive (1),27/12/2014 12:00:00
 ,MP_OetD_DAD_DocsExts_2.pdf,MP_OetD_DAD_DocsExts[#1],Fichiers ajoutés lors de l'enrichissement manuel de l'archive (2),27/12/2014 12:00:00
 
-,#ContainsName[MP_Cons_Msg_Echange[#1]],Messages échangés,22/12/2014 12:00:00
-,#ContainsName[MP_Cons_Msg_Echange[#2]],Messages échangés,23/12/2014 12:00:00
-,#ContainsName[MP_OetD_Cand_Retenues1[#2]],Offre de l'entreprise Y pour le lot 2,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Cand_NRetenues1[#1]],Offre non-retenue lot 1,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Cand_NRetenues1[#2]],Offre non-retenue lot 2,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Admissibilite_Compl1[#1]],Documents complémentaires du lot 1,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Admissibilite_Compl1[#2]],Documents complémentaires du lot 2,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Admissibilite_Rejet_Echange[#1]],Message de rejet pour le lot 1,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Admissibilite_Rejet_Echange[#2]],Message de rejet pour le lot 2,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Admissibilite_Lettre_Fichier[#1]],Lettre d'admission du lot 1 (fichier),27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Admissibilite_Lettre_Fichier[#2]],Lettre d'admmission du lot 2 (fichier),27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Analyse[#1]],Analyse des offres du lot 1,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#1]],Fichiers de candidatures non retenues,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#2]],Fichiers de candidatures non retenues,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#1]],Fichiers de candidature retenue pour le lot 1,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#2]],Fichiers de candidature retenue pour le lot 2,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Rejet_Echange],Messages d'attribution,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_analyse_decision1],Documents liés à l'attribution,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_analyse_decision1_PJ1],Pièces jointes liées à l'attribution,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Engag],Documents d'engagement,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Engag_AE],Actes d'engagement,27/12/2014 12:00:00
-,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_analyse_decision_Compl_Fichier[#1]],Messages complémentaires,27/12/2014 12:00:00
+,#ContainsName[MP_Cons_Msg_Echange[#1]],Messages échangés
+,#ContainsName[MP_Cons_Msg_Echange[#2]],Messages échangés
+,#ContainsName[MP_OetD_Cand_Retenues1[#2]],Offre de l'entreprise Y pour le lot 2
+,#ContainsName[MP_OetD_Cand_NRetenues1[#1]],Offre non-retenue lot 1
+,#ContainsName[MP_OetD_Cand_NRetenues1[#2]],Offre non-retenue lot 2
+,#ContainsName[MP_OetD_Admissibilite_Compl1[#1]],Documents complémentaires du lot 1
+,#ContainsName[MP_OetD_Admissibilite_Compl1[#2]],Documents complémentaires du lot 2
+,#ContainsName[MP_OetD_Admissibilite_Rejet_Echange[#1]],Message de rejet pour le lot 1
+,#ContainsName[MP_OetD_Admissibilite_Rejet_Echange[#2]],Message de rejet pour le lot 2
+,#ContainsName[MP_OetD_Admissibilite_Lettre_Fichier[#1]],Lettre d'admission du lot 1 (fichier)
+,#ContainsName[MP_OetD_Admissibilite_Lettre_Fichier[#2]],Lettre d'admmission du lot 2 (fichier)
+,#ContainsName[MP_OetD_Analyse[#1]],Analyse des offres du lot 1
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#1]],Fichiers de candidatures non retenues
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#2]],Fichiers de candidatures non retenues
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#1]],Fichiers de candidature retenue pour le lot 1
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_OR1[#2]],Fichiers de candidature retenue pour le lot 2
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Rejet_Echange],Messages d'attribution
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_analyse_decision1],Documents liés à l'attribution
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_analyse_decision1_PJ1],Pièces jointes liées à l'attribution
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Engag],Documents d'engagement
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_Analyse_Decision_Engag_AE],Actes d'engagement
+,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_analyse_decision_Compl_Fichier[#1]],Messages complémentaires
 
 
 ,#KeywordContent[MP_OetD_Analyse[#1][#1]],petite fourniture

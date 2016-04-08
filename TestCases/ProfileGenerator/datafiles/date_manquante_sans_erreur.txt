@@ -8,12 +8,12 @@
 ,#OriginatingAgency.Name,Département du Morbihan - Direction des systèmes d'information
 
 ,#ContainsName[O6_Chapitre1],Offre retenue de l'entreprise 1
-,document1e1.txt,O6_Chapitre1,Document 1 E1
+,document1e1.txt,O6_Chapitre1,Document 1 E1,
 ,document2e1.txt,O6_Chapitre1,Document 2 E1,
-,document1e2.txt,O6_Chapitre1,Document 1 E2,,
-,document_inexistant1.txt,O6_Chapitre1,Document 2 E2
+,document1e2.txt,O6_Chapitre1,Document 1 E2,
+,document_inexistant1.txt,O6_Chapitre1,Document 2 E2,
 ,document_inexistant2.txt,O6_Chapitre1,Document 3 E2,
-,document_inexistant3.txt,O6_Chapitre1,Document réponse  1 E2,,
+,document_inexistant3.txt,O6_Chapitre1,Document réponse  1 E2,
 
 ,#KeywordContent[#1],mot-clé à voir apparaître si un mot-clé a été demandé
 ,#KeywordContent[OFFRES_RETENUES#1,mot-clé 1 pour l'offre retenue

@@ -83,7 +83,7 @@ namespace BusinessDataControllerUnitTest {
                 "ERR: La ligne '2' contient '3' séparateurs (", 
                 "ERR: La ligne '3' contient '12' séparateurs (", 
                 "ERR: le 1er champ de la ligne '5' commence par 'T' alors qu'il devrait commencer par #",
-                "ERR: dans la ligne '13' la date '32/12/2014 12:00:00' a un format non reconnu",
+                "ERR: dans la ligne '13' la date '32/12/2014 12:00:00' a un format non reconnu (formats autorisés AAAA-MM-JJ ou AAAA-MM-JJ HH:MM:SS)",
                 "ERR: dans la ligne '14' la date '' a un format non reconnu",
                 "ERR: la ligne '16' contient une balise '#BlaBlaBla[ENRSON[#1]]' qui n'est pas reconnue et ne sera pas traitée",
                 "ERR: dans la ligne '17' le 1er champ ne contient pas de nom de balise",
@@ -92,6 +92,7 @@ namespace BusinessDataControllerUnitTest {
                 "ERR: dans la ligne '33' le 2ème champ ne correspond pas à un des formats possibles : tagname, tagname{doc}, tagname[#num] ou tagname[#num]{doc}",
                 "ERR: dans la ligne '34' le 2ème champ ne correspond pas à un des formats possibles : tagname, tagname{doc}, tagname[#num] ou tagname[#num]{doc}",
                 "ERR: dans la ligne '43' la date '1er juin 2013 12:00:00' a un format non reconnu",
+                "ERR: dans la ligne '55' le 1er champ ne correspond pas à un des formats possibles : #tagname, #tagname[TAG] ou #tagname[TAG[#num]]",
                 "ERR: la tagname 'TransferName' a été trouvée '2' fois alors qu'elle ne doit être présente qu'une seule fois",
                 };
             declencherControleDonnees("caban_erreurs", erreursAttendues);
