@@ -93,58 +93,39 @@ namespace BusinessDataControllerLauncher {
             bdc.setTracesWriter(streamWriter);
             StringCollection errors = bdc.controlDataFormat(datacontrol.dataFile);
 
+            StringCollection erreursCorrespondance =
+                bdc.controlMatchingBetweenDataAndProfile(datacontrol.dataFile, datacontrol.profileFile);
+
+            int nbErreurs = 0;
+            if (errors.Count > 0)
+                nbErreurs += errors.Count;
+            if (erreursCorrespondance != null && erreursCorrespondance.Count != 0)
+                nbErreurs += erreursCorrespondance.Count;
+            if (nbErreurs > 0)
+                System.Console.WriteLine("\nDes erreurs ont été rencontrées\n");
+
             if (errors.Count > 0) {
-                System.Console.WriteLine("\nDes erreurs ont été rencontrées\n\n");
+                System.Console.WriteLine("\nErreurs dans les données :\n");
                 foreach (String str in errors) {
                     System.Console.WriteLine(str);
                     streamWriter.WriteLine(str);
                 }
-                System.Console.WriteLine("\n\n");
-                streamWriter.WriteLine("\n\n");
+                System.Console.WriteLine("\n");
+                streamWriter.WriteLine("\n");
             }
 
-            RngProfileController rpc = new RngProfileController();
-            rpc.setTracesWriter(streamWriter);
-
-            rpc.controlProfileFile(datacontrol.profileFile);
-            /*
-            StringCollection arbre = rpc.getTreeList();
-
-            if (arbre != null && arbre.Count != 0) {
-                Console.WriteLine("\nArbre des unités documentaires.\n");
-                Console.WriteLine("Les unités répétées sont présentées sous la forme UNITE[#1].");
-                foreach (String str in arbre) {
-                    Console.WriteLine(str);
-                    streamWriter.WriteLine(str);
+            if (erreursCorrespondance != null && erreursCorrespondance.Count != 0) {
+                System.Console.WriteLine("\nErreurs de correspondance entre les données et le profil :\n");
+                foreach (String err in erreursCorrespondance) {
+                    Console.WriteLine(err);
+                    streamWriter.WriteLine(err);
                 }
-                streamWriter.WriteLine("\n\n");
+                System.Console.WriteLine("\n");
+                streamWriter.WriteLine("\n");
             }
-            */
-            StringCollection expectedTags = rpc.getExpectedTagsListList();
+            streamWriter.Flush();
 
-            if (expectedTags != null && expectedTags.Count != 0) {
-                Console.WriteLine("\nTags attendus.\n");
-                Console.WriteLine("Les unités répétées sont présentées sous la forme UNITE[#1].");
-                foreach (String str in expectedTags) {
-                    Console.WriteLine(str);
-                    streamWriter.WriteLine(str);
-                }
-                streamWriter.WriteLine("\n\n");
-            }
-
-            errors = rpc.getErrorsList();
-
-            if (errors != null && errors.Count != 0) {
-                Console.WriteLine("\n!!!!!!!!!!!!!!!!!!!!!!\nIl y a eu des erreurs.\n");
-                foreach (String str in errors) {
-                    Console.WriteLine(str);
-                    streamWriter.WriteLine(str);
-                }
-            } else {
-                Console.WriteLine("\nAucune erreur détectée\n");
-            }
-
-            return errors.Count;
+            return nbErreurs;
         }
     }
 }

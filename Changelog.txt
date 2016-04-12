@@ -1,4 +1,10 @@
 -------------------------
+Changements du 2016-04-12
+- Livraison d'une version opérationnelle du contrôleur de données métier
+- Ajout d'un répertoire documentation
+- Ajout d'un guide de démarrage rapide (Quickstart.txt) et des profils, données métier et documents nécessaires à son utilisation
+
+-------------------------
 Changements du 2016-03-23
 
 - Ajout d'un répertoire documentation
