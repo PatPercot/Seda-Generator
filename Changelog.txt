@@ -1,6 +1,10 @@
 -------------------------
-Changements du 2016-04-08
+Changements du 2016-04-12
+- Livraison d'une version opérationnelle du contrôleur de données métier (manquaient les deriers développements dans l'exécutable)
+- Ajout d'un guide de démarrage rapide (Quickstart.txt) et des profils, données métier et documents nécessaires à son utilisation
 
+-------------------------
+Changements du 2016-04-08
 - Contrôleur de données métier (croisement des données avec le profil)
 - Ajout de commentaires dans les données métier (ligne débutant par #)
 - Corrections erreurs de messages

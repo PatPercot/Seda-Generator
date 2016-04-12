@@ -197,11 +197,12 @@ namespace BusinessDataControllerUnitTest {
                 { 
                 "#TransferName",
                 "#OriginatingAgency.Identification",
+                "#KeywordContent",
                 "#ContainsName[ENRSON[#1]]",
                 "#ContainsDescription[ENRSON[#1]]",
-                "document[ENRSON[#1]]{PDF}",
-                "document[ENRSON[#1]]{MP3}",
-                "document[ENRSON[#1]]{WAV}",
+                "document: ENRSON[#1]{PDF}",
+                "document: ENRSON[#1]{MP3}",
+                "document: ENRSON[#1]{WAV}",
 
                 };
             declencherAnalyseProfil("tags_profil", erreursAttendues, tagsAttendus);
@@ -225,24 +226,25 @@ namespace BusinessDataControllerUnitTest {
                 "#OriginatingAgency.LegalClassification",
                 "#OriginatingAgency.Name",
                 "#OriginatingAgency.Identification",
+                "#KeywordContent",
                 "#ContainsName[ENRSON[#1]]",
                 "#ContainsDescription[ENRSON[#1]]",
                 "#KeywordContent[ENRSON[#1]]",
-                "document[ENRSON[#1]]{PDF}",
-                "document[ENRSON[#1]]{MP3}",
-                "document[ENRSON[#1]]{WAV}",
+                "document: ENRSON[#1]{PDF}",
+                "document: ENRSON[#1]{MP3}",
+                "document: ENRSON[#1]{WAV}",
                 "#ContainsName[ENRSON[#1]//SAMPLES[#1]]",
                 "#ContainsDescription[ENRSON[#1]//SAMPLES[#1]]",
                 "#KeywordContent[ENRSON[#1]//SAMPLES[#1]]",
-                "document[ENRSON[#1]//SAMPLES[#1]]",
+                "document: ENRSON[#1]//SAMPLES[#1]",
                 "#ContainsName[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
                 "#ContainsDescription[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
                 "#KeywordContent[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
-                "document[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
+                "document: ENRSON[#1]//SAMPLES[#1]//DESCRIPTION",
                 "#ContainsName[ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
                 "#ContainsDescription[ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
                 "#KeywordContent[ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
-                "document[ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
+                "document: ENRSON[#1]//SAMPLES[#1]//ANNEXE",
                 };
             declencherAnalyseProfil("tags_profil_complet_profil", erreursAttendues, tagsAttendus);
         }
@@ -262,6 +264,8 @@ namespace BusinessDataControllerUnitTest {
                 "#OriginatingAgency.LegalClassification",
                 "#OriginatingAgency.Name",
                 "#OriginatingAgency.Identification",
+                "#KeywordContent[#1]",
+                "#KeywordContent[#2]",
                 "#ContainsName[ENRSON[#1]]",
                 "#ContainsDescription[ENRSON[#1]]",
                 "#KeywordContent[ENRSON[#1]]",
@@ -277,12 +281,12 @@ namespace BusinessDataControllerUnitTest {
                 };
             String[] tagsListeDocumentsAttendus = 
                 { 
-                "[ENRSON[#1]]{PDF}",
-                "[ENRSON[#1]]{MP3}",
-                "[ENRSON[#1]]{WAV}",
-                "[ENRSON[#1]//SAMPLES[#1]]",
-                "[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
-                "[ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
+                "ENRSON[#1]{PDF}",
+                "ENRSON[#1]{MP3}",
+                "ENRSON[#1]{WAV}",
+                "ENRSON[#1]//SAMPLES[#1]",
+                "ENRSON[#1]//SAMPLES[#1]//DESCRIPTION",
+                "ENRSON[#1]//SAMPLES[#1]//ANNEXE",
                 };
 
             DataControlConfig control = configLoader("tags_profil_complet_donnees");
@@ -350,13 +354,9 @@ namespace BusinessDataControllerUnitTest {
         }
 
 
-        [TestMethod]
-        /*
-         * 
-         * */
-        public void H05_ConfrontationDonneesEtProfilCorrects() {
+        private void ConfrontationDonneesEtProfil(String testAExecuter, String[] erreursAttendues) {
             StreamWriter streamWriter = null;
-            DataControlConfig control = configLoader("tags_profil_complet_comparaison");
+            DataControlConfig control = configLoader(testAExecuter);
             String traceFile = control.traceFile;
             String profileFile = control.profileFile;
             String dataFile = control.dataFile;
@@ -371,53 +371,13 @@ namespace BusinessDataControllerUnitTest {
             } catch (IOException e) { eh(e, "Mauvaise syntaxe de nom de fichier"); } catch (UnauthorizedAccessException e) { eh(e, "Droits d'accès à corriger"); } catch (System.Security.SecurityException e) { eh(e, "Droits d'accès à corriger"); }
 
             BusinessDataController bc = new BusinessDataController();
-            StringCollection erreurs = bc.controlMatchingBetweenDataAndProfile( dataFile,  profileFile);
-
-            foreach (String err in erreurs) {
-                streamWriter.WriteLine(err);
-            }
-            streamWriter.Flush();
-            Assert.AreEqual(0, erreurs.Count, "Le nombre d'erreurs attendues et obtenues diffère");
-        }
-
-        [TestMethod]
-        /*
-         * 
-         * */
-        public void H06_ConfrontationDonneesIncorrectesAvecProfil() {
-            StreamWriter streamWriter = null;
-            DataControlConfig control = configLoader("tags_donnees_incompletes_comparaison");
-            String traceFile = control.traceFile;
-            String profileFile = control.profileFile;
-            String dataFile = control.dataFile;
-
-            Action<Exception, String> eh = (ex, str) => {
-                Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);
-                throw ex;
-            };
-
-            try {
-                streamWriter = new StreamWriter(traceFile);
-            } catch (IOException e) { eh(e, "Mauvaise syntaxe de nom de fichier"); } catch (UnauthorizedAccessException e) { eh(e, "Droits d'accès à corriger"); } catch (System.Security.SecurityException e) { eh(e, "Droits d'accès à corriger"); }
-
-            BusinessDataController bc = new BusinessDataController();
+            bc.setTracesWriter(streamWriter);
             StringCollection erreurs = bc.controlMatchingBetweenDataAndProfile(dataFile, profileFile);
 
             foreach (String err in erreurs) {
                 streamWriter.WriteLine(err);
             }
             streamWriter.Flush();
-            String[] erreursAttendues = {
-                "Dans le profil, le tag '#Comment' ne trouve pas de correspondance dans les données métier",
-                "Dans le profil, le tag '#TransferName' ne trouve pas de correspondance dans les données métier",
-                "Dans le profil, le tag '#OriginatingAgency.Description' ne trouve pas de correspondance dans les données métier",
-                "Dans le profil, le tag '#OriginatingAgency.Name' ne trouve pas de correspondance dans les données métier",
-                "Dans le profil, le tag '#KeywordContent[ENRSON[#1]]' ne trouve pas de correspondance dans les données métier",
-                "Dans le profil, le tag 'document[ENRSON[#1]]{MP3}' ne trouve pas de correspondance dans les données métier",
-                "Dans le profil, le tag 'document[ENRSON[#1]]{WAV}' ne trouve pas de correspondance dans les données métier",
-                "Dans le profil, le tag '#ContainsDescription[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]' ne trouve pas de correspondance dans les données métier",
-                "Dans le profil, le tag '#ContainsName[ENRSON[#1]//SAMPLES[#1]//ANNEXE]' ne trouve pas de correspondance dans les données métier",
-            };
 
             int erreur = 0;
             if (erreurs != null && erreurs.Count != 0) {
@@ -430,5 +390,35 @@ namespace BusinessDataControllerUnitTest {
             Assert.AreEqual(erreursAttendues.Length, erreurs.Count, "Le nombre d'erreurs attendues et obtenues diffère");
         }
 
+
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void H05_ConfrontationDonneesEtProfilCorrects() {
+            String[] erreursAttendues = { };
+            ConfrontationDonneesEtProfil("tags_profil_complet_comparaison", erreursAttendues);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void H06_ConfrontationDonneesIncorrectesAvecProfil() {
+            String[] erreursAttendues = {
+                "Dans le profil, le tag '#Comment' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#TransferName' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#OriginatingAgency.Description' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#OriginatingAgency.Name' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#KeywordContent' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#KeywordContent[ENRSON[#1]]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#ContainsDescription[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#ContainsName[ENRSON[#1]//SAMPLES[#1]//ANNEXE]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag de document 'ENRSON[#1]{MP3}' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag de document 'ENRSON[#1]{WAV}' ne trouve pas de correspondance dans les données métier",
+            };
+            ConfrontationDonneesEtProfil("tags_donnees_incompletes_comparaison", erreursAttendues);
+        }
     }
 }

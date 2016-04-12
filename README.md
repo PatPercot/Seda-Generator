@@ -1,16 +1,25 @@
 # Seda-Generator
 
-Archivage numérique - Digital archiving - 
+Archivage numérique - Digital archiving - ProBANT
 
-Générateur automatique de bordereaux de transfert SEDA
+Générateur automatique de bordereaux de transfert SEDA ProBANT
 
 Disponible 
    sur GitHub   https://github.com/PatPercot/Seda-Generator
 Et sur CodePlex https://sedaautogenerator.codeplex.com/
 
 
+Pour démarrer rapidement : lire le fichier Documentation/QuickStart.txt
+
+ProBANT signifie Production de bordereaux pour l'archivage numérique territorial
+
+
+
+Pour vous informer un peu plus sur la génération de bordereaux de transfert :
+
 Ce générateur de bordereaux de transferts n'est pas vraiment le seul générateur existant.
 Mais il est le seul générateur publié sous licence libre.
+Vous en trouverez aussi une version Java sur GitHub : https://github.com/CGI-France/Java-Seda-Generator
 
 À ce jour, il y a peu de générateurs. Mais demain tous les SAE auront besoin de s’appuyer sur eux, 
 parce qu’ils apportent une solution aux problèmes ci-dessous :

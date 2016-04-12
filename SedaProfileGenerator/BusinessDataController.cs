@@ -21,58 +21,107 @@ namespace SedaSummaryGenerator {
             if (traceActions)
                 ad.setTracesWriter(tracesWriter);
             ad.loadFile(dataFile);
-
+            /*
             StringCollection erreursDonnees = ad.getErrorsList();
             if (erreursDonnees.Count != 0) {
                 foreach (String st in erreursDonnees) {
                     errors.Add(st);
                 }
             }
-
+            */
             RngProfileController rpc = new RngProfileController();
             if (traceActions)
                 rpc.setTracesWriter(tracesWriter);
             rpc.controlProfileFile(profileFile);
-
+            /*
             StringCollection erreursProfil = rpc.getErrorsList();
             if (erreursProfil.Count != 0) {
                 foreach (String st in erreursProfil) {
                     errors.Add(st);
                 }
             }
-
+            */
+            String str;
             StringCollection tagsForKeys = ad.getTagsListForKeys();
             StringCollection tagsForDocs = ad.getTagsListForDocuments();
             StringCollection expectedTags = rpc.getExpectedTagsListList();
-            StringCollection tagsForDocsModified;
-            String str;
 
-            // Test des clés
+            StringCollection expectedTagsForDocs = new StringCollection();
+            foreach (String st in expectedTags) {
+                if (st.StartsWith("document: ")) {
+                    expectedTagsForDocs.Add(st.Substring(10));
+                }
+            }
+            foreach (String st in expectedTagsForDocs) {
+                expectedTags.Remove("document: " + st);
+            }
+
+            StringCollection tagsForKeysModified = new StringCollection();
             foreach (String st in tagsForKeys) {
+                str = Regex.Replace(st, @"#KeywordContent\[#[0-9]+\]", "#KeywordContent");
+                tagsForKeysModified.Add(str);
+            }
+
+            StringCollection tagsForDocsModified = new StringCollection();
+            foreach (String st in tagsForDocs) {
+                str = Regex.Replace(st, @"#KeywordContent(\[[^]]+\])?\[#[0-9]+\]", "#KeywordContent$1");
+                tagsForDocsModified.Add(str);
+            }
+
+            if (traceActions) {
+                if (tagsForKeysModified.Count != 0) {
+                    tracesWriter.WriteLine("\ntagsForKeysModified");
+                    foreach (String st in tagsForKeysModified) {
+                        tracesWriter.WriteLine(st);
+                    }
+                }
+                if (tagsForDocsModified.Count != 0) {
+                    tracesWriter.WriteLine("\ntagsForDocsModified");
+                    foreach (String st in tagsForDocsModified) {
+                        tracesWriter.WriteLine(st);
+                    }
+                }
+                if (expectedTags.Count != 0) {
+                    tracesWriter.WriteLine("\nexpectedTags");
+                    foreach (String st in expectedTags) {
+                        tracesWriter.WriteLine(st);
+                    }
+                }
+                if (expectedTagsForDocs.Count != 0) {
+                    tracesWriter.WriteLine("\nexpectedTagsForDocs");
+                    foreach (String st in expectedTagsForDocs) {
+                        tracesWriter.WriteLine(st);
+                    }
+                }
+                tracesWriter.WriteLine("");
+            }
+
+            
+            // Test des clés
+            foreach (String st in tagsForKeysModified) {
                 str = Regex.Replace(st, @"\[#\d+\]", "[#1]");
+                str = Regex.Replace(str, @"#KeywordContent\[#[0-9]+\]", "#KeywordContent");
                 if (expectedTags.IndexOf(str) == -1)
                     errors.Add("La clé '" + st + "' fournie par les données métier n'est pas attendue par le profil");
             }
 
-            tagsForDocsModified = new StringCollection();
-            foreach (String st in tagsForDocs) {
-                str = Regex.Replace(st, @"^", "document");
-                str = Regex.Replace(str, @"\[#\d+\]", "[#1]");
-                tagsForDocsModified.Add(str);
-            }
-
             // Test des documents
             foreach (String st in tagsForDocsModified) {
-                if (expectedTags.IndexOf(st) == -1)
+                str = Regex.Replace(st, @"\[#\d+\]", "[#1]");
+                str = Regex.Replace(str, @"#KeywordContent(\[[^]]+\])?\[#[0-9]+\]", "#KeywordContent$1");
+                if (expectedTagsForDocs.IndexOf(str) == -1)
                     errors.Add("Le document typé par le tag '" + st + "' n'est pas attendu par le profil");
             }
 
             // Test du profil
             foreach (String st in expectedTags) {
-                if (tagsForKeys.IndexOf(st) == -1) {
-                    if (tagsForDocsModified.IndexOf(st) == -1) {
-                        errors.Add("Dans le profil, le tag '" + st + "' ne trouve pas de correspondance dans les données métier");
-                    }
+                if (tagsForKeysModified.IndexOf(st) == -1) {
+                    errors.Add("Dans le profil, le tag '" + st + "' ne trouve pas de correspondance dans les données métier");
+                }
+            }
+            foreach (String st in expectedTagsForDocs) {
+                if (tagsForDocsModified.IndexOf(st) == -1) {
+                    errors.Add("Dans le profil, le tag de document '" + st + "' ne trouve pas de correspondance dans les données métier");
                 }
             }
             return errors;

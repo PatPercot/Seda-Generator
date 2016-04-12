@@ -98,7 +98,7 @@ namespace SedaSummaryGenerator {
             if (traceActions) tracesWriter.WriteLine("\n-----------------------------------------\n");
             if (traceActions) tracesWriter.WriteLine("Début de la vérification du profil");
             if (traceActions) tracesWriter.WriteLine("\n-----------------------------------------\n");
-            Console.WriteLine("Début de la vérification du profil");
+            //Console.WriteLine("Début de la vérification du profil");
             String xPath;
             try {
                 grammarNode = docIn.SelectSingleNode("rng:grammar", docInXmlnsManager);
@@ -172,7 +172,7 @@ namespace SedaSummaryGenerator {
             if (traceActions) tracesWriter.WriteLine("\n-----------------------------------------\n");
             if (traceActions) tracesWriter.WriteLine("Fin de la vérification du profil");
             if (traceActions) tracesWriter.WriteLine("\n-----------------------------------------\n");
-            Console.WriteLine("Fin de la vérification du profil");
+            //Console.WriteLine("Fin de la vérification du profil");
 
             if (rootContainsNode != null) {
                 //if (traceActions) tracesWriter.WriteLine(rootContainsNode.dump(false));
@@ -233,6 +233,8 @@ namespace SedaSummaryGenerator {
             if (parentNode != null) {
                 parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
                 if (parentNodeName != null) {
+                    String oldParentNodeName = parentNodeName;
+
                     nodeName = "CustodialHistory";
                     xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
                     node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
@@ -255,6 +257,28 @@ namespace SedaSummaryGenerator {
                             }
                         }
                     }
+
+                    // Recherche de KeywordContent
+                    xPath = "rng:define[@name='" + oldParentNodeName + "']/descendant::rng:element[@name='" + "ContentDescriptive" + "']/rng:ref";
+                    parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (parentNode != null) {
+                        parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
+                        if (parentNodeName != null) {
+                            xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + "KeywordContent" + "']/rng:ref";
+                            parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (parentNode != null) {
+                                parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
+                                if (parentNodeName != null) {
+                                    xPath = "rng:define[@name='" + parentNodeName + "']/rng:data[@type='string']";
+                                    node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                    if (node != null) {
+                                        expectedTagsList.Add("#KeywordContent");
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
         }
@@ -343,12 +367,12 @@ namespace SedaSummaryGenerator {
                                     xPath = "rng:define[@name='" + parentNodeName + "']/rng:attribute[@name='schemeID']/rng:value";
                                     parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                                     if (parentNode != null) {
-                                        expectedTagsList.Add("document[" + currentContainsNode.getRelativeContext() + "]" +
+                                        expectedTagsList.Add("document: " + currentContainsNode.getRelativeContext() +
                                             "{" + getDocumentTypeId(parentNode.InnerText, String.Empty) + "}");
                                     }
                                 }
                             } else {
-                                expectedTagsList.Add("document[" + currentContainsNode.getRelativeContext() + "]");
+                                expectedTagsList.Add("document: " + currentContainsNode.getRelativeContext());
                             }
                         }
                     }
@@ -771,7 +795,7 @@ namespace SedaSummaryGenerator {
                                                     errorsList.Add("Dans l'unité documentaire '" + currentDocumentTypeId + "', la balise Identification de balise Document n°'" + compteur + "' doit avoir un attribut schemeID obligatoire");
                                                 } else {
                                                     String docTypeId = getDocumentTypeId(schemeIdNode.InnerText, context + "/Document[" + compteur + "]");
-                                                    Console.WriteLine("Type de document '" + docTypeId + "'");
+                                                    //Console.WriteLine("Type de document '" + docTypeId + "'");
                                                 }
                                             }
                                         }
