@@ -74,7 +74,7 @@ namespace BusinessDataControllerLauncher {
 
             DataControlConfig datacontrol = config.getDatacontrolConfig(jobName);
             if (datacontrol == null) {
-                System.Console.WriteLine("Aucun job 'data-control' trouvé dans le fichier job.config. Vérifiez la syntaxe ou créez une tâche.");
+                System.Console.WriteLine("Aucun job 'data-control: " + jobName + "' trouvé dans le fichier job.config. Vérifiez la syntaxe ou créez une tâche.");
                 System.Environment.Exit(-1);
             }
 

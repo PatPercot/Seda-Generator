@@ -59,7 +59,7 @@ namespace SedaSummaryGeneratorLauncher {
 
             GeneratorConfig generatorJob = config.getGeneratorConfig(jobName);
             if (generatorJob == null) {
-                System.Console.WriteLine("Aucun job 'generator' trouvé dans le fichier job.config. Vérifiez la syntaxe ou créez une tâche.");
+                System.Console.WriteLine("Aucun job 'generator: " + jobName + "' trouvé dans le fichier job.config. Vérifiez la syntaxe ou créez une tâche.");
                 System.Environment.Exit(-1);
             }
 

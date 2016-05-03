@@ -56,7 +56,7 @@ namespace RngProfileControllerLauncher {
 
             ProfileControlConfig control = config.getProfileConfig(jobName);
             if (control == null) {
-                System.Console.WriteLine("Aucun job 'profile-control' trouvé dans le fichier job.config. Vérifiez la syntaxe ou créez une tâche.");
+                System.Console.WriteLine("Aucun job 'profile-control: " + jobName + "' trouvé dans le fichier job.config. Vérifiez la syntaxe ou créez une tâche.");
                 System.Environment.Exit(-1);
             }
 

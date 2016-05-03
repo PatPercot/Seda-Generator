@@ -101,7 +101,7 @@ namespace CommonClassesLibrary {
                 if (c.nomJob.Equals(configName))
                     return c;
             }
-            if (profilecontrolList.Count >= 1)
+            if (configName.Equals("default") && profilecontrolList.Count >= 1)
                 return profilecontrolList.ElementAt(0);
             return null;
         }
@@ -114,7 +114,7 @@ namespace CommonClassesLibrary {
                 if (c.nomJob.Equals(configName))
                     return c;
             }
-            if (datacontrolList.Count >= 1)
+            if (configName.Equals("default") && datacontrolList.Count >= 1)
                 return datacontrolList.ElementAt(0);
             return null;
         }
@@ -127,7 +127,7 @@ namespace CommonClassesLibrary {
                 if (c.nomJob.Equals(configName))
                     return c;
             }
-            if (generatorList.Count >= 1)
+            if (configName.Equals("default") && generatorList.Count >= 1)
                 return generatorList.ElementAt(0);
             return null;
         }

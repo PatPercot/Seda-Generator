@@ -1,4 +1,9 @@
 -------------------------
+Changements du 2016-05-03
+- Correction de la sélection de tâches. Si la tâche n'est pas précisée default est choisie.
+  Si default n'existe pas, la première est choisie. Erreur si la tâche n'existe pas
+
+-------------------------
 Changements du 2016-04-12
 - Livraison d'une version opérationnelle du contrôleur de données métier (manquaient les deriers développements dans l'exécutable)
 - Ajout d'un guide de démarrage rapide (Quickstart.txt) et des profils, données métier et documents nécessaires à son utilisation
