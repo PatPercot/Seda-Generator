@@ -1,0 +1,14 @@
+Suivi des versions
+
+Version 1.0.0
+	Première version utilisable avec les applications C# 
+		- de contrôle de profil RngProfileControllerLauncher.exe
+		- de contrôle de données BusinessDataControllerLauncher.exe
+		- de génération de bordereaux de transfert SedaSummaryGeneratorLauncher.exe
+	Fonctionnalités
+		- configuration complète par job.config
+		- exécutables utilisables par copie des .exe du prépertoire Programs-Releases
+		- utilisation possible avec base de données : requiert des droits d'administrateur
+	Bugs
+		- ContainsDescription n'est pas produit dans le bordereau de transfert
+
