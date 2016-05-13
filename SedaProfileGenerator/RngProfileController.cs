@@ -317,7 +317,7 @@ namespace SedaSummaryGenerator {
                             xPath = "rng:define[@name='" + parentNodeName + "']/rng:data[@type='string']";
                             node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                             if (node != null) {
-                                expectedTagsList.Add("#ContainsDescription[" + currentContainsNode.getRelativeContext() + "]");
+                                expectedTagsList.Add("#ContentDescription.Description[" + currentContainsNode.getRelativeContext() + "]");
                             }
                         }
                     }

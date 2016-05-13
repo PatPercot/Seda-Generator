@@ -1,5 +1,15 @@
 Guide de démarrage rapide du générateur de bordereaux de transfert
 
+	À compter de mai 2016, le code C# va se focaliser sur le contrôle, la génération
+	étant assurée par la version Java. 
+	Le code C# sera gardé en synchronisation avec le générateur Java que vous trouverez
+	à cette adresse : https://github.com/PatPercot/Java-Seda-Generator
+	Ce code est un fork du générateur CGI publié sur GitHub :
+		https://github.com/CGI-France/Java-Seda-Generator
+	CGI traitera les Pull request produites à partir de cette version au fur et à mesure
+	de leur validation. Cette validation n'étant ni automatique ni systématique, les deux
+	versions pourront diverger temporairement.
+
 1) Installation du logiciel
 2) Instrumentation d'un profil d'archivage
 3) Préparation des données métier
@@ -12,7 +22,7 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 1) Installation du logiciel
 
 	Si vous êtes sous Linux, bonne nouvelle, les programmes peuvent être exécutés 
-	directement sous Mono (installez le paquateg Mono de votre distribution)
+	directement sous Mono (installez le paquetage Mono de votre distribution)
 
 1-a) Installation
 	Sur la plate-forme GitHub : cliquer sur le bouton "Download ZIP"
@@ -20,7 +30,16 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 		(choissez un chemin court, idéalement dans la racine d'un de vos disques)
 	Aller dans le répertoire "Programs-Releases" qui contient les exécutables
 	Faites une copie du fichier job.config.sample et renommez-la en job.config
+
+	Téléchargez la dernière version du ZIP situé à cette adresse :
+		https://github.com/PatPercot/Java-Seda-Generator/tree/master/target
+	Extraire les fichiers de ce ZIP dans Programs-Releases, particulièrement :
+		le répertoire lib
+		le fichier JavaSedaProfileGenerator_task.bat
+	
 	Vous êtes prêt à démarrer.
+	
+
 
 1-b) Préparation
 	Explorez le répertoire "travail" dans le répertoire "Programs-Releases"
@@ -203,7 +222,10 @@ d'archivage.
 	  
 4-c) Production du bordereau
 	Dans la console, tapez la ligne de commande :
-		SedaSummaryGeneratorLauncher CABAN
+		JavaSedaProfileGenerator_task.bat CABAN
+			
+			anciennement, pour le version C# :
+				SedaSummaryGeneratorLauncher CABAN
 	
 	En ouvrant le fichier "travail/bordereaux/CABAN_sonerion.xml" vous pourrez constater
 	que certaines informations concernant les documents à archiver ont été produites à partir

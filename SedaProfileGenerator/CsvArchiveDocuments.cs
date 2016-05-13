@@ -104,7 +104,7 @@ namespace SedaSummaryGenerator {
                 throw (ex);
             };
 
-            if (traceActions) tracesWriter.WriteLine("ArchiveDocuments.LoadFile");
+            if (traceActions) tracesWriter.WriteLine("ArchiveDocuments.LoadFile '" + csvFile + "'");
             Regex rgxSeperator;
             String line;
             int nbLine = 0;
@@ -182,10 +182,10 @@ namespace SedaSummaryGenerator {
 
             balisesMultiples = new Dictionary<string, int>();
             balisesMultiples.Add("ContainsName", 0);
-            balisesMultiples.Add("ContainsDescription", 0);
+            balisesMultiples.Add("ContentDescription.Description", 0);
             balisesMultiples.Add("KeywordContent", 0);
 
-            if (traceActions) tracesWriter.WriteLine("ArchiveDocuments.checkFile");
+            if (traceActions) tracesWriter.WriteLine("ArchiveDocuments.checkFile '" + csvFile + "'");
             Regex rgxSeperator;
             String line;
             int linenumber = 0;

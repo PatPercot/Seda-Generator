@@ -856,6 +856,8 @@ namespace SedaSummaryGenerator {
                         dataString = formatSizeForNode(sizeOfDocument, node);
                     } else if (context.EndsWith("/Document/Description")) {
                         dataString = archiveDocuments.getDocumentName();
+                    } else if (context.EndsWith("/ContentDescription/Description")) {
+                        dataString = archiveDocuments.getKeyValue("ContentDescription.Description[" + currentContainsNode.getRelativeContext() + "]");
                     } else if (context.EndsWith("/ArchiveObject/Name") // SEDA 1.0
                         || context.EndsWith("/Contains/Contains/Name")) { // SEDA .02
                         dataString = archiveDocuments.getKeyValue("ContainsName[" + currentContainsNode.getRelativeContext() + "]");
