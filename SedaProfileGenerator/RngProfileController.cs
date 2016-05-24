@@ -454,6 +454,7 @@ namespace SedaSummaryGenerator {
 
                 checkForMultipleDocument(defineNodeName, context);
                 checkForContentDescription(defineNodeName, context);
+                checkForKeywordTag(defineNodeName, context);
                 checkForFilename(defineNodeName, context);
                 checkForDocType(defineNodeName, context);
                 // TODO: Désactivation du contrôle de la langue en attendant une meilleure gestion
@@ -714,7 +715,7 @@ namespace SedaSummaryGenerator {
 
 
         protected void checkForContentDescription(String defineNodeName, String context) {
-            // Tester la présence de ContentDescription dans rng:optiona avec un KeywordContent
+            // Tester la présence de ContentDescription dans rng:optional avec un KeywordContent
             // imbriqué dans un ContentDescriptive et lancer une alerte
             String xPath = "rng:define[@name='" + defineNodeName + "']/rng:optional/rng:element[@name='ContentDescription']/rng:ref";
             XmlNode cdrefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
@@ -733,7 +734,7 @@ namespace SedaSummaryGenerator {
                             xPath = "rng:define[@name='" + cdeNodeName + "']/rng:element[@name='KeywordContent']";
                             XmlNode kwNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                             if (kwNode != null) {
-                                errorsList.Add("Les mots-clés de l'unité documentaire '" + currentDocumentTypeId + "' ne pourront pas produits car la description du contenu est optionnelle.");
+                                errorsList.Add("Les mots-clés de l'unité documentaire '" + currentDocumentTypeId + "' ne pourront pas être produits car la description du contenu est optionnelle.");
                             }
                         }
                     }
@@ -741,7 +742,105 @@ namespace SedaSummaryGenerator {
             }
         }
 
-        
+        /*
+         * Recherche la définition d'un nœud de nom searchedNodename
+         * dans la définition du nœud defineNodeName 
+         * dans le contexte context
+         * 
+         * Exemple :
+         * on recherche la définition de ContentDescriptive dans ContentDescription_N65703
+         * le retour est la déinition du nœud située ici : <rng:define name="ContentDescriptive_N65720">
+         * 
+          	<rng:define name="ContentDescription_N65703">
+		        <rng:element name="Language">
+			        <rng:ref name="Language_N65707"/>
+		        </rng:element>
+		        <rng:element name="ContentDescriptive">
+			        <rng:ref name="ContentDescriptive_N65720"/>
+		        </rng:element>
+	        </rng:define>
+	        <rng:define name="ContentDescriptive_N65720">
+		        <rng:element name="KeywordContent">
+			        <rng:ref name="KeywordContent_N65725"/>
+		        </rng:element>
+		        <rng:element name="KeywordReference">
+			        <rng:ref name="KeywordReference_N65736"/>
+		        </rng:element>
+	        </rng:define>
+         * 
+         * */
+        protected String getDefinedNodeName(String defineNodeName, String context, String searchedNodename, bool optional) {
+            String searchedNodeName = String.Empty;
+            String xPath;
+            String stOptional = optional ? "//" : "";
+            xPath = "rng:define[@name='" + defineNodeName + "']" 
+                + stOptional 
+                + "/rng:element[@name='" + searchedNodename + "']/rng:ref";
+
+            XmlNode searchedRefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (searchedRefNode != null) {
+                searchedNodeName = searchedRefNode.Attributes.GetNamedItem("name").Value;
+                if (searchedNodeName == null)
+                    errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+            }
+            return searchedNodeName;
+        }
+
+
+        /*
+         * on recherche la définition de ContentDescription dans le Contains
+         * le retour est la déinition du nœud située ici : <rng:define name="ContentDescriptive_N65720">
+         * 
+          	<rng:define name="ContentDescription_N65703">
+		        <rng:element name="Language">
+			        <rng:ref name="Language_N65707"/>
+		        </rng:element>
+		        <rng:element name="ContentDescriptive">
+			        <rng:ref name="ContentDescriptive_N65720"/>
+		        </rng:element>
+	        </rng:define>
+	        <rng:define name="ContentDescriptive_N65720">
+		        <rng:element name="KeywordContent">
+			        <rng:ref name="KeywordContent_N65725"/>
+		        </rng:element>
+		        <rng:element name="KeywordReference">
+			        <rng:ref name="KeywordReference_N65736"/>
+		        </rng:element>
+	        </rng:define>
+         * 
+         * */
+        protected void checkForKeywordTag(String containsNodeName, String context) {
+            String contentDescriptionNodeName = getDefinedNodeName(containsNodeName, context, "ContentDescription", false);
+            if (contentDescriptionNodeName != String.Empty) {
+                // Est-ce qu'il y a des nœuds keyword multiples
+                XmlNodeList kwList = grammarNode.SelectNodes("descendant::rng:" + SEDA_version == "0.2" ? "ContentDescriptive" : "Keyword");
+                if (kwList != null && kwList.Count > 1) {
+                    String intermediateNodeName = getDefinedNodeName(contentDescriptionNodeName, context
+                        , SEDA_version == "0.2" ? "ContentDescriptive" : "Keyword", false);
+                    if (intermediateNodeName != String.Empty) {
+                        bool bKeywordRequiresTag = true;
+                        String keywordContentNodeName = getDefinedNodeName(intermediateNodeName, context, "KeywordContent", false);
+                        if (keywordContentNodeName != String.Empty) {
+                            String xPath = "rng:define[@name='" + keywordContentNodeName + "']/rng:value";
+                            XmlNode valueNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (valueNode != null)
+                                bKeywordRequiresTag = false;
+                        }
+                        if (bKeywordRequiresTag) {
+                            String keywordReferenceNodeName = getDefinedNodeName(intermediateNodeName, context, "KeywordReference", false);
+                            if (keywordReferenceNodeName != String.Empty) {
+                                String xPath = "rng:define[@name='" + keywordReferenceNodeName + "']";
+                                XmlNode keywordReferenceNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                getSchemeIdValue(keywordReferenceNode, xPath, context);
+                            } else {
+                                errorsList.Add("Les mots-clés de l'unité documentaire '" + currentDocumentTypeId + "' doivent avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         /*
          * Génération d'alertes si des Document multiples existent et qu'il n'y a pas de balise Identification
          */
