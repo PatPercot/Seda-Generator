@@ -1041,6 +1041,38 @@ namespace SedaSummaryGeneratorUnitTest {
 
         }
 
+        // Ce test correspond à la génération d'un bordereau au format SEDA 0.2, 
+        // le test suivant vérifie avec les mêmes données la génération d'un bordereau au format SEDA 1.0
+        [TestMethod]
+        public void W67_TestMultipleDocumentsV02() {
+            executeGenerator("multiple_documents_V02", "0.2");
+
+            checkForNoErrors();
+            checkAttribute("/s:ArchiveTransfer/s:Contains/s:Contains/s:Document[1]/s:Attachment"
+                , "filename", "document1e1.txt");
+
+            checkAttribute("/s:ArchiveTransfer/s:Contains/s:Contains//s:Document[2]/s:Attachment"
+                , "filename", "document2e1.txt");
+
+
+        }
+
+
+        // Ce test correspond à la génération d'un bordereau au format SEDA 1.0, 
+        [TestMethod]
+        public void W68_TestMultipleDocumentsV10() {
+            executeGenerator("multiple_documents_V10", "1.0");
+
+            checkForNoErrors();
+            checkAttribute("/s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:Document[1]/s:Attachment"
+                , "filename", "document1e1.txt");
+
+            checkAttribute("/s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:Document[2]/s:Attachment"
+                , "filename", "document2e1.txt");
+
+
+        }
+
 
 
     }

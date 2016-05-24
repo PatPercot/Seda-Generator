@@ -1,0 +1,13 @@
+,#TransferName,Test de documents multiples
+,#OriginatingAgency.BusinessType,0123456789
+,#OriginatingAgency.LegalClassification,0123456789
+,#Comment,Test des unités documentaires répétées (structure simple un seul niveau)
+,#CustodialHistory,Historique de conservation
+,#OriginatingAgency.Description,Service support chargé de la fourniture et de la maintenance des systèmes d'information
+,#OriginatingAgency.Identification,225600014_007
+,#OriginatingAgency.Name,Département du Morbihan - Direction des systèmes d'information
+
+,#ContainsName[UD1],Unité documentaire 1
+,document1e1.txt,UD1{DOC1},Document 1 E1,
+,document2e1.txt,UD1{DOC2},Document 2 E1,
+
