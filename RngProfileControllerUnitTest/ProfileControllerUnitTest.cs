@@ -291,6 +291,23 @@ namespace RngProfileControllerUnitTest {
             declencherTestProfil("MultipleDocumentSansTypeOuFilename", branchesAttendues, erreursAttendues);
         }
 
+        [TestMethod]
+        public void M20_TestMultipleDocumentSansTypeOuFilenamev10() {
+            String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+            String[] erreursAttendues = 
+                { 
+                "Dans l'unité documentaire 'UD1', la balise Document n°'5' doit contenir une balise ArchivalAgencyDocumentIdentifier de cardinalités 1-1",
+                "L'attribut filename de la balise Document[1]/Attachment de l'unité documentaire 'UD1' est interdit alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.",
+                "L'attribut filename de la balise Document[4]/Attachment de l'unité documentaire 'UD1' est facultatif alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.",
+                "L'attribut filename de la balise Document[5]/Attachment de l'unité documentaire 'UD1' est interdit alors qu'il est obligatoire. Les documents ne pourront pas y être stockés.",
+                "Le type de document de la balise Document[1] de l'unité documentaire 'UD1' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.",
+                "Le type de document de la balise Document[2] de l'unité documentaire 'UD1' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.",
+                "Le type de document de la balise Document[5] de l'unité documentaire 'UD1' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.",
+                "Le type de document de la balise Document[6] de l'unité documentaire 'UD1' ne doit pas être multiple. La cardinalité doit être modifiée.",
+                };
+            declencherTestProfil("MultipleDocumentSansTypeOuFilenameV10", branchesAttendues, erreursAttendues);
+        }
+
 
     }
 }

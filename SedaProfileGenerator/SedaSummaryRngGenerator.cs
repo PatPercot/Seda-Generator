@@ -36,6 +36,7 @@ namespace SedaSummaryGenerator {
         private XmlWriter docOut;
         private XmlNamespaceManager docInXmlnsManager;
         private XmlNode grammarNode;
+        private String SEDA_version; // Contient la version du SEDA 0.2 ou 1.0
         // La génération se fait en deux passes
         // Durant la première on calcule le nombre de doucments par unité documentaire
         // les erreurs sont inhibées durant cette phase
@@ -279,6 +280,18 @@ namespace SedaSummaryGenerator {
                 grammarNode = docIn.SelectSingleNode("rng:grammar", docInXmlnsManager);
                 XmlNode startNode = docIn.SelectSingleNode("rng:grammar/rng:start/rng:ref", docInXmlnsManager);
                 if (grammarNode != null && startNode != null) {
+                    // SEDA 1.0 "fr:gouv:culture:archivesdefrance:seda:v1.0"
+                    // SEDA 0.2 "fr:gouv:ae:archive:draft:standard_echange_v0.2"
+                    String sTestSeda = grammarNode.Attributes.GetNamedItem("ns").Value;
+                    if (sTestSeda == "fr:gouv:ae:archive:draft:standard_echange_v0.2") {
+                        SEDA_version = "0.2";
+                    } else
+                        if (sTestSeda == "fr:gouv:culture:archivesdefrance:seda:v1.0") {
+                            SEDA_version = "1.0";
+                        } else {
+                            SEDA_version = "Version du SEDA inconnue";
+                            errorsList.Add("Version du SEDA inconnue : '" + sTestSeda + "'");
+                        }
                     recurseDefine(startNode.Attributes.GetNamedItem("name").Value, "");
                 } else {
                     if (currentPass == 2) {
@@ -465,7 +478,10 @@ namespace SedaSummaryGenerator {
                 XmlNode secondStep = grammarNode.SelectSingleNode("rng:define[@name='" + firstStepName +
                     "']", docInXmlnsManager);
                 if (secondStep != null) {
-                    XmlNode thirdStep = secondStep.SelectSingleNode("descendant::rng:element[@name='Identification']/rng:ref", docInXmlnsManager);
+                    String stDocumentIdentification = SEDA_version == "1.0" ? "ArchivalAgencyDocumentIdentifier" : "Identification";
+                    XmlNode thirdStep = secondStep.SelectSingleNode("descendant::rng:element[@name='" 
+                        + stDocumentIdentification
+                        + "']/rng:ref", docInXmlnsManager);
                     if (thirdStep != null) {
                         String fourthStepName = thirdStep.Attributes.GetNamedItem("name").Value;
                         XmlNode fourthStep = grammarNode.SelectSingleNode("rng:define[@name='" + fourthStepName +

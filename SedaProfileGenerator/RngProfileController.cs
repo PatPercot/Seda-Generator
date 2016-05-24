@@ -33,6 +33,8 @@ namespace SedaSummaryGenerator {
         private String SEDA_version;    // 0.2 ou 1.0
         private String rootContains = "Contains";
         private String descendantContains = "Contains";
+        private String stDocumentIdentification = "Identification";
+
         private ContainsNode rootContainsNode;
         private ContainsNode currentContainsNode;
         private String currentDocumentTypeId;
@@ -111,12 +113,14 @@ namespace SedaSummaryGenerator {
                     if (sTestSeda == "fr:gouv:ae:archive:draft:standard_echange_v0.2") {
                         rootContains = "Contains";
                         descendantContains = "Contains";
+                        stDocumentIdentification = "Identification";
                         SEDA_version = "0.2";
                     }
                     else
                         if (sTestSeda == "fr:gouv:culture:archivesdefrance:seda:v1.0") {
                             rootContains = "Archive";
                             descendantContains = "ArchiveObject";
+                            stDocumentIdentification = "ArchivalAgencyDocumentIdentifier";
                             SEDA_version = "1.0";
                         }
                         else {
@@ -359,7 +363,9 @@ namespace SedaSummaryGenerator {
                         compteur++;
                         parentNodeName = docNode.Attributes.GetNamedItem("name").Value;
                         if (parentNodeName != null) {
-                            xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + "Identification" + "']/rng:ref";
+                            xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" 
+                                + stDocumentIdentification
+                                + "']/rng:ref";
                             parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                             if (parentNode != null) {
                                 parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
@@ -613,17 +619,23 @@ namespace SedaSummaryGenerator {
                     if (docNodeName == null) {
                         errorsList.Add("Le nœud RNG du document n°'" + nDoc + "' n'a pas d'attribut name.");
                     } else {
-                        xPath = "rng:define[@name='" + docNodeName + "']/rng:element[@name='Type']/rng:ref";
+                        xPath = "rng:define[@name='" + docNodeName + "']/rng:oneOrMore/rng:element[@name='Type']/rng:ref";
                         XmlNode typeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                         if (typeNode != null) {
-                            String typeNodeName = typeNode.Attributes.GetNamedItem("name").Value;
-                            if (typeNodeName == null) {
-                                errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
-                            } else {
-                                xPath = "rng:define[@name='" + typeNodeName + "']/rng:value";
-                                XmlNode attrNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                                if (attrNode == null) {
-                                    errorsList.Add("Le type de document de la balise Document[" + nDoc + "] de l'unité documentaire '" + currentDocumentTypeId + "' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.");
+                            errorsList.Add("Le type de document de la balise Document[" + nDoc + "] de l'unité documentaire '" + currentDocumentTypeId + "' ne doit pas être multiple. La cardinalité doit être modifiée.");
+                        } else {
+                            xPath = "rng:define[@name='" + docNodeName + "']/rng:element[@name='Type']/rng:ref";
+                            typeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (typeNode != null) {
+                                String typeNodeName = typeNode.Attributes.GetNamedItem("name").Value;
+                                if (typeNodeName == null) {
+                                    errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+                                } else {
+                                    xPath = "rng:define[@name='" + typeNodeName + "']/rng:value";
+                                    XmlNode attrNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                    if (attrNode == null) {
+                                        errorsList.Add("Le type de document de la balise Document[" + nDoc + "] de l'unité documentaire '" + currentDocumentTypeId + "' n'a pas de valeur. C'est une donnée archivistique qui doit être fournie par le profil.");
+                                    }
                                 }
                             }
                         }
@@ -741,15 +753,15 @@ namespace SedaSummaryGenerator {
             }
         }
 
-        
+
         /*
-         * Génération d'alertes si des Document multiples existent et qu'il n'y a pas de balise Identification
+         * Génération d'alertes si des Document multiples existent et qu'il n'y a pas de balise Identification ou ArchivalAgencyDocumentIdentifier
          */
         protected void checkForMultipleDocument(String defineNodeName, String context) {
             if (traceActions) tracesWriter.WriteLine("checkForMultipleDocument ('" + defineNodeName + "', '" + context + "', '" + currentDocumentTypeId + "')");
             String xPath;
             // TODO
-            // Tester l'existence de balise Document multiples et signaler l'absence de Attachment/Identification
+            // Tester l'existence de balise Document multiples et signaler l'absence de Identification ou ArchivalAgencyDocumentIdentifier
             xPath = "rng:define[@name='" + defineNodeName + "']";
             XmlNode containsNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
             if (containsNode == null) {
@@ -771,10 +783,12 @@ namespace SedaSummaryGenerator {
                             if (documentNode == null) {
                                 errorsList.Add("Le nœud '" + xPath + "' n'a pas été trouvé dans le profil '" + profileFile + "'");
                             } else {
-                                xPath = "rng:element[@name='Identification']/rng:ref";
+                                xPath = "rng:element[@name='"
+                                    + stDocumentIdentification
+                                    + "']/rng:ref";
                                 XmlNode identificationNode = documentNode.SelectSingleNode(xPath, docInXmlnsManager);
                                 if (identificationNode == null) {
-                                    errorsList.Add("Dans l'unité documentaire '" + currentDocumentTypeId + "', la balise Document n°'" + compteur + "' doit contenir une balise Identification de cardinalités 1-1");
+                                    errorsList.Add("Dans l'unité documentaire '" + currentDocumentTypeId + "', la balise Document n°'" + compteur + "' doit contenir une balise " + stDocumentIdentification + " de cardinalités 1-1");
                                 } else {
                                     String identificationName = identificationNode.Attributes.GetNamedItem("name").Value;
                                     if (identificationName == null) {
@@ -792,7 +806,7 @@ namespace SedaSummaryGenerator {
                                                 xPath = "rng:define[@name='" + identificationDefinitionNodeName + "']/rng:attribute[@name='schemeID']/rng:value";
                                                 XmlNode schemeIdNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                                                 if (schemeIdNode == null) {
-                                                    errorsList.Add("Dans l'unité documentaire '" + currentDocumentTypeId + "', la balise Identification de balise Document n°'" + compteur + "' doit avoir un attribut schemeID obligatoire");
+                                                    errorsList.Add("Dans l'unité documentaire '" + currentDocumentTypeId + "', la balise " + stDocumentIdentification + " de balise Document n°'" + compteur + "' doit avoir un attribut schemeID obligatoire");
                                                 } else {
                                                     String docTypeId = getDocumentTypeId(schemeIdNode.InnerText, context + "/Document[" + compteur + "]");
                                                     //Console.WriteLine("Type de document '" + docTypeId + "'");
