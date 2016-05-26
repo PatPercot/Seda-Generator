@@ -322,8 +322,10 @@ namespace RngProfileControllerUnitTest {
             String[] branchesAttendues = { "\troot", "\t\tKEYWORDUNIT_OK", "\t\tKEYWORDUNIT_NOTOK", "" };
             String[] erreursAttendues = 
                 { 
-                "Les mots-clés de l'unité documentaire 'KEYWORDUNIT_OK' doivent avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
-                "Les mots-clés de l'unité documentaire 'KEYWORDUNIT_NOTOK' doivent avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
+                "Le mot-clé n° '1' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
+                "Le mot-clé n° '2' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
+                "Le mot-clé n° '2' de l'unité documentaire 'KEYWORDUNIT_OK' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
+                "Le mot-clé n° '2' de l'unité documentaire 'KEYWORDUNIT_NOTOK' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
                 };
             declencherTestProfil("KeywordUnTagged", branchesAttendues, erreursAttendues);
         }

@@ -1,6 +1,3 @@
--------------------------
-<<<<<<< HEAD
-=======
 Changements du 2016-05-24
 - Contrôleur de profils et générateur : correction erreur en version 1.0 du SEDA sur gestion de l'identification des documents
   Ajout d'un cas de test pour le contrôle
