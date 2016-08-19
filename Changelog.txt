@@ -1,8 +1,17 @@
+-------------------------
+Changements du 2016-06-06
+- Contrôleur de profils et de données
+    Mots-clés avec tags + cas de tests
+- Contrôleur de profils
+	Unicité des mots-clés + cas de tests
+
+-------------------------
 Changements du 2016-05-24
 - Contrôleur de profils et générateur : correction erreur en version 1.0 du SEDA sur gestion de l'identification des documents
   Ajout d'un cas de test pour le contrôle
-  Ajoyt de deux cas de test pour le générateur
+  Ajout de deux cas de test pour le générateur
 
+-------------------------
 Changements du 2016-05-11
 - Modification documentation pour générateur Java
 - Modification contrôleur de données et générateur pour ContentDescription.Description

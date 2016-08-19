@@ -6,8 +6,8 @@
 ,#OriginatingAgency.LegalClassification,classification du producteur
 ,#OriginatingAgency.Name,nom du producteur
 ,#OriginatingAgency.Identification,identification du producteur
-,#KeywordContent[#1],BREST
-,#KeywordContent[#2],FOLKLORE
+,#KeywordContent[KW_COMMUNE],BREST
+,#KeywordContent[KW_EVT],FOLKLORE
 ,#ContainsName[ENRSON[#1]],nom UD enrson 1
 ,#ContentDescription.Description[ENRSON[#1]],description UD enrson 1
 ,#KeywordContent[ENRSON[#1]],mot-clé enrson 1

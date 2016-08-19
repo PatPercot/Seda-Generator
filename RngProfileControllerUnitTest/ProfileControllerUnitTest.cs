@@ -175,43 +175,63 @@ namespace RngProfileControllerUnitTest {
         [TestMethod]
         public void M06_TestProfil06() {
             String[] branchesAttendues = null;
-            String[] erreursAttendues = { "L'identifiant MP_Cons n'est pas unique, il est utilisé 2 fois." };
+            String[] erreursAttendues = { "Identifiant DOCLIST malformé, on attend 'DOCLIST / identifier' et on a 'CG56_DOCLIST_2015 MP_Cons_Dossier' dans le contexte '/Contains/Contains' dans l'attribut schemeID de ArchivalAgencyObjectIdentifier" };
             declencherTestProfil("profil_test_1-06", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
         public void M07_TestProfil07() {
             String[] branchesAttendues = null;
-            String[] erreursAttendues = { "Identifiant DOCLIST malformé, on attend 'DOCLIST / identifier' et on a 'CG56_DOCLIST_2015 MP_Cons'" };
+            String[] erreursAttendues = { "L'identifiant MP_Cons n'est pas unique, il est utilisé 2 fois." };
             declencherTestProfil("profil_test_1-07", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
         public void M08_TestProfil08() {
             String[] branchesAttendues = null;
-            String[] erreursAttendues = { "L'attribut schemeID de la balise ArchivalAgencyObjectIdentifier de l'unité documentaire 'MP_Cons' ne doit pas être optionnel. Il faut le rendre obligatoire." };
+            String[] erreursAttendues = { 
+                        "L'attribut schemeID de la balise ArchivalAgencyObjectIdentifier de l'unité documentaire 'MP_Cons' ne doit pas être optionnel. Il faut le rendre obligatoire.",
+                        "Dans l'unité documentaire 'MP_Cons_Dossier_AncDCE', la balise Identification de balise Document n°'2' doit avoir un attribut schemeID obligatoire",
+            };
             declencherTestProfil("profil_test_1-08", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
         public void M10_TestProfil10() {
             String[] branchesAttendues = null;
-            String[] erreursAttendues = { "La balise ArchivalAgencyObjectIdentifier de l'unité documentaire 'MP_Cons' est optionnelle. Il faut la rendre obligatoire." };
+            String[] erreursAttendues = { "L'unité documentaire 'MP_OetD_Analyse' peut être répétée, mais elle ne possède pas de TAG répétable (TAG+)." };
             declencherTestProfil("profil_test_1-10", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
         public void M11_TestProfil11() {
             String[] branchesAttendues = null;
-            String[] erreursAttendues = { "L'unité documentaire 'MP_OetD_Analyse' peut être répétée, mais elle ne possède pas de TAG répétable (TAG+)." };
+            String[] erreursAttendues = { "L'unité documentaire 'MP_OetD_Analyse+' est unique ou optionnelle, mais elle possède un TAG répétable (TAG+)." };
             declencherTestProfil("profil_test_1-11", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
         public void M12_TestProfil12() {
             String[] branchesAttendues = null;
-            String[] erreursAttendues = { "L'unité documentaire 'MP_OetD_Analyse+' est unique ou optionnelle, mais elle possède un TAG répétable (TAG+)." };
+            String[] erreursAttendues = { 
+                        "La balise ArchivalAgencyObjectIdentifier de l'unité documentaire 'MP_Cons' est optionnelle. Il faut la rendre obligatoire.",
+                        "Les mots-clés de l'unité documentaire 'MP_OetD_Analyse+' ne pourront pas être produits car la description du contenu est optionnelle."
+                    };
             declencherTestProfil("profil_test_1-12", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void M12b_TestProfil13() {
+            String[] branchesAttendues = null;
+            String[] erreursAttendues = { 
+                "Dans l'unité documentaire 'MP_Cons_Dossier_AncDCE', la balise Identification de balise Document n°'1' doit avoir un attribut schemeID obligatoire",
+                "Dans l'unité documentaire 'MP_Cons_Dossier_AncDCE', la balise Identification de balise Document n°'2' doit avoir un attribut schemeID obligatoire",
+                "Le mot-clé n° '1' de l'unité documentaire 'MP_OetD_Analyse+' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
+                "Le mot-clé n° '2' de l'unité documentaire 'MP_OetD_Analyse+' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
+                "Le mot-clé n° '3' de l'unité documentaire 'MP_OetD_Analyse+' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
+                "Le mot-clé n° '4' de l'unité documentaire 'MP_OetD_Analyse+' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
+            };
+            declencherTestProfil("profil_test_1-13", branchesAttendues, erreursAttendues);
         }
 
         [TestMethod]
@@ -322,12 +342,23 @@ namespace RngProfileControllerUnitTest {
             String[] branchesAttendues = { "\troot", "\t\tKEYWORDUNIT_OK", "\t\tKEYWORDUNIT_NOTOK", "" };
             String[] erreursAttendues = 
                 { 
-                "Le mot-clé n° '1' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
-                "Le mot-clé n° '2' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
+                "Le mot-clé n° '1' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID obligatoire de la forme 'DOCLIST / TAG'",
+                "Le mot-clé n° '2' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID obligatoire de la forme 'DOCLIST / TAG'",
                 "Le mot-clé n° '2' de l'unité documentaire 'KEYWORDUNIT_OK' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
                 "Le mot-clé n° '2' de l'unité documentaire 'KEYWORDUNIT_NOTOK' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
                 };
             declencherTestProfil("KeywordUnTagged", branchesAttendues, erreursAttendues);
+        }
+
+        [TestMethod]
+        public void M23_TestKeywordDuplicated() {
+            String[] branchesAttendues = { "\troot", "\t\tKEYWORDUNIT_OK", "\t\tKEYWORDUNIT_NOTOK", "" };
+            String[] erreursAttendues = 
+                { 
+                "Le mot-clé n° '2' de l'archive a un tag 'ARKW1' qui n'est pas unique",
+                "Le mot-clé n° '2' de l'unité documentaire 'KEYWORDUNIT_NOTOK' a un tag 'KWNOTOK' qui n'est pas unique",
+                };
+            declencherTestProfil("KeywordDuplicated", branchesAttendues, erreursAttendues);
         }
 
 

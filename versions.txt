@@ -1,5 +1,23 @@
 Suivi des versions
 
+Version 1.0.2
+	Première version utilisable avec le générateur Java
+		- contrôle de profil RngProfileControllerLauncher.exe
+		- contrôle de données BusinessDataControllerLauncher.exe
+		- génération de bordereaux de transfert à télécharger 
+			sur https://github.com/PatPercot/Java-Seda-Generator
+			Voir la documentation QuickStart.txt dans Documentation
+	Améliorations
+		- Le contrôle des mots-clés avec tags
+
+Version 1.0.2
+	Seconde version utilisable avec les applications C# 
+		- de contrôle de profil RngProfileControllerLauncher.exe
+		- de contrôle de données BusinessDataControllerLauncher.exe
+		- de génération de bordereaux de transfert SedaSummaryGeneratorLauncher.exe
+	Améliorations
+		- ContentDescription.Description est produit
+
 Version 1.0.0
 	Première version utilisable avec les applications C# 
 		- de contrôle de profil RngProfileControllerLauncher.exe

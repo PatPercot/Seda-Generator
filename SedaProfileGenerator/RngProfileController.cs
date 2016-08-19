@@ -155,9 +155,11 @@ namespace SedaSummaryGenerator {
                                         if (containsNodeName == null) {
                                             errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
                                         } else {
-                                            loadExpectedTagsInMainContainsNode( containsNodeName );
-                                            checkForDocumentInArchive(containsNodeName, "");
-                                            checkForKeywordTag(containsNodeName, "");
+                                            currentDocumentTypeId = "root";
+                                            loadExpectedTagsInMainContainsNode( containsNodeName, "rootContains" );
+                                            checkForDocumentInArchive(containsNodeName, "rootContains");
+                                            checkForTagInContains("Keyword", containsNodeName, "rootContains");
+                                            checkForTagInContains("FilePlanPosition", containsNodeName, "rootContains");
                                             recurseContainsDefine(containsNodeName, String.Empty, false);
                                         }
                                     }
@@ -214,7 +216,7 @@ namespace SedaSummaryGenerator {
             }
         }
 
-        private void loadExpectedTagsInMainContainsNode(String activeNodeName) {
+        private void loadExpectedTagsInMainContainsNode(String activeNodeName, String context) {
             XmlNode node, parentNode;
             String xPath, nodeName, parentNodeName, nodeContent;
 
@@ -271,8 +273,17 @@ namespace SedaSummaryGenerator {
                     if (kwList != null && kwList.Count > 1) {
                         foreach (XmlNode descriptiveNode in kwList) {
                             ++numkw;
+                            // On récupère le ContentDescriptive_N?????
                             parentNodeName = descriptiveNode.Attributes.GetNamedItem("name").Value;
                             if (parentNodeName != null) {
+                                String stScheme = null;
+                                String keywordReferenceNodeName = getDefinedNodeName(parentNodeName, context, "KeywordReference", false);
+                                if (keywordReferenceNodeName != String.Empty) {
+                                    xPath = "rng:define[@name='" + keywordReferenceNodeName + "']";
+                                    XmlNode keywordReferenceNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                    stScheme = getSchemeIdValue(keywordReferenceNode, xPath, "", false);
+                                }
+
                                 xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + "KeywordContent" + "']/rng:ref";
                                 parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                                 if (parentNode != null) {
@@ -281,7 +292,6 @@ namespace SedaSummaryGenerator {
                                         xPath = "rng:define[@name='" + parentNodeName + "']/rng:data[@type='string']";
                                         node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                                         if (node != null) {
-                                            String stScheme = getSchemeIdValue(node, xPath, "");
                                             if (stScheme != null && stScheme != String.Empty)
                                                 expectedTagsList.Add("#KeywordContent[" + stScheme + "]");
                                             else
@@ -413,8 +423,13 @@ namespace SedaSummaryGenerator {
             return docId;
         }
 
-        protected String getSchemeIdValue(XmlNode aaoirefNode, String currentXpath, String context) {
+
+        // Récupère l'attribut schemeID
+        // Si bArchivalAgencyObjectIdentifier = false aucun message dde diagnostic n'est émis 
+        // Les erreurs manifestes (structure XML non conforme) sont émis
+        protected String getSchemeIdValue(XmlNode aaoirefNode, String currentXpath, String context, bool bArchivalAgencyObjectIdentifier) {
             String ret = null;
+            String baliseName = "";
             String aaoiNodeName = aaoirefNode.Attributes.GetNamedItem("name").Value;
             if (aaoiNodeName == null) {
                 errorsList.Add("Le nœud '" + currentXpath + "' n'a pas d'attribut name.");
@@ -426,9 +441,11 @@ namespace SedaSummaryGenerator {
                     schemeIdNode = grammarNode.SelectSingleNode(currentXpath, docInXmlnsManager);
                     if (schemeIdNode != null) {
                         ret = getDocumentTypeId(schemeIdNode.InnerText, context);
-                        errorsList.Add("L'attribut schemeID de la balise ArchivalAgencyObjectIdentifier de l'unité documentaire '" + ret + "' ne doit pas être optionnel. Il faut le rendre obligatoire.");
+                        if (bArchivalAgencyObjectIdentifier)
+                            errorsList.Add("L'attribut schemeID de la balise ArchivalAgencyObjectIdentifier de l'unité documentaire '" + ret + "' ne doit pas être optionnel. Il faut le rendre obligatoire.");
                     } else {
-                        errorsList.Add("L'attribut schemeID de la balise ArchivalAgencyObjectIdentifier de l'unité documentaire '" + currentDocumentTypeId + "' n'existe pas. Il faut le créer, le rendre obligatoire et lui donner un nom de tag unique.");
+                        if (bArchivalAgencyObjectIdentifier)
+                            errorsList.Add("L'attribut schemeID de la balise ArchivalAgencyObjectIdentifier de l'unité documentaire '" + currentDocumentTypeId + "' n'existe pas. Il faut le créer, le rendre obligatoire et lui donner un nom de tag unique.");
                     }
                 } else {
                     ret = getDocumentTypeId(schemeIdNode.InnerText, context);
@@ -454,7 +471,7 @@ namespace SedaSummaryGenerator {
                     xPath = "rng:define[@name='" + defineNodeName + "']/rng:optional/rng:element[@name='ArchivalAgencyObjectIdentifier']/rng:ref";
                     aaoirefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                     if (aaoirefNode != null) {
-                        String ret = getSchemeIdValue(aaoirefNode, xPath, context);
+                        String ret = getSchemeIdValue(aaoirefNode, xPath, context, true);
                         if (ret != null) {
                             errorsList.Add("La balise ArchivalAgencyObjectIdentifier de l'unité documentaire '" + ret + "' est optionnelle. Il faut la rendre obligatoire.");
                         }
@@ -462,14 +479,15 @@ namespace SedaSummaryGenerator {
                     else
                         errorsList.Add("La balise ArchivalAgencyObjectIdentifier de l'unité documentaire '" + currentDocumentTypeId + "' n'existe pas. Il faut la créer et la rendre obligatoire.");
                 } else {
-                    String ret = getSchemeIdValue(aaoirefNode, xPath, context);
+                    String ret = getSchemeIdValue(aaoirefNode, xPath, context, true);
                     if (ret != null)
                         currentDocumentTypeId = ret;
                 }
 
                 checkForMultipleDocument(defineNodeName, context);
                 checkForContentDescription(defineNodeName, context);
-                checkForKeywordTag(defineNodeName, context);
+                checkForTagInContains("Keyword", defineNodeName, context);
+                checkForTagInContains("FilePlanPosition", defineNodeName, context);
                 checkForFilename(defineNodeName, context);
                 checkForDocType(defineNodeName, context);
                 // TODO: Désactivation du contrôle de la langue en attendant une meilleure gestion
@@ -830,23 +848,126 @@ namespace SedaSummaryGenerator {
 	        </rng:define>
          * 
          * */
-        protected void checkForKeywordTag(String containsNodeName, String context) {
+        protected void checkForTagInContains(String tag2Search, String containsNodeName, String context) {
+            // Pour contrôler l'unicité des keyword ou FilePlanPosition
+            StringCollection listXmlTags = new StringCollection();
             String contentDescriptionNodeName = getDefinedNodeName(containsNodeName, context, "ContentDescription", false);
             if (contentDescriptionNodeName != String.Empty) {
-                String stKeyword = SEDA_version == "0.2" ? "ContentDescriptive" : "Keyword";
-                String xPath = "rng:define[@name='" + contentDescriptionNodeName + "']/descendant::rng:element[@name='" + stKeyword + "']/rng:ref";
-                XmlNodeList kwList = grammarNode.SelectNodes(xPath, docInXmlnsManager);
-                int numkw = 0;
-                if (kwList != null && kwList.Count > 1) {
-                    foreach (XmlNode contentDescriptive in kwList) {
-                        ++numkw;
-                        String stContentDescriptive;
-                        stContentDescriptive = contentDescriptive.Attributes.GetNamedItem("name").Value;
-                        if (stContentDescriptive == null)
+                String stTag2Search;
+                if (tag2Search.Equals("Keyword"))
+                    stTag2Search = SEDA_version == "0.2" ? "ContentDescriptive" : "Keyword";
+                else
+                    if (tag2Search.Equals("FilePlanPosition"))
+                        stTag2Search = tag2Search;
+                    else
+                        stTag2Search = "UnknowTag";
+
+                String xPath = "rng:define[@name='" + contentDescriptionNodeName + "']/descendant::rng:element[@name='" + stTag2Search + "']/rng:ref";
+                XmlNodeList searchedTagsList = grammarNode.SelectNodes(xPath, docInXmlnsManager);
+                int numTagInList = 0;
+                if (searchedTagsList != null && searchedTagsList.Count > 1) {
+                    foreach (XmlNode searchedTagNode in searchedTagsList) {
+                        ++numTagInList;
+                        String stSearchedTagDefinition;
+                        stSearchedTagDefinition = searchedTagNode.Attributes.GetNamedItem("name").Value;
+                        if (stSearchedTagDefinition == null)
                             errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
                         else {
+                            String stScheme = String.Empty;
+                            bool bSearchedTagRequiresTag = true;
+                            String keywordContentNodeName = getDefinedNodeName(stSearchedTagDefinition, context, "KeywordContent", false);
+                            if (keywordContentNodeName != String.Empty) {
+                                xPath = "rng:define[@name='" + keywordContentNodeName + "']/rng:value";
+                                XmlNode valueNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                if (valueNode != null)
+                                    bSearchedTagRequiresTag = false;
+                            }
+                            if (bSearchedTagRequiresTag) {
+                                bool bEmettreWarning = true, bErreurDuplication = false;
+                                String keywordReferenceNodeName = getDefinedNodeName(stSearchedTagDefinition, context, "KeywordReference", false);
+                                if (keywordReferenceNodeName != String.Empty) {
+                                    xPath = "rng:define[@name='" + keywordReferenceNodeName + "']";
+                                    XmlNode keywordReferenceNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                    stScheme = getSchemeIdValue(keywordReferenceNode, xPath, context, false);
+                                    if (stScheme != null && stScheme != String.Empty)
+                                        bEmettreWarning = false;
+                                    if (listXmlTags.Contains(stScheme))
+                                        bErreurDuplication = true;
+                                    listXmlTags.Add(stScheme);
+                                }
+                                if (bEmettreWarning || bErreurDuplication) {
+                                    if (currentDocumentTypeId == null
+                                        || String.Empty.Equals(currentDocumentTypeId)
+                                        || currentDocumentTypeId.Equals("root")) {
+                                        if (bEmettreWarning)
+                                            errorsList.Add("Le mot-clé n° '" + numTagInList + "' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID obligatoire de la forme 'DOCLIST / TAG'");
+                                        else
+                                            errorsList.Add("Le mot-clé n° '" + numTagInList + "' de l'archive a un tag '" + stScheme + "' qui n'est pas unique");
+                                    } else
+                                        if (bEmettreWarning)
+                                            errorsList.Add("Le mot-clé n° '" + numTagInList + "' de l'unité documentaire '" + currentDocumentTypeId + "' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'");
+                                        else
+                                            errorsList.Add("Le mot-clé n° '" + numTagInList + "' de l'unité documentaire '" + currentDocumentTypeId + "' a un tag '" + stScheme + "' qui n'est pas unique");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /*
+         * on recherche la définition de ContentDescription dans le Contains
+         * On recherche ensuite les FilePlanPosition
+         * 
+	        <rng:define name="ContentDescription_N65615">
+		        <rng:element name="DescriptionLevel">
+			        <rng:ref name="DescriptionLevel_N65618"/>
+		        </rng:element>
+		        <rng:zeroOrMore>
+			        <rng:element name="FilePlanPosition">
+				        <rng:ref name="FilePlanPosition_N65629"/>
+			        </rng:element>
+		        </rng:zeroOrMore>
+		        <rng:zeroOrMore>
+			        <rng:element name="FilePlanPosition">
+				        <rng:ref name="FilePlanPosition_N65662"/>
+			        </rng:element>
+		        </rng:zeroOrMore>
+		        <rng:oneOrMore>
+			        <rng:element name="Language">
+				        <rng:ref name="Language_N65695"/>
+			        </rng:element>
+		        </rng:oneOrMore>
+	        </rng:define>
+	        <rng:define name="FilePlanPosition_N65629">
+		        <rng:data type="string"/>
+		        <rng:attribute name="schemeID">
+			        <rng:value>DOCLIST / FPP1</rng:value>
+		        </rng:attribute>
+	        </rng:define>
+         * 
+         * */
+        protected void checkForFilePlanPositionTag(String containsNodeName, String context) {
+            // Pour contrôler l'unicité des doclist des FilePlanPosition
+            StringCollection listFPP = new StringCollection();
+            String contentDescriptionNodeName = getDefinedNodeName(containsNodeName, context, "ContentDescription", false);
+            if (contentDescriptionNodeName != String.Empty) {
+                String stFPP = "FilePlanPosition";
+                String xPath = "rng:define[@name='" + contentDescriptionNodeName + "']/descendant::rng:element[@name='" + stFPP + "']/rng:ref";
+                XmlNodeList fppList = grammarNode.SelectNodes(xPath, docInXmlnsManager);
+                int numfpp = 0;
+                if (fppList != null && fppList.Count > 1) {
+                    foreach (XmlNode filePlanPosition in fppList) {
+                        ++numfpp;
+                        String stFilePlanPosition;
+                        stFilePlanPosition = filePlanPosition.Attributes.GetNamedItem("name").Value;
+                        if (stFilePlanPosition == null)
+                            errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+                        else {
+                            String stScheme = String.Empty;
                             bool bKeywordRequiresTag = true;
-                            String keywordContentNodeName = getDefinedNodeName(stContentDescriptive, context, "KeywordContent", false);
+                            String keywordContentNodeName = getDefinedNodeName(stFilePlanPosition, context, "KeywordContent", false);
                             if (keywordContentNodeName != String.Empty) {
                                 xPath = "rng:define[@name='" + keywordContentNodeName + "']/rng:value";
                                 XmlNode valueNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
@@ -854,20 +975,31 @@ namespace SedaSummaryGenerator {
                                     bKeywordRequiresTag = false;
                             }
                             if (bKeywordRequiresTag) {
-                                bool bEmettreWarning = true;
-                                String keywordReferenceNodeName = getDefinedNodeName(stContentDescriptive, context, "KeywordReference", false);
+                                bool bEmettreWarning = true, bErreurDuplication = false;
+                                String keywordReferenceNodeName = getDefinedNodeName(stFilePlanPosition, context, "KeywordReference", false);
                                 if (keywordReferenceNodeName != String.Empty) {
                                     xPath = "rng:define[@name='" + keywordReferenceNodeName + "']";
                                     XmlNode keywordReferenceNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                                    String stScheme = getSchemeIdValue(keywordReferenceNode, xPath, context);
+                                    stScheme = getSchemeIdValue(keywordReferenceNode, xPath, context, false);
                                     if (stScheme != null && stScheme != String.Empty)
                                         bEmettreWarning = false;
+                                    if (listFPP.Contains(stScheme))
+                                        bErreurDuplication = true;
+                                    listFPP.Add(stScheme);
                                 }
-                                if (bEmettreWarning) {
-                                    if (currentDocumentTypeId == null || String.Empty.Equals(currentDocumentTypeId))
-                                        errorsList.Add("Le mot-clé n° '" + numkw + "' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'");
-                                    else
-                                        errorsList.Add("Le mot-clé n° '" + numkw + "' de l'unité documentaire '" + currentDocumentTypeId + "' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'");
+                                if (bEmettreWarning || bErreurDuplication) {
+                                    if (currentDocumentTypeId == null
+                                        || String.Empty.Equals(currentDocumentTypeId)
+                                        || currentDocumentTypeId.Equals("root")) {
+                                        if (bEmettreWarning)
+                                            errorsList.Add("Le mot-clé n° '" + numfpp + "' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID obligatoire de la forme 'DOCLIST / TAG'");
+                                        else
+                                            errorsList.Add("Le mot-clé n° '" + numfpp + "' de l'archive a un tag '" + stScheme + "' qui n'est pas unique");
+                                    } else
+                                        if (bEmettreWarning)
+                                            errorsList.Add("Le mot-clé n° '" + numfpp + "' de l'unité documentaire '" + currentDocumentTypeId + "' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'");
+                                        else
+                                            errorsList.Add("Le mot-clé n° '" + numfpp + "' de l'unité documentaire '" + currentDocumentTypeId + "' a un tag '" + stScheme + "' qui n'est pas unique");
                                 }
                             }
                         }
