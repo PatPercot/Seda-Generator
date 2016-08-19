@@ -10,6 +10,9 @@ Et sur CodePlex https://sedaautogenerator.codeplex.com/
 
 
 Pour démarrer rapidement : lire le fichier Documentation/QuickStart.txt
+https://github.com/PatPercot/Seda-Generator/blob/master/Documentation/QuickStart.txt
+
+
 
 ProBANT signifie Production de bordereaux pour l'archivage numérique territorial
 
@@ -17,21 +20,27 @@ ProBANT signifie Production de bordereaux pour l'archivage numérique territorial
 
 Pour vous informer un peu plus sur la génération de bordereaux de transfert :
 
+ProbANT a été développé par la direction des systèmes d'information du département du Morbihan http://www.morbihan.fr/accueil/
+Mégalis https://www.megalisbretagne.org a été le second utilisateur de ce générateur (version re-développée en Java par CGI http://www.cgi.fr/)
+
 Ce générateur de bordereaux de transferts n'est pas vraiment le seul générateur existant.
 Mais il est le seul générateur publié sous licence libre.
-Vous en trouverez aussi une version Java sur GitHub : https://github.com/CGI-France/Java-Seda-Generator
+Vous en trouverez aussi la version Java re-développée par CGI sur GitHub : https://github.com/CGI-France/Java-Seda-Generator
 
 À ce jour, il y a peu de générateurs. Mais demain tous les SAE auront besoin de s’appuyer sur eux, 
 parce qu’ils apportent une solution aux problèmes ci-dessous :
--	le bordereau, c’est le bât qui blesse, la source de la majeure partie des problèmes d’archivage numérique ;
+-	le bordereau, c’est le bât qui blesse, la source de la majeure partie des problèmes d’archivage numérique,
+    il n'est pas aisé d'en produire manuellement pour les verser dans le SAE ;
 -	la production de bordereaux de transferts est une chose complexe, les applications métier ne savent pas 
     les générer correctement (l’arborescence est complexe et la majeure partie des données est de nature 
 	archivistique) et le coût de développement des bordereaux est un frein au développement des SAE ;
 -	à chaque modification du profil (aussi simple soit-elle), il faut modifier le code qui produit 
     le bordereau (et accessoirement payer le prestataire) ;
 -	à chaque changement de version du SEDA, il faut récrire le code de génération du bordereau.
+
  
 Mode de fonctionnement des générateurs
+
 Principe : toutes les données qui sont précisées dans le profil ne sont pas demandées aux applications métier.
 Une solution aisée à mettre en œuvre est l’utilisation des chemins XPath. Les données métier spécifient 
 le chemin de chacune des données à archiver.
