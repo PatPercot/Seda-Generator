@@ -66,6 +66,7 @@ namespace SedaSummaryGeneratorLauncher {
             System.Console.WriteLine("Génération bordereau du job '" + generatorJob.nomJob + "' : '" + generatorJob.dataFile + "' avec l'accord '" + generatorJob.accordVersement + "'");
 
             String accordVersement = generatorJob.accordVersement;
+            String baseURI = generatorJob.baseURI;
             String fichier_donnees = generatorJob.dataFile;
             String repertoire_documents = generatorJob.repDocuments;
             String fichier_bordereau = generatorJob.bordereauFile;
@@ -82,9 +83,6 @@ namespace SedaSummaryGeneratorLauncher {
                 streamWriter = new StreamWriter(traceFile);
             } catch (IOException e) { eh(e, "Mauvaise syntaxe de nom de fichier"); } catch (UnauthorizedAccessException e) { eh(e, "Droits d'accès à corriger"); } catch (System.Security.SecurityException e) { eh(e, "Droits d'accès à corriger"); }
 
-
-            String baseURI = "http://test";
-
             StringCollection errors;
 
             SedaSummaryGenerator.SedaSummaryGenerator ssg = new SedaSummaryRngGenerator();
@@ -93,7 +91,7 @@ namespace SedaSummaryGeneratorLauncher {
             if (config.hasAccordVersementConfig()) {
                 AccordVersementConfig accordVersementConfig = config.getAccordVersementConfig(accordVersement, baseURI);
                 if (accordVersementConfig == null) {
-                    Console.WriteLine("ATTENTION : Impossible de trouver l'accord de versement '" + accordVersement + "' dans la configuration");
+                    Console.WriteLine("ATTENTION : Impossible de trouver l'accord de versement '" + accordVersement + "' pour le serveur '" + baseURI + "' dans la configuration");
                 } else {
                     if (accordVersementConfig.SAE_ProfilArchivage.Length == 0)
                         Console.WriteLine("ATTENTION : Le profil d'archivage n'a pas de nom de fichier");

@@ -213,7 +213,7 @@ namespace SedaSummaryGenerator {
         override public void prepareInformationsWithConfigFile(SimpleConfig config, String baseURI, String accordVersement, String dataSha1) {
             AccordVersementConfig accordVersementConfig = config.getAccordVersementConfig(accordVersement, baseURI);
             if (accordVersementConfig == null) {
-                errorsList.Add("Impossible de trouver l'accord de versement '" + accordVersement + "' dans la configuration");
+                errorsList.Add("Impossible de trouver l'accord de versement '" + accordVersement + "' pour le serveur '" + baseURI + "' dans la configuration");
             } else {
                 TransferId = accordVersementConfig.TransferIdPrefix + dataSha1 + "@" + DateTime.UtcNow.ToString("o");
                 profileFile = accordVersementConfig.SAE_ProfilArchivage;

@@ -129,7 +129,8 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 
 3-a) Précisions utiles
 	Le fichier de données est un fichier texte qui liste les données à associer au profil
-	pour produire un bordereau.
+	pour produire un bordereau. ATTENTION : dans Notepad++ sélectionnez l'encodage UTF-8.
+	Si vous ne le faites pas, les accents ne seront pas corrects dans le bordereau
 	
 	Les données métier sont les données qui changent à chaque versement. Cela correspond typiquement aux 
 	documents qui sont versés, mais aussi à des descriptions des archives (dont les dates ou les intitulés
@@ -141,7 +142,8 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 	les caractères contenus dans les noms, les métadonnées et les chemins de fichiers.
 
 	Ci-dessous la liste des balises que vous pouvez mettre dans le fichier de données
-	Les pseudo balises qui ne correspondent pas à une balise SEDA sont suivies du texte " : pseudobalise"
+	Les pseudo balises qui ne correspondent pas à réellement à une balise SEDA sont suivies du texte " : pseudobalise".
+	Ces pseudo balises ont été créées parce que les deux premières versions du SEDA n'employaient pas le même nom de balise.
 	
 	TransferName : pseudobalise
 	Comment
@@ -220,7 +222,7 @@ d'archivage.
 	[accord-versement : CABAN]
 		SAE_Serveur = http://test
 		TransferIdPrefix = PREFIX_CABAN_
-		SAE_ProfilArchivage = ./tests/CABAN_TAG_profil_Sonerion_schema.rng
+		SAE_ProfilArchivage = travail/profils/CABAN_TAG_profil_Sonerion_schema.rng
 		TransferringAgencyId = 22560001400016
 		TransferringAgencyName = Conseil départemental du Morbihan
 		TransferringAgencyDesc = Le conseil départemental du Morbihan est l'auteur du programme ProBANT (générateur de bordereaux de transfert)
