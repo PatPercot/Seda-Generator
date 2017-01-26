@@ -32,14 +32,27 @@ namespace SedaSummaryGeneratorLauncher {
 
             String jobName;
             if (args.Length < 1) {
-                System.Console.WriteLine("Syntaxe attendue : BusinessDataController nom-job-controle");
-                System.Console.WriteLine("nom-job-controle est une section dans le fichier job.config");
-                System.Console.WriteLine("Une section a la forme :");
+                System.Console.WriteLine("Syntaxe attendue : SedaSummaryGeneratorLauncher nom-job-generation");
+                System.Console.WriteLine("nom-job-generation est une section dans le fichier job.config");
+                System.Console.WriteLine("Une section de génération de bordereau a la forme :");
                 System.Console.WriteLine("[data-control : nom-job-controle]");
                 System.Console.WriteLine("  trace = chemin/vers/fichier-de-trace.txt");
-                System.Console.WriteLine("  profil = chemin/vers/fichier-de-profil.rng");
+                System.Console.WriteLine("  accord = nom-accord-versement");
+                System.Console.WriteLine("  baseURI = chemin/vers/repertoire-des-documents");
                 System.Console.WriteLine("  data = chemin/vers/fichier-de-donnees-metier.txt");
+                System.Console.WriteLine("  bordereau = chemin/vers/bordereau-a-generer.xml");
                 System.Console.WriteLine("");
+                System.Console.WriteLine("Où nom-accord-versemnt et baseURI renvoient vers une section accord-versement/SAE_Serveur");
+                System.Console.WriteLine("[accord-versement : nom-accord-versement]");
+                System.Console.WriteLine("	SAE_Serveur = http://test");
+                System.Console.WriteLine("	TransferIdPrefix = PREFIX_");
+                System.Console.WriteLine("	SAE_ProfilArchivage = chemin-vers-fichier");
+                System.Console.WriteLine("	TransferringAgencyId = TA_ID");
+                System.Console.WriteLine("	TransferringAgencyName = TA_NAME");
+                System.Console.WriteLine("	TransferringAgencyDesc = TA_DESC");
+                System.Console.WriteLine("	ArchivalAgencyId = AA_ID");
+                System.Console.WriteLine("	ArchivalAgencyName = AA_NAME");
+                System.Console.WriteLine("	ArchivalAgencyDesc = AA_DESC");
                 System.Console.WriteLine("Aucun job demandé, le premier job sera exécuté");
                 System.Console.WriteLine("");
                 jobName = String.Empty;
@@ -66,6 +79,7 @@ namespace SedaSummaryGeneratorLauncher {
             System.Console.WriteLine("Génération bordereau du job '" + generatorJob.nomJob + "' : '" + generatorJob.dataFile + "' avec l'accord '" + generatorJob.accordVersement + "'");
 
             String accordVersement = generatorJob.accordVersement;
+            String baseURI = generatorJob.baseURI;
             String fichier_donnees = generatorJob.dataFile;
             String repertoire_documents = generatorJob.repDocuments;
             String fichier_bordereau = generatorJob.bordereauFile;
@@ -82,9 +96,6 @@ namespace SedaSummaryGeneratorLauncher {
                 streamWriter = new StreamWriter(traceFile);
             } catch (IOException e) { eh(e, "Mauvaise syntaxe de nom de fichier"); } catch (UnauthorizedAccessException e) { eh(e, "Droits d'accès à corriger"); } catch (System.Security.SecurityException e) { eh(e, "Droits d'accès à corriger"); }
 
-
-            String baseURI = "http://test";
-
             StringCollection errors;
 
             SedaSummaryGenerator.SedaSummaryGenerator ssg = new SedaSummaryRngGenerator();
@@ -93,7 +104,7 @@ namespace SedaSummaryGeneratorLauncher {
             if (config.hasAccordVersementConfig()) {
                 AccordVersementConfig accordVersementConfig = config.getAccordVersementConfig(accordVersement, baseURI);
                 if (accordVersementConfig == null) {
-                    Console.WriteLine("ATTENTION : Impossible de trouver l'accord de versement '" + accordVersement + "' dans la configuration");
+                    Console.WriteLine("ATTENTION : Impossible de trouver l'accord de versement '" + accordVersement + "' pour le serveur '" + baseURI + "' dans la configuration");
                 } else {
                     if (accordVersementConfig.SAE_ProfilArchivage.Length == 0)
                         Console.WriteLine("ATTENTION : Le profil d'archivage n'a pas de nom de fichier");

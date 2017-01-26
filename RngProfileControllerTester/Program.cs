@@ -29,13 +29,12 @@ namespace RngProfileControllerLauncher {
 
             String jobName;
             if (args.Length < 1) {
-                System.Console.WriteLine("Syntaxe attendue : BusinessDataController nom-job-controle");
+                System.Console.WriteLine("Syntaxe attendue : RngProfileControllerLauncher nom-job-controle");
                 System.Console.WriteLine("nom-job-controle est une section dans le fichier job.config");
-                System.Console.WriteLine("Une section a la forme :");
-                System.Console.WriteLine("[data-control : nom-job-controle]");
+                System.Console.WriteLine("Une section de contrôle de profil a la forme :");
+                System.Console.WriteLine("[profile-control : nom-job-controle]");
                 System.Console.WriteLine("  trace = chemin/vers/fichier-de-trace.txt");
                 System.Console.WriteLine("  profil = chemin/vers/fichier-de-profil.rng");
-                System.Console.WriteLine("  data = chemin/vers/fichier-de-donnees-metier.txt");
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Aucun job demandé, le premier job sera exécuté");
                 System.Console.WriteLine("");

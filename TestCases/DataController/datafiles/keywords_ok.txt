@@ -1,0 +1,21 @@
+
+,#KeywordContent[MP_OetD_Analyse[#1][#1]],petite fourniture
+,#KeywordContent[MP_OetD_Analyse[#1][#2]],papier imprimante
+,#KeywordContent[MP_OetD_Analyse[#1][#3]],stylos bille
+,#KeywordContent[MP_OetD_Analyse[#1][#4]],crayons de couleur
+
+,#TransferName,Marché de fournitures 12/07/2012
+,#OriginatingAgency.Identification,CG56_MP_001
+,#OriginatingAgency.Name,Service des Marchés Publics (SMP)
+
+#			Cette ligne est un commentaire et ne posera pas de problèmes lors de la lecture du fichier de données
+#   Cette ligne est un commentaire et ne posera pas de problèmes lors de la lecture du fichier de données
+
+,#KeywordContent[ENRSON[#1]{KW1}[#1]],Premier mot clé KW1 de ENRSON n° 1
+,#KeywordContent[ENRSON[#1]{KW1}[#2]],Second mot clé KW1 de ENRSON n° 1
+,#KeywordContent[ENRSON[#1]{KW2}[#1]],Premier mot clé KW2 de ENRSON n° 1
+,#KeywordContent[ENRSON[#1]{KW3}[#1]],Premier mot clé KW3 de ENRSON n° 1
+,#KeywordContent[ENRSON[#1]{KW3}[#2]],Second mot clé KW3 de ENRSON n° 1
+,#KeywordContent[ENRSON[#1]{KW4}[#2]],Premier mot clé KW4 de ENRSON n° 1
+
+,#KEYWORD_CONTEXTUALISÉS_À_TRAITER,Burp

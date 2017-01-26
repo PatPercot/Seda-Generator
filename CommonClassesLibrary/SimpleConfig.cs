@@ -212,7 +212,7 @@ namespace CommonClassesLibrary {
                                     authorizedKeys = "trace|profil";
                                 else if (section.Equals("data-control"))  
                                     authorizedKeys = "trace|profil|data";
-                                else if (section.Equals("generator")) 
+                                else if (section.Equals("generator"))
                                     authorizedKeys = "trace|accord|data|rep_documents|baseURI|bordereau";
                                 else if (section.Equals("accord-versement")) 
                                     authorizedKeys = "SAE_Serveur|TransferIdPrefix|SAE_ProfilArchivage|TransferringAgencyId|TransferringAgencyName|TransferringAgencyDesc|ArchivalAgencyId|ArchivalAgencyName|ArchivalAgencyDesc";

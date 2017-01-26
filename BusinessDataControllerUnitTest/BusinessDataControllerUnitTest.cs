@@ -423,5 +423,19 @@ namespace BusinessDataControllerUnitTest {
             };
             ConfrontationDonneesEtProfil("tags_donnees_incompletes_comparaison", erreursAttendues);
         }
+
+        [TestMethod]
+        /*
+         *  Utiliser ce test pour analyser des erreurs non répertoriées
+         * */
+        public void H07_TestKeywordOk()
+        {
+            String[] erreursAttendues = 
+                { 
+                    "TODO : les keyword contextualisés sont à traiter"
+                };
+            declencherControleDonnees("keywords_ok", erreursAttendues);
+        }
+
     }
 }

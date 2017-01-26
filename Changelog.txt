@@ -1,4 +1,11 @@
 -------------------------
+Changements du 2017-01-26
+- Contrôleurs de données et de profil
+	Correction des messages de présentation
+	Modification de ContentDescription en ContentDescription.Description
+	Introduction des KeywordContent contextualisés
+	
+-------------------------
 Changements du 2016-06-06
 - Contrôleur de profils et de données
     Mots-clés avec tags + cas de tests

@@ -1,6 +1,11 @@
 Suivi des versions
 
-Version 1.0.2
+Version 1.0.4
+	Intégration du générateur Java (scripts)
+		- Amélioration de la gestion du fichier de configuration
+		- Corrections dans la gestion des mots-clés du SEDA
+		
+Version 1.0.3
 	Première version utilisable avec le générateur Java
 		- contrôle de profil RngProfileControllerLauncher.exe
 		- contrôle de données BusinessDataControllerLauncher.exe

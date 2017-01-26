@@ -49,7 +49,7 @@ namespace BusinessDataControllerLauncher {
             if (args.Length < 1) {
                 System.Console.WriteLine("Syntaxe attendue : BusinessDataControllerLauncher nom-job-controle");
                 System.Console.WriteLine("nom-job-controle est une section dans le fichier job.config");
-                System.Console.WriteLine("Une section a la forme :");
+                System.Console.WriteLine("Une section de contrôle de données métier a la forme :");
                 System.Console.WriteLine("[data-control : nom-job-controle]");
                 System.Console.WriteLine("  trace = chemin/vers/fichier-de-trace.txt");
                 System.Console.WriteLine("  profil = chemin/vers/fichier-de-profil.rng");
