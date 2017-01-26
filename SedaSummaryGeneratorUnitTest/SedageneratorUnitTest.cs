@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SedaSummaryGenerator;
 using System.IO;
@@ -34,7 +35,7 @@ namespace SedaSummaryGeneratorUnitTest {
 
         protected void checkForErrors(String[] erreursAttendues) {
             // Début de vérification de bon déroulement
-            errors = ssg.getErrorsList();
+            // errors = ssg.getErrorsList();
             Assert.IsNotNull(errors, "La liste d'erreurs rencontrées doit exister");
             Assert.AreEqual(erreursAttendues.Length, errors.Count, "Le nombre d'erreurs attendues et rencontrées ne correspond pas");
             int numerror = 0;
@@ -46,7 +47,7 @@ namespace SedaSummaryGeneratorUnitTest {
 
         protected void checkForNoErrors() {
             // Début de vérification de bon déroulement
-            errors = ssg.getErrorsList();
+            // errors = ssg.getErrorsList();
             Assert.AreEqual(false, errors != null && errors.Count != 0, "Aucune erreur ne doit avoir été détectée");
             int numerror = 0;
             if (errors != null && errors.Count != 0) {
@@ -98,13 +99,100 @@ namespace SedaSummaryGeneratorUnitTest {
             Assert.IsNull(node, "Le nœud '" + xPath + "' ne devrait pas exister");
         }
 
-        protected void executeGenerator(String jobName, String sedaVersion) {
+        protected void executeGenerator(String jobName, String sedaVersion)
+        {
             Action<Exception, String> eh = (ex, str) => {
                 Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);
                 throw ex;
             };
             Action<Exception> ehb = (ex) => {
-                streamWriter.WriteLine("Erreur lors de la préparation du bordereau pour le test '" + fichier_bordereau + "' " + ex.GetType().Name);
+                Console.WriteLine("Erreur lors de la préparation du bordereau pour le test '" + fichier_bordereau + "' " + ex.GetType().Name);
+            };
+
+            SimpleConfig config = new SimpleConfig();
+            String erreur = config.loadFile("./job.config");
+            if (erreur != String.Empty) // on tient compte du fait qu'en environnement de développement, l'exe est dans bin/Release
+                erreur = config.loadFile("../../job.config");
+
+            if (erreur != String.Empty) {
+                System.Console.WriteLine(erreur);
+                Assert.Fail(erreur);
+            }
+
+            GeneratorConfig control = config.getGeneratorConfig(jobName);
+
+            accordVersement = control.accordVersement;
+            fichier_metier = control.dataFile;
+            path_datafiles = control.repDocuments;
+            fichier_bordereau = control.bordereauFile;
+            traceFile = control.traceFile;
+            baseURI = control.baseURI;
+
+            Process myProcess = new Process();
+            try {
+                myProcess.StartInfo.UseShellExecute = false;
+                myProcess.StartInfo.WorkingDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\..\\..";
+                myProcess.StartInfo.FileName = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)
+                    + "\\..\\..\\JavaSedaProfileGeneratorCD56_task.bat";
+                myProcess.StartInfo.Arguments = jobName;
+                myProcess.StartInfo.CreateNoWindow = true;
+                myProcess.StartInfo.RedirectStandardError = true;
+                myProcess.StartInfo.StandardErrorEncoding = System.Text.ASCIIEncoding.Default;
+                // ATTENTION : la présence des deux instructions ci-dessous empêche le processus de se terminer
+                // myProcess.StartInfo.RedirectStandardOutput = true;
+                // myProcess.StartInfo.StandardOutputEncoding = System.Text.ASCIIEncoding.Default;
+                myProcess.Start();
+                int nbBcl = 0;
+                while (nbBcl < 6 && myProcess.WaitForExit(5000) == false) {
+                    ++nbBcl;
+                }
+                if (nbBcl == 6) 
+                    myProcess.Kill();
+                // Parce que l'on a redirigé les sorties standards, il faut appeler WaitForExit
+                myProcess.WaitForExit();
+            }
+            catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }
+
+            errors = new StringCollection();
+            if (myProcess.ExitCode >= 0) {
+                String ln;
+                while ((ln = myProcess.StandardError.ReadLine()) != null) {
+                    errors.Add(ln);
+                }
+            }
+
+
+            docBordereau = new XmlDocument();
+            try {
+                using (StreamReader sr = new StreamReader(fichier_bordereau)) {
+                    String line = sr.ReadToEnd();
+                    //Console.WriteLine(line);
+                    docBordereau.LoadXml(line);
+                    //Instantiate an XmlNamespaceManager object. 
+                    docInXmlnsManager = new System.Xml.XmlNamespaceManager(docBordereau.NameTable);
+                    // Add the namespaces used in xml to the XmlNamespaceManager.
+                    // docInXmlnsManager.AddNamespace(String.Empty, sedaVersion.Equals("1.0") ? namespaceSEDA10 : namespaceSEDA02);
+                    docInXmlnsManager.AddNamespace("s", sedaVersion.Equals("1.0") ? namespaceSEDA10 : namespaceSEDA02);
+                }
+            }
+            catch (ArgumentException e) { ehb(e); }
+            catch (DirectoryNotFoundException e) { ehb(e); }
+            catch (FileNotFoundException e) { ehb(e); }
+            catch (OutOfMemoryException e) { ehb(e); }
+            catch (IOException e) { ehb(e); }
+
+            // streamWriter.Close();
+        }
+
+        protected void executeGeneratorCsharp(String jobName, String sedaVersion) {
+            Action<Exception, String> eh = (ex, str) => {
+                Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);
+                throw ex;
+            };
+            Action<Exception> ehb = (ex) => {
+                Console.WriteLine("Erreur lors de la préparation du bordereau pour le test '" + fichier_bordereau + "' " + ex.GetType().Name);
             };
 
             SimpleConfig config = new SimpleConfig();
@@ -163,17 +251,19 @@ namespace SedaSummaryGeneratorUnitTest {
             ssg.close();
 
             streamWriter.WriteLine("\n---------- ERREURS ----------\n");
-            StringCollection dumpErrors = ssg.getErrorsList();
-            if (dumpErrors != null && dumpErrors.Count != 0) {
-                foreach (String err in dumpErrors) {
+            errors = ssg.getErrorsList();
+            if (errors != null && errors.Count != 0) {
+                foreach (String err in errors) {
                     streamWriter.WriteLine(err);
                 }
             }
             streamWriter.WriteLine("\n---------- ^^^^^^^ ----------\n");
 
             docBordereau = new XmlDocument();
-            try {
-                using (StreamReader sr = new StreamReader(fichier_bordereau)) {
+            try
+            {
+                using (StreamReader sr = new StreamReader(fichier_bordereau))
+                {
                     String line = sr.ReadToEnd();
                     //Console.WriteLine(line);
                     docBordereau.LoadXml(line);

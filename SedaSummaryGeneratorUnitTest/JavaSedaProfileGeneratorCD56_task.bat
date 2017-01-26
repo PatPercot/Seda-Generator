@@ -11,7 +11,7 @@ REM ARGUMENTS
 SET TASK=%1
 
 REM GENERATOR : Modifier à chaque changement de version
-SET JAVASEDAPROFILEGENERATOR=lib-cd56/JavaSedaProfileGenerator-1.0.4.jar
+SET JAVASEDAPROFILEGENERATOR=lib-cd56/JavaSedaProfileGenerator-1.0.5.jar
 
 REM LIB
 SET LOGBACK_LIB=lib-cd56/logback-classic-1.0.7.jar
@@ -28,4 +28,4 @@ SET JAVA_BIN=java
 
 SET CLASSPATH=%LOGBACK_LIB%;%LOGBACK_CORE_LIB%;%POSTGRESQL_LIB%;%SAXON_LIB%;%SERIALIZER_LIB%;%SLF4J_LIB%;%XALAN_LIB%;%XMLAPIS_LIB%;%COMMONS_LANG_LIB%;%JAVASEDAPROFILEGENERATOR%;%LOGBACK_DIR%
 
-%JAVA_BIN% -classpath %CLASSPATH% unit.SedaGeneratorUnit ./sedaGeneratorUnit.properties ./job.config %TASK%
+%JAVA_BIN% -classpath %CLASSPATH% unit.SedaGeneratorUnit ./sedaGeneratorUnit.properties ./job-java.config %TASK%
