@@ -2,10 +2,10 @@
 ,#OriginatingAgency.Identification,CG56_MP_001
 ,#OriginatingAgency.Name,Service des Marchés Publics (SMP)
 
-,#KeywordContent[#1],Vannes
-,#KeywordContent[#2],Marché de fournitures
-,#KeywordContent[#3],Consommables
-,#KeywordContent[#4],Papeterie
+,#KeywordContent[{KWGEO}],Vannes
+,#KeywordContent[{KWTYPE}],Marché de fournitures
+,#KeywordContent[{KWCATEGORIE}],Consommables
+,#KeywordContent[{KWREFERENCE}],Papeterie
 
 
 ,depot_DCE_horodatage.xml,MP_Cons_Dossier{MP_Cons_Dossier_Horodatage},Jeton d'horodatage du dépôt du DCE,01/12/2014 12:00:00
@@ -193,21 +193,7 @@
 ,#ContainsName[MP_OetD_Analyse[#1]//MP_OetD_analyse_decision_Compl_Fichier[#1]],Messages complémentaires
 
 
-,#KeywordContent[MP_OetD_Analyse[#1][#1]],petite fourniture
-,#KeywordContent[MP_OetD_Analyse[#1][#2]],papier imprimante
-,#KeywordContent[MP_OetD_Analyse[#1][#3]],stylos bille
-,#KeywordContent[MP_OetD_Analyse[#1][#4]],crayons de couleur
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+,#KeywordContent[MP_OetD_Analyse[#1]{CODE_CPV}],0123
+,#KeywordContent[MP_OetD_Analyse[#1]{NUM_MARCHE}],20161123_001
+,#KeywordContent[MP_OetD_Analyse[#1]{CATEGORIE_LOT}],petite fourniture
+,#KeywordContent[MP_OetD_Analyse[#1]{NATURE_DECISION}],Admission
