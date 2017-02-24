@@ -9,7 +9,7 @@
 
 ,#CustodialHistory,Les documents ont été créés dans la GED Alfresco
 
-,#KeywordContent[#1],Mot-clé Archive
+,#KeywordContent[{KW1}],Mot-clé Archive
 
 
 ,#ContainsName[O6_Chapitre1],1ère unité documentaire
