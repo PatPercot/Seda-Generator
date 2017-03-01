@@ -1,0 +1,19 @@
+;#KeywordContent[{KWAR1}];KWAR1 unique
+
+;#KeywordContent[{KWAR2}[#1]];KWAR2 n1
+;#KeywordContent[{KWAR2}[#2]];KWAR2 n2
+;#KeywordContent[{KWAR2}[#3]];KWAR2 n3
+
+;#KeywordContent[UD1{KWOK1}[#1]];KWOK1 n1
+;#KeywordContent[UD1{KWOK1}[#2]];KWOK1 n2
+;#KeywordContent[UD1{KWOK1}[#3]];KWOK1 n3
+
+;#KeywordContent[UD1{KWOK2}[#1]];KWOK2 n1
+;#KeywordContent[UD1{KWOK2}[#2]];KWOK2 n2
+;#KeywordContent[UD1{KWOK2}[#3]];KWOK2 n3
+
+;#KeywordContent[UD1{KWOPT}[#1]];KWOPT optionnel
+
+;#KeywordContent[UD2{SSKW1}[#1]];SSKW1 n1
+;#KeywordContent[UD2{SSKW1}[#2]];SSKW1 n2
+;#KeywordContent[UD2{SSKW1}[#3]];SSKW1 n3

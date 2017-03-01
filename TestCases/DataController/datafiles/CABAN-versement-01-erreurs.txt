@@ -6,8 +6,8 @@
 ,#TransferName,Balise doublée
 ;#TransferName;Concours bagad catégorie 1 du 02/03/2014 à BREST
 
-,#KeywordContent[#1],BREST
-,#KeywordContent[#2],CONCOURS
+,#KeywordContent[{KW_COMMUNE}],BREST
+,#KeywordContent[{KW_EVT}],CONCOURS
 
 ;2014-xx-xx-xxxxx-kbx-ordre.pdf;DESC_EVT;fichier .pdf descriptif général de l'événement;01/12/2014 12:00:00
 ;2014-xx-xx-xxxxx-kbx-ordre.ppt;DESC_EVT;fichier .ppt descriptif général de l'événement;32/12/2014 12:00:00
@@ -33,8 +33,8 @@
 ,2009-11-bbcs-29500-cd01-p2.truc,TAG{DOCUMENT],fichier TRUC,01/12/2014 12:00:00,type-empreinte,empreinte,150000
 ,2009-11-bbcs-29500-cd01-p2.truc,TAG[#1}[DOCUMENT},fichier TRUC,01/12/2014 12:00:00,type-empreinte,empreinte,150000
 
-,#KeywordContent[OFFRES_RETENUES[#2]],mot-clé 2 pour l'offre retenue
-,#KeywordContent[OR_ETP[#3][#2]],mot-clé 2 pour l'offre retenue 3
+,#KeywordContent[OFFRES_RETENUES{KW2}],mot-clé 2 pour l'offre retenue
+,#KeywordContent[OR_ETP[#3]{KW3}],mot-clé 2 pour l'offre retenue 3
 
 ,MP_Cons_Msg_Echange_PJ_1_1.pdf,MP_Cons_Msg_Echange[#1]//MP_Cons_Msg_Echange_PJ,Pièce jointe du message 1,11/12/2014 12:00:00
 ,MP_OetD_Analyse_Recept_ONR1_AE_Acte_1_1.pdf,MP_OetD_Analyse[#1]//MP_OetD_Analyse_Recept_ONR1[#1]//MP_OetD_Analyse_Recept_ONR1_AE{MP_OetD_Analyse_Recept_ONR1_AE_Acte},Acte d'engagement,20/12/2014 12:00:00

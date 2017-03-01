@@ -299,44 +299,52 @@ namespace SedaSummaryGenerator {
                     balisename = match.Groups[1].Value;
                 }
             }
-            Regex simpleOrIndexedformat = new Regex ("^#" + balisename + @"(\[#\d+\])?$");
-            /*
-            Regex taggedFormat = new Regex("^#" + balisename + @"\[\w([\w\d_]+)?\]$");
-            Regex taggedIndexedFormat = new Regex("^#" + balisename + @"\[\w([\w\d_]+)\[#\d+\]\]$");
-            Regex taggedIndexedIndexedFormat = new Regex("^#" + balisename + @"\[\w([\w\d_]+)\[#\d+\]\[#\d+\]\]$");
-            */
-
-            String fullTagformat = @"(\w[\w\d_]+)(\[#\d+\])?((//\w[\w\d_]+)(\[#\d+\])?)*({\w[\w\d_]+})?";
-            Regex globalFormat = new Regex("^#" + balisename + @"\[" + fullTagformat + @"(\[#\d+\])?\]$");
             bool formatOK = false;
-            matches = simpleOrIndexedformat.Matches(tag);
-            if (matches.Count == 1)
-                formatOK = true;
-            else {
-                matches = globalFormat.Matches(tag);
+            if (balisename.Equals("KeywordContent")) {
+                Regex keywordFormat = new Regex(@"^#KeywordContent\[((\w[\w\d_]+)(\[#\d+\])?((//\w[\w\d_]+)(\[#\d+\])?)*)?({\w[\w\d_]+})(\[#\d+\])?\]$");
+                matches = keywordFormat.Matches(tag);
                 if (matches.Count == 1)
                     formatOK = true;
-            }
-            /*
-            matches = simpleOrIndexedformat.Matches(tag);
-            if (matches.Count == 1) 
-                formatOK = true;
-            else {
-                matches = taggedFormat.Matches(tag);
+            } else {
+                Regex simpleOrIndexedformat = new Regex ("^#" + balisename + @"(\[#\d+\])?$");
+                /*
+                Regex taggedFormat = new Regex("^#" + balisename + @"\[\w([\w\d_]+)?\]$");
+                Regex taggedIndexedFormat = new Regex("^#" + balisename + @"\[\w([\w\d_]+)\[#\d+\]\]$");
+                Regex taggedIndexedIndexedFormat = new Regex("^#" + balisename + @"\[\w([\w\d_]+)\[#\d+\]\[#\d+\]\]$");
+                */
+
+                String fullTagformat = @"(\w[\w\d_]+)(\[#\d+\])?((//\w[\w\d_]+)(\[#\d+\])?)*({\w[\w\d_]+})?";
+                Regex globalFormat = new Regex("^#" + balisename + @"\[" + fullTagformat + @"(\[#\d+\])?\]$");
+                matches = simpleOrIndexedformat.Matches(tag);
                 if (matches.Count == 1)
                     formatOK = true;
                 else {
-                    matches = taggedIndexedFormat.Matches(tag);
+                    matches = globalFormat.Matches(tag);
                     if (matches.Count == 1)
                         formatOK = true;
+                }
+                    /*
+                    matches = simpleOrIndexedformat.Matches(tag);
+                    if (matches.Count == 1) 
+                        formatOK = true;
                     else {
-                        matches = taggedIndexedIndexedFormat.Matches(tag);
+                        matches = taggedFormat.Matches(tag);
                         if (matches.Count == 1)
                             formatOK = true;
+                        else {
+                            matches = taggedIndexedFormat.Matches(tag);
+                            if (matches.Count == 1)
+                                formatOK = true;
+                            else {
+                                matches = taggedIndexedIndexedFormat.Matches(tag);
+                                if (matches.Count == 1)
+                                    formatOK = true;
+                            }
+                        }
                     }
-                }
+                     * */
+
             }
-             * */
             if (formatOK != true) {
                 listeAvertissements.Add("ERR: dans la ligne '" + linenumber +
                     "' le 1er champ ne correspond pas à un des formats possibles : #tagname, #tagname[TAG] ou #tagname[TAG[#num]]");

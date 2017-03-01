@@ -19,11 +19,14 @@
 ,document3e3.txt,OR_ETP[#3],Document jeton d'horodatage 3 E2,01/12/2014 12:00:00
 
 ,#KeywordContent[{KWARCHIVE}],mot-clé à voir apparaître si un mot-clé a été demandé
-,#KeywordContent[OFFRES_RETENUES{KW1}],mot-clé 1 pour l'offre retenue
-,#KeywordContent[OFFRES_RETENUES{KW2}],mot-clé 2 pour l'offre retenue
-,#KeywordContent[OR_ETP[#1]{ETPKW1}],mot-clé 1 pour l'offre retenue 1
-,#KeywordContent[OR_ETP[#1]{ETPKW2}],mot-clé 2 pour l'offre retenue 1
-,#KeywordContent[OR_ETP[#2]{ETPKW1}],mot-clé 1 pour l'offre retenue 2
-,#KeywordContent[OR_ETP[#2]{ETPKW2}],mot-clé 2 pour l'offre retenue 2
-,#KeywordContent[OR_ETP[#3]{ETPKW1}],mot-clé 1 pour l'offre retenue 3
-,#KeywordContent[OR_ETP[#3]{ETPKW2}],mot-clé 2 pour l'offre retenue 3
+,#KeywordContent[OFFRES_RETENUES{KW1}[#1]],mot-clé 1 pour l'offre retenue
+,#KeywordContent[OFFRES_RETENUES{KW1}[#2]],mot-clé 2 pour l'offre retenue
+,#KeywordContent[OFFRES_RETENUES{KW2}[#1]],mot-clé 1 pour l'offre retenue
+,#KeywordContent[OFFRES_RETENUES{KW2}[#2]],mot-clé 2 pour l'offre retenue
+,#KeywordContent[OR_ETP[#1]{ETPKW1}[#1]],mot-clé 1 pour l'offre retenue 1
+,#KeywordContent[OR_ETP[#1]{ETPKW2}[#1]],mot-clé 2 pour l'offre retenue 1
+,#KeywordContent[OR_ETP[#2]{ETPKW1}[#1]],mot-clé 1 pour l'offre retenue 2
+,#KeywordContent[OR_ETP[#2]{ETPKW2}[#1]],mot-clé 2 pour l'offre retenue 2
+,#KeywordContent[OR_ETP[#3]{ETPKW1}[#1]],mot-clé 2 pour l'offre retenue 2
+,#KeywordContent[OR_ETP[#3]{ETPKW1}[#2]],mot-clé 2 pour l'offre retenue 2
+,#KeywordContent[OR_ETP[#3]{ETPKW2}[#1]],mot-clé 1 pour l'offre retenue 3

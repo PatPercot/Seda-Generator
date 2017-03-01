@@ -14,13 +14,13 @@
 
 ,#ContainsName[ENRSON[#1]//SAMPLES[#1]],nom UD enrson samples 1
 ,#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]],description UD enrson samples 1
-,#KeywordContent[ENRSON[#1]//SAMPLES[#1]],mo-clé UD enrson samples 1
+,#KeywordContent[ENRSON[#1]//SAMPLES[#1]{KW2}],mo-clé UD enrson samples 1
 ,fichier enrson samples 1,ENRSON[#1]//SAMPLES[#1],fichier enrson samples 1,01/12/2014 12:00:00
 ,#ContainsName[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION],nom UD enrson samples description 1
 
-,#KeywordContent[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION],mot-clé UD enrson samples description 1
+,#KeywordContent[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION{KW3}],mot-clé UD enrson samples description 1
 ,fichier enrson sample description 1,ENRSON[#1]//SAMPLES[#1]//DESCRIPTION,fichier enrson sample description 1,01/12/2014 12:00:00
 
 ,#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]//ANNEXE],description UD enrson samples annexe 1
-,#KeywordContent[ENRSON[#1]//SAMPLES[#1]//ANNEXE],mot-clé UD enrson samples annexe 1
+,#KeywordContent[ENRSON[#1]//SAMPLES[#1]//ANNEXE{KW4}],mot-clé UD enrson samples annexe 1
 ,fichier enrson sample annexe 1,ENRSON[#1]//SAMPLES[#1]//ANNEXE,fichier enrson sample annexe 1,01/12/2014 12:00:00

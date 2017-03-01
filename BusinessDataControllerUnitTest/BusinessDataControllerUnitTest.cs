@@ -197,8 +197,8 @@ namespace BusinessDataControllerUnitTest {
                 { 
                 "#TransferName",
                 "#OriginatingAgency.Identification",
-                "#KeywordContent[KW_COMMUNE]",
-                "#KeywordContent[KW_EVT]",
+                "#KeywordContent[{KW_COMMUNE}]",
+                "#KeywordContent[{KW_EVT}]",
                 "#ContainsName[ENRSON[#1]]",
                 "#ContentDescription.Description[ENRSON[#1]]",
                 "document: ENRSON[#1]{PDF}",
@@ -227,25 +227,25 @@ namespace BusinessDataControllerUnitTest {
                 "#OriginatingAgency.LegalClassification",
                 "#OriginatingAgency.Name",
                 "#OriginatingAgency.Identification",
-                "#KeywordContent[KW_COMMUNE]",
-                "#KeywordContent[KW_EVT]",
+                "#KeywordContent[{KW_COMMUNE}]",
+                "#KeywordContent[{KW_EVT}]",
                 "#ContainsName[ENRSON[#1]]",
                 "#ContentDescription.Description[ENRSON[#1]]",
-                "#KeywordContent[ENRSON[#1]]",
+                "#KeywordContent[ENRSON[#1]{KW1}]",
                 "document: ENRSON[#1]{PDF}",
                 "document: ENRSON[#1]{MP3}",
                 "document: ENRSON[#1]{WAV}",
                 "#ContainsName[ENRSON[#1]//SAMPLES[#1]]",
                 "#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]]",
-                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]]",
+                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]{KW2}]",
                 "document: ENRSON[#1]//SAMPLES[#1]",
                 "#ContainsName[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
                 "#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
-                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
+                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION{KW3}]",
                 "document: ENRSON[#1]//SAMPLES[#1]//DESCRIPTION",
                 "#ContainsName[ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
                 "#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
-                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
+                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]//ANNEXE{KW4}]",
                 "document: ENRSON[#1]//SAMPLES[#1]//ANNEXE",
                 };
             declencherAnalyseProfil("tags_profil_complet_profil", erreursAttendues, tagsAttendus);
@@ -266,20 +266,20 @@ namespace BusinessDataControllerUnitTest {
                 "#OriginatingAgency.LegalClassification",
                 "#OriginatingAgency.Name",
                 "#OriginatingAgency.Identification",
-                "#KeywordContent[KW_COMMUNE]",
-                "#KeywordContent[KW_EVT]",
+                "#KeywordContent[{KW_COMMUNE}]",
+                "#KeywordContent[{KW_EVT}]",
                 "#ContainsName[ENRSON[#1]]",
                 "#ContentDescription.Description[ENRSON[#1]]",
-                "#KeywordContent[ENRSON[#1]]",
+                "#KeywordContent[ENRSON[#1]{KW1}]",
                 "#ContainsName[ENRSON[#1]//SAMPLES[#1]]",
                 "#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]]",
-                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]]",
+                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]{KW2}]",
                 "#ContainsName[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
                 "#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
-                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
+                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION{KW3}]",
                 "#ContainsName[ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
                 "#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
-                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]//ANNEXE]",
+                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]//ANNEXE{KW4}]",
                 };
             String[] tagsListeDocumentsAttendus = 
                 { 
@@ -413,9 +413,9 @@ namespace BusinessDataControllerUnitTest {
                 "Dans le profil, le tag '#TransferName' ne trouve pas de correspondance dans les données métier",
                 "Dans le profil, le tag '#OriginatingAgency.Description' ne trouve pas de correspondance dans les données métier",
                 "Dans le profil, le tag '#OriginatingAgency.Name' ne trouve pas de correspondance dans les données métier",
-                "Dans le profil, le tag '#KeywordContent[KW_COMMUNE]' ne trouve pas de correspondance dans les données métier",
-                "Dans le profil, le tag '#KeywordContent[KW_EVT]' ne trouve pas de correspondance dans les données métier",
-                "Dans le profil, le tag '#KeywordContent[ENRSON[#1]]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#KeywordContent[{KW_COMMUNE}]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#KeywordContent[{KW_EVT}]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#KeywordContent[ENRSON[#1]{KW1}]' ne trouve pas de correspondance dans les données métier",
                 "Dans le profil, le tag '#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]' ne trouve pas de correspondance dans les données métier",
                 "Dans le profil, le tag '#ContainsName[ENRSON[#1]//SAMPLES[#1]//ANNEXE]' ne trouve pas de correspondance dans les données métier",
                 "Dans le profil, le tag de document 'ENRSON[#1]{MP3}' ne trouve pas de correspondance dans les données métier",
@@ -426,15 +426,20 @@ namespace BusinessDataControllerUnitTest {
 
         [TestMethod]
         /*
-         *  Utiliser ce test pour analyser des erreurs non répertoriées
+         *  Tests des Keyword OK SEDA 0.2
          * */
-        public void H07_TestKeywordOk()
-        {
-            String[] erreursAttendues = 
-                { 
-                    "TODO : les keyword contextualisés sont à traiter"
-                };
-            declencherControleDonnees("keywords_ok", erreursAttendues);
+        public void H07_TestKeyword02Tagged() {
+            String[] erreursAttendues = { };
+            declencherControleDonnees("keywords02_tagged", erreursAttendues);
+        }
+
+        [TestMethod]
+        /*
+         *  Tests des Keyword OK SEDA 1.0
+         * */
+        public void H08_TestKeyword10Tagged() {
+            String[] erreursAttendues = { };
+            declencherControleDonnees("keywords10_tagged", erreursAttendues);
         }
 
     }

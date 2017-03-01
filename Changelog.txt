@@ -1,4 +1,9 @@
 -------------------------
+Changements du 2017-03-01
+- Contrôleurs de données et de profil
+	Mise à niveau des KeywordContent avec schemeID conforme au code Java
+
+-------------------------
 Changements du 2017-01-26
 - Contrôleurs de données et de profil
 	Correction des messages de présentation
