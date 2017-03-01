@@ -8,6 +8,7 @@
 ,#OriginatingAgency.Name,Département du Morbihan - Direction des systèmes d'information
 
 ,#ContainsName[O6_Chapitre1],Offre retenue de l'entreprise 1
+,#CustodialHistory[O6_Chapitre1],Historique spécifique de l'unité documentaire
 ,document1e1.txt,O6_Chapitre1,Document 1 E1,
 ,document2e1.txt,O6_Chapitre1,Document 2 E1,
 ,document1e2.txt,O6_Chapitre1,Document 1 E2,

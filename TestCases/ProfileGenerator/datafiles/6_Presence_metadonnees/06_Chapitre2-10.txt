@@ -13,4 +13,5 @@
 
 
 ,#ContainsName[O6_Chapitre1],1ère unité documentaire
+,#CustodialHistory[O6_Chapitre1],Un historique spécifique est prévu sur cette unité documentaire
 ,Document1.pdf,O6_Chapitre1,Document du test,01/06/2013 12:00:00

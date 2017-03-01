@@ -9,6 +9,7 @@
 ,#KeywordContent[{KW_COMMUNE}],BREST
 ,#KeywordContent[{KW_EVT}],FOLKLORE
 ,#ContainsName[ENRSON[#1]],nom UD enrson 1
+,#CustodialHistory[ENRSON[#1]],historique de conservation unité documentaire
 ,#ContentDescription.Description[ENRSON[#1]],description UD enrson 1
 ,#KeywordContent[ENRSON[#1]{KW1}],mot-clé enrson 1
 ,fichier enrson pdf 1,ENRSON[#1]{PDF},fichier enrson pdf 1,01/12/2014 12:00:00

@@ -411,6 +411,14 @@ namespace SedaSummaryGenerator {
                 parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
                 if (parentNodeName != null) {
                     String oldParentNodeName = parentNodeName;
+
+                    String nodeName = "CustodialHistory";
+                    xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
+                    node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (node != null) {
+                        expectedTagsList.Add("#" + nodeName + "["  + currentContainsNode.getRelativeContext() + "]");
+                    }
+
                     // Recherche de Description
                     xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + "Description" + "']/rng:ref";
                     parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);

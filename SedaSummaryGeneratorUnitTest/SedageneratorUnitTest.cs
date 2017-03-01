@@ -1083,7 +1083,10 @@ namespace SedaSummaryGeneratorUnitTest {
         public void W62_TestGenerateur_6_2_11() {
             executeGenerator("06_Chapitre2-11", "0.2");
 
-            String[] erreursAttendues = { "#DATAERR: Le tag : '#ContainsName[O6_Chapitre1]' n'a pas été trouvé dans les données métier" };
+            String[] erreursAttendues = { 
+                "#DATAERR: Le tag : '#ContainsName[O6_Chapitre1]' n'a pas été trouvé dans les données métier",
+                "#DATAERR: Le tag : '#CustodialHistory[O6_Chapitre1]' n'a pas été trouvé dans les données métier",
+                };
             checkForErrors(erreursAttendues);
             checkInnerText("/s:ArchiveTransfer/s:Comment"
                , "Commentaire sur les tests de l'onglet 6");
