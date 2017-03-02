@@ -1,6 +1,7 @@
 ,#Comment,commentaire
 ,#TransferName,nom du transfert
 ,#CustodialHistory,historique de conservation
+,#ContentDescription.Description,Description de l'archive
 ,#OriginatingAgency.BusinessType,type de business du producteur
 ,#OriginatingAgency.Description,description du producteur
 ,#OriginatingAgency.LegalClassification,classification du producteur

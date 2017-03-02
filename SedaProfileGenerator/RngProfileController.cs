@@ -265,6 +265,20 @@ namespace SedaSummaryGenerator {
                         }
                     }
 
+                    // Recherche de Description
+                    xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + "Description" + "']/rng:ref";
+                    parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (parentNode != null) {
+                        parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
+                        if (parentNodeName != null) {
+                            xPath = "rng:define[@name='" + parentNodeName + "']/rng:data[@type='string']";
+                            node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (node != null) {
+                                expectedTagsList.Add("#ContentDescription.Description");
+                            }
+                        }
+                    }
+
                     // Recherche de KeywordContent
                     addExpectedKeywordTags(oldParentNodeName, context, null);
                 }
