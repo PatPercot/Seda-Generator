@@ -1,9 +1,12 @@
 -------------------------
-Changements du 2017-03-01
+Changements du 2017-03-03
 - Contrôleurs de données et de profil
 	Mise à niveau des KeywordContent avec schemeID conforme au code Java
+- Contrôleur de données)
 	Mise à niveau de CustodialHistory dans les unités documentaires conforme au code Java
 	Ajout du contrôle dans Archive de ContentDescription.Description dans les données métier et le profil
+	Message d'alerte données manquantes uniquement si CustodialHistory ne fournit pas de contenu dans le profil
+	Message d'alerte si donnée dupliquée entre profil et données pour CustodialHistory et ContentDescription.Description
 
 -------------------------
 Changements du 2017-01-26

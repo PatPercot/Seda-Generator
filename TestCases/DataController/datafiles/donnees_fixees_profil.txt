@@ -1,0 +1,6 @@
+,#TransferName,Transfert de données conflictuelle par le profil et les données : OK
+,#CustodialHistory,Historique fourni par les données et le profil
+,#ContentDescription.Description,Description fournie par les données et le profil
+,#CustodialHistory[UD1],Historique fourni par les données et le profil
+,#ContentDescription.Description[UD1],Description fournie par les données et le profil
+,#ContainsName[UD1],Nom de l'unité documentaire : OK

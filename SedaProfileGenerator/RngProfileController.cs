@@ -246,7 +246,14 @@ namespace SedaSummaryGenerator {
                     xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
                     node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                     if (node != null) {
-                        expectedTagsList.Add("#" + nodeName);
+                        nodeContent = node.Attributes.GetNamedItem("name").Value;
+                        if (nodeContent != null) {
+                            xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
+                            node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (node != null) {
+                                expectedTagsList.Add("#" + nodeName);
+                            }
+                        }
                     }
                     nodeName = "OriginatingAgency";
                     xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
@@ -430,7 +437,14 @@ namespace SedaSummaryGenerator {
                     xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
                     node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                     if (node != null) {
-                        expectedTagsList.Add("#" + nodeName + "["  + currentContainsNode.getRelativeContext() + "]");
+                        nodeContent = node.Attributes.GetNamedItem("name").Value;
+                        if (nodeContent != null) {
+                            xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
+                            node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (node != null) {
+                                expectedTagsList.Add("#" + nodeName + "[" + currentContainsNode.getRelativeContext() + "]");
+                            }
+                        }
                     }
 
                     // Recherche de Description

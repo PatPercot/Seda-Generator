@@ -415,6 +415,7 @@ namespace BusinessDataControllerUnitTest {
             String[] erreursAttendues = {
                 "Dans le profil, le tag '#Comment' ne trouve pas de correspondance dans les données métier",
                 "Dans le profil, le tag '#TransferName' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#CustodialHistory' ne trouve pas de correspondance dans les données métier",
                 "Dans le profil, le tag '#OriginatingAgency.Description' ne trouve pas de correspondance dans les données métier",
                 "Dans le profil, le tag '#OriginatingAgency.Name' ne trouve pas de correspondance dans les données métier",
                 "Dans le profil, le tag '#ContentDescription.Description' ne trouve pas de correspondance dans les données métier",
@@ -446,6 +447,21 @@ namespace BusinessDataControllerUnitTest {
         public void H08_TestKeyword10Tagged() {
             String[] erreursAttendues = { };
             declencherControleDonnees("keywords10_tagged", erreursAttendues);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void H09_TestDonneesProfilEtDonnees() {
+            String[] erreursAttendues = 
+                { 
+                "La clé '#CustodialHistory' fournie par les données métier n'est pas attendue par le profil",
+                "La clé '#ContentDescription.Description' fournie par les données métier n'est pas attendue par le profil",
+                "La clé '#CustodialHistory[UD1]' fournie par les données métier n'est pas attendue par le profil",
+                "La clé '#ContentDescription.Description[UD1]' fournie par les données métier n'est pas attendue par le profil",
+                };
+            ConfrontationDonneesEtProfil("donnees_profil_et_donnees", erreursAttendues);
         }
 
     }
