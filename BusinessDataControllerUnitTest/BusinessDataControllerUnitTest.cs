@@ -71,7 +71,7 @@ namespace BusinessDataControllerUnitTest {
             streamWriter.Close();
         }
 
-        void declencherAnalyseProfil(String jobName, String[] erreursAttendues, String[] tagsAttendus) {
+        void declencherAnalyseProfil(String jobName, String[] erreursAttendues, String[] tagsAttendus, Boolean bWithWarns = false) {
             StreamWriter streamWriter = null;
             DataControlConfig control = configLoader(jobName);
             String traceFile = control.traceFile;
@@ -105,6 +105,7 @@ namespace BusinessDataControllerUnitTest {
             streamWriter.Flush();
 
             if (erreursAttendues != null) {
+                /*
                 int erreur = 0;
                 if (erreurs != null && erreurs.Count != 0) {
                     foreach (String str in erreurs) {
@@ -115,6 +116,26 @@ namespace BusinessDataControllerUnitTest {
                 }
 
                 Assert.AreEqual(erreursAttendues.Length, erreurs.Count, "Le nombre d'erreurs attendues et obtenues diffère");
+                 * */
+                StringCollection errors = rpc.getErrorsList();
+                int erreur = 0;
+                if (errors != null && errors.Count != 0) {
+                    foreach (String str in errors) {
+                        if (bWithWarns) {
+                            if (erreursAttendues.Length > erreur)
+                                StringAssert.StartsWith(str, erreursAttendues[erreur], "Comparaison des erreurs");
+                            erreur++;
+                        } else {
+                            if (str.StartsWith("(--) ") == false) {
+                                if (erreursAttendues.Length > erreur)
+                                    StringAssert.StartsWith(str, erreursAttendues[erreur], "Comparaison des erreurs");
+                                erreur++;
+                            }
+                        }
+                    }
+                }
+                Assert.AreEqual(erreursAttendues.Length, erreur, "Le nombre d'erreurs attendues et obtenues diffère");
+
             }
 
             StringCollection tags = rpc.getExpectedTagsListList();
@@ -360,7 +381,7 @@ namespace BusinessDataControllerUnitTest {
         }
 
 
-        private void ConfrontationDonneesEtProfil(String testAExecuter, String[] erreursAttendues) {
+        private void ConfrontationDonneesEtProfil(String testAExecuter, String[] erreursAttendues, Boolean bWithWarns = false) {
             StreamWriter streamWriter = null;
             DataControlConfig control = configLoader(testAExecuter);
             String traceFile = control.traceFile;
@@ -388,12 +409,20 @@ namespace BusinessDataControllerUnitTest {
             int erreur = 0;
             if (erreurs != null && erreurs.Count != 0) {
                 foreach (String str in erreurs) {
-                    if (erreursAttendues.Length > erreur)
-                        StringAssert.StartsWith(str, erreursAttendues[erreur], "Comparaison des erreurs");
-                    erreur++;
+                    if (bWithWarns) {
+                        if (erreursAttendues.Length > erreur)
+                            StringAssert.StartsWith(str, erreursAttendues[erreur], "Comparaison des erreurs");
+                        erreur++;
+                    } else {
+                        if (str.StartsWith("(--) ") == false) {
+                            if (erreursAttendues.Length > erreur)
+                                StringAssert.StartsWith(str, erreursAttendues[erreur], "Comparaison des erreurs");
+                            erreur++;
+                        }
+                    }
                 }
             }
-            Assert.AreEqual(erreursAttendues.Length, erreurs.Count, "Le nombre d'erreurs attendues et obtenues diffère");
+            Assert.AreEqual(erreursAttendues.Length, erreur, "Le nombre d'erreurs attendues et obtenues diffère");
         }
 
 
@@ -461,7 +490,7 @@ namespace BusinessDataControllerUnitTest {
                 "La clé '#CustodialHistory[UD1]' fournie par les données métier n'est pas attendue par le profil",
                 "La clé '#ContentDescription.Description[UD1]' fournie par les données métier n'est pas attendue par le profil",
                 };
-            ConfrontationDonneesEtProfil("donnees_profil_et_donnees", erreursAttendues);
+            ConfrontationDonneesEtProfil("donnees_profil_et_donnees", erreursAttendues, true);
         }
 
     }

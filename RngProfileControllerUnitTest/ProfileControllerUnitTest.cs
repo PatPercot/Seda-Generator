@@ -23,7 +23,7 @@ namespace RngProfileControllerUnitTest {
             return config.getProfileConfig(configName);
         }
 
-        void declencherTestProfil(String jobName, String[] branchesAttendues, String[] erreursAttendues) {
+        void declencherTestProfil(String jobName, String[] branchesAttendues, String[] erreursAttendues, Boolean bWithWarns = false) {
             StreamWriter streamWriter = null;
             ProfileControlConfig control = configLoader(jobName);
             String traceFile = control.traceFile;
@@ -47,8 +47,10 @@ namespace RngProfileControllerUnitTest {
                 streamWriter.WriteLine("Arbre des unités documentaires.");
                 StringCollection arbre = rpc.getTreeList();
                 if (arbre != null && arbre.Count != 0) {
+                    int numBranche = 1;
                     foreach (String str in arbre) {
-                        streamWriter.WriteLine(str);
+                        streamWriter.WriteLine(String.Format("{0,3:G}\t", numBranche) + str);
+                        ++numBranche;
                     }
                 }
                 streamWriter.WriteLine("-----------------");
@@ -57,28 +59,34 @@ namespace RngProfileControllerUnitTest {
                 streamWriter.WriteLine("Liste des erreurs.");
                 StringCollection erreurs = rpc.getErrorsList();
                 if (erreurs != null && erreurs.Count != 0) {
+                    int numErreur = 1;
                     foreach (String str in erreurs) {
-                        streamWriter.WriteLine(str);
+                        streamWriter.WriteLine(String.Format("{0,3:G}\t", numErreur) + str);
+                        ++numErreur;
                     }
                 }
                 streamWriter.WriteLine("-----------------");
             }
             streamWriter.Flush();
 
-            if (erreursAttendues != null) {
-                StringCollection errors = rpc.getErrorsList();
-
-                int erreur = 0;
-                if (errors != null && errors.Count != 0) {
-                    foreach (String str in errors) {
+            StringCollection errors = rpc.getErrorsList();
+            int erreur = 0;
+            if (errors != null && errors.Count != 0) {
+                foreach (String str in errors) {
+                    if (bWithWarns) {
                         if (erreursAttendues.Length > erreur)
                             StringAssert.StartsWith(str, erreursAttendues[erreur], "Comparaison des erreurs");
                         erreur++;
+                    } else {
+                        if (str.StartsWith("(--) ") == false) {
+                            if (erreursAttendues.Length > erreur)
+                                StringAssert.StartsWith(str, erreursAttendues[erreur], "Comparaison des erreurs");
+                            erreur++;
+                        }
                     }
                 }
-
-                Assert.AreEqual(erreursAttendues.Length, errors.Count, "Le nombre d'erreurs attendues et obtenues diffère");
             }
+            Assert.AreEqual(erreursAttendues.Length, erreur, "Le nombre d'erreurs attendues et obtenues diffère");
 
             if (branchesAttendues != null) {
                 StringCollection arbre = rpc.getTreeList();
@@ -361,6 +369,18 @@ namespace RngProfileControllerUnitTest {
             declencherTestProfil("KeywordDuplicated", branchesAttendues, erreursAttendues);
         }
 
+        [TestMethod]
+        public void M24_TestAccordVersementProducteur() {
+            String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+            String[] erreursAttendues = 
+                { 
+                "(--) La balise ArchivalAgreement est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
+                "(--) La balise OriginatingAgency est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
+                "(--) La balise OriginatingAgency de l'unité documentaire 'UD1' est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
+                };
+            declencherTestProfil("AccordVersement_Producteur", branchesAttendues, erreursAttendues, true);
+        }
+        
 
     }
 }

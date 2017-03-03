@@ -7,6 +7,8 @@ Changements du 2017-03-03
 	Ajout du contrôle dans Archive de ContentDescription.Description dans les données métier et le profil
 	Message d'alerte données manquantes uniquement si CustodialHistory ne fournit pas de contenu dans le profil
 	Message d'alerte si donnée dupliquée entre profil et données pour CustodialHistory et ContentDescription.Description
+- Contrôleur de profil
+	Messages d'avertissement (--) si ArchivalAgreement ou OriginatingAgency optionnels
 
 -------------------------
 Changements du 2017-01-26

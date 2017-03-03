@@ -158,6 +158,9 @@ namespace SedaSummaryGenerator {
                                             currentDocumentTypeId = "root";
                                             loadExpectedTagsInMainContainsNode( containsNodeName, "rootContains" );
                                             checkForDocumentInArchive(containsNodeName, "rootContains");
+                                            checkFoArchivalAgreementInArchive(containsNodeName, "rootContains");
+                                            checkForContentDescription(containsNodeName, "rootContains");
+                                            checkForOptionalOriginatingAgency(containsNodeName, "rootContains");
                                             checkForTagInContains("Keyword", containsNodeName, "rootContains");
                                             checkForTagInContains("FilePlanPosition", containsNodeName, "rootContains");
                                             recurseContainsDefine(containsNodeName, String.Empty, false);
@@ -585,6 +588,7 @@ namespace SedaSummaryGenerator {
 
                 checkForMultipleDocument(defineNodeName, context);
                 checkForContentDescription(defineNodeName, context);
+                checkForOptionalOriginatingAgency(defineNodeName, context);
                 checkForTagInContains("Keyword", defineNodeName, context);
                 checkForTagInContains("FilePlanPosition", defineNodeName, context);
                 checkForFilename(defineNodeName, context);
@@ -851,6 +855,21 @@ namespace SedaSummaryGenerator {
         }
 
 
+        protected void checkFoArchivalAgreementInArchive(String defineNodeName, String context) {
+            // Tester le caractère obligatoire de ArchivalAgreement dans le Contains (ou Archive) de départ 
+            // et lancer une alerte si il est optionnel
+            bool error = false;
+            String xPath = "rng:define[@name='" + defineNodeName + "']/rng:optional/rng:element[@name='ArchivalAgreement']/rng:ref";
+            XmlNode cdrefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (cdrefNode != null) {
+                error = true;
+            }
+            if (error) {
+                errorsList.Add("(--) La balise ArchivalAgreement est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire");
+            }
+        }
+
+
 
         protected void checkForContentDescription(String defineNodeName, String context) {
             // Tester la présence de ContentDescription dans rng:optional avec un KeywordContent
@@ -876,6 +895,36 @@ namespace SedaSummaryGenerator {
                                 errorsList.Add("Les mots-clés de l'unité documentaire '" + currentDocumentTypeId + "' ne pourront pas être produits car la description du contenu est optionnelle.");
                             }
                         }
+                    }
+                }
+            }
+        }
+
+        protected void checkForOptionalOriginatingAgency(String defineNodeName, String context) {
+            // Recherche de OriginatingAgency alerte si optionnel
+            String xPath = "rng:define[@name='" + defineNodeName + "']/rng:element[@name='ContentDescription']/rng:ref";
+            XmlNode cdrefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (cdrefNode != null) {
+                String cdrefNodeName = cdrefNode.Attributes.GetNamedItem("name").Value;
+                if (cdrefNodeName == null) {
+                    errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
+                } else {
+                    Boolean bProducteurOptionnel = true;
+                    xPath = "rng:define[@name='" + cdrefNodeName + "']/rng:optional/rng:element[@name='OriginatingAgecny']/rng:ref";
+                    XmlNode cdeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (cdeNode != null)
+                        bProducteurOptionnel = false;
+                    else {
+                        xPath = "rng:define[@name='" + cdrefNodeName + "']/rng:zeroOrMore/rng:element[@name='OriginatingAgecny']/rng:ref";
+                        cdeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                        if (cdeNode != null)
+                            bProducteurOptionnel = false;
+                    }
+                    if (bProducteurOptionnel == true) {
+                        if (context.Equals("rootContains"))
+                            errorsList.Add("(--) La balise OriginatingAgency est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire");
+                        else
+                            errorsList.Add("(--) La balise OriginatingAgency de l'unité documentaire '" + currentDocumentTypeId + "' est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire");
                     }
                 }
             }
