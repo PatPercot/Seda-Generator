@@ -1114,12 +1114,12 @@ namespace SedaSummaryGeneratorUnitTest {
                 , "Integrity en provenance application 1");
 
             checkInnerText("/s:ArchiveTransfer/s:Contains/s:ContentDescription/s:Size"
-                , "87432");
+                , "3999996");
 
-            /* TODO: corriger le calcul de la taille en Java
+            /* TODO: corriger le calcul de la taille en Java */
             checkInnerText("/s:ArchiveTransfer/s:Contains/s:Contains[1]/s:Contains[1]/s:ContentDescription/s:Size"
                 , "333333");
-             * */
+
         }
 
         [TestMethod]
@@ -1134,7 +1134,7 @@ namespace SedaSummaryGeneratorUnitTest {
                 , "Integrity en provenance application 1");
 
             checkInnerText("/s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ArchiveObject[1]/s:Document[1]/s:Size"
-                , "10929");
+                , "111111");
         }
 
         // Ce test correspond à la génération d'un bordereau au format SEDA 0.2, 

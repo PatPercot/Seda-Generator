@@ -5,26 +5,26 @@
 ,#OriginatingAgency.Name,Département du Morbihan - Direction des systèmes d'information
 
 ,#ContainsName[OR_ETP[#1]],Offre retenue de l'entreprise 1
-#,document1e1.txt,OR_ETP[#1],Document 1 E1,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 1,10929
-#,document2e1.txt,OR_ETP[#1],Document 2 E1,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 2,222222
-,document1e1.txt,OR_ETP[#1],Document 1 E1,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 1
-,document2e1.txt,OR_ETP[#1],Document 2 E1,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 2
+,document1e1.txt,OR_ETP[#1],Document 1 E1,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 1,111111
+,document2e1.txt,OR_ETP[#1],Document 2 E1,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 2,222222
+#,document1e1.txt,OR_ETP[#1],Document 1 E1,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 1
+#,document2e1.txt,OR_ETP[#1],Document 2 E1,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 2
 
 ,#ContainsName[OR_ETP[#2]],Offre retenue de l'entreprise 2
-#,document1e2.txt,OR_ETP[#2],Document 1 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 3,333333
-#,document2e2.txt,OR_ETP[#2],Document 2 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 4,444444
-#,document3e2.txt,OR_ETP[#2],Document 3 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 5,555555
-,document1e2.txt,OR_ETP[#2],Document 1 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 3
-,document2e2.txt,OR_ETP[#2],Document 2 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 4
-,document3e2.txt,OR_ETP[#2],Document 3 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 5
+,document1e2.txt,OR_ETP[#2],Document 1 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 3,333333
+,document2e2.txt,OR_ETP[#2],Document 2 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 4,444444
+,document3e2.txt,OR_ETP[#2],Document 3 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 5,555555
+#,document1e2.txt,OR_ETP[#2],Document 1 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 3
+#,document2e2.txt,OR_ETP[#2],Document 2 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 4
+#,document3e2.txt,OR_ETP[#2],Document 3 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 5
 
 ,#ContainsName[OR_ETP[#3]],Offre retenue de l'entreprise 33333
-#,document1e3.txt,OR_ETP[#3],Document réponse  1 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 6,666666
-#,document2e3.txt,OR_ETP[#3],Document signature  2 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 7,777777
-#,document3e3.txt,OR_ETP[#3],Document jeton d'horodatage 3 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 8,888888
-,document1e3.txt,OR_ETP[#3],Document réponse  1 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 6
-,document2e3.txt,OR_ETP[#3],Document signature  2 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 7
-,document3e3.txt,OR_ETP[#3],Document jeton d'horodatage 3 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 8
+,document1e3.txt,OR_ETP[#3],Document réponse  1 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 6,666666
+,document2e3.txt,OR_ETP[#3],Document signature  2 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 7,777777
+,document3e3.txt,OR_ETP[#3],Document jeton d'horodatage 3 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 8,888888
+#,document1e3.txt,OR_ETP[#3],Document réponse  1 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 6
+#,document2e3.txt,OR_ETP[#3],Document signature  2 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 7
+#,document3e3.txt,OR_ETP[#3],Document jeton d'horodatage 3 E2,01/12/2014 12:00:00,algo-perso,Integrity en provenance application 8
 
 ,#KeywordContent[{KW1}],mot-clé à voir apparaître si un mot-clé a été demandé
 ,#KeywordContent[OFFRES_RETENUES{KW2}],mot-clé pour l'offre retenue
