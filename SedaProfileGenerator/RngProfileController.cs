@@ -865,7 +865,7 @@ namespace SedaSummaryGenerator {
                 error = true;
             }
             if (error) {
-                errorsList.Add("(--) La balise ArchivalAgreement est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire");
+                errorsList.Add("(--) La balise ArchivalAgreement est optionnelle ou absente et ne sera pas générée. Elle pourrait être rendue obligatoire");
             }
         }
 
@@ -909,16 +909,16 @@ namespace SedaSummaryGenerator {
                 if (cdrefNodeName == null) {
                     errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
                 } else {
-                    Boolean bProducteurOptionnel = true;
-                    xPath = "rng:define[@name='" + cdrefNodeName + "']/rng:optional/rng:element[@name='OriginatingAgecny']/rng:ref";
+                    Boolean bProducteurOptionnel = false;
+                    xPath = "rng:define[@name='" + cdrefNodeName + "']/rng:optional/rng:element[@name='OriginatingAgency']/rng:ref";
                     XmlNode cdeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                     if (cdeNode != null)
-                        bProducteurOptionnel = false;
+                        bProducteurOptionnel = true;
                     else {
-                        xPath = "rng:define[@name='" + cdrefNodeName + "']/rng:zeroOrMore/rng:element[@name='OriginatingAgecny']/rng:ref";
+                        xPath = "rng:define[@name='" + cdrefNodeName + "']/rng:zeroOrMore/rng:element[@name='OriginatingAgency']/rng:ref";
                         cdeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                         if (cdeNode != null)
-                            bProducteurOptionnel = false;
+                            bProducteurOptionnel = true;
                     }
                     if (bProducteurOptionnel == true) {
                         if (context.Equals("rootContains"))

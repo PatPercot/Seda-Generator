@@ -374,7 +374,7 @@ namespace RngProfileControllerUnitTest {
             String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
             String[] erreursAttendues = 
                 { 
-                "(--) La balise ArchivalAgreement est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
+                "(--) La balise ArchivalAgreement est optionnelle ou absente et ne sera pas générée. Elle pourrait être rendue obligatoire",
                 "(--) La balise OriginatingAgency est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
                 "(--) La balise OriginatingAgency de l'unité documentaire 'UD1' est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
                 };
