@@ -350,8 +350,8 @@ namespace RngProfileControllerUnitTest {
             String[] branchesAttendues = { "\troot", "\t\tKEYWORDUNIT_OK", "\t\tKEYWORDUNIT_NOTOK", "" };
             String[] erreursAttendues = 
                 { 
-                "Le mot-clé n° '1' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID obligatoire de la forme 'DOCLIST / TAG'",
-                "Le mot-clé n° '2' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID obligatoire de la forme 'DOCLIST / TAG'",
+                "Le mot-clé n° '1' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
+                "Le mot-clé n° '2' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
                 "Le mot-clé n° '2' de l'unité documentaire 'KEYWORDUNIT_OK' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
                 "Le mot-clé n° '2' de l'unité documentaire 'KEYWORDUNIT_NOTOK' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
                 };
@@ -379,6 +379,20 @@ namespace RngProfileControllerUnitTest {
                 "(--) La balise OriginatingAgency de l'unité documentaire 'UD1' est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
                 };
             declencherTestProfil("AccordVersement_Producteur", branchesAttendues, erreursAttendues, true);
+        }
+
+        [TestMethod]
+        public void M25_TestFilePlanPosition() {
+            String[] branchesAttendues = { "\troot", "\t\tUD1", "\t\t\tUD11[#1]", "\t\t\tUD12[#1]", "\t\tUD2", "\t\t\tUD21", "\t\tUD3", "\t\t\tUD31", "" };
+            String[] erreursAttendues = 
+                { 
+                "L'attribut schemeID de la balise FilePlanPosition n° '1' de l'archive ne doit pas être optionnel. Il faut le rendre obligatoire.",
+                "L'attribut schemeID de la balise FilePlanPosition n° '1' de l'unité documentaire 'UD31' n'existe pas. Il faut le créer, le rendre obligatoire et lui donner un nom de tag unique.",
+                "L'attribut schemeID de la balise FilePlanPosition n° '2' de l'unité documentaire 'UD31' n'existe pas. Il faut le créer, le rendre obligatoire et lui donner un nom de tag unique.",
+                "L'attribut schemeID de la balise FilePlanPosition n° '3' de l'unité documentaire 'UD31' ne doit pas être optionnel. Il faut le rendre obligatoire.",
+                "La balise FilePlanPosition n° '4' de l'unité documentaire 'UD31' a un tag 'FPPOPTIONAL' qui n'est pas unique",
+                };
+            declencherTestProfil("FilePlanPosition", branchesAttendues, erreursAttendues, true);
         }
         
 

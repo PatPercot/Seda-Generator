@@ -9,6 +9,7 @@ Changements du 2017-03-03
 	Message d'alerte si donnée dupliquée entre profil et données pour CustodialHistory et ContentDescription.Description
 - Contrôleur de profil
 	Messages d'avertissement (--) si ArchivalAgreement ou OriginatingAgency optionnels
+	Messages d'erreur pour les balises FilePlanPosition
 
 -------------------------
 Changements du 2017-01-26

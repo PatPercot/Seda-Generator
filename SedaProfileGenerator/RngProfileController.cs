@@ -162,7 +162,8 @@ namespace SedaSummaryGenerator {
                                             checkForContentDescription(containsNodeName, "rootContains");
                                             checkForOptionalOriginatingAgency(containsNodeName, "rootContains");
                                             checkForTagInContains("Keyword", containsNodeName, "rootContains");
-                                            checkForTagInContains("FilePlanPosition", containsNodeName, "rootContains");
+                                            // checkForTagInContains("FilePlanPosition", containsNodeName, "rootContains");
+                                            checkForFilePlanPositionTag(containsNodeName, "rootContains");
                                             recurseContainsDefine(containsNodeName, String.Empty, false);
                                         }
                                     }
@@ -406,7 +407,7 @@ namespace SedaSummaryGenerator {
                         } // if (schemeIdRequired == true)
                     } // if (parentNodeName != null)
                 } // foreach
-            } // if (kwList != null && kwList.Count > 1)
+            } // if (kwList != null && kwList.Count >= 1)
 
         }
 
@@ -527,7 +528,6 @@ namespace SedaSummaryGenerator {
         // Si numkw != 0, le message émis indique que l'on travaille sur un Keywrod
         protected String getSchemeIdValue(XmlNode aaoirefNode, String currentXpath, String context, int numKeyword) {
             String ret = null;
-            String baliseName = "";
             String aaoiNodeName = aaoirefNode.Attributes.GetNamedItem("name").Value;
             if (aaoiNodeName == null) {
                 errorsList.Add("Le nœud '" + currentXpath + "' n'a pas d'attribut name.");
@@ -552,6 +552,26 @@ namespace SedaSummaryGenerator {
                 } else {
                     ret = getDocumentTypeId(schemeIdNode.InnerText, context);
                 }
+            }
+            return ret;
+        }
+
+        // Récupère l'attribut schemeID des FilePlanPosition
+        protected String getFPPSchemeIdValue(String stFilePlanPosition, String stLocalisation, String context, int numFPP) {
+            String ret = null;
+            String xPath = "rng:define[@name='" + stFilePlanPosition + "']/rng:attribute[@name='schemeID']/rng:value";
+            XmlNode schemeIdNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (schemeIdNode == null) {
+                xPath = "rng:define[@name='" + stFilePlanPosition + "']/rng:optional/rng:attribute[@name='schemeID']/rng:value";
+                schemeIdNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                if (schemeIdNode != null) {
+                    ret = getDocumentTypeId(schemeIdNode.InnerText, context);
+                    errorsList.Add("L'attribut schemeID de la balise FilePlanPosition n° '" + numFPP + "' " + stLocalisation + " ne doit pas être optionnel. Il faut le rendre obligatoire.");
+                } else {
+                    errorsList.Add("L'attribut schemeID de la balise FilePlanPosition n° '" + numFPP + "' " + stLocalisation + " n'existe pas. Il faut le créer, le rendre obligatoire et lui donner un nom de tag unique.");
+                }
+            } else {
+                ret = getDocumentTypeId(schemeIdNode.InnerText, context);
             }
             return ret;
         }
@@ -590,7 +610,8 @@ namespace SedaSummaryGenerator {
                 checkForContentDescription(defineNodeName, context);
                 checkForOptionalOriginatingAgency(defineNodeName, context);
                 checkForTagInContains("Keyword", defineNodeName, context);
-                checkForTagInContains("FilePlanPosition", defineNodeName, context);
+                // checkForTagInContains("FilePlanPosition", defineNodeName, context);
+                checkForFilePlanPositionTag(defineNodeName, context);
                 checkForFilename(defineNodeName, context);
                 checkForDocType(defineNodeName, context);
                 // TODO: Désactivation du contrôle de la langue en attendant une meilleure gestion
@@ -1013,7 +1034,11 @@ namespace SedaSummaryGenerator {
                 String xPath = "rng:define[@name='" + contentDescriptionNodeName + "']/descendant::rng:element[@name='" + stTag2Search + "']/rng:ref";
                 XmlNodeList searchedTagsList = grammarNode.SelectNodes(xPath, docInXmlnsManager);
                 int numTagInList = 0;
-                if (searchedTagsList != null && searchedTagsList.Count > 1) {
+                if (searchedTagsList == null)
+                    return;
+                // Si la balise recherchée est unique, elle n'a pas à avoir un identifiant
+                // Sauf si elle est dans l'archive
+                if (searchedTagsList.Count > 1 || (context.Equals("rootContains") && searchedTagsList.Count >= 1)) {
                     foreach (XmlNode searchedTagNode in searchedTagsList) {
                         ++numTagInList;
                         String stSearchedTagDefinition;
@@ -1037,25 +1062,23 @@ namespace SedaSummaryGenerator {
                                     xPath = "rng:define[@name='" + keywordReferenceNodeName + "']";
                                     XmlNode keywordReferenceNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                                     stScheme = getSchemeIdValue(keywordReferenceNode, xPath, context, numTagInList);
-                                    if (stScheme != null && stScheme != String.Empty)
+                                    if (stScheme != null && stScheme != String.Empty) {
                                         bEmettreWarning = false;
-                                    if (listXmlTags.Contains(stScheme))
-                                        bErreurDuplication = true;
-                                    listXmlTags.Add(stScheme);
+                                        if (listXmlTags.Contains(stScheme))
+                                            bErreurDuplication = true;
+                                        listXmlTags.Add(stScheme);
+                                    }
                                 }
                                 if (bEmettreWarning || bErreurDuplication) {
-                                    if (currentDocumentTypeId == null
-                                        || String.Empty.Equals(currentDocumentTypeId)
-                                        || currentDocumentTypeId.Equals("root")) {
-                                        if (bEmettreWarning)
-                                            errorsList.Add("Le mot-clé n° '" + numTagInList + "' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID obligatoire de la forme 'DOCLIST / TAG'");
-                                        else
-                                            errorsList.Add("Le mot-clé n° '" + numTagInList + "' de l'archive a un tag '" + stScheme + "' qui n'est pas unique");
-                                    } else
-                                        if (bEmettreWarning)
-                                            errorsList.Add("Le mot-clé n° '" + numTagInList + "' de l'unité documentaire '" + currentDocumentTypeId + "' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'");
-                                        else
-                                            errorsList.Add("Le mot-clé n° '" + numTagInList + "' de l'unité documentaire '" + currentDocumentTypeId + "' a un tag '" + stScheme + "' qui n'est pas unique");
+                                    String stLocalisation = String.Empty;
+                                    if (context.Equals("rootContains"))
+                                        stLocalisation = "de l'archive";
+                                    else
+                                        stLocalisation = "de l'unité documentaire '" + currentDocumentTypeId + "'";
+                                    if (bEmettreWarning)
+                                        errorsList.Add("Le mot-clé n° '" + numTagInList + "' " + stLocalisation + " doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'");
+                                    if (bErreurDuplication)
+                                        errorsList.Add("Le mot-clé n° '" + numTagInList + "' " + stLocalisation + " a un tag '" + stScheme + "' qui n'est pas unique");
                                 }
                             }
                         }
@@ -1105,7 +1128,11 @@ namespace SedaSummaryGenerator {
                 String xPath = "rng:define[@name='" + contentDescriptionNodeName + "']/descendant::rng:element[@name='" + stFPP + "']/rng:ref";
                 XmlNodeList fppList = grammarNode.SelectNodes(xPath, docInXmlnsManager);
                 int numfpp = 0;
-                if (fppList != null && fppList.Count > 1) {
+                if (fppList == null)
+                    return;
+                // Si la balise recherchée est unique, elle n'a pas à avoir un identifiant
+                // Sauf si elle est dans l'archive
+                if (fppList.Count > 1 || (context.Equals("rootContains") && fppList.Count >= 1)) {
                     foreach (XmlNode filePlanPosition in fppList) {
                         ++numfpp;
                         String stFilePlanPosition;
@@ -1113,41 +1140,28 @@ namespace SedaSummaryGenerator {
                         if (stFilePlanPosition == null)
                             errorsList.Add("Le nœud '" + xPath + "' n'a pas d'attribut name.");
                         else {
-                            String stScheme = String.Empty;
-                            bool bKeywordRequiresTag = true;
-                            String keywordContentNodeName = getDefinedNodeName(stFilePlanPosition, context, "KeywordContent", false);
-                            if (keywordContentNodeName != String.Empty) {
-                                xPath = "rng:define[@name='" + keywordContentNodeName + "']/rng:value";
-                                XmlNode valueNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                                if (valueNode != null)
-                                    bKeywordRequiresTag = false;
-                            }
-                            if (bKeywordRequiresTag) {
-                                bool bEmettreWarning = true, bErreurDuplication = false;
-                                String keywordReferenceNodeName = getDefinedNodeName(stFilePlanPosition, context, "KeywordReference", false);
-                                if (keywordReferenceNodeName != String.Empty) {
-                                    xPath = "rng:define[@name='" + keywordReferenceNodeName + "']";
-                                    XmlNode keywordReferenceNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                                    stScheme = getSchemeIdValue(keywordReferenceNode, xPath, context, numfpp);
-                                    if (stScheme != null && stScheme != String.Empty)
-                                        bEmettreWarning = false;
+                            xPath = "rng:define[@name='" + stFilePlanPosition + "']/rng:data";
+                            XmlNode dataNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (dataNode != null) {
+                                String stLocalisation = String.Empty;
+                                if (context.Equals("rootContains"))
+                                    stLocalisation = "de l'archive";
+                                else
+                                    stLocalisation = "de l'unité documentaire '" + currentDocumentTypeId + "'";
+                                bool /* bEmettreWarning = true, */ bErreurDuplication = false;
+                                String stScheme = getFPPSchemeIdValue(stFilePlanPosition, stLocalisation, context, numfpp);
+                                if (stScheme != null && stScheme != String.Empty) {
+                                    // bEmettreWarning = false;
                                     if (listFPP.Contains(stScheme))
                                         bErreurDuplication = true;
                                     listFPP.Add(stScheme);
                                 }
-                                if (bEmettreWarning || bErreurDuplication) {
-                                    if (currentDocumentTypeId == null
-                                        || String.Empty.Equals(currentDocumentTypeId)
-                                        || currentDocumentTypeId.Equals("root")) {
-                                        if (bEmettreWarning)
-                                            errorsList.Add("Le mot-clé n° '" + numfpp + "' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID obligatoire de la forme 'DOCLIST / TAG'");
-                                        else
-                                            errorsList.Add("Le mot-clé n° '" + numfpp + "' de l'archive a un tag '" + stScheme + "' qui n'est pas unique");
-                                    } else
-                                        if (bEmettreWarning)
-                                            errorsList.Add("Le mot-clé n° '" + numfpp + "' de l'unité documentaire '" + currentDocumentTypeId + "' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'");
-                                        else
-                                            errorsList.Add("Le mot-clé n° '" + numfpp + "' de l'unité documentaire '" + currentDocumentTypeId + "' a un tag '" + stScheme + "' qui n'est pas unique");
+
+                                if (/* bEmettreWarning || */ bErreurDuplication) {
+                                    /* if (bEmettreWarning)
+                                        errorsList.Add("La position dans le plan de classement '" + numfpp + "' " + stLocalisation + " doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'"); */
+                                    if (bErreurDuplication)
+                                        errorsList.Add("La balise FilePlanPosition n° '" + numfpp + "' " + stLocalisation + " a un tag '" + stScheme + "' qui n'est pas unique");
                                 }
                             }
                         }
@@ -1172,7 +1186,7 @@ namespace SedaSummaryGenerator {
                 xPath = "descendant::rng:element[@name='Document']/rng:ref";
                 XmlNodeList documentNodesList = containsNode.SelectNodes(xPath, docInXmlnsManager);
                 // On peut ne pas avoir de Document
-                if (documentNodesList != null && documentNodesList.Count > 1) {
+                if (documentNodesList != null && documentNodesList.Count > 1) { // Uniquement si il y a des documents multiples
                     int compteur = 0;
                     foreach (XmlNode node in documentNodesList) {
                         compteur++;
