@@ -1,0 +1,25 @@
+,#Comment,Commentaire des positions de plan de classement
+,#TransferName,Transfert des positions de plan de classement
+
+#,#FilePlanPosition[{FPPARCHIVE}],Position archive
+
+#,#FilePlanPosition[UD1],Position UD1
+
+#,#FilePlanPosition[UD11[#1][#1]],Position n° 1 UD11 n° 1
+#,#FilePlanPosition[UD11[#1][#2]],Position n° 2 UD11 n° 1
+
+#,#FilePlanPosition[UD11[#2][#1]],Position n° 1 UD11 n° 2
+#,#FilePlanPosition[UD11[#2][#2]],Position n° 2 UD11 n° 2
+#,#FilePlanPosition[UD11[#2][#3]],Position n° 3 UD11 n° 2
+
+#,#FilePlanPosition[UD12[#1]{FPP121}],Position FPP121 UD12 n° 1
+#,#FilePlanPosition[UD12[#2]{FPP121}],Position FPP121 UD12 n° 1
+
+#,#FilePlanPosition[UD2{FPP21}],Position FPP21 UD2
+
+#,#FilePlanPosition[UD2{FPP22}],Position FPP22 UD2
+
+# Optionnel, mais obligatoire pour la validation
+#,#FilePlanPosition[UD2{FPP23}],Position FPP23 UD2
+
+#,#FilePlanPosition[UD21],Position UD21

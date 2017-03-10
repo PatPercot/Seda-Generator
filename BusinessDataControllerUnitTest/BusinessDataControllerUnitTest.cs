@@ -493,5 +493,36 @@ namespace BusinessDataControllerUnitTest {
             ConfrontationDonneesEtProfil("donnees_profil_et_donnees", erreursAttendues, true);
         }
 
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void I01_TestFilePlanPosition() {
+            String[] erreursAttendues = 
+                { 
+                };
+            ConfrontationDonneesEtProfil("FilePlanPositionOK", erreursAttendues, true);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void I02_TestFilePlanPositionErreur() {
+            String[] erreursAttendues = 
+                { 
+                "Dans le profil, le tag '#FilePlanPosition[{FPPARCHIVE}]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#FilePlanPosition[UD1]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#FilePlanPosition[UD11[#1][#1]]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#FilePlanPosition[UD12[#1]{FPP121}]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#FilePlanPosition[UD2{FPP21}]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#FilePlanPosition[UD2{FPP22}]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#FilePlanPosition[UD2{FPP23}]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#FilePlanPosition[UD21]' ne trouve pas de correspondance dans les données métier",
+                };
+            ConfrontationDonneesEtProfil("FilePlanPositionERREUR", erreursAttendues, true);
+        }
+
+        
     }
 }

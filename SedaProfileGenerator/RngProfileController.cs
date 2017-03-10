@@ -218,6 +218,7 @@ namespace SedaSummaryGenerator {
                     }
                 }
             }
+
         }
 
         private void loadExpectedTagsInMainContainsNode(String activeNodeName, String context) {
@@ -292,6 +293,9 @@ namespace SedaSummaryGenerator {
 
                     // Recherche de KeywordContent
                     addExpectedKeywordTags(oldParentNodeName, context, null);
+
+                    // Recherche de FilePlanPosition
+                    addExpectedFilePlanPositionTags(oldParentNodeName, context, null);
                 }
             }
         }
@@ -346,9 +350,9 @@ namespace SedaSummaryGenerator {
                 </rng:define>
              * */
             // Recherche de KeywordContent
-        protected void addExpectedKeywordTags(String startNodeName, String context, String relativeContext) {
+        protected void addExpectedKeywordTags(String contentDescriptionDefineName, String context, String relativeContext) {
             String stKeyword = SEDA_version == "0.2" ? "ContentDescriptive" : "Keyword";
-            String xPath = "rng:define[@name='" + startNodeName + "']/descendant::rng:element[@name='" + stKeyword + "']/rng:ref";
+            String xPath = "rng:define[@name='" + contentDescriptionDefineName + "']/descendant::rng:element[@name='" + stKeyword + "']/rng:ref";
             XmlNodeList kwList = grammarNode.SelectNodes(xPath, docInXmlnsManager);
             XmlNode parentNode, node;
             String parentNodeName;
@@ -407,9 +411,61 @@ namespace SedaSummaryGenerator {
                         } // if (schemeIdRequired == true)
                     } // if (parentNodeName != null)
                 } // foreach
-            } // if (kwList != null && kwList.Count >= 1)
+            } // if (fppList != null && fppList.Count >= 1)
 
         }
+
+        protected void addExpectedFilePlanPositionTags(String contentDescriptionDefineName, String context, String relativeContext) {
+            String stFPP = "FilePlanPosition";
+            String xPath = "rng:define[@name='" + contentDescriptionDefineName + "']/descendant::rng:element[@name='" + stFPP + "']/rng:ref";
+            XmlNodeList fppList = grammarNode.SelectNodes(xPath, docInXmlnsManager);
+            XmlNode parentNode, node;
+            String stFilePlanPosition;
+            int numfpp = 0;
+            if (fppList == null)
+            return;
+
+            if (fppList.Count >= 1) {
+                foreach (XmlNode filePlanPositionNode in fppList) {
+                    ++numfpp;
+                    // On récupère le ContentDescriptive_N?????
+                    stFilePlanPosition = filePlanPositionNode.Attributes.GetNamedItem("name").Value;
+                    if (stFilePlanPosition != null) {
+                        String stScheme = null;
+                        xPath = "rng:define[@name='" + stFilePlanPosition + "']/rng:data[@type='string']";
+                        if (grammarNode.SelectSingleNode(xPath, docInXmlnsManager) != null) {
+                            xPath = "rng:define[@name='" + stFilePlanPosition + "']/descendant::rng:attribute[@name='schemeID']/rng:value";
+                            XmlNode schemeIdNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (schemeIdNode != null)
+                                stScheme = getDocumentTypeId(schemeIdNode.InnerText, context);
+                            Boolean bRepeatable = false;
+                            /*  Pas d'utilisation à ce jour de optional */
+                            /* Boolean boptional = false;  */
+                            xPath = "../..";
+                            parentNode = filePlanPositionNode.SelectSingleNode(xPath);
+                            String parentNodeStr = parentNode.Name;
+                            if (parentNodeStr == "rng:zeroOrMore" || parentNodeStr == "rng:oneOrMore")
+                                bRepeatable = true;
+                            /*  Pas d'utilisation à ce jour de optional */
+                            /* if (parentNodeStr == "rng:zeroOrMore")
+                                boptional = true; */
+                            String stEnd = bRepeatable ? "[#1]]" : "]";
+
+                            if (stScheme != null && stScheme != String.Empty) {
+                                if (relativeContext == null)
+                                    expectedTagsList.Add("#FilePlanPosition[{" + stScheme + "}" + stEnd);
+                                else
+                                    expectedTagsList.Add("#FilePlanPosition[" + relativeContext + "{" + stScheme + "}" + stEnd);
+                            } else {
+                                expectedTagsList.Add("#FilePlanPosition[" + relativeContext + stEnd);
+                            } // if (stScheme != null && stScheme != String.Empty)
+                        }
+                    } // if (stFilePlanPosition != null)
+                } // foreach
+            } // if (fppList != null && fppList.Count >= 1)
+
+        }
+
 
         private void loadExpectedTagsInContainsNode(String activeNodeName, String docTypeId, String context) {
             XmlNode node, parentNode;
@@ -435,7 +491,7 @@ namespace SedaSummaryGenerator {
             if (parentNode != null) {
                 parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
                 if (parentNodeName != null) {
-                    String oldParentNodeName = parentNodeName;
+                    String contentDescriptionDefineName = parentNodeName;
 
                     String nodeName = "CustodialHistory";
                     xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
@@ -466,7 +522,9 @@ namespace SedaSummaryGenerator {
                     }
 
                     // Recherche de KeywordContent
-                    addExpectedKeywordTags(oldParentNodeName, context, currentContainsNode.getRelativeContext());
+                    addExpectedKeywordTags(contentDescriptionDefineName, context, currentContainsNode.getRelativeContext());
+                    // Recherche de FilePlanPosition
+                    addExpectedFilePlanPositionTags(contentDescriptionDefineName, context, currentContainsNode.getRelativeContext());
                 }
             }
 
@@ -525,7 +583,7 @@ namespace SedaSummaryGenerator {
         }
 
         // Récupère l'attribut schemeID
-        // Si numkw != 0, le message émis indique que l'on travaille sur un Keywrod
+        // Si numfpp != 0, le message émis indique que l'on travaille sur un Keywrod
         protected String getSchemeIdValue(XmlNode aaoirefNode, String currentXpath, String context, int numKeyword) {
             String ret = null;
             String aaoiNodeName = aaoirefNode.Attributes.GetNamedItem("name").Value;
