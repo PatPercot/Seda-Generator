@@ -64,25 +64,6 @@ namespace RngProfileControllerLauncher {
             String profileFile = control.profileFile;
             String traceFile = control.traceFile;
 
-            // String traceFile = @"D:\DEV_PPE\devel\gw-quimper\trace-control.txt";
-            // String profileFile = @"D:\DEV_PPE\devel\gw-quimper\repetition_une_unite_deux_documents_schema.rng";
-
-            //String profileFile = @"D:\DEV_PPE\tests\marches\20150619Profil_avec_doc_falcultatif_donne_avant_engagement\EMEG_PROFIL_MP_0002_schema.rng";
-            //String profileFile = @"D:\DEV_PPE\tests\marches\repetition_une_unite-1-v1_0_schema.rng";
-
-            //String profileFile = @"D:\DEV_PPE\tests\marches\repetition_une_unite-trois_documents-optionnels_schema.rng";
-
-            //String profileFile = @"D:\DEV_PPE\tests\CGI\Test_MARCHES-V5bis\EMEG_PROFIL_MP_0002-PPE_schema.rng";
-
-            //String profileFile = @"D:\DEV_PPE\tests\marches\repetition_une_unite_schema.rng";
-            //String profileFile = @"D:\DEV_PPE\tests\marches\repetition_une_unite_avec_sous_unites_schema.rng";
-            //String profileFile = @"D:\DEV_PPE\tests\marches\repetition_deux_unites_avec_sous_unites_schema.rng";
-
-            //String profileFile = @"\\cg56.fr\dfs2\BW\DEVT\ArcEspCo\DATA\CG56_PROFIL_PES_0001_v1_schema-duplication.rng";
-            //String profileFile = "D:/DEV_PPE/devel/RNG/esco-ad/SAE-INT-PROFIL-ESPACE-CO_schema.rng";
-            //String profileFile = @"\\vm-devshare\d$\DEV_PPE\devel\CG56_PES-transfert-manuel\CG56_PROFIL_PES_0001_v1_schema.rng";
-
-
             Action<Exception, String> eh = (ex, str) => {
                 Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);
                 System.Environment.Exit(-1);
@@ -95,6 +76,7 @@ namespace RngProfileControllerLauncher {
             RngProfileController rpc = new RngProfileController();
             rpc.setTracesWriter(streamWriter);
 
+            rpc.setDataFile(control.dataFile);
             rpc.controlProfileFile(profileFile);
             
             StringCollection arbre = rpc.getTreeList();
@@ -103,6 +85,16 @@ namespace RngProfileControllerLauncher {
                 Console.WriteLine("\nArbre des unités documentaires.\n");
                 Console.WriteLine("Les unités répétées sont présentées sous la forme UNITE[#1].");
                 foreach (String str in arbre) {
+                    Console.WriteLine(str);
+                    streamWriter.WriteLine(str);
+                }
+            }
+
+            StringCollection expectedTagsList = rpc.getExpectedTagsListList();
+
+            if (expectedTagsList != null && expectedTagsList.Count != 0) {
+                Console.WriteLine("\nTags attendus par le profil.\n");
+                foreach (String str in expectedTagsList) {
                     Console.WriteLine(str);
                     streamWriter.WriteLine(str);
                 }

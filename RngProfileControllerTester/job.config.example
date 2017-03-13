@@ -22,13 +22,20 @@
 #
 #
 
+# profile-control peut prendre deux formes, 
+# la première est destinée au contrôle uniquement
+# la seconde est destinée à produire un exemplaire des données métier
 [profil-control : nom-job]
   trace = chemin/vers/fichier-de-trace.txt
   profil = chemin/vers/fichier-de-profil.rng
   
+# profile-control peut prendre deux formes, 
+# la première est destinée au contrôle uniquement
+# la seconde est destinée à produire un exemplaire des données métier
 [profil-control : marche-v1]
   trace = chemin/vers/trace-marche.txt
   profil = chemin/vers/profil-marche.rng
+  data = chemin/vers/exemple-donnees-metier.txt
   
   
 [data-control : nom-job]

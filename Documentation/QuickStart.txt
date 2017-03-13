@@ -78,6 +78,15 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
   trace = travail/traces/CABAN_profil_Sonerion_traces.txt
   profil = travail/profils/CABAN_profil_Sonerion_schema.rng
 
+  Si vous souhaitez produire un fichier de données exemples (à partir de la version 1.0.6)
+  vous pouvez ajouter une ligne data. Vous pourrez repartir ensuite de ce fichier pour générer
+  vos données métier
+
+[profile-control : CABAN]
+  trace = travail/traces/CABAN_profil_Sonerion_traces.txt
+  profil = travail/profils/CABAN_profil_Sonerion_schema.rng
+  date = travail/traces/CABAN_profil_Sonerion_donnees.txt
+
     Collez ce texte dans le fichier job.config en fin de fichier
 	
 	Si vous utilisez votre propre profil d'archivage, modifiez :
@@ -155,6 +164,8 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 	documents qui sont versés, mais aussi à des descriptions des archives (dont les dates ou les intitulés
 	peuvent changer d'un versement à l'autre) ou à des mots-clés qui décrivent le versement.
 	
+	Vous pouvez vous appuyer (à partir de la version 1.0.6) sur le fichier de données exemples produit par 
+	le contrôleur de profils (voir section précédente).
 	
 	Chaque ligne commence par un caractère séparateur (noté "[sép]") qui peut changer à chaque ligne.
 	Ce caractère doit être choisi parmi les caractères de ponctuation ";:,!|" pour ne pas interférer avec

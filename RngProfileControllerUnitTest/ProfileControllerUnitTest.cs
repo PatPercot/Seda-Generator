@@ -8,6 +8,7 @@ using CommonClassesLibrary;
 namespace RngProfileControllerUnitTest {
     [TestClass]
     public class ProfileControllerUnitTest {
+        ProfileControlConfig control;
 
         ProfileControlConfig configLoader(String configName) {
             SimpleConfig config = new SimpleConfig();
@@ -23,9 +24,44 @@ namespace RngProfileControllerUnitTest {
             return config.getProfileConfig(configName);
         }
 
-        void declencherTestProfil(String jobName, String[] branchesAttendues, String[] erreursAttendues, Boolean bWithWarns = false) {
+        private void declencherTestProfilEtGeneration(String jobName, String[] branchesAttendues, String[] erreursAttendues
+            , String[] tagsExemplesAttendus) {
+                Action<Exception> eh = (ex) => {
+                    Console.WriteLine(ex.GetType().Name + " en comparaison des tags attendus : " + control.dataFile);
+                    throw ex;
+                };
+
+
+            declencherTestProfil(jobName, branchesAttendues, erreursAttendues, false);
+            try {
+                StreamReader reader = new StreamReader(control.dataFile);
+                String strLine;
+                int numLine = 0;
+                while ((strLine = reader.ReadLine()) != null) {
+                    strLine = strLine.Trim();
+                    if (strLine.StartsWith("#")) {
+
+                    } else if (strLine.Equals(String.Empty)) {
+
+                    } else {
+                        Assert.AreEqual(tagsExemplesAttendus[numLine], strLine, "Comparaison des exemples de tags attendus");
+                        numLine++;
+                    }
+                }
+                reader.Close();
+
+                Assert.AreEqual(tagsExemplesAttendus.Length, numLine, "Le nombre de tags attendus ne correpond pas");
+
+            }
+            catch (FileNotFoundException e) { eh(e); }
+            catch (DirectoryNotFoundException e) { eh(e); }
+            catch (IOException e) { eh(e); }
+
+        }
+
+        private void declencherTestProfil(String jobName, String[] branchesAttendues, String[] erreursAttendues, Boolean bWithWarns = false) {
             StreamWriter streamWriter = null;
-            ProfileControlConfig control = configLoader(jobName);
+            control = configLoader(jobName);
             String traceFile = control.traceFile;
             String profileFile = control.profileFile;
 
@@ -41,6 +77,7 @@ namespace RngProfileControllerUnitTest {
             RngProfileController rpc = new RngProfileController();
             rpc.setTracesWriter(streamWriter);
 
+            rpc.setDataFile(control.dataFile);
             rpc.controlProfileFile(profileFile);
             {
                 streamWriter.WriteLine("-------------------------------");
@@ -394,7 +431,32 @@ namespace RngProfileControllerUnitTest {
                 };
             declencherTestProfil("FilePlanPosition", branchesAttendues, erreursAttendues, true);
         }
-        
+
+        [TestMethod]
+        public void M26_TestDonneesProfilMarches() {
+            String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+            String[] erreursAttendues = { };
+            String[] tagsExemplesAttendus = { 
+                ",#Comment,Texte à personnaliser",
+                ",#TransferName,Texte à personnaliser",
+                ",#CustodialHistory,Texte à personnaliser",
+                ",#OriginatingAgency.Description,Texte à personnaliser",
+                ",#OriginatingAgency.Name,Texte à personnaliser",
+                ",#OriginatingAgency.Identification,Texte à personnaliser",
+                ",#ContentDescription.Description,Texte à personnaliser",
+                ",#FilePlanPosition[{FPPARCHIVE}[#1]],Texte à personnaliser",
+                ",#ContainsName[UD1],Texte à personnaliser",
+                ",#CustodialHistory[UD1],Texte à personnaliser",
+                ",#KeywordContent[UD1{KW11}],Texte à personnaliser",
+                ",#KeywordContent[UD1{KW2}],Texte à personnaliser",
+                ",#FilePlanPosition[UD1{FPP11}[#1]],Texte à personnaliser",
+                ",#FilePlanPosition[UD1{FPP12}[#1]],Texte à personnaliser",
+                ",fichier.txt,document: UD1{FILE1},Description du document,13/03/2017 14:31:27",
+                ",fichier.txt,document: UD1{FILE2},Description du document,13/03/2017 14:31:27",
+            };
+            declencherTestProfilEtGeneration("generation_donnees_metier", branchesAttendues, erreursAttendues, tagsExemplesAttendus);
+        }
+
 
     }
 }

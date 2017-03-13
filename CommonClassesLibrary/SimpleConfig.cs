@@ -38,16 +38,15 @@ namespace CommonClassesLibrary {
 
     public class ProfileControlConfig : Job {
         public String profileFile = String.Empty;
+        public String dataFile = String.Empty;
     }
 
     public class DataControlConfig : ProfileControlConfig {
-        public String dataFile = String.Empty;
     }
 
-    public class GeneratorConfig : Job {
+    public class GeneratorConfig : ProfileControlConfig {
         public String accordVersement = String.Empty;
         public String bordereauFile = String.Empty;
-        public String dataFile = String.Empty;
         public String repDocuments = String.Empty;
         public String baseURI = String.Empty;
     }
@@ -154,6 +153,7 @@ namespace CommonClassesLibrary {
                         pcontrol.nomJob = sectionName;
                         pcontrol.traceFile = traceFile;
                         pcontrol.profileFile = profileFile;
+                        pcontrol.dataFile = dataFile;
                         profilecontrolList.Add(pcontrol);
                         break;
                     case "data-control":
@@ -209,7 +209,7 @@ namespace CommonClassesLibrary {
                                 String authorizedKeys = String.Empty;
                                 inSection = true;
                                 if (section.Equals("profile-control"))    
-                                    authorizedKeys = "trace|profil";
+                                    authorizedKeys = "trace|profil|data";
                                 else if (section.Equals("data-control"))  
                                     authorizedKeys = "trace|profil|data";
                                 else if (section.Equals("generator"))

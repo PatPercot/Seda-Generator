@@ -27,6 +27,12 @@ d'une ligne à l'autre.
 L'ordre de production des lignes est quelconque. Elles n'ont pas à suivre la logique du profil
 d'archivage.
 
+À compter de la version 1.0.6, le programme RngProfileControllerLauncher est capable de 
+générer un fichier de donnnées métier exemple à partir du profil.
+Pour cela, il suffit d'ajouter une cible "data" dans la configuration du contrôle.
+Le fichier désigné par cette variable "data" sera créé avec un exemple de ligne pour chacune
+des données attendues par le profil.
+
 
 1) Données générales
 

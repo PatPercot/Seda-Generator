@@ -27,6 +27,7 @@ using System.Collections;
 namespace SedaSummaryGenerator {
     public class RngProfileController {
         private String profileFile = String.Empty;
+        private String dataFile = null;
         private XmlDocument docIn;
         private XmlNamespaceManager docInXmlnsManager;
         private XmlNode grammarNode;
@@ -62,6 +63,9 @@ namespace SedaSummaryGenerator {
             expectedTagsList = new StringCollection();
         }
 
+        public void setDataFile(String dataFile) {
+            this.dataFile = dataFile;
+        }
 
         /*
          * La liste des documents à archiver est définie dans un fichier qui 
@@ -197,6 +201,43 @@ namespace SedaSummaryGenerator {
                 }
             }
 
+            Action<Exception, String> ehd = (ex, str) => {
+                if (traceActions) tracesWriter.WriteLine(ex.GetType().Name + " while writing: " + dataFile);
+                if (traceActions) tracesWriter.WriteLine(ex.Message);
+                errorsList.Add("Erreur lors de la création des données métier (" + str + ") '" + dataFile + "' " + ex.GetType().Name + " : " + ex.Message);
+            };
+
+            if (dataFile != null && ! dataFile.Equals(String.Empty)) {
+                try {
+                    StreamWriter dataStream = new StreamWriter(dataFile);
+                    dataStream.WriteLine("# Liste de tags attendus par le profil");
+                    dataStream.WriteLine("# Les tags de la forme TAG[#1] sont des tags répétables");
+                    dataStream.WriteLine("# \t#1 est un indice qui peut prendre des valeurs entières");
+                    dataStream.WriteLine("# \n");
+                    dataStream.WriteLine("# Les documents peuvent prendre trois formes");
+                    dataStream.WriteLine("# Les trois derniers éléments peuvent être produits par le générateur");
+                    dataStream.WriteLine("# Dans les données qui suivent, seule la première forme est fournie\n");
+                    dataStream.WriteLine("# Document, 1ère forme (chemin et nom du fichier) (TAG) (Description) (date)");
+                    dataStream.WriteLine("# Document, 2ème forme (chemin et nom du fichier) (TAG) (Description) (date) (algorithme de l'empreinte) (empreinte)");
+                    dataStream.WriteLine("# Document, 3ème forme (chemin et nom du fichier) (TAG) (Description) (date) (algorithme de l'empreinte) (empreinte) (taille)");
+                    dataStream.WriteLine("# Exemple complet : ,fichier.txt,TAG,Description du document,13/03/2017 14:31:27,http://www.w3.org/2001/04/xmlenc#sha256,f81ba5573d70bb23c5510237208e2965bd87a389623c985cff341879e373c4b7,29516");
+                    dataStream.WriteLine("# \n\n");
+                    if (expectedTagsList != null && expectedTagsList.Count != 0) {
+                        foreach (String str in expectedTagsList) {
+                            if (str.StartsWith("#")) {
+                                dataStream.WriteLine("," + str + ",Texte à personnaliser");
+                            } else {
+                                dataStream.WriteLine(",fichier.txt," + str + ",Description du document,13/03/2017 14:31:27");
+                            }
+                        }
+                    }
+                    dataStream.Close();
+                }
+                catch (IOException e) { ehd(e, "Mauvaise syntaxe de nom de fichier"); }
+                catch (UnauthorizedAccessException e) { ehd(e, "Droits d'accès à corriger"); }
+                catch (System.Security.SecurityException e) { ehd(e, "Droits d'accès à corriger"); }
+
+            }
         }
 
 

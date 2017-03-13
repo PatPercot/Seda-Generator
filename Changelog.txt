@@ -1,4 +1,9 @@
 -------------------------
+Changements du 2017-03-13
+- Contrôleur de profils
+	Ajout de la fonctionnalité de génération de données métier exemples à partir du profil
+
+-------------------------
 Changements du 2017-03-03
 - Contrôleur de profil
 	Messages d'avertissement (--) si ArchivalAgreement ou OriginatingAgency optionnels
