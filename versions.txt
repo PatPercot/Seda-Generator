@@ -1,5 +1,11 @@
 Suivi des versions
 
+Version 1.0.6
+	Ajout de la fonctionnalité de production de données métier exemples à partir du profil
+	
+Version 1.0.5
+	Compatibilité du code du générateur Java et des contrôleurs C#
+
 Version 1.0.4
 	Intégration du générateur Java (scripts)
 		- Amélioration de la gestion du fichier de configuration
