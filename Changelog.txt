@@ -11,6 +11,8 @@ Changements du 2017-03-03
 	Messages d'erreur pour les balises FilePlanPosition
 - Contrôleurs de données et de profil
 	Mise à niveau des KeywordContent avec schemeID conforme au code Java
+- Génération de bordereaux
+	Jeu de test pour les FilePlanPosition (l'implémentation dans le code Java est partielle)
 
 -------------------------
 Changements du 2017-01-26

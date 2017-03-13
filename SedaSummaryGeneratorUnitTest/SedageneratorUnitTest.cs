@@ -99,22 +99,24 @@ namespace SedaSummaryGeneratorUnitTest {
             Assert.IsNull(node, "Le nœud '" + xPath + "' ne devrait pas exister");
         }
 
-        protected void executeGenerator(String jobName, String sedaVersion) {
+        protected void executeGenerator(String jobName, String sedaVersion, bool bCatchSummaryNotGenerated = true) {
             // Boolean bJava = false;
             Boolean bJava = true;
             if (bJava)
-                executeGeneratorJava(jobName, sedaVersion);
+                executeGeneratorJava(jobName, sedaVersion, bCatchSummaryNotGenerated);
             else
-                executeGeneratorCsharp(jobName, sedaVersion);
+                executeGeneratorCsharp(jobName, sedaVersion, bCatchSummaryNotGenerated);
         }
 
-        protected void executeGeneratorJava(String jobName, String sedaVersion) {
+        protected void executeGeneratorJava(String jobName, String sedaVersion, bool bCatchSummaryNotGenerated) {
             Action<Exception, String> eh = (ex, str) => {
                 Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);
                 throw ex;
             };
             Action<Exception> ehb = (ex) => {
                 Console.WriteLine("Erreur lors de la préparation du bordereau pour le test '" + fichier_bordereau + "' " + ex.GetType().Name);
+                if (bCatchSummaryNotGenerated)
+                    throw ex;
             };
 
             SimpleConfig config = new SimpleConfig();
@@ -196,13 +198,15 @@ namespace SedaSummaryGeneratorUnitTest {
             // streamWriter.Close();
         }
 
-        protected void executeGeneratorCsharp(String jobName, String sedaVersion) {
+        protected void executeGeneratorCsharp(String jobName, String sedaVersion, bool bCatchSummaryNotGenerated) {
             Action<Exception, String> eh = (ex, str) => {
                 Console.WriteLine(ex.GetType().Name + " while trying to use trace file: " + traceFile + ". Complementary message: " + str);
                 throw ex;
             };
             Action<Exception> ehb = (ex) => {
                 Console.WriteLine("Erreur lors de la préparation du bordereau pour le test '" + fichier_bordereau + "' " + ex.GetType().Name);
+                if (bCatchSummaryNotGenerated)
+                    throw ex;
             };
 
             SimpleConfig config = new SimpleConfig();
@@ -649,7 +653,7 @@ namespace SedaSummaryGeneratorUnitTest {
 
         [TestMethod]
         public void W29_TestGenerateur_4_2_04() {
-            executeGenerator("liste-fichiers_4-2-04", "0.2");
+            executeGenerator("liste-fichiers_4-2-04", "0.2", false); // Le bordereau ne sera pas généré
 
             String[] erreursAttendues = { "Il existe des unités documentaires obligatoires sans documents : MP_Cons_Dossier_AncDCE\t" };
             checkForErrors(erreursAttendues);
@@ -887,7 +891,7 @@ namespace SedaSummaryGeneratorUnitTest {
 
         [TestMethod]
         public void W44_TestGenerateur_3_2_03() {
-            executeGenerator("liste-fichiers_3-2-03", "0.2");
+            executeGenerator("liste-fichiers_3-2-03", "0.2", false); // Le bordereau ne sera pas généré
 
             String[] erreursAttendues = { "Il existe des unités documentaires obligatoires sans documents : MP_Cons_Dossier_AncDCE\t" };
             checkForErrors(erreursAttendues);
@@ -1179,7 +1183,7 @@ namespace SedaSummaryGeneratorUnitTest {
 
         }
 
-
+        
         // Ce test correspond à la génération d'un bordereau au format SEDA 1.0, 
         [TestMethod]
         public void W69_TestKeywordSansTags() {
@@ -1189,6 +1193,17 @@ namespace SedaSummaryGeneratorUnitTest {
                                             "#DATAERR: Le tag : '#Comment' n'a pas été trouvé dans les données métier",
                                             "#DATAERR: Le tag : '#KeywordContent[{null}]' n'a pas été trouvé dans les données métier",
                                             "#DATAERR: Le tag : '#KeywordContent[O6_Chapitre1{null}]' n'a pas été trouvé dans les données métier"
+                                        };
+            checkForErrors(erreursAttendues);
+
+        }
+
+        // Ce test correspond à la génération d'un bordereau au format SEDA 1.0, 
+        [TestMethod]
+        public void W70_TestFilePlanPosition() {
+            executeGenerator("fileplanposition", "0.2");
+
+            String[] erreursAttendues = { 
                                         };
             checkForErrors(erreursAttendues);
 

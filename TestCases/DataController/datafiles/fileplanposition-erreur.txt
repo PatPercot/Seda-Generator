@@ -23,3 +23,7 @@
 #,#FilePlanPosition[UD2{FPP23}],Position FPP23 UD2
 
 #,#FilePlanPosition[UD21],Position UD21
+
+,Document1.pdf,UD11[#1],Document du test,01/12/2014 12:00:00
+,Document1.pdf,UD12[#1],Document du test,01/12/2014 12:00:00
+,Document1.pdf,UD21,Document du test,01/12/2014 12:00:00
