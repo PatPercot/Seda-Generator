@@ -1,28 +1,38 @@
 **************************
+2017-03-14
+	Contr√¥leur de profils
+		Les balises OriginatingAgency ne sont requises que si elles ne sont pas vides 
+			(v√©rifier la pr√©sence de rng:data)
+			"priorit√© moyenne"
+		Les tags des donn√©es m√©tier document sont g√©n√©r√©es avec un pr√©fixe "document: "
+			qui doit √™tre supprim√©
+			"priorit√© basse"
+
+**************************
 2016-03-10
 
-	PrÈvoir un mode silent (pas d'affichage sur console) pour les exÈcutables
+	Pr√©voir un mode silent (pas d'affichage sur console) pour les ex√©cutables
 
 **************************
 2016-01-27
 
-	PrÈvoir rapidement LatestDate te OldestDate dans les donnÈes mÈtier (plus gestion des dates de dÈpart communicabilitÈ et sort final)
+	Pr√©voir rapidement LatestDate te OldestDate dans les donn√©es m√©tier (plus gestion des dates de d√©part communicabilit√© et sort final)
 	
-	Lors du passage au SEDA 2.0 considÈrer la notation TAG{DOC] Èquivalente ‡ la notation TAG/DOC
+	Lors du passage au SEDA 2.0 consid√©rer la notation TAG{DOC] √©quivalente √† la notation TAG/DOC
 
 **************************
 2015-09-07
-	CrÈer un outil de contrÙle des donnÈes mÈtier (confrontÈes au prodil d'archivage)
-	Points ‡ vÈrifier :
-		Une donnÈe est fournie alors qu'elle est fixe dans le profil
-		Un TAG utilisÈ n'est pas rÈfÈrencÈ dans le profil
-		Le TAG est indiquÈ comme rÈpÈtable alors qu'il ne l'est pas dans le profil
-		Le TAG est fourni sous forme fixe alors qu'il est rÈpÈtable dans le profil
+	Cr√©er un outil de contr√¥le des donn√©es m√©tier (confront√©es au prodil d'archivage)
+	Points √† v√©rifier :
+		Une donn√©e est fournie alors qu'elle est fixe dans le profil
+		Un TAG utilis√© n'est pas r√©f√©renc√© dans le profil
+		Le TAG est indiqu√© comme r√©p√©table alors qu'il ne l'est pas dans le profil
+		Le TAG est fourni sous forme fixe alors qu'il est r√©p√©table dans le profil
 		Le format de la date est incorrect ou la date est inexistante
-		Le TAG n'est pas gÈnÈrable car le nom de balise n'existe pas 
-			(vÈrifier ContainsName, Originating_Description, ...)
-		Nombre de champs incorrect ou sÈparateur mal choisi
-		VÈrification des champs d'une ligne document (qui peuvent Ítre mal ordonnÈs) :
+		Le TAG n'est pas g√©n√©rable car le nom de balise n'existe pas 
+			(v√©rifier ContainsName, Originating_Description, ...)
+		Nombre de champs incorrect ou s√©parateur mal choisi
+		V√©rification des champs d'une ligne document (qui peuvent √™tre mal ordonn√©s) :
 			TAG non conforme
 			Syntaxe du nom de fichier incorrecte
 			Date du fichier non conforme
@@ -30,11 +40,11 @@
 			
 **************************
 2015-07-09
-	Bug si SAEUrl est diffÈrent entre BDD et code WS
+	Bug si SAEUrl est diff√©rent entre BDD et code WS
 
 **************************
 2015-06-19 
-	Ajouter la captation de l'exception dans le cas o˘ le rÈpertoire est inexistant pour le fichier bordereau
+	Ajouter la captation de l'exception dans le cas o√π le r√©pertoire est inexistant pour le fichier bordereau
 	OU ERREUR droits insuffisants sans doute aussi
-	Une exception non gÈrÈe du type 'System.IO.DirectoryNotFoundException' s'est produite dans System.Xml.dll
-	Informations supplÈmentaires : Impossible de trouver une partie du chemin d'accËs 'D:\DEV_PPE\tests\CGI\Test_MARCHES-V5bis\WORK\bordereau-marches-V5bis.xml'.
+	Une exception non g√©r√©e du type 'System.IO.DirectoryNotFoundException' s'est produite dans System.Xml.dll
+	Informations suppl√©mentaires : Impossible de trouver une partie du chemin d'acc√®s 'D:\DEV_PPE\tests\CGI\Test_MARCHES-V5bis\WORK\bordereau-marches-V5bis.xml'.
