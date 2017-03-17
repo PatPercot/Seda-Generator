@@ -16,8 +16,6 @@
 **************************
 2016-01-27
 
-	Prévoir rapidement LatestDate te OldestDate dans les données métier (plus gestion des dates de départ communicabilité et sort final)
-	
 	Lors du passage au SEDA 2.0 considérer la notation TAG{DOC] équivalente à la notation TAG/DOC
 
 **************************
