@@ -1,14 +1,4 @@
-**************************
-2017-03-14
-	Contrôleur de profils
-		Les balises OriginatingAgency ne sont requises que si elles ne sont pas vides 
-			(vérifier la présence de rng:data)
-			"priorité moyenne"
-		Les tags des données métier document sont générées avec un préfixe "document: "
-			qui doit être supprimé
-			"priorité basse"
-
-**************************
+﻿***************************
 2016-03-10
 
 	Prévoir un mode silent (pas d'affichage sur console) pour les exécutables

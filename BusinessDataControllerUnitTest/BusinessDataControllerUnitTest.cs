@@ -217,7 +217,6 @@ namespace BusinessDataControllerUnitTest {
             String[] tagsAttendus = 
                 { 
                 "#TransferName",
-                "#OriginatingAgency.Identification",
                 "#KeywordContent[{KW_COMMUNE}]",
                 "#KeywordContent[{KW_EVT}]",
                 "#ContainsName[ENRSON[#1]]",

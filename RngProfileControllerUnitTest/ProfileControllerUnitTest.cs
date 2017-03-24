@@ -451,8 +451,8 @@ namespace RngProfileControllerUnitTest {
                 ",#KeywordContent[UD1{KW2}],Texte à personnaliser",
                 ",#FilePlanPosition[UD1{FPP11}[#1]],Texte à personnaliser",
                 ",#FilePlanPosition[UD1{FPP12}[#1]],Texte à personnaliser",
-                ",fichier.txt,document: UD1{FILE1},Description du document,13/03/2017 14:31:27",
-                ",fichier.txt,document: UD1{FILE2},Description du document,13/03/2017 14:31:27",
+                ",fichier.txt,UD1{FILE1},Description du document,13/03/2017 14:31:27",
+                ",fichier.txt,UD1{FILE2},Description du document,13/03/2017 14:31:27",
             };
             declencherTestProfilEtGeneration("generation_donnees_metier", branchesAttendues, erreursAttendues, tagsExemplesAttendus);
         }

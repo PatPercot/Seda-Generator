@@ -1,4 +1,11 @@
-Suivi des versions
+﻿Suivi des versions
+
+Version 1.0.7
+	Contrôleur de profils
+		OriginatingAgency.xxx ne sont plus générées dans les données métier si le profil les fournit
+		Le préfixe "document: " dans les données métier n'est plus généré
+	Générateur
+		Les RuntimeException ne sont plus déclenchées si les balise Duration, Receipt, ... sont trouvées
 
 Version 1.0.6
 	Ajout de la fonctionnalité de production de données métier exemples à partir du profil

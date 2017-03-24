@@ -227,7 +227,7 @@ namespace SedaSummaryGenerator {
                             if (str.StartsWith("#")) {
                                 dataStream.WriteLine("," + str + ",Texte à personnaliser");
                             } else {
-                                dataStream.WriteLine(",fichier.txt," + str + ",Description du document,13/03/2017 14:31:27");
+                                dataStream.WriteLine(",fichier.txt," + str.Replace("document: ", "") + ",Description du document,13/03/2017 14:31:27");
                             }
                         }
                     }
@@ -312,7 +312,14 @@ namespace SedaSummaryGenerator {
                                 xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + name + "']/rng:ref";
                                 node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                                 if (node != null) {
-                                    expectedTagsList.Add("#OriginatingAgency." + name);
+                                    nodeContent = node.Attributes.GetNamedItem("name").Value;
+                                    if (nodeContent != null) {
+                                        xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
+                                        node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                        if (node != null) {
+                                            expectedTagsList.Add("#OriginatingAgency." + name);
+                                        }
+                                    }
                                 }
                             }
                         }
