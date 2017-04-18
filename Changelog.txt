@@ -1,4 +1,9 @@
 -------------------------
+Changements du 2017-04-17
+- Contrôleur de données et de profils
+	Correction de bug sur la recherche des Keyword répétables et optionnels
+
+-------------------------
 Changements du 2017-03-24
 - Contrôleur de profils
 	OriginatingAgency.xxx ne sont plus générées dans les données métier si le profil les fournit

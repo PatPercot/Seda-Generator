@@ -8,7 +8,7 @@
 ,#OriginatingAgency.Name,nom du producteur
 ,#OriginatingAgency.Identification,identification du producteur
 ,#KeywordContent[{KW_COMMUNE}],BREST
-,#KeywordContent[{KW_EVT}],FOLKLORE
+,#KeywordContent[{KW_EVT}[#1]],FOLKLORE
 ,#ContainsName[ENRSON[#1]],nom UD enrson 1
 ,#CustodialHistory[ENRSON[#1]],historique de conservation unité documentaire
 ,#ContentDescription.Description[ENRSON[#1]],description UD enrson 1
@@ -18,7 +18,7 @@
 ,fichier enrson wav 1,ENRSON[#1]{WAV},fichier enrson wav 1,01/12/2014 12:00:00,ALGO-CRYPTO-PERSO,GABUZOMEUH,111111
 ,#ContainsName[ENRSON[#1]//SAMPLES[#1]],nom UD enrson samples 1
 ,#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]],description UD enrson samples 1
-,#KeywordContent[ENRSON[#1]//SAMPLES[#1]{KW2}],mo-clé UD enrson samples 1
+,#KeywordContent[ENRSON[#1]//SAMPLES[#1]{KW2}[#1]],mo-clé UD enrson samples 1
 ,fichier enrson samples 1,ENRSON[#1]//SAMPLES[#1],fichier enrson samples 1,01/12/2014 12:00:00,ALGO-CRYPTO-PERSO,GABUZOMEUH,111111
 ,#ContainsName[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION],nom UD enrson samples description 1
 ,#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION],description UD enrson samples description 1

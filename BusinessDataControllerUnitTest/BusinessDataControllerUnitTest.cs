@@ -249,7 +249,7 @@ namespace BusinessDataControllerUnitTest {
                 "#OriginatingAgency.Identification",
                 "#ContentDescription.Description",
                 "#KeywordContent[{KW_COMMUNE}]",
-                "#KeywordContent[{KW_EVT}]",
+                "#KeywordContent[{KW_EVT}[#1]]",
                 "#ContainsName[ENRSON[#1]]",
                 "#CustodialHistory[ENRSON[#1]]",
                 "#ContentDescription.Description[ENRSON[#1]]",
@@ -259,7 +259,7 @@ namespace BusinessDataControllerUnitTest {
                 "document: ENRSON[#1]{WAV}",
                 "#ContainsName[ENRSON[#1]//SAMPLES[#1]]",
                 "#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]]",
-                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]{KW2}]",
+                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]{KW2}[#1]]",
                 "document: ENRSON[#1]//SAMPLES[#1]",
                 "#ContainsName[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
                 "#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
@@ -290,14 +290,14 @@ namespace BusinessDataControllerUnitTest {
                 "#OriginatingAgency.Name",
                 "#OriginatingAgency.Identification",
                 "#KeywordContent[{KW_COMMUNE}]",
-                "#KeywordContent[{KW_EVT}]",
+                "#KeywordContent[{KW_EVT}[#1]]",
                 "#ContainsName[ENRSON[#1]]",
                 "#CustodialHistory[ENRSON[#1]]",
                 "#ContentDescription.Description[ENRSON[#1]]",
                 "#KeywordContent[ENRSON[#1]{KW1}]",
                 "#ContainsName[ENRSON[#1]//SAMPLES[#1]]",
                 "#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]]",
-                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]{KW2}]",
+                "#KeywordContent[ENRSON[#1]//SAMPLES[#1]{KW2}[#1]]",
                 "#ContainsName[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
                 "#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]",
                 "#KeywordContent[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION{KW3}]",
@@ -448,7 +448,7 @@ namespace BusinessDataControllerUnitTest {
                 "Dans le profil, le tag '#OriginatingAgency.Name' ne trouve pas de correspondance dans les données métier",
                 "Dans le profil, le tag '#ContentDescription.Description' ne trouve pas de correspondance dans les données métier",
                 "Dans le profil, le tag '#KeywordContent[{KW_COMMUNE}]' ne trouve pas de correspondance dans les données métier",
-                "Dans le profil, le tag '#KeywordContent[{KW_EVT}]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#KeywordContent[{KW_EVT}[#1]]' ne trouve pas de correspondance dans les données métier",
                 "Dans le profil, le tag '#CustodialHistory[ENRSON[#1]]' ne trouve pas de correspondance dans les données métier",
                 "Dans le profil, le tag '#KeywordContent[ENRSON[#1]{KW1}]' ne trouve pas de correspondance dans les données métier",
                 "Dans le profil, le tag '#ContentDescription.Description[ENRSON[#1]//SAMPLES[#1]//DESCRIPTION]' ne trouve pas de correspondance dans les données métier",
@@ -522,6 +522,17 @@ namespace BusinessDataControllerUnitTest {
             ConfrontationDonneesEtProfil("FilePlanPositionERREUR", erreursAttendues, true);
         }
 
-        
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void I03_TestKeywordSedaV10() {
+            String[] erreursAttendues = 
+                { 
+                };
+            ConfrontationDonneesEtProfil("PES_MANUEL_V10", erreursAttendues, true);
+        }
+
+        // PES_MANUEL_V10
     }
 }

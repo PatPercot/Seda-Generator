@@ -428,34 +428,28 @@ namespace SedaSummaryGenerator {
                                 stScheme = getSchemeIdValue(keywordReferenceNode, xPath, "", numkw);
                             }
 
-                            xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + "KeywordContent" + "']/rng:ref";
-                            parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                            if (parentNode != null) {
-                                parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
-                                if (parentNodeName != null) {
-                                    xPath = "rng:define[@name='" + parentNodeName + "']/rng:data[@type='string']";
-                                    node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                                    if (node != null) {
-                                        Boolean bRepeatable = false;
-                                        Boolean boptional = false;
-                                        xPath = "../..";
-                                        parentNode = node.SelectSingleNode(xPath);
-                                        String parentNodeStr = parentNode.Name;
-                                        if (parentNodeStr == "rng:zeroOrMore" || parentNodeStr == "rng:oneOrMore")
-                                            bRepeatable = true;
-                                        if (parentNodeStr == "rng:zeroOrMore")
-                                            boptional = true;
+                            // xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + "KeywordContent" + "']/rng:ref";
+                            xPath = "rng:define[@name='" + contentDescriptionDefineName + "']/descendant::rng:element[@name='" + stKeyword + "']/rng:ref[@name='" + parentNodeName + "']";
+                            XmlNode referenceNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (referenceNode != null) {
+                                Boolean bRepeatable = false;
+                                Boolean boptional = false;
+                                xPath = "../..";
+                                parentNode = referenceNode.SelectSingleNode(xPath);
+                                String parentNodeStr = parentNode.Name;
+                                if (parentNodeStr == "rng:zeroOrMore" || parentNodeStr == "rng:oneOrMore")
+                                    bRepeatable = true;
+                                if (parentNodeStr == "rng:zeroOrMore")
+                                    boptional = true;
 
-                                        if (stScheme != null && stScheme != String.Empty) {
-                                            String stEnd = bRepeatable ? "[#1]]" : "]";
-                                            if (relativeContext == null)
-                                                expectedTagsList.Add("#KeywordContent[{" + stScheme + "}" + stEnd);
-                                            else
-                                                expectedTagsList.Add("#KeywordContent[" + relativeContext + "{" + stScheme + "}" + stEnd);
-                                        }
-                                    }
+                                if (stScheme != null && stScheme != String.Empty) {
+                                    String stEnd = bRepeatable ? "[#1]]" : "]";
+                                    if (relativeContext == null)
+                                        expectedTagsList.Add("#KeywordContent[{" + stScheme + "}" + stEnd);
+                                    else
+                                        expectedTagsList.Add("#KeywordContent[" + relativeContext + "{" + stScheme + "}" + stEnd);
                                 }
-                            } // if (parentNode != null)
+                            } // if (referenceNode != null)
                         } // if (schemeIdRequired == true)
                     } // if (parentNodeName != null)
                 } // foreach
