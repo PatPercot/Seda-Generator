@@ -458,6 +458,20 @@ namespace RngProfileControllerUnitTest {
             declencherTestProfilEtGeneration("generation_donnees_metier", branchesAttendues, erreursAttendues, tagsExemplesAttendus);
         }
 
+		[TestMethod]
+		/*
+		 * 
+		 * */
+		public void M27_TestSansUniteDocumentaireErreur()
+		{
+			String[] branchesAttendues = { "\troot", "" };
+			String[] erreursAttendues = 
+                { 
+				"La présence d'une unité documentaire est obligatoire",
+                };
+			declencherTestProfil("SansUniteDocumentaireERREUR", branchesAttendues, erreursAttendues, true);
+		}
+
 
     }
 }
