@@ -1153,6 +1153,7 @@ namespace SedaSummaryGeneratorUnitTest {
 
         // Ce test correspond à la génération d'un bordereau au format SEDA 0.2, 
         // le test suivant vérifie avec les mêmes données la génération d'un bordereau au format SEDA 1.0
+		// Verifie que les noms des fichiers d'un repertoire correspondent bien a ceux que l'on a indique
         [TestMethod]
         public void W67_TestMultipleDocumentsV02() {
             executeGenerator("multiple_documents_V02", "0.2");
@@ -1168,7 +1169,8 @@ namespace SedaSummaryGeneratorUnitTest {
         }
 
 
-        // Ce test correspond à la génération d'un bordereau au format SEDA 1.0, 
+		// Ce test correspond à la génération d'un bordereau au format SEDA 1.0, 
+		// Verifie que les noms des fichiers d'un repertoire correspondent bien a ceux que l'on a indique
         [TestMethod]
         public void W68_TestMultipleDocumentsV10() {
             executeGenerator("multiple_documents_V10", "1.0");
@@ -1210,6 +1212,21 @@ namespace SedaSummaryGeneratorUnitTest {
         }
 
 
+        // Ce test correspond à la génération d'un bordereau au format SEDA 1.0, 
+        // le test suivant vérifie avec les mêmes données la génération d'un bordereau au format SEDA 1.0
+		// Verifie que les noms des fichiers des repertoires correspondent bien a ceux que l'on a indique
+        [TestMethod]
+        public void W71_TestVerifAttachementFileNameSedaV1_0() {
+            executeGenerator("AttachmentFileNameSedaV1_0", "1.0");
+
+            checkForNoErrors();
+            checkAttribute("/s:ArchiveTransfer/s:Archive/s:ArchiveObject/s:ArchiveObject/s:Document/s:Attachment"
+                , "filename", "fichierPES_AR.txt");
+
+            checkAttribute("/s:ArchiveTransfer/s:Archive/s:ArchiveObject/s:Document/s:Attachment"
+                , "filename", "fichierPES.txt");
+			
+        }
 
     }
 }
