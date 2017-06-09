@@ -533,6 +533,19 @@ namespace BusinessDataControllerUnitTest {
             ConfrontationDonneesEtProfil("PES_MANUEL_V10", erreursAttendues, true);
         }
 
+		[TestMethod]
+		/*
+		 * 
+		 * */
+		public void I04_TestSansUniteDocumentaireErreur()
+		{
+			String[] erreursAttendues = 
+                { 
+                "La présence d'une unité documentaire est obligatoire.",
+                };
+			ConfrontationDonneesEtProfil("SansUniteDocumentaireERREUR", erreursAttendues, true);
+		}
+
         // PES_MANUEL_V10
     }
 }

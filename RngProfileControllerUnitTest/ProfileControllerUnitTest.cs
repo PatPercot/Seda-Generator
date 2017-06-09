@@ -356,6 +356,7 @@ namespace RngProfileControllerUnitTest {
             declencherTestProfil("MultipleDocumentSansTypeOuFilename", branchesAttendues, erreursAttendues);
         }
 
+		[TestMethod]
         public void M20_TestMultipleDocumentSansTypeOuFilenamev10() {
             String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
             String[] erreursAttendues = 
