@@ -740,7 +740,8 @@ namespace SedaSummaryGenerator {
                 // Parcourir récursivement toutes les balises Contains filles
                 xPath = "descendant::rng:element[@name='" + descendantContains + "']/rng:ref";
                 XmlNodeList containsNodesList = containsNode.SelectNodes(xPath, docInXmlnsManager);
-                if (containsNodesList != null) {
+				if (containsNodesList != null && containsNodesList.Count > 0)
+				{
                     foreach (XmlNode node in containsNodesList) {
                         String nodeName = node.Attributes.GetNamedItem("name").Value;
                         if (nodeName == null) {
@@ -766,6 +767,7 @@ namespace SedaSummaryGenerator {
                         }
                     }
                 }
+				else { errorsList.Add("La présence d'une unité documentaire est obligatoire"); }
                 currentContainsNode = currentContainsNode.getParent();
             }
         }
