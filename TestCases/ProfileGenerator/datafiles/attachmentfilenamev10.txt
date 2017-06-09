@@ -1,0 +1,27 @@
+# Liste de tags attendus par le profil
+# Les tags de la forme TAG[#1] sont des tags répétables
+# 	#1 est un indice qui peut prendre des valeurs entières
+# 
+
+# Les documents peuvent prendre trois formes
+# Les trois derniers éléments peuvent être produits par le générateur
+# Dans les données qui suivent, seule la première forme est fournie
+
+# Document, 1ère forme (chemin et nom du fichier) (TAG) (Description) (date)
+# Document, 2ème forme (chemin et nom du fichier) (TAG) (Description) (date) (algorithme de l'empreinte) (empreinte)
+# Document, 3ème forme (chemin et nom du fichier) (TAG) (Description) (date) (algorithme de l'empreinte) (empreinte) (taille)
+# Exemple complet : ,fichier.txt,TAG,Description du document,13/03/2017 14:31:27,http://www.w3.org/2001/04/xmlenc#sha256,f81ba5573d70bb23c5510237208e2965bd87a389623c985cff341879e373c4b7,29516
+# 
+
+
+,#TransferName,Texte à personnaliser
+,#KeywordContent[{KW_COLLECTIVITE}],Texte à personnaliser
+,#KeywordContent[{KW_CODCOLLECTIVITE_BUDGET}],Texte à personnaliser
+,#KeywordContent[{KW_SIRET}],Texte à personnaliser
+,#KeywordContent[{KW_DATE_AR}],Texte à personnaliser
+,#ContainsName[PES],ArchiveObject contenant le flux PES
+,#KeywordContent[PES{KW_IDBORD}[#1]],Texte à personnaliser
+,#KeywordContent[PES{KW_IDPCE}[#1]],Texte à personnaliser
+,#ContainsName[PES_AR],ArchiveObject contenant l'accusé de réception du flux PES
+,fichierPES.txt,PES,Fichier contenant le flux PES,13/03/2017 14:31:27
+,fichierPES_AR.txt,PES_AR,Fichier contenant l'AR du flux PES,13/03/2017 14:31:27
