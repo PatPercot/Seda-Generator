@@ -89,7 +89,7 @@ namespace SedaSummaryGenerator {
                     //Add the namespaces used in books.xml to the XmlNamespaceManager.
                     docInXmlnsManager.AddNamespace("rng", "http://relaxng.org/ns/structure/1.0");
                 }
-            } 
+            }
             catch (ArgumentException e) { eh(e); }
             catch (DirectoryNotFoundException e) { eh(e); }
             catch (FileNotFoundException e) { eh(e); }

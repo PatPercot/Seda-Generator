@@ -356,7 +356,6 @@ namespace RngProfileControllerUnitTest {
             declencherTestProfil("MultipleDocumentSansTypeOuFilename", branchesAttendues, erreursAttendues);
         }
 
-		[TestMethod]
         public void M20_TestMultipleDocumentSansTypeOuFilenamev10() {
             String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
             String[] erreursAttendues = 
@@ -456,7 +455,7 @@ namespace RngProfileControllerUnitTest {
                 ",fichier.txt,UD1{FILE2},Description du document,13/03/2017 14:31:27",
             };
             declencherTestProfilEtGeneration("generation_donnees_metier", branchesAttendues, erreursAttendues, tagsExemplesAttendus);
-        }
+		}
 
 		[TestMethod]
 		/*
@@ -469,9 +468,35 @@ namespace RngProfileControllerUnitTest {
                 { 
 				"La présence d'une unité documentaire est obligatoire",
                 };
-			declencherTestProfil("SansUniteDocumentaireERREUR", branchesAttendues, erreursAttendues, true);
+			declencherTestProfil("SansUniteDocumentaireErreur", branchesAttendues, erreursAttendues, true);
 		}
 
+		[TestMethod]
+		/*
+		 * 
+		 * */
+		public void M28_TestUdSansFilleErreur()
+		{
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"La présence d'un document est obligatoire lorsque l'unité documentaire n'a pas de fille",
+                };
+			declencherTestProfil("UdSansFilleErreur", branchesAttendues, erreursAttendues, true);
+		}
 
+		[TestMethod]
+		/*
+		 * 
+		 * */
+		public void M29_TestUniteDocumentaireCardinalite01Erreur()
+		{
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"La cardinalité d'une unité documentaire doit être de 1-1",
+                };
+			declencherTestProfil("UniteDocumentaireCardinalite01Erreur", branchesAttendues, erreursAttendues, true);
+		}
     }
 }
