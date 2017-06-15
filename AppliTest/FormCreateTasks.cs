@@ -24,8 +24,8 @@ namespace AppliTest
 		}
 
 		/// <summary>
-		/// Vérifie quels sont les cases cochés afin de bloquer certains paramètres pour éviter
-		/// à l'utilisateur d'avoir à copier. De plus cela affiche le même texte lorsque l'on remplie.
+		/// Vérifie quels sont les cases cochés afin de bloquer certains
+		/// paramètres pour éviter à l'utilisateur d'avoir à copier.
 		/// </summary>
 		private void ChecksVerif()
 		{
@@ -52,6 +52,11 @@ namespace AppliTest
 			tbxAccordVersementProfile.Enabled = !(this.cbxProfileTask.Checked || this.cbxDataTask.Checked);
 		}
 
+		/// <summary>
+		/// Affiche le même texte dans les cases reliés au profil et data lorsque l'on
+		/// remplie les premiers du formulaire. Pour les boîtes de texte concernées par
+		/// la complétion automatique en lien avec soit le profil, soit la tâche même objectif.
+		/// </summary>
 		private void TextCompletion()
 		{
 			if (this.cbxProfileTask.Checked)
@@ -73,6 +78,7 @@ namespace AppliTest
 			}
 		}
 
+		// Active le formulaire pour créer une tâche de type profil
 		private void cbxProfilTask_CheckedChanged(object sender, EventArgs e)
 		{
 			gbxProfil.Enabled = cbxProfileTask.Checked;
@@ -84,6 +90,7 @@ namespace AppliTest
 			TextCompletion();
 		}
 
+		// Active le formulaire pour créer une tâche de type data
 		private void cbxDataTask_CheckedChanged(object sender, EventArgs e)
 		{
 			tbxDataData.Enabled = cbxDataTask.Checked;
@@ -95,6 +102,7 @@ namespace AppliTest
 			TextCompletion();
 		}
 
+		// Active le formulaire pour créer une tâche de type générateur
 		private void cbxGeneratorTask_CheckedChanged(object sender, EventArgs e)
 		{
 			tbxUriBase.Enabled = cbxGeneratorTask.Checked;
@@ -121,6 +129,16 @@ namespace AppliTest
 		private void tbxProfileProfile_KeyUp(object sender, KeyEventArgs e)
 		{
 			TextCompletion();
+		}
+
+		private void cbxFollowTaskName_CheckedChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void cbxFollowProfileName_CheckedChanged(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

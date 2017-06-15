@@ -561,6 +561,7 @@
 			this.cbxFollowProfileName.Text = "Suivre le nom du profil";
 			this.cbxFollowProfileName.UseVisualStyleBackColor = true;
 			this.cbxFollowProfileName.Visible = false;
+			this.cbxFollowProfileName.CheckedChanged += new System.EventHandler(this.cbxFollowProfileName_CheckedChanged);
 			// 
 			// cbxFollowTaskName
 			// 
@@ -573,6 +574,7 @@
 			this.cbxFollowTaskName.Text = "Suivre le nom de la tâche";
 			this.cbxFollowTaskName.UseVisualStyleBackColor = true;
 			this.cbxFollowTaskName.Visible = false;
+			this.cbxFollowTaskName.CheckedChanged += new System.EventHandler(this.cbxFollowTaskName_CheckedChanged);
 			// 
 			// gbxData
 			// 
