@@ -89,7 +89,7 @@ namespace SedaSummaryGenerator {
                     //Add the namespaces used in books.xml to the XmlNamespaceManager.
                     docInXmlnsManager.AddNamespace("rng", "http://relaxng.org/ns/structure/1.0");
                 }
-            } 
+            }
             catch (ArgumentException e) { eh(e); }
             catch (DirectoryNotFoundException e) { eh(e); }
             catch (FileNotFoundException e) { eh(e); }
@@ -676,6 +676,31 @@ namespace SedaSummaryGenerator {
             return ret;
         }
 
+		/// <summary>
+		/// On cherche à savoir s'il y a des filles/documents de l'unité documentaire unique au même seuil que root.
+		/// Répond rien dans ce cas, sinon renvoie une erreur.
+		/// </summary>
+		/// <param name="activeNodeName">Lieu de l'unité documentaire</param>
+		protected void checkContainsHasContainsOrDocuments(String activeNodeName, String context) {
+			// Recherche des filles des unités documentaires
+			if (traceActions) tracesWriter.WriteLine("checkContainsHasContainsOrDocuments ('" + activeNodeName + "', '" + context + "', '" + currentDocumentTypeId + "')");
+			String xPath = "rng:define[@name='" + activeNodeName + "']";
+            XmlNode containsNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+			xPath = "descendant::rng:element[@name='Document']/rng:ref";
+			XmlNodeList documentNodeList = containsNode.SelectNodes(xPath, docInXmlnsManager);
+			if (documentNodeList != null && documentNodeList.Count > 0) {
+			} else {
+				xPath = "descendant::rng:element[@name='" + descendantContains + "']/rng:ref";
+				XmlNodeList containsNodesList = containsNode.SelectNodes(xPath, docInXmlnsManager);
+				xPath = "descendant::rng:element[@name='Contains']/rng:ref";
+				containsNodesList = containsNode.SelectNodes(xPath, docInXmlnsManager);
+				if (containsNodesList != null && containsNodesList.Count > 0) {
+				} else {
+						errorsList.Add("La présence d'un document est obligatoire dans l'unité documentaire '" + currentDocumentTypeId + "' car elle n'a pas d'unité documentaire fille");
+				}
+			}
+		}
+
         protected void recurseContainsDefine(String defineNodeName, String context, bool isRepeatable) {
             if (traceActions) tracesWriter.WriteLine("recurseContainsDefine ('" + defineNodeName + "', '" + context + "', '" + currentDocumentTypeId + "')");
             String xPath;
@@ -706,6 +731,7 @@ namespace SedaSummaryGenerator {
                         currentDocumentTypeId = ret;
                 }
 
+				checkContainsHasContainsOrDocuments(defineNodeName, context);
                 checkForMultipleDocument(defineNodeName, context);
                 checkForContentDescription(defineNodeName, context);
                 checkForOptionalOriginatingAgency(defineNodeName, context);
@@ -766,8 +792,10 @@ namespace SedaSummaryGenerator {
                             recurseContainsDefine(nodeName, context + "/Contains", bRepeatableContains);
                         }
                     }
-                }
-				else { errorsList.Add("La présence d'une unité documentaire est obligatoire"); }
+                } else {
+					if (currentDocumentTypeId == "root")
+						errorsList.Add("La présence d'une unité documentaire est obligatoire dans l'archive");
+				}
                 currentContainsNode = currentContainsNode.getParent();
             }
         }
