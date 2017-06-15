@@ -293,8 +293,10 @@ namespace RngProfileControllerUnitTest {
         public void M14_TestErreurDescriptionContenuKeyword() {
             String[] branchesAttendues = { "\troot", "\t\tKEYWORDUNIT_OK", "\t\tKEYWORDUNIT_NOTOK", "" };
             String[] erreursAttendues = 
-                { 
-                "Les mots-clés de l'unité documentaire 'KEYWORDUNIT_NOTOK' ne pourront pas être produits car la description du contenu est optionnelle.", 
+                {
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
+                "Les mots-clés de l'unité documentaire 'KEYWORDUNIT_NOTOK' ne pourront pas être produits car la description du contenu est optionnelle.",
                 };
             declencherTestProfil("KeywordInOptionalDescription", branchesAttendues, erreursAttendues);
         }
@@ -334,8 +336,9 @@ namespace RngProfileControllerUnitTest {
         public void M18_TestUtilisationBaliseDocumentArchive() {
             String[] branchesAttendues = { "\troot", "\t\tUD1[#1]", "" };
             String[] erreursAttendues = 
-                { 
+                {
                 "La balise Document de Archive (ou Contains premier niveau) ne peut pas recevoir de documents. Tous les documents doivent être situés dans des unités documentaires.", 
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
                 };
             declencherTestProfil("UtilisationBaliseDocumentArchive", branchesAttendues, erreursAttendues);
         }
@@ -377,6 +380,8 @@ namespace RngProfileControllerUnitTest {
             String[] branchesAttendues = { "\troot", "\t\tKEYWORDUNIT_OK", "\t\tKEYWORDUNIT_NOTOK", "" };
             String[] erreursAttendues = 
                 { 
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
                 "Les mots-clés de l'unité documentaire 'KEYWORDUNIT_NOTOK' ne pourront pas être produits car la description du contenu est optionnelle.", 
                 };
             declencherTestProfil("KeywordTagged", branchesAttendues, erreursAttendues);
@@ -389,7 +394,9 @@ namespace RngProfileControllerUnitTest {
                 { 
                 "Le mot-clé n° '1' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
                 "Le mot-clé n° '2' de l'archive doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
                 "Le mot-clé n° '2' de l'unité documentaire 'KEYWORDUNIT_OK' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
                 "Le mot-clé n° '2' de l'unité documentaire 'KEYWORDUNIT_NOTOK' doit avoir un identifiant de référentiel avec un attribut schemeID de la forme 'DOCLIST / TAG'",
                 };
             declencherTestProfil("KeywordUnTagged", branchesAttendues, erreursAttendues);
@@ -401,6 +408,8 @@ namespace RngProfileControllerUnitTest {
             String[] erreursAttendues = 
                 { 
                 "Le mot-clé n° '2' de l'archive a un tag 'ARKW1' qui n'est pas unique",
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
                 "Le mot-clé n° '2' de l'unité documentaire 'KEYWORDUNIT_NOTOK' a un tag 'KWNOTOK' qui n'est pas unique",
                 };
             declencherTestProfil("KeywordDuplicated", branchesAttendues, erreursAttendues);
@@ -413,6 +422,7 @@ namespace RngProfileControllerUnitTest {
                 { 
                 "(--) La balise ArchivalAgreement est optionnelle ou absente et ne sera pas générée. Elle pourrait être rendue obligatoire",
                 "(--) La balise OriginatingAgency est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
                 "(--) La balise OriginatingAgency de l'unité documentaire 'UD1' est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
                 };
             declencherTestProfil("AccordVersement_Producteur", branchesAttendues, erreursAttendues, true);
@@ -424,6 +434,10 @@ namespace RngProfileControllerUnitTest {
             String[] erreursAttendues = 
                 { 
                 "L'attribut schemeID de la balise FilePlanPosition n° '1' de l'archive ne doit pas être optionnel. Il faut le rendre obligatoire.",
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
                 "L'attribut schemeID de la balise FilePlanPosition n° '1' de l'unité documentaire 'UD31' n'existe pas. Il faut le créer, le rendre obligatoire et lui donner un nom de tag unique.",
                 "L'attribut schemeID de la balise FilePlanPosition n° '2' de l'unité documentaire 'UD31' n'existe pas. Il faut le créer, le rendre obligatoire et lui donner un nom de tag unique.",
                 "L'attribut schemeID de la balise FilePlanPosition n° '3' de l'unité documentaire 'UD31' ne doit pas être optionnel. Il faut le rendre obligatoire.",
@@ -466,7 +480,7 @@ namespace RngProfileControllerUnitTest {
 			String[] branchesAttendues = { "\troot", "" };
 			String[] erreursAttendues = 
                 { 
-				"La présence d'une unité documentaire est obligatoire",
+				"La présence d'une unité documentaire est obligatoire dans l'archive",
                 };
 			declencherTestProfil("SansUniteDocumentaireErreur", branchesAttendues, erreursAttendues, true);
 		}
@@ -480,7 +494,7 @@ namespace RngProfileControllerUnitTest {
 			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
 			String[] erreursAttendues = 
                 { 
-				"La présence d'un document est obligatoire lorsque l'unité documentaire n'a pas de fille",
+				"La présence d'un document est obligatoire dans l'unité documentaire '",
                 };
 			declencherTestProfil("UdSansFilleErreur", branchesAttendues, erreursAttendues, true);
 		}
