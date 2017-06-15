@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="fr:gouv:ae:archive:draft:standard_echange_v0.2" xmlns:qdt="fr:gouv:ae:archive:draft:standard_echange_v0.2:QualifiedDataType:1" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:6" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="fr:gouv:ae:archive:draft:standard_echange_v0.2" version="1.1">
-
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="fr:gouv:ae:archive:draft:standard_echange_v0.2" xmlns:qdt="fr:gouv:ae:archive:draft:standard_echange_v0.2:QualifiedDataType:1"
+xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:6" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="fr:gouv:ae:archive:draft:standard_echange_v0.2" version="1.1">
 	<xsd:element name="ArchiveTransfer">
 		<xsd:element name="Date" type="udt:DateTimeType"/>
 		<xsd:element name="TransferIdentifier" type="qdt:ArchivesIDType">
@@ -49,5 +50,4 @@
 		</xsd:element>
 		<xsd:attribute name="Id" type="xsd:ID" use="prohibited"/>
 	</xsd:element>
-
 </xsd:schema>
