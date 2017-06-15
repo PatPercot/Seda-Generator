@@ -503,14 +503,42 @@ namespace RngProfileControllerUnitTest {
 		/*
 		 * 
 		 * */
-		public void M29_TestUniteDocumentaireCardinalite01Erreur()
+		public void M29_TestUdCardinalite01Erreur()
 		{
 			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
 			String[] erreursAttendues = 
                 { 
 				"La cardinalité d'une unité documentaire doit être de 1-1",
                 };
-			declencherTestProfil("UniteDocumentaireCardinalite01Erreur", branchesAttendues, erreursAttendues, true);
+			declencherTestProfil("UdCardinalite01Erreur", branchesAttendues, erreursAttendues, true);
+		}
+
+		[TestMethod]
+		/*
+		 * 
+		 * */
+		public void M30_TestBaliseArchiveAgreementAbsente()
+		{
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"La balise ArchivalAgreement doit être présente et obligatoire dans l'Archive",
+                };
+			declencherTestProfil("ArchivalAgreementAbsente", branchesAttendues, erreursAttendues, true);
+		}
+
+		[TestMethod]
+		/*
+		 * 
+		 * */
+		public void M31_TestBaliseArchiveAgreementFalcultative()
+		{
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"La balise ArchivalAgreement doit être présente et obligatoire dans l'Archive",
+                };
+			declencherTestProfil("ArchivalAgreementFalcultative", branchesAttendues, erreursAttendues, true);
 		}
     }
 }
