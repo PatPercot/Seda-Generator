@@ -357,10 +357,17 @@ namespace SedaSummaryGenerator {
                 if (balisesMultiples.TryGetValue(balisename, out nbOccurrences)) {
                     balisesMultiples[balisename] = nbOccurrences + 1;
                 } else {
-                    listeAvertissements.Add("ERR: la ligne '" + linenumber +
-                        "' contient une balise '" + tag +
-                        "' qui n'est pas reconnue et ne sera pas traitée");
-                }
+					if (tag.Equals("ArchivalAgreement")) {
+						listeAvertissements.Add("ERR: la ligne '" + linenumber +
+							"' contient une balise '" + tag +
+							"' qui ne doit pas se trouver dans les données métier, car son" +
+							" contenu provient du fichier de configuration (.config)");						
+					} else {
+
+						listeAvertissements.Add("ERR: la ligne '" + linenumber +
+							"' contient une balise '" + tag +
+							"' qui n'est pas reconnue et ne sera pas traitée");
+					}
             }
         }
 
