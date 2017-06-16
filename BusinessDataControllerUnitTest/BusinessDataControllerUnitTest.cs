@@ -500,7 +500,7 @@ namespace BusinessDataControllerUnitTest {
 		{
 			String[] erreursAttendues = 
                 { 
-				"La balise ArchivalAgreement ne doit pas être contenue dans les données métier",
+				"ERR: la ligne '17' contient une balise '#ArchivalAgreement' qui ne doit pas se trouver dans les données métier",
                 };
 			declencherControleDonnees("AvecBaliseArchivalAgreement", erreursAttendues);
 		}
