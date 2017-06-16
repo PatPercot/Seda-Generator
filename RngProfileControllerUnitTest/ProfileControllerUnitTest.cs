@@ -420,8 +420,8 @@ namespace RngProfileControllerUnitTest {
             String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
             String[] erreursAttendues = 
                 { 
-                "(--) La balise ArchivalAgreement est optionnelle ou absente et ne sera pas générée. Elle pourrait être rendue obligatoire",
                 "(--) La balise OriginatingAgency est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
+                "(--) La balise ArchivalAgreement est optionnelle et ne sera pas générée. Il est conseillé de la rendre obligatoire",
 				"La présence d'un document est obligatoire dans l'unité documentaire '",
                 "(--) La balise OriginatingAgency de l'unité documentaire 'UD1' est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
                 };
@@ -494,6 +494,7 @@ namespace RngProfileControllerUnitTest {
 			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
 			String[] erreursAttendues = 
                 { 
+				"(--) La balise ArchivalAgreement est absente, il est conseillé de la mettre et la rendre obligatoire",
 				"La présence d'un document est obligatoire dans l'unité documentaire '",
                 };
 			declencherTestProfil("UdSansFilleErreur", branchesAttendues, erreursAttendues, true);
@@ -522,7 +523,7 @@ namespace RngProfileControllerUnitTest {
 			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
 			String[] erreursAttendues = 
                 { 
-				"La balise ArchivalAgreement doit être présente et obligatoire dans l'Archive",
+				"(--) La balise ArchivalAgreement est absente, il est conseillé de la mettre et la rendre obligatoire",
                 };
 			declencherTestProfil("ArchivalAgreementAbsente", branchesAttendues, erreursAttendues, true);
 		}
@@ -536,7 +537,7 @@ namespace RngProfileControllerUnitTest {
 			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
 			String[] erreursAttendues = 
                 { 
-				"La balise ArchivalAgreement doit être présente et obligatoire dans l'Archive",
+				"(--) La balise ArchivalAgreement est optionnelle et ne sera pas générée. Il est conseillé de la rendre obligatoire",
                 };
 			declencherTestProfil("ArchivalAgreementFalcultative", branchesAttendues, erreursAttendues, true);
 		}

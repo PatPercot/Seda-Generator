@@ -161,8 +161,7 @@ namespace SedaSummaryGenerator {
                                         } else {
                                             currentDocumentTypeId = "root";
                                             loadExpectedTagsInMainContainsNode( containsNodeName, "rootContains" );
-                                            checkForDocumentInArchive(containsNodeName, "rootContains");
-                                            checkFoArchivalAgreementInArchive(containsNodeName, "rootContains");
+											checkForDocumentInArchive(containsNodeName, "rootContains");
                                             checkForContentDescription(containsNodeName, "rootContains");
                                             checkForOptionalOriginatingAgency(containsNodeName, "rootContains");
                                             checkForTagInContains("Keyword", containsNodeName, "rootContains");
@@ -681,14 +680,16 @@ namespace SedaSummaryGenerator {
 		/// Répond rien dans ce cas, sinon renvoie une erreur.
 		/// </summary>
 		/// <param name="activeNodeName">Lieu de l'unité documentaire</param>
-		protected void checkContainsHasContainsOrDocuments(String activeNodeName, String context) {
-			// Recherche des filles des unités documentaires
+		/// <param name="context"></param>
+		protected void checkContainsHasContainsOrDocuments(String activeNodeName, String context)
+		{
+			// Recherche des filles d'unités documentaires
 			if (traceActions) tracesWriter.WriteLine("checkContainsHasContainsOrDocuments ('" + activeNodeName + "', '" + context + "', '" + currentDocumentTypeId + "')");
 			String xPath = "rng:define[@name='" + activeNodeName + "']";
-            XmlNode containsNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+			XmlNode containsNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
 			xPath = "descendant::rng:element[@name='Document']/rng:ref";
 			XmlNodeList documentNodeList = containsNode.SelectNodes(xPath, docInXmlnsManager);
-			if (documentNodeList != null && documentNodeList.Count > 0) {
+			if (documentNodeList != null && documentNodeList.Count > 0)	{
 			} else {
 				xPath = "descendant::rng:element[@name='" + descendantContains + "']/rng:ref";
 				XmlNodeList containsNodesList = containsNode.SelectNodes(xPath, docInXmlnsManager);
@@ -696,7 +697,29 @@ namespace SedaSummaryGenerator {
 				containsNodesList = containsNode.SelectNodes(xPath, docInXmlnsManager);
 				if (containsNodesList != null && containsNodesList.Count > 0) {
 				} else {
-						errorsList.Add("La présence d'un document est obligatoire dans l'unité documentaire '" + currentDocumentTypeId + "' car elle n'a pas d'unité documentaire fille");
+					errorsList.Add("La présence d'un document est obligatoire dans l'unité documentaire '" + currentDocumentTypeId + "' car elle n'a pas d'unité documentaire fille");
+				}
+			}
+		}
+
+		/// <summary>
+		/// On recherche la balise ArchivalAgreement qui se situe dans Archive.
+		/// Répond rien dans le cas où elle est présente, sinon renvoie une erreur.
+		/// </summary>
+		/// <param name="activeNodeName"></param>
+		/// <param name="context"></param>
+		protected void checkArchivalAgreement(String activeNodeName, String context)
+		{
+			if (traceActions) tracesWriter.WriteLine("checkArchivalAgreement ('" + activeNodeName + "', '" + context + "', '" + currentDocumentTypeId + "')");
+			String xPath = "rng:define[@name='" + activeNodeName + "']/rng:element[@name='ArchivalAgreement']";
+			XmlNode containsNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+			if (containsNode == null) {
+				xPath = "rng:define[@name='" + activeNodeName + "']/rng:optional/rng:element[@name='ArchivalAgreement']";
+				containsNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+				if (containsNode != null) {
+					errorsList.Add("(--) La balise ArchivalAgreement est optionnelle et ne sera pas générée. Il est conseillé de la rendre obligatoire");
+				} else {
+					errorsList.Add("(--) La balise ArchivalAgreement est absente, il est conseillé de la mettre et la rendre obligatoire");
 				}
 			}
 		}
@@ -745,7 +768,8 @@ namespace SedaSummaryGenerator {
                 checkForDescriptionLevel(defineNodeName, context);
 
             }
-            if (currentDocumentTypeId == "root") {
+			if (currentDocumentTypeId == "root") {
+				checkArchivalAgreement(defineNodeName, context);
                 rootContainsNode = new ContainsNode(currentDocumentTypeId, null, true);
                 currentContainsNode = rootContainsNode;
             } else {
@@ -1004,23 +1028,6 @@ namespace SedaSummaryGenerator {
                 errorsList.Add("La balise Document de Archive (ou Contains premier niveau) ne peut pas recevoir de documents. Tous les documents doivent être situés dans des unités documentaires.");
             }
         }
-
-
-        protected void checkFoArchivalAgreementInArchive(String defineNodeName, String context) {
-            // Tester le caractère obligatoire de ArchivalAgreement dans le Contains (ou Archive) de départ 
-            // et lancer une alerte si il est optionnel
-            bool error = false;
-            String xPath = "rng:define[@name='" + defineNodeName + "']/rng:optional/rng:element[@name='ArchivalAgreement']/rng:ref";
-            XmlNode cdrefNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-            if (cdrefNode != null) {
-                error = true;
-            }
-            if (error) {
-                errorsList.Add("(--) La balise ArchivalAgreement est optionnelle ou absente et ne sera pas générée. Elle pourrait être rendue obligatoire");
-            }
-        }
-
-
 
         protected void checkForContentDescription(String defineNodeName, String context) {
             // Tester la présence de ContentDescription dans rng:optional avec un KeywordContent
