@@ -124,25 +124,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessDataController\BusinessDataControllerLauncher.csproj">
-      <Project>{ae43509f-d241-4311-9faf-23021d944d23}</Project>
-      <Name>BusinessDataControllerLauncher</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RngProfileControllerTester\RngProfileControllerLauncher.csproj">
-      <Project>{f062aa42-812b-46b2-83bd-c82d3d5296a7}</Project>
-      <Name>RngProfileControllerLauncher</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SedaProfileGenerator\SedaProfileGenerator.csproj">
-      <Project>{02fe45d7-4311-4d32-8488-fee19c30beda}</Project>
-      <Name>SedaProfileGenerator</Name>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </ProjectReference>
-    <ProjectReference Include="..\SedaSummaryGeneratorTester\SedaSummaryGeneratorLauncher.csproj">
-      <Project>{d33262fe-4647-44da-a97f-2cddb47ea08d}</Project>
-      <Name>SedaSummaryGeneratorLauncher</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5 %28x86 et x64%29</ProductName>

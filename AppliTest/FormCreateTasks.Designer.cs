@@ -28,14 +28,14 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.gbControleurs = new System.Windows.Forms.GroupBox();
+			this.gbxTasks = new System.Windows.Forms.GroupBox();
 			this.cbxProfileTask = new System.Windows.Forms.CheckBox();
 			this.cbxGeneratorTask = new System.Windows.Forms.CheckBox();
 			this.cbxDataTask = new System.Windows.Forms.CheckBox();
 			this.btnRetour = new System.Windows.Forms.Button();
 			this.tbxTaskName = new System.Windows.Forms.TextBox();
 			this.lblTaskName = new System.Windows.Forms.Label();
-			this.gbxProfil = new System.Windows.Forms.GroupBox();
+			this.gbxProfile = new System.Windows.Forms.GroupBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.tbxProfileData = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
@@ -74,8 +74,6 @@
 			this.tbxBordereau = new System.Windows.Forms.TextBox();
 			this.label7 = new System.Windows.Forms.Label();
 			this.tbxGeneratorTrace = new System.Windows.Forms.TextBox();
-			this.cbxFollowProfileName = new System.Windows.Forms.CheckBox();
-			this.cbxFollowTaskName = new System.Windows.Forms.CheckBox();
 			this.gbxData = new System.Windows.Forms.GroupBox();
 			this.label6 = new System.Windows.Forms.Label();
 			this.tbxDataData = new System.Windows.Forms.TextBox();
@@ -91,26 +89,32 @@
 			this.lblTaskExample3 = new System.Windows.Forms.Label();
 			this.lblTaskExample2 = new System.Windows.Forms.Label();
 			this.lblTaskExample1 = new System.Windows.Forms.Label();
-			this.gbControleurs.SuspendLayout();
-			this.gbxProfil.SuspendLayout();
+			this.lblDataDonneesMetier = new System.Windows.Forms.Label();
+			this.rdbtnFollowTaskName = new System.Windows.Forms.RadioButton();
+			this.rdbtnFollowProfileName = new System.Windows.Forms.RadioButton();
+			this.gbxFollowName = new System.Windows.Forms.GroupBox();
+			this.rdbtnFollowNone = new System.Windows.Forms.RadioButton();
+			this.gbxTasks.SuspendLayout();
+			this.gbxProfile.SuspendLayout();
 			this.gbxGenerator.SuspendLayout();
 			this.gbxAccordVersement.SuspendLayout();
 			this.gbxArchivalAgency.SuspendLayout();
 			this.gbxTansferringAgency.SuspendLayout();
 			this.gbxData.SuspendLayout();
+			this.gbxFollowName.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// gbControleurs
+			// gbxTasks
 			// 
-			this.gbControleurs.Controls.Add(this.cbxProfileTask);
-			this.gbControleurs.Controls.Add(this.cbxGeneratorTask);
-			this.gbControleurs.Controls.Add(this.cbxDataTask);
-			this.gbControleurs.Location = new System.Drawing.Point(41, 12);
-			this.gbControleurs.Name = "gbControleurs";
-			this.gbControleurs.Size = new System.Drawing.Size(197, 42);
-			this.gbControleurs.TabIndex = 0;
-			this.gbControleurs.TabStop = false;
-			this.gbControleurs.Text = "Tâche(s) à créer";
+			this.gbxTasks.Controls.Add(this.cbxProfileTask);
+			this.gbxTasks.Controls.Add(this.cbxGeneratorTask);
+			this.gbxTasks.Controls.Add(this.cbxDataTask);
+			this.gbxTasks.Location = new System.Drawing.Point(22, 12);
+			this.gbxTasks.Name = "gbxTasks";
+			this.gbxTasks.Size = new System.Drawing.Size(197, 42);
+			this.gbxTasks.TabIndex = 0;
+			this.gbxTasks.TabStop = false;
+			this.gbxTasks.Text = "Tâche(s) à créer";
 			// 
 			// cbxProfileTask
 			// 
@@ -130,7 +134,7 @@
 			this.cbxGeneratorTask.Name = "cbxGeneratorTask";
 			this.cbxGeneratorTask.Size = new System.Drawing.Size(79, 17);
 			this.cbxGeneratorTask.TabIndex = 2;
-			this.cbxGeneratorTask.Text = "&Generateur";
+			this.cbxGeneratorTask.Text = "&Générateur";
 			this.cbxGeneratorTask.UseVisualStyleBackColor = true;
 			this.cbxGeneratorTask.CheckedChanged += new System.EventHandler(this.cbxGeneratorTask_CheckedChanged);
 			// 
@@ -147,10 +151,10 @@
 			// 
 			// btnRetour
 			// 
-			this.btnRetour.Location = new System.Drawing.Point(350, 24);
+			this.btnRetour.Location = new System.Drawing.Point(331, 24);
 			this.btnRetour.Name = "btnRetour";
 			this.btnRetour.Size = new System.Drawing.Size(75, 23);
-			this.btnRetour.TabIndex = 27;
+			this.btnRetour.TabIndex = 28;
 			this.btnRetour.Text = "&Retour";
 			this.btnRetour.UseVisualStyleBackColor = true;
 			this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click);
@@ -163,6 +167,7 @@
 			this.tbxTaskName.Size = new System.Drawing.Size(177, 20);
 			this.tbxTaskName.TabIndex = 3;
 			this.tbxTaskName.Visible = false;
+			this.tbxTaskName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxTaskName_KeyUp);
 			// 
 			// lblTaskName
 			// 
@@ -174,22 +179,22 @@
 			this.lblTaskName.Text = "Nom de la tâche :";
 			this.lblTaskName.Visible = false;
 			// 
-			// gbxProfil
+			// gbxProfile
 			// 
-			this.gbxProfil.Controls.Add(this.label3);
-			this.gbxProfil.Controls.Add(this.tbxProfileData);
-			this.gbxProfil.Controls.Add(this.label2);
-			this.gbxProfil.Controls.Add(this.lblTrace);
-			this.gbxProfil.Controls.Add(this.tbxProfileTrace);
-			this.gbxProfil.Controls.Add(this.tbxProfileProfile);
-			this.gbxProfil.Enabled = false;
-			this.gbxProfil.Location = new System.Drawing.Point(13, 273);
-			this.gbxProfil.Name = "gbxProfil";
-			this.gbxProfil.Size = new System.Drawing.Size(418, 103);
-			this.gbxProfil.TabIndex = 6;
-			this.gbxProfil.TabStop = false;
-			this.gbxProfil.Text = "Profil";
-			this.gbxProfil.Visible = false;
+			this.gbxProfile.Controls.Add(this.label3);
+			this.gbxProfile.Controls.Add(this.tbxProfileData);
+			this.gbxProfile.Controls.Add(this.label2);
+			this.gbxProfile.Controls.Add(this.lblTrace);
+			this.gbxProfile.Controls.Add(this.tbxProfileTrace);
+			this.gbxProfile.Controls.Add(this.tbxProfileProfile);
+			this.gbxProfile.Enabled = false;
+			this.gbxProfile.Location = new System.Drawing.Point(13, 273);
+			this.gbxProfile.Name = "gbxProfile";
+			this.gbxProfile.Size = new System.Drawing.Size(418, 103);
+			this.gbxProfile.TabIndex = 7;
+			this.gbxProfile.TabStop = false;
+			this.gbxProfile.Text = "Profil";
+			this.gbxProfile.Visible = false;
 			// 
 			// label3
 			// 
@@ -197,7 +202,7 @@
 			this.label3.Location = new System.Drawing.Point(6, 74);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(85, 13);
-			this.label3.TabIndex = 8;
+			this.label3.TabIndex = 9;
 			this.label3.Text = "Nom de la data :";
 			// 
 			// tbxProfileData
@@ -206,7 +211,8 @@
 			this.tbxProfileData.Location = new System.Drawing.Point(99, 71);
 			this.tbxProfileData.Name = "tbxProfileData";
 			this.tbxProfileData.Size = new System.Drawing.Size(313, 20);
-			this.tbxProfileData.TabIndex = 8;
+			this.tbxProfileData.TabIndex = 9;
+			this.tbxProfileData.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxProfileData_KeyUp);
 			// 
 			// label2
 			// 
@@ -214,7 +220,7 @@
 			this.label2.Location = new System.Drawing.Point(6, 22);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(75, 13);
-			this.label2.TabIndex = 6;
+			this.label2.TabIndex = 7;
 			this.label2.Text = "Nom du profil :";
 			// 
 			// lblTrace
@@ -223,7 +229,7 @@
 			this.lblTrace.Location = new System.Drawing.Point(6, 48);
 			this.lblTrace.Name = "lblTrace";
 			this.lblTrace.Size = new System.Drawing.Size(88, 13);
-			this.lblTrace.TabIndex = 7;
+			this.lblTrace.TabIndex = 8;
 			this.lblTrace.Text = "Nom de la trâce :";
 			// 
 			// tbxProfileTrace
@@ -232,7 +238,8 @@
 			this.tbxProfileTrace.Location = new System.Drawing.Point(99, 45);
 			this.tbxProfileTrace.Name = "tbxProfileTrace";
 			this.tbxProfileTrace.Size = new System.Drawing.Size(313, 20);
-			this.tbxProfileTrace.TabIndex = 7;
+			this.tbxProfileTrace.TabIndex = 8;
+			this.tbxProfileTrace.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxProfileTrace_KeyUp);
 			// 
 			// tbxProfileProfile
 			// 
@@ -240,7 +247,7 @@
 			this.tbxProfileProfile.Location = new System.Drawing.Point(99, 19);
 			this.tbxProfileProfile.Name = "tbxProfileProfile";
 			this.tbxProfileProfile.Size = new System.Drawing.Size(313, 20);
-			this.tbxProfileProfile.TabIndex = 6;
+			this.tbxProfileProfile.TabIndex = 7;
 			this.tbxProfileProfile.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxProfileProfile_KeyUp);
 			// 
 			// gbxGenerator
@@ -260,7 +267,7 @@
 			this.gbxGenerator.Location = new System.Drawing.Point(437, 12);
 			this.gbxGenerator.Name = "gbxGenerator";
 			this.gbxGenerator.Size = new System.Drawing.Size(476, 470);
-			this.gbxGenerator.TabIndex = 12;
+			this.gbxGenerator.TabIndex = 13;
 			this.gbxGenerator.TabStop = false;
 			this.gbxGenerator.Text = "Générateur";
 			this.gbxGenerator.Visible = false;
@@ -271,7 +278,7 @@
 			this.label19.Location = new System.Drawing.Point(6, 126);
 			this.label19.Name = "label19";
 			this.label19.Size = new System.Drawing.Size(85, 13);
-			this.label19.TabIndex = 16;
+			this.label19.TabIndex = 17;
 			this.label19.Text = "Nom de la data :";
 			// 
 			// tbxGeneratorData
@@ -280,7 +287,8 @@
 			this.tbxGeneratorData.Location = new System.Drawing.Point(143, 123);
 			this.tbxGeneratorData.Name = "tbxGeneratorData";
 			this.tbxGeneratorData.Size = new System.Drawing.Size(313, 20);
-			this.tbxGeneratorData.TabIndex = 16;
+			this.tbxGeneratorData.TabIndex = 17;
+			this.tbxGeneratorData.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxGeneratorData_KeyUp);
 			// 
 			// gbxAccordVersement
 			// 
@@ -295,7 +303,7 @@
 			this.gbxAccordVersement.Location = new System.Drawing.Point(6, 149);
 			this.gbxAccordVersement.Name = "gbxAccordVersement";
 			this.gbxAccordVersement.Size = new System.Drawing.Size(463, 311);
-			this.gbxAccordVersement.TabIndex = 17;
+			this.gbxAccordVersement.TabIndex = 18;
 			this.gbxAccordVersement.TabStop = false;
 			this.gbxAccordVersement.Text = "Accord de versement";
 			// 
@@ -305,7 +313,7 @@
 			this.label25.Location = new System.Drawing.Point(6, 42);
 			this.label25.Name = "label25";
 			this.label25.Size = new System.Drawing.Size(75, 13);
-			this.label25.TabIndex = 18;
+			this.label25.TabIndex = 19;
 			this.label25.Text = "Nom du profil :";
 			// 
 			// tbxAccordVersementProfile
@@ -314,7 +322,8 @@
 			this.tbxAccordVersementProfile.Location = new System.Drawing.Point(137, 39);
 			this.tbxAccordVersementProfile.Name = "tbxAccordVersementProfile";
 			this.tbxAccordVersementProfile.Size = new System.Drawing.Size(313, 20);
-			this.tbxAccordVersementProfile.TabIndex = 18;
+			this.tbxAccordVersementProfile.TabIndex = 19;
+			this.tbxAccordVersementProfile.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxAccordVersementProfile_KeyUp);
 			// 
 			// gbxArchivalAgency
 			// 
@@ -327,7 +336,7 @@
 			this.gbxArchivalAgency.Location = new System.Drawing.Point(7, 200);
 			this.gbxArchivalAgency.Name = "gbxArchivalAgency";
 			this.gbxArchivalAgency.Size = new System.Drawing.Size(450, 103);
-			this.gbxArchivalAgency.TabIndex = 23;
+			this.gbxArchivalAgency.TabIndex = 24;
 			this.gbxArchivalAgency.TabStop = false;
 			this.gbxArchivalAgency.Text = "ArchivalAgency";
 			// 
@@ -337,7 +346,7 @@
 			this.label16.Location = new System.Drawing.Point(6, 74);
 			this.label16.Name = "label16";
 			this.label16.Size = new System.Drawing.Size(38, 13);
-			this.label16.TabIndex = 25;
+			this.label16.TabIndex = 26;
 			this.label16.Text = "Desc :";
 			// 
 			// tbxArchivalAgencyDesc
@@ -346,7 +355,8 @@
 			this.tbxArchivalAgencyDesc.Location = new System.Drawing.Point(131, 71);
 			this.tbxArchivalAgencyDesc.Name = "tbxArchivalAgencyDesc";
 			this.tbxArchivalAgencyDesc.Size = new System.Drawing.Size(313, 20);
-			this.tbxArchivalAgencyDesc.TabIndex = 25;
+			this.tbxArchivalAgencyDesc.TabIndex = 26;
+			this.tbxArchivalAgencyDesc.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxArchivalAgencyDesc_KeyUp);
 			// 
 			// label17
 			// 
@@ -354,7 +364,7 @@
 			this.label17.Location = new System.Drawing.Point(6, 22);
 			this.label17.Name = "label17";
 			this.label17.Size = new System.Drawing.Size(22, 13);
-			this.label17.TabIndex = 23;
+			this.label17.TabIndex = 24;
 			this.label17.Text = "Id :";
 			// 
 			// label18
@@ -363,7 +373,7 @@
 			this.label18.Location = new System.Drawing.Point(6, 48);
 			this.label18.Name = "label18";
 			this.label18.Size = new System.Drawing.Size(41, 13);
-			this.label18.TabIndex = 24;
+			this.label18.TabIndex = 25;
 			this.label18.Text = "Name :";
 			// 
 			// tbxArchivalAgencyName
@@ -372,7 +382,8 @@
 			this.tbxArchivalAgencyName.Location = new System.Drawing.Point(131, 45);
 			this.tbxArchivalAgencyName.Name = "tbxArchivalAgencyName";
 			this.tbxArchivalAgencyName.Size = new System.Drawing.Size(313, 20);
-			this.tbxArchivalAgencyName.TabIndex = 24;
+			this.tbxArchivalAgencyName.TabIndex = 25;
+			this.tbxArchivalAgencyName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxArchivalAgencyName_KeyUp);
 			// 
 			// tbxArchivalAgencyId
 			// 
@@ -380,7 +391,8 @@
 			this.tbxArchivalAgencyId.Location = new System.Drawing.Point(131, 19);
 			this.tbxArchivalAgencyId.Name = "tbxArchivalAgencyId";
 			this.tbxArchivalAgencyId.Size = new System.Drawing.Size(313, 20);
-			this.tbxArchivalAgencyId.TabIndex = 23;
+			this.tbxArchivalAgencyId.TabIndex = 24;
+			this.tbxArchivalAgencyId.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxArchivalAgencyId_KeyUp);
 			// 
 			// gbxTansferringAgency
 			// 
@@ -393,7 +405,7 @@
 			this.gbxTansferringAgency.Location = new System.Drawing.Point(7, 91);
 			this.gbxTansferringAgency.Name = "gbxTansferringAgency";
 			this.gbxTansferringAgency.Size = new System.Drawing.Size(450, 103);
-			this.gbxTansferringAgency.TabIndex = 20;
+			this.gbxTansferringAgency.TabIndex = 21;
 			this.gbxTansferringAgency.TabStop = false;
 			this.gbxTansferringAgency.Text = "TansferringAgency";
 			// 
@@ -403,7 +415,7 @@
 			this.label11.Location = new System.Drawing.Point(6, 74);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(38, 13);
-			this.label11.TabIndex = 22;
+			this.label11.TabIndex = 23;
 			this.label11.Text = "Desc :";
 			// 
 			// tbxTransferringAgencyDesc
@@ -412,7 +424,8 @@
 			this.tbxTransferringAgencyDesc.Location = new System.Drawing.Point(131, 71);
 			this.tbxTransferringAgencyDesc.Name = "tbxTransferringAgencyDesc";
 			this.tbxTransferringAgencyDesc.Size = new System.Drawing.Size(313, 20);
-			this.tbxTransferringAgencyDesc.TabIndex = 22;
+			this.tbxTransferringAgencyDesc.TabIndex = 23;
+			this.tbxTransferringAgencyDesc.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxTransferringAgencyDesc_KeyUp);
 			// 
 			// label12
 			// 
@@ -420,7 +433,7 @@
 			this.label12.Location = new System.Drawing.Point(6, 22);
 			this.label12.Name = "label12";
 			this.label12.Size = new System.Drawing.Size(22, 13);
-			this.label12.TabIndex = 20;
+			this.label12.TabIndex = 21;
 			this.label12.Text = "Id :";
 			// 
 			// label15
@@ -429,7 +442,7 @@
 			this.label15.Location = new System.Drawing.Point(6, 48);
 			this.label15.Name = "label15";
 			this.label15.Size = new System.Drawing.Size(41, 13);
-			this.label15.TabIndex = 21;
+			this.label15.TabIndex = 22;
 			this.label15.Text = "Name :";
 			// 
 			// tbxTransferringAgencyName
@@ -438,7 +451,8 @@
 			this.tbxTransferringAgencyName.Location = new System.Drawing.Point(131, 45);
 			this.tbxTransferringAgencyName.Name = "tbxTransferringAgencyName";
 			this.tbxTransferringAgencyName.Size = new System.Drawing.Size(313, 20);
-			this.tbxTransferringAgencyName.TabIndex = 21;
+			this.tbxTransferringAgencyName.TabIndex = 22;
+			this.tbxTransferringAgencyName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxTransferringAgencyName_KeyUp);
 			// 
 			// tbxTransferringAgencyId
 			// 
@@ -446,7 +460,8 @@
 			this.tbxTransferringAgencyId.Location = new System.Drawing.Point(131, 19);
 			this.tbxTransferringAgencyId.Name = "tbxTransferringAgencyId";
 			this.tbxTransferringAgencyId.Size = new System.Drawing.Size(313, 20);
-			this.tbxTransferringAgencyId.TabIndex = 20;
+			this.tbxTransferringAgencyId.TabIndex = 21;
+			this.tbxTransferringAgencyId.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxTransferringAgencyId_KeyUp);
 			// 
 			// label13
 			// 
@@ -454,7 +469,7 @@
 			this.label13.Location = new System.Drawing.Point(6, 16);
 			this.label13.Name = "label13";
 			this.label13.Size = new System.Drawing.Size(74, 13);
-			this.label13.TabIndex = 17;
+			this.label13.TabIndex = 18;
 			this.label13.Text = "Serveur SAE :";
 			// 
 			// tbxSaeServer
@@ -463,7 +478,7 @@
 			this.tbxSaeServer.Location = new System.Drawing.Point(137, 13);
 			this.tbxSaeServer.Name = "tbxSaeServer";
 			this.tbxSaeServer.Size = new System.Drawing.Size(313, 20);
-			this.tbxSaeServer.TabIndex = 17;
+			this.tbxSaeServer.TabIndex = 18;
 			// 
 			// label14
 			// 
@@ -471,7 +486,7 @@
 			this.label14.Location = new System.Drawing.Point(6, 68);
 			this.label14.Name = "label14";
 			this.label14.Size = new System.Drawing.Size(87, 13);
-			this.label14.TabIndex = 19;
+			this.label14.TabIndex = 20;
 			this.label14.Text = "TransferIdPrefix :";
 			// 
 			// tbxTransferIdPrefix
@@ -480,7 +495,8 @@
 			this.tbxTransferIdPrefix.Location = new System.Drawing.Point(137, 65);
 			this.tbxTransferIdPrefix.Name = "tbxTransferIdPrefix";
 			this.tbxTransferIdPrefix.Size = new System.Drawing.Size(313, 20);
-			this.tbxTransferIdPrefix.TabIndex = 19;
+			this.tbxTransferIdPrefix.TabIndex = 20;
+			this.tbxTransferIdPrefix.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxTransferIdPrefix_KeyUp);
 			// 
 			// label8
 			// 
@@ -488,7 +504,7 @@
 			this.label8.Location = new System.Drawing.Point(6, 100);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(84, 13);
-			this.label8.TabIndex = 15;
+			this.label8.TabIndex = 16;
 			this.label8.Text = "URI de la base :";
 			// 
 			// tbxUriBase
@@ -497,7 +513,8 @@
 			this.tbxUriBase.Location = new System.Drawing.Point(143, 97);
 			this.tbxUriBase.Name = "tbxUriBase";
 			this.tbxUriBase.Size = new System.Drawing.Size(313, 20);
-			this.tbxUriBase.TabIndex = 15;
+			this.tbxUriBase.TabIndex = 16;
+			this.tbxUriBase.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxUriBase_KeyUp);
 			// 
 			// label4
 			// 
@@ -505,7 +522,7 @@
 			this.label4.Location = new System.Drawing.Point(6, 74);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(137, 13);
-			this.label4.TabIndex = 14;
+			this.label4.TabIndex = 15;
 			this.label4.Text = "Répertoire des documents :";
 			// 
 			// tbxDocumentsRepertory
@@ -514,7 +531,8 @@
 			this.tbxDocumentsRepertory.Location = new System.Drawing.Point(143, 71);
 			this.tbxDocumentsRepertory.Name = "tbxDocumentsRepertory";
 			this.tbxDocumentsRepertory.Size = new System.Drawing.Size(313, 20);
-			this.tbxDocumentsRepertory.TabIndex = 14;
+			this.tbxDocumentsRepertory.TabIndex = 15;
+			this.tbxDocumentsRepertory.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxDocumentsRepertory_KeyUp);
 			// 
 			// label5
 			// 
@@ -522,7 +540,7 @@
 			this.label5.Location = new System.Drawing.Point(6, 22);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(101, 13);
-			this.label5.TabIndex = 12;
+			this.label5.TabIndex = 13;
 			this.label5.Text = "Nom du bordereau :";
 			// 
 			// tbxBordereau
@@ -531,7 +549,8 @@
 			this.tbxBordereau.Location = new System.Drawing.Point(143, 19);
 			this.tbxBordereau.Name = "tbxBordereau";
 			this.tbxBordereau.Size = new System.Drawing.Size(313, 20);
-			this.tbxBordereau.TabIndex = 12;
+			this.tbxBordereau.TabIndex = 13;
+			this.tbxBordereau.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxBordereau_KeyUp);
 			// 
 			// label7
 			// 
@@ -539,7 +558,7 @@
 			this.label7.Location = new System.Drawing.Point(6, 48);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(88, 13);
-			this.label7.TabIndex = 13;
+			this.label7.TabIndex = 14;
 			this.label7.Text = "Nom de la trâce :";
 			// 
 			// tbxGeneratorTrace
@@ -548,33 +567,8 @@
 			this.tbxGeneratorTrace.Location = new System.Drawing.Point(143, 44);
 			this.tbxGeneratorTrace.Name = "tbxGeneratorTrace";
 			this.tbxGeneratorTrace.Size = new System.Drawing.Size(313, 20);
-			this.tbxGeneratorTrace.TabIndex = 13;
-			// 
-			// cbxFollowProfileName
-			// 
-			this.cbxFollowProfileName.AutoSize = true;
-			this.cbxFollowProfileName.Enabled = false;
-			this.cbxFollowProfileName.Location = new System.Drawing.Point(270, 112);
-			this.cbxFollowProfileName.Name = "cbxFollowProfileName";
-			this.cbxFollowProfileName.Size = new System.Drawing.Size(130, 17);
-			this.cbxFollowProfileName.TabIndex = 5;
-			this.cbxFollowProfileName.Text = "Suivre le nom du profil";
-			this.cbxFollowProfileName.UseVisualStyleBackColor = true;
-			this.cbxFollowProfileName.Visible = false;
-			this.cbxFollowProfileName.CheckedChanged += new System.EventHandler(this.cbxFollowProfileName_CheckedChanged);
-			// 
-			// cbxFollowTaskName
-			// 
-			this.cbxFollowTaskName.AutoSize = true;
-			this.cbxFollowTaskName.Enabled = false;
-			this.cbxFollowTaskName.Location = new System.Drawing.Point(41, 112);
-			this.cbxFollowTaskName.Name = "cbxFollowTaskName";
-			this.cbxFollowTaskName.Size = new System.Drawing.Size(146, 17);
-			this.cbxFollowTaskName.TabIndex = 4;
-			this.cbxFollowTaskName.Text = "Suivre le nom de la tâche";
-			this.cbxFollowTaskName.UseVisualStyleBackColor = true;
-			this.cbxFollowTaskName.Visible = false;
-			this.cbxFollowTaskName.CheckedChanged += new System.EventHandler(this.cbxFollowTaskName_CheckedChanged);
+			this.tbxGeneratorTrace.TabIndex = 14;
+			this.tbxGeneratorTrace.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxGeneratorTrace_KeyUp);
 			// 
 			// gbxData
 			// 
@@ -588,7 +582,7 @@
 			this.gbxData.Location = new System.Drawing.Point(13, 379);
 			this.gbxData.Name = "gbxData";
 			this.gbxData.Size = new System.Drawing.Size(418, 103);
-			this.gbxData.TabIndex = 9;
+			this.gbxData.TabIndex = 10;
 			this.gbxData.TabStop = false;
 			this.gbxData.Text = "Data";
 			this.gbxData.Visible = false;
@@ -599,7 +593,7 @@
 			this.label6.Location = new System.Drawing.Point(6, 74);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(85, 13);
-			this.label6.TabIndex = 11;
+			this.label6.TabIndex = 12;
 			this.label6.Text = "Nom de la data :";
 			// 
 			// tbxDataData
@@ -608,7 +602,8 @@
 			this.tbxDataData.Location = new System.Drawing.Point(99, 71);
 			this.tbxDataData.Name = "tbxDataData";
 			this.tbxDataData.Size = new System.Drawing.Size(313, 20);
-			this.tbxDataData.TabIndex = 11;
+			this.tbxDataData.TabIndex = 12;
+			this.tbxDataData.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxDataData_KeyUp);
 			// 
 			// label9
 			// 
@@ -616,7 +611,7 @@
 			this.label9.Location = new System.Drawing.Point(6, 22);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(75, 13);
-			this.label9.TabIndex = 9;
+			this.label9.TabIndex = 10;
 			this.label9.Text = "Nom du profil :";
 			// 
 			// label10
@@ -625,7 +620,7 @@
 			this.label10.Location = new System.Drawing.Point(6, 48);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(88, 13);
-			this.label10.TabIndex = 10;
+			this.label10.TabIndex = 11;
 			this.label10.Text = "Nom de la trâce :";
 			// 
 			// tbxDataTrace
@@ -634,7 +629,8 @@
 			this.tbxDataTrace.Location = new System.Drawing.Point(99, 45);
 			this.tbxDataTrace.Name = "tbxDataTrace";
 			this.tbxDataTrace.Size = new System.Drawing.Size(313, 20);
-			this.tbxDataTrace.TabIndex = 10;
+			this.tbxDataTrace.TabIndex = 11;
+			this.tbxDataTrace.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxDataTrace_KeyUp);
 			// 
 			// tbxDataProfile
 			// 
@@ -642,17 +638,19 @@
 			this.tbxDataProfile.Location = new System.Drawing.Point(99, 19);
 			this.tbxDataProfile.Name = "tbxDataProfile";
 			this.tbxDataProfile.Size = new System.Drawing.Size(313, 20);
-			this.tbxDataProfile.TabIndex = 9;
+			this.tbxDataProfile.TabIndex = 10;
+			this.tbxDataProfile.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxDataProfile_KeyUp);
 			// 
 			// btnCreate
 			// 
 			this.btnCreate.Enabled = false;
-			this.btnCreate.Location = new System.Drawing.Point(269, 24);
+			this.btnCreate.Location = new System.Drawing.Point(250, 24);
 			this.btnCreate.Name = "btnCreate";
 			this.btnCreate.Size = new System.Drawing.Size(75, 23);
-			this.btnCreate.TabIndex = 26;
+			this.btnCreate.TabIndex = 27;
 			this.btnCreate.Text = "&Créer";
 			this.btnCreate.UseVisualStyleBackColor = true;
+			this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
 			// 
 			// lblExamples
 			// 
@@ -679,9 +677,9 @@
 			this.lblProfileExample2.AutoSize = true;
 			this.lblProfileExample2.Location = new System.Drawing.Point(243, 195);
 			this.lblProfileExample2.Name = "lblProfileExample2";
-			this.lblProfileExample2.Size = new System.Drawing.Size(165, 13);
+			this.lblProfileExample2.Size = new System.Drawing.Size(189, 13);
 			this.lblProfileExample2.TabIndex = 5;
-			this.lblProfileExample2.Text = "Nom trâce -> testDeProfil1_Trace";
+			this.lblProfileExample2.Text = "Nom trâce -> testDeProfil1_profil_trace";
 			this.lblProfileExample2.Visible = false;
 			// 
 			// lblProfileExample3
@@ -689,46 +687,108 @@
 			this.lblProfileExample3.AutoSize = true;
 			this.lblProfileExample3.Location = new System.Drawing.Point(243, 223);
 			this.lblProfileExample3.Name = "lblProfileExample3";
-			this.lblProfileExample3.Size = new System.Drawing.Size(157, 13);
+			this.lblProfileExample3.Size = new System.Drawing.Size(155, 13);
 			this.lblProfileExample3.TabIndex = 5;
-			this.lblProfileExample3.Text = "Nom data -> testDeProfil1_Data";
+			this.lblProfileExample3.Text = "Nom data -> testDeProfil1_data";
 			this.lblProfileExample3.Visible = false;
 			// 
 			// lblTaskExample3
 			// 
 			this.lblTaskExample3.AutoSize = true;
-			this.lblTaskExample3.Location = new System.Drawing.Point(14, 223);
+			this.lblTaskExample3.Location = new System.Drawing.Point(16, 223);
 			this.lblTaskExample3.Name = "lblTaskExample3";
-			this.lblTaskExample3.Size = new System.Drawing.Size(220, 13);
+			this.lblTaskExample3.Size = new System.Drawing.Size(219, 13);
 			this.lblTaskExample3.TabIndex = 5;
-			this.lblTaskExample3.Text = "Nom bordereau -> PrimalTask911_Bordereau";
+			this.lblTaskExample3.Text = "Nom bordereau -> PrimalTask911_bordereau";
 			this.lblTaskExample3.Visible = false;
 			// 
 			// lblTaskExample2
 			// 
 			this.lblTaskExample2.AutoSize = true;
-			this.lblTaskExample2.Location = new System.Drawing.Point(14, 195);
+			this.lblTaskExample2.Location = new System.Drawing.Point(16, 195);
 			this.lblTaskExample2.Name = "lblTaskExample2";
-			this.lblTaskExample2.Size = new System.Drawing.Size(168, 13);
+			this.lblTaskExample2.Size = new System.Drawing.Size(167, 13);
 			this.lblTaskExample2.TabIndex = 5;
-			this.lblTaskExample2.Text = "Nom profil -> PrimalTask911_Profil";
+			this.lblTaskExample2.Text = "Nom profil -> PrimalTask911_profil";
 			this.lblTaskExample2.Visible = false;
 			// 
 			// lblTaskExample1
 			// 
 			this.lblTaskExample1.AutoSize = true;
-			this.lblTaskExample1.Location = new System.Drawing.Point(14, 168);
+			this.lblTaskExample1.Location = new System.Drawing.Point(16, 168);
 			this.lblTaskExample1.Name = "lblTaskExample1";
 			this.lblTaskExample1.Size = new System.Drawing.Size(144, 13);
 			this.lblTaskExample1.TabIndex = 5;
 			this.lblTaskExample1.Text = "Nom tâche -> PrimalTask911";
 			this.lblTaskExample1.Visible = false;
 			// 
+			// lblDataDonneesMetier
+			// 
+			this.lblDataDonneesMetier.AutoSize = true;
+			this.lblDataDonneesMetier.Location = new System.Drawing.Point(154, 257);
+			this.lblDataDonneesMetier.Name = "lblDataDonneesMetier";
+			this.lblDataDonneesMetier.Size = new System.Drawing.Size(112, 13);
+			this.lblDataDonneesMetier.TabIndex = 28;
+			this.lblDataDonneesMetier.Text = "data = données métier";
+			this.lblDataDonneesMetier.Visible = false;
+			// 
+			// rdbtnFollowTaskName
+			// 
+			this.rdbtnFollowTaskName.AutoSize = true;
+			this.rdbtnFollowTaskName.Location = new System.Drawing.Point(6, 19);
+			this.rdbtnFollowTaskName.Name = "rdbtnFollowTaskName";
+			this.rdbtnFollowTaskName.Size = new System.Drawing.Size(67, 17);
+			this.rdbtnFollowTaskName.TabIndex = 4;
+			this.rdbtnFollowTaskName.TabStop = true;
+			this.rdbtnFollowTaskName.Text = "La tâche";
+			this.rdbtnFollowTaskName.UseVisualStyleBackColor = true;
+			this.rdbtnFollowTaskName.CheckedChanged += new System.EventHandler(this.rdbtnFollowProfileName_CheckedChanged);
+			// 
+			// rdbtnFollowProfileName
+			// 
+			this.rdbtnFollowProfileName.AutoSize = true;
+			this.rdbtnFollowProfileName.Location = new System.Drawing.Point(179, 19);
+			this.rdbtnFollowProfileName.Name = "rdbtnFollowProfileName";
+			this.rdbtnFollowProfileName.Size = new System.Drawing.Size(62, 17);
+			this.rdbtnFollowProfileName.TabIndex = 5;
+			this.rdbtnFollowProfileName.TabStop = true;
+			this.rdbtnFollowProfileName.Text = "Le profil";
+			this.rdbtnFollowProfileName.UseVisualStyleBackColor = true;
+			// 
+			// gbxFollowName
+			// 
+			this.gbxFollowName.Controls.Add(this.rdbtnFollowNone);
+			this.gbxFollowName.Controls.Add(this.rdbtnFollowTaskName);
+			this.gbxFollowName.Controls.Add(this.rdbtnFollowProfileName);
+			this.gbxFollowName.Location = new System.Drawing.Point(13, 86);
+			this.gbxFollowName.Name = "gbxFollowName";
+			this.gbxFollowName.Size = new System.Drawing.Size(418, 53);
+			this.gbxFollowName.TabIndex = 4;
+			this.gbxFollowName.TabStop = false;
+			this.gbxFollowName.Text = "Attribuer des noms en rapport avec";
+			this.gbxFollowName.Visible = false;
+			// 
+			// rdbtnFollowNone
+			// 
+			this.rdbtnFollowNone.AutoSize = true;
+			this.rdbtnFollowNone.Checked = true;
+			this.rdbtnFollowNone.Enabled = false;
+			this.rdbtnFollowNone.Location = new System.Drawing.Point(350, 19);
+			this.rdbtnFollowNone.Name = "rdbtnFollowNone";
+			this.rdbtnFollowNone.Size = new System.Drawing.Size(56, 17);
+			this.rdbtnFollowNone.TabIndex = 6;
+			this.rdbtnFollowNone.TabStop = true;
+			this.rdbtnFollowNone.Text = "Aucun";
+			this.rdbtnFollowNone.UseVisualStyleBackColor = true;
+			this.rdbtnFollowNone.CheckedChanged += new System.EventHandler(this.rdbtnFollowNone_CheckedChanged);
+			// 
 			// FormCreateTasks
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(921, 488);
+			this.ClientSize = new System.Drawing.Size(920, 484);
+			this.Controls.Add(this.gbxFollowName);
+			this.Controls.Add(this.lblDataDonneesMetier);
 			this.Controls.Add(this.lblTaskExample3);
 			this.Controls.Add(this.lblTaskExample2);
 			this.Controls.Add(this.lblTaskExample1);
@@ -738,21 +798,21 @@
 			this.Controls.Add(this.lblExamples);
 			this.Controls.Add(this.btnCreate);
 			this.Controls.Add(this.gbxData);
-			this.Controls.Add(this.cbxFollowTaskName);
-			this.Controls.Add(this.cbxFollowProfileName);
 			this.Controls.Add(this.gbxGenerator);
-			this.Controls.Add(this.gbxProfil);
+			this.Controls.Add(this.gbxProfile);
 			this.Controls.Add(this.lblTaskName);
 			this.Controls.Add(this.tbxTaskName);
 			this.Controls.Add(this.btnRetour);
-			this.Controls.Add(this.gbControleurs);
+			this.Controls.Add(this.gbxTasks);
+			this.Location = new System.Drawing.Point(100, 100);
 			this.Name = "FormCreateTasks";
 			this.ShowIcon = false;
-			this.Text = "TGNA";
-			this.gbControleurs.ResumeLayout(false);
-			this.gbControleurs.PerformLayout();
-			this.gbxProfil.ResumeLayout(false);
-			this.gbxProfil.PerformLayout();
+			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+			this.Text = "TCNA";
+			this.gbxTasks.ResumeLayout(false);
+			this.gbxTasks.PerformLayout();
+			this.gbxProfile.ResumeLayout(false);
+			this.gbxProfile.PerformLayout();
 			this.gbxGenerator.ResumeLayout(false);
 			this.gbxGenerator.PerformLayout();
 			this.gbxAccordVersement.ResumeLayout(false);
@@ -763,6 +823,8 @@
 			this.gbxTansferringAgency.PerformLayout();
 			this.gbxData.ResumeLayout(false);
 			this.gbxData.PerformLayout();
+			this.gbxFollowName.ResumeLayout(false);
+			this.gbxFollowName.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -770,14 +832,14 @@
 
 		#endregion
 
-		private System.Windows.Forms.GroupBox gbControleurs;
+		private System.Windows.Forms.GroupBox gbxTasks;
 		private System.Windows.Forms.CheckBox cbxProfileTask;
 		private System.Windows.Forms.CheckBox cbxGeneratorTask;
 		private System.Windows.Forms.CheckBox cbxDataTask;
 		private System.Windows.Forms.Button btnRetour;
 		private System.Windows.Forms.TextBox tbxTaskName;
 		private System.Windows.Forms.Label lblTaskName;
-		private System.Windows.Forms.GroupBox gbxProfil;
+		private System.Windows.Forms.GroupBox gbxProfile;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.TextBox tbxProfileData;
 		private System.Windows.Forms.Label label2;
@@ -793,8 +855,6 @@
 		private System.Windows.Forms.TextBox tbxBordereau;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.TextBox tbxGeneratorTrace;
-		private System.Windows.Forms.CheckBox cbxFollowProfileName;
-		private System.Windows.Forms.CheckBox cbxFollowTaskName;
 		private System.Windows.Forms.Label label19;
 		private System.Windows.Forms.TextBox tbxGeneratorData;
 		private System.Windows.Forms.GroupBox gbxAccordVersement;
@@ -833,5 +893,10 @@
 		private System.Windows.Forms.Label label25;
 		private System.Windows.Forms.TextBox tbxAccordVersementProfile;
 		private System.Windows.Forms.Label lblProfileExample1;
+		private System.Windows.Forms.Label lblDataDonneesMetier;
+		private System.Windows.Forms.RadioButton rdbtnFollowTaskName;
+		private System.Windows.Forms.RadioButton rdbtnFollowProfileName;
+		private System.Windows.Forms.GroupBox gbxFollowName;
+		private System.Windows.Forms.RadioButton rdbtnFollowNone;
 	}
 }

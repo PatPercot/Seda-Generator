@@ -38,7 +38,7 @@
 			this.btnProfilExist.Name = "btnProfilExist";
 			this.btnProfilExist.Size = new System.Drawing.Size(81, 35);
 			this.btnProfilExist.TabIndex = 0;
-			this.btnProfilExist.Text = "&Utiliser un profil existant";
+			this.btnProfilExist.Text = "&Créer des tâches";
 			this.btnProfilExist.UseVisualStyleBackColor = true;
 			this.btnProfilExist.Click += new System.EventHandler(this.btnProfilExistant_Click);
 			// 
@@ -59,9 +59,11 @@
 			this.ClientSize = new System.Drawing.Size(192, 57);
 			this.Controls.Add(this.btnCreateProfil);
 			this.Controls.Add(this.btnProfilExist);
+			this.Location = new System.Drawing.Point(100, 100);
 			this.Name = "FormProfile";
 			this.ShowIcon = false;
-			this.Text = "TGNA";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+			this.Text = "TCNA";
 			this.ResumeLayout(false);
 
 		}

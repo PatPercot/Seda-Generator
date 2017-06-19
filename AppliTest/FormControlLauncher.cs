@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AppliTest;
-using RngProfileControllerLauncher;
 
 
 namespace AppliTest
@@ -40,11 +39,6 @@ namespace AppliTest
 		private void activationBoutonControler()
 		{
 			btnControler.Enabled = this.cbxProfilControl.Checked || this.cbxDataControl.Checked || this.cbxGeneratorControl.Checked;
-		}
-
-		private void button1_Click(object sender, EventArgs e)
-		{
-
 		}
     }
 }

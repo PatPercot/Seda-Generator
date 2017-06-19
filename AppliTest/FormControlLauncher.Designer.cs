@@ -94,7 +94,7 @@
 			this.btnControler.TabIndex = 6;
 			this.btnControler.Text = "Contrôler";
 			this.btnControler.UseVisualStyleBackColor = true;
-			this.btnControler.Click += new System.EventHandler(this.button1_Click);
+			this.btnControler.Click += new System.EventHandler(this.btnControler_Click);
 			// 
 			// FormControlLauncher
 			// 
