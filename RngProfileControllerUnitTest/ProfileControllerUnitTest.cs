@@ -420,8 +420,8 @@ namespace RngProfileControllerUnitTest {
             String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
             String[] erreursAttendues = 
                 { 
-                "(--) La balise ArchivalAgreement est optionnelle ou absente et ne sera pas générée. Elle pourrait être rendue obligatoire",
                 "(--) La balise OriginatingAgency est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
+                "(--) La balise ArchivalAgreement est optionnelle et ne sera pas générée. Il est conseillé de la rendre obligatoire",
 				"La présence d'un document est obligatoire dans l'unité documentaire '",
                 "(--) La balise OriginatingAgency de l'unité documentaire 'UD1' est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
                 };
@@ -494,6 +494,7 @@ namespace RngProfileControllerUnitTest {
 			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
 			String[] erreursAttendues = 
                 { 
+				"(--) La balise ArchivalAgreement est absente, il est conseillé de la mettre et la rendre obligatoire",
 				"La présence d'un document est obligatoire dans l'unité documentaire '",
                 };
 			declencherTestProfil("UdSansFilleErreur", branchesAttendues, erreursAttendues, true);
@@ -503,14 +504,42 @@ namespace RngProfileControllerUnitTest {
 		/*
 		 * 
 		 * */
-		public void M29_TestUniteDocumentaireCardinalite01Erreur()
+		public void M29_TestUdCardinalite01Erreur()
+		{
+			String[] branchesAttendues = { "\troot", "\t\tPES", "" };
+			String[] erreursAttendues = 
+                { 
+				"L'unité documentaire étant seule dans l'archive, il faut qu'elle soit rendue obligatoire",
+                };
+			declencherTestProfil("UdCardinalite01Erreur", branchesAttendues, erreursAttendues, true);
+		}
+
+		[TestMethod]
+		/*
+		 * 
+		 * */
+		public void M30_TestBaliseArchiveAgreementAbsente()
 		{
 			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
 			String[] erreursAttendues = 
                 { 
-				"La cardinalité d'une unité documentaire doit être de 1-1",
+				"(--) La balise ArchivalAgreement est absente, il est conseillé de la mettre et la rendre obligatoire",
                 };
-			declencherTestProfil("UniteDocumentaireCardinalite01Erreur", branchesAttendues, erreursAttendues, true);
+			declencherTestProfil("ArchivalAgreementAbsente", branchesAttendues, erreursAttendues, true);
+		}
+
+		[TestMethod]
+		/*
+		 * 
+		 * */
+		public void M31_TestBaliseArchiveAgreementFalcultative()
+		{
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"(--) La balise ArchivalAgreement est optionnelle et ne sera pas générée. Il est conseillé de la rendre obligatoire",
+                };
+			declencherTestProfil("ArchivalAgreementFalcultative", branchesAttendues, erreursAttendues, true);
 		}
     }
 }

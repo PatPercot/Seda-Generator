@@ -492,6 +492,19 @@ namespace BusinessDataControllerUnitTest {
             ConfrontationDonneesEtProfil("donnees_profil_et_donnees", erreursAttendues, true);
         }
 
+		[TestMethod]
+		/*
+		 * 
+		 * */
+		public void H10_TestBaliseArchivalAgreement()
+		{
+			String[] erreursAttendues = 
+                { 
+				"ERR: la ligne '17' contient une balise '#ArchivalAgreement' qui ne doit pas se trouver dans les données métier",
+                };
+			declencherControleDonnees("AvecBaliseArchivalAgreement", erreursAttendues);
+		}
+
         [TestMethod]
         /*
          * 
