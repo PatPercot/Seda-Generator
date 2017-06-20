@@ -506,10 +506,10 @@ namespace RngProfileControllerUnitTest {
 		 * */
 		public void M29_TestUdCardinalite01Erreur()
 		{
-			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] branchesAttendues = { "\troot", "\t\tPES", "" };
 			String[] erreursAttendues = 
                 { 
-				"La cardinalité d'une unité documentaire doit être de 1-1",
+				"L'unité documentaire étant seule dans l'archive, il faut qu'elle soit rendue obligatoire",
                 };
 			declencherTestProfil("UdCardinalite01Erreur", branchesAttendues, erreursAttendues, true);
 		}
