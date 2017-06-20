@@ -22,10 +22,5 @@ namespace AppliTest
 		{
 			//this.lbxErreurs.SelectedIndex();
 		}
-
-		private void lbxErreurs_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-		}
     }
 }

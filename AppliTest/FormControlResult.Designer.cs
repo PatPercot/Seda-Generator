@@ -49,7 +49,6 @@
 			this.lbxErrors.Name = "lbxErrors";
 			this.lbxErrors.Size = new System.Drawing.Size(434, 368);
 			this.lbxErrors.TabIndex = 1;
-			this.lbxErrors.SelectedIndexChanged += new System.EventHandler(this.lbxErreurs_SelectedIndexChanged);
 			// 
 			// FormControlResult
 			// 
