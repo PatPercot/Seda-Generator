@@ -26,9 +26,10 @@ namespace AppliTest
 			try {
 				myProcess.StartInfo.UseShellExecute = false;
 				myProcess.StartInfo.WorkingDirectory = pathExecution;
-				myProcess.StartInfo.FileName = "C:\\Program Files (x86)\\Java\\jre1.8.0_121\\bin\\java.exe -jar " + Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)
-					+ "\\travail\\profils\\agape-v115.jar";
-				myProcess.StartInfo.CreateNoWindow = false;
+				myProcess.StartInfo.FileName = @"C:/Program Files (x86)/Java/jre1.8.0_121/bin/java.exe";
+				myProcess.StartInfo.Arguments = "-jar " + Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)
+					+ @"/travail/profils/agape-v115.jar";
+				myProcess.StartInfo.CreateNoWindow = true;
 				myProcess.StartInfo.RedirectStandardError = true;
 				myProcess.StartInfo.StandardErrorEncoding = System.Text.ASCIIEncoding.Default;
 				// ATTENTION : la présence des deux instructions ci-dessous empêche le processus de se terminer

@@ -197,49 +197,49 @@ namespace AppliTest
 		}
 
 		private void btnCreate_Click(object sender, EventArgs e) {
-			string[] profileTask = { "", "", "", "", "" }, dataTask = { "", "", "", "", "" },
-				generatorTask = { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" };
+			string tasks = "";
 			if (this.cbxProfileTask.Checked) {
-				profileTask[0] = "\n";
-				profileTask[1] = "[profile-control : " + this.tbxTaskName.Text + "]";
-				profileTask[2] = "trace = travail/traces/" + this.tbxProfileTrace.Text + ".txt";
-				profileTask[3] = "profil = travail/profils/" + this.tbxProfileProfile.Text + ".rng";
-				profileTask[4] = "data = travail/metier/" + this.tbxProfileData.Text + ".txt";
+				// Ecrit la tâche du contrôle de profil
+				tasks += "\n";
+				tasks += "[profile-control : " + this.tbxTaskName.Text + "]\n";
+				tasks += "trace = travail/traces/" + this.tbxProfileTrace.Text + ".txt\n";
+				tasks += "profil = travail/profils/" + this.tbxProfileProfile.Text + ".rng\n";
+				tasks += "data = travail/metier/" + this.tbxProfileData.Text + ".txt\n";
 			}
 			if (this.cbxDataTask.Checked) {
-				dataTask[0] = "\n";
-				dataTask[1] = "[data-control : " + this.tbxTaskName.Text + "]";
-				dataTask[2] = "trace = travail/traces/" + this.tbxDataTrace.Text + ".txt";
-				dataTask[3] = "profil = travail/profils/" + this.tbxDataProfile.Text + ".rng";
-				dataTask[4] = "data = travail/metier/" + this.tbxDataData.Text + ".txt";
+				// Ecrit la tâche du contrôle des données métier
+				tasks += "\n";
+				tasks += "[data-control : " + this.tbxTaskName.Text + "]\n";
+				tasks += "trace = travail/traces/" + this.tbxDataTrace.Text + ".txt\n";
+				tasks += "profil = travail/profils/" + this.tbxDataProfile.Text + ".rng\n";
+				tasks += "data = travail/metier/" + this.tbxDataData.Text + ".txt\n";
 			}
 			if (this.cbxGeneratorTask.Checked) {
-
-				generatorTask[0] = "\n";
-				generatorTask[1] = "[accord-versement : " + this.tbxTaskName.Text + "]";
-				generatorTask[2] = "SAE_Serveur = " + this.tbxSaeServer.Text;
-				generatorTask[3] = "TransferIdPrefix = " + this.tbxTransferIdPrefix.Text;
-				generatorTask[4] = "SAE_ProfilArchivage = travail/profils/" + this.tbxAccordVersementProfile.Text + ".rng";	
- 				generatorTask[5] = "TransferringAgencyId = " + this.tbxTransferringAgencyId.Text;
-				generatorTask[6] = "TransferringAgencyName = " + this.tbxTransferringAgencyName.Text;
-				generatorTask[7] = "TransferringAgencyDesc = " + this.tbxTransferringAgencyDesc.Text;
-				generatorTask[8] = "ArchivalAgencyId = " + this.tbxArchivalAgencyId.Text;
-				generatorTask[9] = "ArchivalAgencyName = " + this.tbxArchivalAgencyName.Text;
-				generatorTask[10] = "ArchivalAgencyDesc = " + this.tbxArchivalAgencyDesc.Text;
-				generatorTask[11] = "\n";
-				generatorTask[12] = "[generator : " + this.tbxTaskName.Text + "]";
-				generatorTask[13] = "accord = " + this.tbxTaskName.Text;
-				generatorTask[14] = "baseURI = " + this.tbxUriBase.Text;
-				generatorTask[15] = "trace = travail/traces/" + this.tbxGeneratorTrace.Text + ".txt";
-				generatorTask[16] = "data = travail/metier/" + this.tbxGeneratorData.Text + ".txt";
-				generatorTask[17] = "rep_documents = travail/documents/" + this.tbxDocumentsRepertory.Text;
-				generatorTask[18] = "bordereau = travail/bordereaux/" + this.tbxBordereau.Text + ".xml";
+				// Ecrit la tâche du contrôle du générateur (accord de versement en +)
+				tasks += "\n";
+				tasks += "[accord-versement : " + this.tbxTaskName.Text + "]\n";
+				tasks += "SAE_Serveur = " + this.tbxSaeServer.Text + "\n";
+				tasks += "TransferIdPrefix = " + this.tbxTransferIdPrefix.Text + "\n";
+				tasks += "SAE_ProfilArchivage = travail/profils/" + this.tbxAccordVersementProfile.Text + ".rng\n";
+				tasks += "TransferringAgencyId = " + this.tbxTransferringAgencyId.Text + "\n";
+				tasks += "TransferringAgencyName = " + this.tbxTransferringAgencyName.Text + "\n";
+				tasks += "TransferringAgencyDesc = " + this.tbxTransferringAgencyDesc.Text + "\n";
+				tasks += "ArchivalAgencyId = " + this.tbxArchivalAgencyId.Text + "\n";
+				tasks += "ArchivalAgencyName = " + this.tbxArchivalAgencyName.Text + "\n";
+				tasks += "ArchivalAgencyDesc = " + this.tbxArchivalAgencyDesc.Text + "\n";
+				tasks += "\n";
+				tasks += "[generator : " + this.tbxTaskName.Text + "]\n";
+				tasks += "accord = " + this.tbxTaskName.Text + "\n";
+				tasks += "baseURI = " + this.tbxUriBase.Text + "\n";
+				tasks += "trace = travail/traces/" + this.tbxGeneratorTrace.Text + ".txt\n";
+				tasks += "data = travail/metier/" + this.tbxGeneratorData.Text + ".txt\n";
+				tasks += "rep_documents = travail/documents/" + this.tbxDocumentsRepertory.Text + "\n";
+				tasks += "bordereau = travail/bordereaux/" + this.tbxBordereau.Text + ".xml\n";
 			}
-			string[][] tasks = {profileTask, dataTask, generatorTask};
+			Stream verif;
 			using (StreamWriter outputFile = new StreamWriter(@"./job.config", true)) {
 				outputFile.WriteLine(tasks);
 			}
-			Console.WriteLine(tasks.ToString());
 		}
 		#endregion
 
