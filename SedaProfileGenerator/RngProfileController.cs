@@ -706,8 +706,8 @@ namespace SedaSummaryGenerator {
 		/// </summary>
 		/// <param name="activeNodeName"></param>
 		/// <param name="context"></param>
-		protected void checkContainsIsObligatory(String activeNodeName, String context) {
-			if (traceActions) tracesWriter.WriteLine("checkContainsIsObligatory ('" + activeNodeName + "', '" + context + "', '" + currentDocumentTypeId + "')");
+		protected void checkContainsIsMandatory(String activeNodeName, String context) {
+			if (traceActions) tracesWriter.WriteLine("checkContainsIsMandatory ('" + activeNodeName + "', '" + context + "', '" + currentDocumentTypeId + "')");
 			String xPath = "rng:define[@name='" + activeNodeName + "']/rng:optional/rng:element[@name='Contains']";
 			XmlNode containsNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
 			if (containsNode != null) {
@@ -783,7 +783,7 @@ namespace SedaSummaryGenerator {
 
             }
 			if (currentDocumentTypeId == "root") {
-				checkContainsIsObligatory(defineNodeName, context);
+				checkContainsIsMandatory(defineNodeName, context);
 				checkArchivalAgreement(defineNodeName, context);
                 rootContainsNode = new ContainsNode(currentDocumentTypeId, null, true);
                 currentContainsNode = rootContainsNode;
