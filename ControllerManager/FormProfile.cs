@@ -20,7 +20,7 @@ namespace ControllerManager
 			InitializeComponent();
 		}
 
-		private void btnCreerProfil_Click(object sender, EventArgs e) {
+		private void btnCreateProfile_Click(object sender, EventArgs e) {
 			String pathExecution = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\..\\..\\"; ;
 			Process myProcess = new Process();
 			try {
@@ -50,8 +50,11 @@ namespace ControllerManager
 			//System.Diagnostics.Process.Start("java.exe -jar agape-v115.jar");
 		}
 
-		private void btnProfilExistant_Click(object sender, EventArgs e)
-		{
+		private void btnManageTasks_Click(object sender, EventArgs e) {
+			
+		}
+
+		private void btnNewTask_Click(object sender, EventArgs e) {
 			fctasks = new FormCreateTasks();
 			fctasks.Show();
 		}

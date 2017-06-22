@@ -27,32 +27,18 @@ namespace ControllerManager
 		private void ChecksVerif()
 		{
 			// Lorsque une tâche est à créer on affiche les informations globales
-			this.tbxTaskName.Enabled = this.cbxProfileTask.Checked || this.cbxDataTask.Checked || this.cbxGeneratorTask.Checked;
-			this.tbxTaskName.Visible = this.tbxTaskName.Enabled;
-			this.lblTaskName.Visible = this.tbxTaskName.Enabled;
-			this.lblExamples.Visible = this.tbxTaskName.Enabled;
-			this.lblTaskExample1.Visible = this.tbxTaskName.Enabled;
-			this.lblTaskExample2.Visible = this.tbxTaskName.Enabled;
-			this.lblTaskExample3.Visible = this.tbxTaskName.Enabled;
-			this.lblProfileExample1.Visible = this.tbxTaskName.Enabled;
-			this.lblProfileExample2.Visible = this.tbxTaskName.Enabled;
-			this.lblProfileExample3.Visible = this.tbxTaskName.Enabled;
-			this.lblDataDonneesMetier.Visible = this.tbxTaskName.Enabled;
-			this.rdbtnFollowTaskName.Enabled = this.tbxTaskName.Enabled;
-			this.rdbtnFollowTaskName.Visible = this.tbxTaskName.Enabled;
-			this.rdbtnFollowProfileName.Enabled = this.tbxTaskName.Enabled;
-			this.rdbtnFollowProfileName.Visible = this.tbxTaskName.Enabled;
-			this.rdbtnFollowNone.Enabled = this.tbxTaskName.Enabled;
-			this.rdbtnFollowNone.Visible = this.tbxTaskName.Enabled;
-			this.gbxFollowName.Visible = this.tbxTaskName.Enabled;
+			this.tbxTaskName.Enabled = this.tbxTaskName.Visible = this.lblExamples.Visible = this.lblTaskExample1.Visible =
+				this.lblTaskExample2.Visible = this.lblTaskExample3.Visible = this.lblProfileExample1.Visible =
+				this.lblProfileExample2.Visible = this.lblProfileExample3.Visible = this.lblDataDonneesMetier.Visible =
+				this.rdbtnFollowTaskName.Visible = this.rdbtnFollowProfileName.Visible = this.rdbtnFollowNone.Visible =
+				this.gbxFollowName.Visible = this.rdbtnFollowTaskName.Enabled = this.rdbtnFollowNone.Enabled = 
+				this.cbxProfileTask.Checked || this.cbxDataTask.Checked || this.cbxGeneratorTask.Checked;
 			// Pour la complétion automatique en lien avec le nom de la tâche, on désactive les liées si elle est cochée
 			// Idem pour celle du profil
-			this.tbxProfileProfile.Enabled = !this.rdbtnFollowTaskName.Checked || this.rdbtnFollowNone.Checked;
-			this.tbxProfileData.Enabled = !(this.rdbtnFollowTaskName.Checked || this.rdbtnFollowProfileName.Checked) || this.rdbtnFollowNone.Checked;
-			this.tbxProfileTrace.Enabled = !(this.rdbtnFollowTaskName.Checked || this.rdbtnFollowProfileName.Checked) || this.rdbtnFollowNone.Checked;
-			this.tbxDataTrace.Enabled = !(this.rdbtnFollowTaskName.Checked || this.rdbtnFollowProfileName.Checked) || this.rdbtnFollowNone.Checked;
-			this.tbxGeneratorTrace.Enabled = !(this.rdbtnFollowTaskName.Checked || this.rdbtnFollowProfileName.Checked) || this.rdbtnFollowNone.Checked;
-			this.tbxBordereau.Enabled = !(this.rdbtnFollowTaskName.Checked || this.rdbtnFollowProfileName.Checked) || this.rdbtnFollowNone.Checked;
+			this.tbxProfileProfile.Enabled = !this.rdbtnFollowTaskName.Checked;
+			this.tbxProfileData.Enabled = this.tbxProfileTrace.Enabled = this.tbxDataTrace.Enabled =
+				this.tbxGeneratorTrace.Enabled = this.tbxBordereau.Enabled =
+				!(this.rdbtnFollowTaskName.Checked || this.rdbtnFollowProfileName.Checked);
 			// Si celle du profil est coché on bloque ce qui est en lien
 			// ex : Nom du profil de Data, Nom de la data de Data et Nom de la data de Générateur
 			this.tbxDataProfile.Enabled = !(this.cbxProfileTask.Checked || this.rdbtnFollowTaskName.Checked);

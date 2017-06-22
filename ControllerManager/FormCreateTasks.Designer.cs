@@ -338,7 +338,7 @@
 			this.gbxArchivalAgency.Size = new System.Drawing.Size(450, 103);
 			this.gbxArchivalAgency.TabIndex = 24;
 			this.gbxArchivalAgency.TabStop = false;
-			this.gbxArchivalAgency.Text = "ArchivalAgency";
+			this.gbxArchivalAgency.Text = "&ArchivalAgency";
 			// 
 			// label16
 			// 
@@ -407,7 +407,7 @@
 			this.gbxTansferringAgency.Size = new System.Drawing.Size(450, 103);
 			this.gbxTansferringAgency.TabIndex = 21;
 			this.gbxTansferringAgency.TabStop = false;
-			this.gbxTansferringAgency.Text = "TansferringAgency";
+			this.gbxTansferringAgency.Text = "&TansferringAgency";
 			// 
 			// label11
 			// 
@@ -470,7 +470,7 @@
 			this.label13.Name = "label13";
 			this.label13.Size = new System.Drawing.Size(74, 13);
 			this.label13.TabIndex = 18;
-			this.label13.Text = "Serveur SAE :";
+			this.label13.Text = "&Serveur SAE :";
 			// 
 			// tbxSaeServer
 			// 
@@ -541,7 +541,7 @@
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(101, 13);
 			this.label5.TabIndex = 13;
-			this.label5.Text = "Nom du bordereau :";
+			this.label5.Text = "Nom du &bordereau :";
 			// 
 			// tbxBordereau
 			// 
@@ -697,9 +697,9 @@
 			this.lblTaskExample3.AutoSize = true;
 			this.lblTaskExample3.Location = new System.Drawing.Point(16, 223);
 			this.lblTaskExample3.Name = "lblTaskExample3";
-			this.lblTaskExample3.Size = new System.Drawing.Size(219, 13);
+			this.lblTaskExample3.Size = new System.Drawing.Size(211, 13);
 			this.lblTaskExample3.TabIndex = 5;
-			this.lblTaskExample3.Text = "Nom bordereau -> PrimalTask911_bordereau";
+			this.lblTaskExample3.Text = "Nom bordereau -> PrimTask911_bordereau";
 			this.lblTaskExample3.Visible = false;
 			// 
 			// lblTaskExample2
@@ -707,9 +707,9 @@
 			this.lblTaskExample2.AutoSize = true;
 			this.lblTaskExample2.Location = new System.Drawing.Point(16, 195);
 			this.lblTaskExample2.Name = "lblTaskExample2";
-			this.lblTaskExample2.Size = new System.Drawing.Size(167, 13);
+			this.lblTaskExample2.Size = new System.Drawing.Size(159, 13);
 			this.lblTaskExample2.TabIndex = 5;
-			this.lblTaskExample2.Text = "Nom profil -> PrimalTask911_profil";
+			this.lblTaskExample2.Text = "Nom profil -> PrimTask911_profil";
 			this.lblTaskExample2.Visible = false;
 			// 
 			// lblTaskExample1
@@ -717,9 +717,9 @@
 			this.lblTaskExample1.AutoSize = true;
 			this.lblTaskExample1.Location = new System.Drawing.Point(16, 168);
 			this.lblTaskExample1.Name = "lblTaskExample1";
-			this.lblTaskExample1.Size = new System.Drawing.Size(144, 13);
+			this.lblTaskExample1.Size = new System.Drawing.Size(136, 13);
 			this.lblTaskExample1.TabIndex = 5;
-			this.lblTaskExample1.Text = "Nom tâche -> PrimalTask911";
+			this.lblTaskExample1.Text = "Nom tâche -> PrimTask911";
 			this.lblTaskExample1.Visible = false;
 			// 
 			// lblDataDonneesMetier
