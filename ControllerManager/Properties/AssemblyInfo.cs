@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Les informations générales relatives à un assembly dépendent de 
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
-[assembly: AssemblyTitle("ControllerTaskManager")]
+[assembly: AssemblyTitle("ControllerManager")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ControllerTaskManager")]
+[assembly: AssemblyProduct("ControllerManager")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Le GUID suivant est pour l'ID de la typelib si ce projet est exposé à COM
-[assembly: Guid("751cd5b9-75e3-4ac7-8cf1-1ab9a7e676d8")]
+[assembly: Guid("776194e8-dc79-4370-b7bc-1954083025e4")]
 
 // Les informations de version pour un assembly se composent des quatre valeurs suivantes :
 //

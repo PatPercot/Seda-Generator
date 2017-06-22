@@ -1,4 +1,4 @@
-﻿namespace ControllerTaskManager
+﻿namespace ControllerManager
 {
 	partial class FormProfile
 	{

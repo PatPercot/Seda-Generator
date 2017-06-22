@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 
-namespace ControllerTaskManager
+namespace ControllerManager
 {
 	public partial class FormProfile : Form
 	{
