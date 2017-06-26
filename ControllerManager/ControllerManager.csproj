@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BibliFunctions.cs" />
     <Compile Include="FormControlLauncher.cs">
       <SubType>Form</SubType>
     </Compile>

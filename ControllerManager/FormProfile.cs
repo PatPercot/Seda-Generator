@@ -18,9 +18,11 @@ namespace ControllerManager
 		public FormProfile()
 		{
 			InitializeComponent();
+			ReadingFile();
 		}
 
-		private void btnCreateProfile_Click(object sender, EventArgs e) {
+		#region //Code de lancement de Agape (sous environnement de développement)
+		/*private void btnCreateProfile_Click(object sender, EventArgs e) {
 			String pathExecution = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\..\\..\\"; ;
 			Process myProcess = new Process();
 			try {
@@ -48,15 +50,76 @@ namespace ControllerManager
 				MessageBox.Show(a.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			//System.Diagnostics.Process.Start("java.exe -jar agape-v115.jar");
+		}*/
+		#endregion
+
+		private void btnExecute_Click(object sender, EventArgs e) {
+
 		}
 
-		private void btnManageTasks_Click(object sender, EventArgs e) {
-			
-		}
-
-		private void btnNewTask_Click(object sender, EventArgs e) {
+		private void btnCreate_Click(object sender, EventArgs e) {
 			fctasks = new FormCreateTasks();
 			fctasks.Show();
+		}
+
+		private void btnEdit_Click(object sender, EventArgs e) {
+
+		}
+
+		private void ReadingFile() {
+			try {
+				int countLineProfile = 4, countLineData = 4;
+				using (StreamReader sReader = new StreamReader(@"./job.config")) {
+					string line;
+					while ((line = sReader.ReadLine()) != null) {
+						countLineProfile = ReadingProfileControlTasks(line, countLineProfile);
+						countLineData = ReadingDataControlTasks(line, countLineData);
+					}
+				}
+			} catch (Exception e) {
+				Console.WriteLine("Le fichier ne peut pas être lu.");
+				Console.WriteLine(e.Message);
+			}
+		}
+
+		private int ReadingProfileControlTasks(string line, int countLineProfile) {
+			bool verifTask = line.Contains("[profile-control : ");
+			if (verifTask || countLineProfile < 4) {
+				int cutTaskA = line.IndexOf(" : ") + 2;
+				if (verifTask) {
+					countLineProfile = 1;
+					this.lbxTasks.Items.Add("->" + line.Substring(cutTaskA, line.Length - 1 - cutTaskA));
+				} else if (countLineProfile < 5) {
+					countLineProfile++;
+					this.lbxTasks.Items.Add(line);
+				}
+			}
+			return countLineProfile;
+		}
+
+		private int ReadingDataControlTasks(string line, int countLineData) {
+			bool verifTask = line.Contains("[data-control : ");
+			if (verifTask || countLineData < 4) {
+				int cutTaskA = line.IndexOf(" : ") + 2;
+				if (verifTask) {
+					countLineData = 1;
+					this.lbxTasks.Items.Add("->" + line.Substring(cutTaskA, line.Length - 1 - cutTaskA));
+				} else if (countLineData < 5) {
+					countLineData++;
+					this.lbxTasks.Items.Add("   " + line);
+				}
+			}
+			return countLineData;
+		}
+
+
+
+		private void btnRemove_Click(object sender, EventArgs e) {
+
+		}
+
+		private void lbxTasks_SelectedIndexChanged(object sender, EventArgs e) {
+
 		}
 	}
 }
