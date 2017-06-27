@@ -722,8 +722,7 @@ namespace SedaSummaryGenerator {
 		/// </summary>
 		/// <param name="activeNodeName"></param>
 		/// <param name="context"></param>
-		protected void checkArchivalAgreement(String activeNodeName, String context)
-		{
+		protected void checkArchivalAgreement(String activeNodeName, String context) {
 			if (traceActions) tracesWriter.WriteLine("checkArchivalAgreement ('" + activeNodeName + "', '" + context + "', '" + currentDocumentTypeId + "')");
 			String xPath = "rng:define[@name='" + activeNodeName + "']/rng:element[@name='ArchivalAgreement']";
 			XmlNode containsNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
@@ -770,7 +769,7 @@ namespace SedaSummaryGenerator {
 
 				checkContainsHasContainsOrDocuments(defineNodeName, context);
                 checkForMultipleDocument(defineNodeName, context);
-                checkForContentDescription(defineNodeName, context);
+				checkForContentDescription(defineNodeName, context);
                 checkForOptionalOriginatingAgency(defineNodeName, context);
                 checkForTagInContains("Keyword", defineNodeName, context);
                 // checkForTagInContains("FilePlanPosition", defineNodeName, context);
@@ -1084,21 +1083,23 @@ namespace SedaSummaryGenerator {
                 } else {
                     Boolean bProducteurOptionnel = false;
                     xPath = "rng:define[@name='" + cdrefNodeName + "']/rng:optional/rng:element[@name='OriginatingAgency']/rng:ref";
-                    XmlNode cdeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                    if (cdeNode != null)
-                        bProducteurOptionnel = true;
-                    else {
-                        xPath = "rng:define[@name='" + cdrefNodeName + "']/rng:zeroOrMore/rng:element[@name='OriginatingAgency']/rng:ref";
-                        cdeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                        if (cdeNode != null)
-                            bProducteurOptionnel = true;
-                    }
-                    if (bProducteurOptionnel == true) {
-                        if (context.Equals("rootContains"))
-                            errorsList.Add("(--) La balise OriginatingAgency est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire");
-                        else
-                            errorsList.Add("(--) La balise OriginatingAgency de l'unité documentaire '" + currentDocumentTypeId + "' est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire");
-                    }
+                    XmlNode optionalDeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+					xPath = "rng:define[@name='" + cdrefNodeName + "']/rng:zeroOrMore/rng:element[@name='OriginatingAgency']/rng:ref";
+					XmlNode zeroOrMoreDeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+					xPath = "rng:define[@name='" + cdrefNodeName + "']/rng:oneOrMore/rng:element[@name='OriginatingAgency']/rng:ref";
+					XmlNode oneOrMoreDeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+					xPath = "rng:define[@name='" + cdrefNodeName + "']/rng:element[@name='OriginatingAgency']/rng:ref";
+					XmlNode mandatoryDeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+
+					if (optionalDeNode != null) {
+						errorsList.Add("(--) La balise OriginatingAgency est optionnelle et ne sera pas générée. Il est conseillé de la rendre obligatoire");
+					} else if (zeroOrMoreDeNode != null) {
+						errorsList.Add("(--) La balise OriginatingAgency est optionnelle et ne sera pas générée. Il est conseillé de la rendre obligatoire");
+					} else if (oneOrMoreDeNode != null) {
+					} else if (mandatoryDeNode != null) {
+					} else {
+						errorsList.Add("(--) La balise OriginatingAgency est absente, il est conseillé de la mettre et la rendre obligatoire");
+					}
                 }
             }
         }
@@ -1389,8 +1390,6 @@ namespace SedaSummaryGenerator {
                 }
             }
         }
-
-
 
         /*
          * Toutes les erreurs détectées peuvent être récupérées dans la liste

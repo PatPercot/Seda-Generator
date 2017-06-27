@@ -419,12 +419,10 @@ namespace RngProfileControllerUnitTest {
         public void M24_TestAccordVersementProducteur() {
             String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
             String[] erreursAttendues = 
-                { 
-                "(--) La balise OriginatingAgency est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
-                "(--) La balise ArchivalAgreement est optionnelle et ne sera pas générée. Il est conseillé de la rendre obligatoire",
+                {
+				"(--) La balise ArchivalAgreement est optionnelle et ne sera pas générée. Il est conseillé de la rendre obligatoire",
 				"La présence d'un document est obligatoire dans l'unité documentaire '",
-                "(--) La balise OriginatingAgency de l'unité documentaire 'UD1' est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
-                };
+				};
             declencherTestProfil("AccordVersement_Producteur", branchesAttendues, erreursAttendues, true);
         }
 
@@ -518,8 +516,7 @@ namespace RngProfileControllerUnitTest {
 		/*
 		 * 
 		 * */
-		public void M30_TestBaliseArchiveAgreementAbsente()
-		{
+		public void M30_TestBaliseArchiveAgreementAbsente() {
 			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
 			String[] erreursAttendues = 
                 { 
@@ -532,14 +529,39 @@ namespace RngProfileControllerUnitTest {
 		/*
 		 * 
 		 * */
-		public void M31_TestBaliseArchiveAgreementFalcultative()
-		{
+		public void M31_TestBaliseArchiveAgreementFalcultative() {
 			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
 			String[] erreursAttendues = 
                 { 
 				"(--) La balise ArchivalAgreement est optionnelle et ne sera pas générée. Il est conseillé de la rendre obligatoire",
                 };
 			declencherTestProfil("ArchivalAgreementFalcultative", branchesAttendues, erreursAttendues, true);
+		}
+
+		[TestMethod]
+		/*
+		 * 
+		 * */
+		public void M32_TestBaliseOriginatingAgencyAbsente() {
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"(--) La balise OriginatingAgency est absente, il est conseillé de la mettre et la rendre obligatoire",
+                };
+			declencherTestProfil("OriginatingAgencyAbsente", branchesAttendues, erreursAttendues, true);
+		}
+
+		[TestMethod]
+		/*
+		 * 
+		 * */
+		public void M33_TestBaliseOriginatingAgencyFalcultative() {
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"(--) La balise OriginatingAgency est optionnelle et ne sera pas générée. Il est conseillé de la rendre obligatoire",
+                };
+			declencherTestProfil("OriginatingAgencyFalcultative", branchesAttendues, erreursAttendues, true);
 		}
     }
 }
