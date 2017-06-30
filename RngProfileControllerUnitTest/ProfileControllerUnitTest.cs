@@ -470,9 +470,6 @@ namespace RngProfileControllerUnitTest {
 		}
 
 		[TestMethod]
-		/*
-		 * 
-		 * */
 		public void M27_TestSansUniteDocumentaireErreur()
 		{
 			String[] branchesAttendues = { "\troot", "" };
@@ -484,9 +481,6 @@ namespace RngProfileControllerUnitTest {
 		}
 
 		[TestMethod]
-		/*
-		 * 
-		 * */
 		public void M28_TestUdSansFilleErreur()
 		{
 			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
@@ -499,9 +493,6 @@ namespace RngProfileControllerUnitTest {
 		}
 
 		[TestMethod]
-		/*
-		 * 
-		 * */
 		public void M29_TestUdCardinalite01Erreur()
 		{
 			String[] branchesAttendues = { "\troot", "\t\tPES", "" };
@@ -512,11 +503,10 @@ namespace RngProfileControllerUnitTest {
 			declencherTestProfil("UdCardinalite01Erreur", branchesAttendues, erreursAttendues, true);
 		}
 
+		// Les balises ArchiveAgreement et OriginatingAgency sont des balises conseillées obligatoires
+
 		[TestMethod]
-		/*
-		 * 
-		 * */
-		public void M30_TestBaliseArchiveAgreementAbsente() {
+		public void M30_TestArchiveAgreementAbsente() {
 			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
 			String[] erreursAttendues = 
                 { 
@@ -524,12 +514,9 @@ namespace RngProfileControllerUnitTest {
                 };
 			declencherTestProfil("ArchivalAgreementAbsente", branchesAttendues, erreursAttendues, true);
 		}
-
+		
 		[TestMethod]
-		/*
-		 * 
-		 * */
-		public void M31_TestBaliseArchiveAgreementFalcultative() {
+		public void M31_TestArchiveAgreementFalcultative() {
 			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
 			String[] erreursAttendues = 
                 { 
@@ -539,10 +526,7 @@ namespace RngProfileControllerUnitTest {
 		}
 
 		[TestMethod]
-		/*
-		 * 
-		 * */
-		public void M32_TestBaliseOriginatingAgencyAbsente() {
+		public void M32_TestOriginatingAgencyAbsente() {
 			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
 			String[] erreursAttendues = 
                 { 
@@ -552,16 +536,116 @@ namespace RngProfileControllerUnitTest {
 		}
 
 		[TestMethod]
-		/*
-		 * 
-		 * */
-		public void M33_TestBaliseOriginatingAgencyFalcultative() {
+		public void M33_TestOriginatingAgencyFalcultative() {
 			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
 			String[] erreursAttendues = 
                 { 
 				"(--) La balise OriginatingAgency est optionnelle et ne sera pas générée. Il est conseillé de la rendre obligatoire",
                 };
 			declencherTestProfil("OriginatingAgencyFalcultative", branchesAttendues, erreursAttendues, true);
+		}
+
+		//A partir d'ici il s'agit de tests en erreur, le contrôleur est à modifier
+
+		// A partir d'ici les balises sont optionnelles, on propose seulement un message lorsqu'elles sont optionnelles
+
+		[TestMethod]
+		public void M34_TestToutesBalisesOptionnellesAbsentes() {
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                {
+                };
+			declencherTestProfil("ToutesBalisesOptionnellesAbsentes", branchesAttendues, erreursAttendues, true);
+		}
+
+		[TestMethod]
+		public void M35_TestDescriptionDeArchivalAgencyFalcultative() {
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"(--) La balise Description de ArchivalAgency est optionnelle et ne sera pas générée. Il serait plus logique de la rendre obligatoire",
+                };
+			declencherTestProfil("DescriptionDeArchivalAgencyFalcultative", branchesAttendues, erreursAttendues, true);
+		}
+		
+		[TestMethod]
+		public void M36_TestDescriptionDeTransferringAgencyFalcultative() {
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"(--) La balise Description de TransferringAgency est optionnelle et ne sera pas générée. Il serait plus logique de la rendre obligatoire",
+                };
+			declencherTestProfil("DescriptionDeTransferringAgencyFalcultative", branchesAttendues, erreursAttendues, true);
+		}
+
+		[TestMethod]
+		public void M37_TestArchivalProfileFalcultative() {
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"(--) La balise ArchivalProfile est optionnelle et ne sera pas générée. Il serait plus logique de la rendre obligatoire",
+                };
+			declencherTestProfil("ArchivalProfileFalcultative", branchesAttendues, erreursAttendues, true);
+		}
+		
+		[TestMethod]
+		public void M38_TestCustodialHistoryFalcultative() {
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"(--) La balise CustodialHistory est optionnelle et ne sera pas générée. Il serait plus logique de la rendre obligatoire",
+                };
+			declencherTestProfil("CustodialHistoryFalcultative", branchesAttendues, erreursAttendues, true);
+		}
+		
+		[TestMethod]
+		public void M39_TestTransferrinAgencyObjectIdentifierFalcultative() {
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"(--) La balise TransferrinAgencyObjectIdentifier est optionnelle et ne sera pas générée. Il serait plus logique de la rendre obligatoire",
+                };
+			declencherTestProfil("TransferrinAgencyObjectIdentifierFalcultative", branchesAttendues, erreursAttendues, true);
+		}
+
+		[TestMethod]
+		public void M40_TestBusinessTypeFalcultative() {
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"(--) La balise BusinessType est optionnelle et ne sera pas générée. Il serait plus logique de la rendre obligatoire",
+                };
+			declencherTestProfil("BusinessTypeFalcultative", branchesAttendues, erreursAttendues, true);
+		}
+
+		[TestMethod]
+		public void M41_TestDescriptionDeDocumentFalcultative() {
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"(--) La balise Description de Document est optionnelle et ne sera pas générée. Il serait plus logique de la rendre obligatoire",
+                };
+			declencherTestProfil("DescriptionDeDocumentFalcultative", branchesAttendues, erreursAttendues, true);
+		}
+		
+		[TestMethod]
+		public void M42_TestCreationFalcultative() {
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"(--) La balise Creation est optionnelle et ne sera pas générée. Il serait plus logique de la rendre obligatoire",
+                };
+			declencherTestProfil("CreationFalcultative", branchesAttendues, erreursAttendues, true);
+		}
+
+		[TestMethod]
+		public void M43_TestCommentFalcultative() {
+			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+			String[] erreursAttendues = 
+                { 
+				"(--) La balise Comment est optionnelle et ne sera pas générée. Il serait plus logique de la rendre obligatoire",
+                };
+			declencherTestProfil("CommentFalcultative", branchesAttendues, erreursAttendues, true);
 		}
     }
 }

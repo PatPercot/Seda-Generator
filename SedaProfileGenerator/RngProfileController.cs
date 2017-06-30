@@ -737,6 +737,55 @@ namespace SedaSummaryGenerator {
 			}
 		}
 
+		/// <summary>
+		/// On recherche les balises Description qui se situe dans ArchivalAgency et TransferringAgency.
+		/// Répond rien dans le cas où elle est présente, sinon renvoie une erreur.
+		/// </summary>
+		/// <param name="activeNodeName"></param>
+		/// <param name="context"></param>
+		protected void checkDescription() {
+			// On cherche d'abord le nom de l'ArchiveTransfer
+			String stRecherche = "ArchiveTransfer";
+			String xPath = "rng:define[@name='" + stRecherche + "']/descendant::rng:element[@name='" + stRecherche + "']/rng:ref";
+			XmlNode archiveTransfer = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+			String archiveTransferName;
+			if (archiveTransfer != null) {
+				// On récupère le ArchiveTransfer_N?????
+				archiveTransferName = archiveTransfer.Attributes.GetNamedItem("name").Value;
+				if (archiveTransferName != null) {
+
+					#region Méthode intégrée
+					var checkDescriptionInArchivalAndTransferringAgency = new Action<string>( agencyRecherche =>
+					{
+						xPath = "rng:define[@name='" + archiveTransferName + "']/descendant::rng:element[@name='" + agencyRecherche + "']/rng:ref";
+						XmlNode agency = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+						String agencyName;
+						if (agency != null) {
+							// On récupère le ?Agency_N?????
+							agencyName = agency.Attributes.GetNamedItem("name").Value;
+							if (agencyName != null) {
+								if (traceActions) tracesWriter.WriteLine("checkDescription ('" + agencyName + "', '" + agency + "', '" + currentDocumentTypeId + "')");
+								xPath = "rng:define[@name='" + agencyName + "']/rng:element[@name='Description']";
+								XmlNode containsNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+								if (containsNode == null) {
+									xPath = "rng:define[@name='" + agencyName + "']/rng:optional/rng:element[@name='Description']";
+									containsNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+									if (containsNode != null) {
+										errorsList.Add("(--) La balise Description de " + agencyRecherche + " est optionnelle et ne sera pas générée. Il serait plus logique de la rendre obligatoire");
+									}
+								}
+							}
+						}
+					});
+					#endregion
+
+					// Appel de la méthode intégrée
+					checkDescriptionInArchivalAndTransferringAgency("ArchivalAgency");
+					checkDescriptionInArchivalAndTransferringAgency("TransferringAgency");
+				}
+			}
+		}
+
         protected void recurseContainsDefine(String defineNodeName, String context, bool isRepeatable) {
             if (traceActions) tracesWriter.WriteLine("recurseContainsDefine ('" + defineNodeName + "', '" + context + "', '" + currentDocumentTypeId + "')");
             String xPath;
@@ -782,6 +831,7 @@ namespace SedaSummaryGenerator {
 
             }
 			if (currentDocumentTypeId == "root") {
+				checkDescription();
 				checkContainsIsMandatory(defineNodeName, context);
 				checkArchivalAgreement(defineNodeName, context);
                 rootContainsNode = new ContainsNode(currentDocumentTypeId, null, true);
