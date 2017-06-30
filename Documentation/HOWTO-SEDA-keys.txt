@@ -32,10 +32,12 @@ Autres que documents
 Xpath																					Source			Type										Seda
 
 /ArchiveTransfer/Date																	Auto			Calcul date exécution du code
-/ArchiveTransfer/Contains/ContentDescription/Size																									0.2
+/ArchiveTransfer/Contains/ContentDescription/Size										Auto			Calcul										0.2
 /ArchiveTransfer/TransferIdentifier														Auto			Préfixe+calcul          
 /ArchiveTransfer/Archive/Name															Métier			#TransferName								1.0
+/ArchiveTransfert/Archive/ArchivalAgreement																Contient l'accord de versement				1.0
 /ArchiveTransfer/Contains/Name															Métier			#TransferName								0.2
+/ArchiveTransfert/Contains/ArchivalAgreement															Contient l'accord de versement				0.2
 /ArchiveTransfer/Comment																Métier			#Comment
 /ArchiveTransfer/TransferringAgency/Description											Database		Champ TransferringAgencyDesc
 /ArchiveTransfer/TransferringAgency/Identification										Database		Champ TransferringAgencyId

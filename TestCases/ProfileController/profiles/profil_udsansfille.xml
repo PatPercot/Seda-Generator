@@ -27,7 +27,7 @@
 				<xsd:element maxOccurs="unbounded" name="Language" type="qdt:CodeLanguageType">
 					<xsd:attribute fixed="edition 2009" name="listVersionID" type="xsd:token" use="required"/>
 				</xsd:element>
-			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="OriginatingAgency" type="OrganizationType"/></xsd:element>
 			<xsd:attribute name="Id" type="xsd:ID" use="prohibited"/>
 			<xsd:element maxOccurs="1" minOccurs="1" name="Contains" type="ArchiveObjectType">
 				<xsd:attribute name="Id" type="xsd:ID" use="prohibited"/>
