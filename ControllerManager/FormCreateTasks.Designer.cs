@@ -81,7 +81,7 @@
 			this.label10 = new System.Windows.Forms.Label();
 			this.tbxDataTrace = new System.Windows.Forms.TextBox();
 			this.tbxDataProfile = new System.Windows.Forms.TextBox();
-			this.btnCreate = new System.Windows.Forms.Button();
+			this.btnCreateTasks = new System.Windows.Forms.Button();
 			this.lblExamples = new System.Windows.Forms.Label();
 			this.lblProfileExample1 = new System.Windows.Forms.Label();
 			this.lblProfileExample2 = new System.Windows.Forms.Label();
@@ -94,6 +94,13 @@
 			this.rdbtnFollowProfileName = new System.Windows.Forms.RadioButton();
 			this.gbxFollowName = new System.Windows.Forms.GroupBox();
 			this.rdbtnFollowNone = new System.Windows.Forms.RadioButton();
+			this.lbxTasks = new System.Windows.Forms.ListBox();
+			this.btnExecute = new System.Windows.Forms.Button();
+			this.btnRemove = new System.Windows.Forms.Button();
+			this.btnEdit = new System.Windows.Forms.Button();
+			this.btnCreateNewTask = new System.Windows.Forms.Button();
+			this.btnCreateProfil = new System.Windows.Forms.Button();
+			this.btnManageTasks = new System.Windows.Forms.Button();
 			this.gbxTasks.SuspendLayout();
 			this.gbxProfile.SuspendLayout();
 			this.gbxGenerator.SuspendLayout();
@@ -641,16 +648,16 @@
 			this.tbxDataProfile.TabIndex = 10;
 			this.tbxDataProfile.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxDataProfile_KeyUp);
 			// 
-			// btnCreate
+			// btnCreateTasks
 			// 
-			this.btnCreate.Enabled = false;
-			this.btnCreate.Location = new System.Drawing.Point(250, 24);
-			this.btnCreate.Name = "btnCreate";
-			this.btnCreate.Size = new System.Drawing.Size(75, 23);
-			this.btnCreate.TabIndex = 27;
-			this.btnCreate.Text = "&Créer";
-			this.btnCreate.UseVisualStyleBackColor = true;
-			this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+			this.btnCreateTasks.Enabled = false;
+			this.btnCreateTasks.Location = new System.Drawing.Point(250, 24);
+			this.btnCreateTasks.Name = "btnCreateTasks";
+			this.btnCreateTasks.Size = new System.Drawing.Size(75, 23);
+			this.btnCreateTasks.TabIndex = 27;
+			this.btnCreateTasks.Text = "&Créer";
+			this.btnCreateTasks.UseVisualStyleBackColor = true;
+			this.btnCreateTasks.Click += new System.EventHandler(this.btnCreateTasks_Click);
 			// 
 			// lblExamples
 			// 
@@ -760,9 +767,9 @@
 			this.gbxFollowName.Controls.Add(this.rdbtnFollowNone);
 			this.gbxFollowName.Controls.Add(this.rdbtnFollowTaskName);
 			this.gbxFollowName.Controls.Add(this.rdbtnFollowProfileName);
-			this.gbxFollowName.Location = new System.Drawing.Point(13, 86);
+			this.gbxFollowName.Location = new System.Drawing.Point(12, 86);
 			this.gbxFollowName.Name = "gbxFollowName";
-			this.gbxFollowName.Size = new System.Drawing.Size(418, 53);
+			this.gbxFollowName.Size = new System.Drawing.Size(419, 53);
 			this.gbxFollowName.TabIndex = 4;
 			this.gbxFollowName.TabStop = false;
 			this.gbxFollowName.Text = "Attribuer des noms en rapport avec";
@@ -782,21 +789,100 @@
 			this.rdbtnFollowNone.UseVisualStyleBackColor = true;
 			this.rdbtnFollowNone.CheckedChanged += new System.EventHandler(this.rdbtnFollowNone_CheckedChanged);
 			// 
+			// lbxTasks
+			// 
+			this.lbxTasks.FormattingEnabled = true;
+			this.lbxTasks.Location = new System.Drawing.Point(12, 488);
+			this.lbxTasks.Name = "lbxTasks";
+			this.lbxTasks.Size = new System.Drawing.Size(288, 160);
+			this.lbxTasks.TabIndex = 33;
+			// 
+			// btnExecute
+			// 
+			this.btnExecute.Location = new System.Drawing.Point(306, 488);
+			this.btnExecute.Name = "btnExecute";
+			this.btnExecute.Size = new System.Drawing.Size(81, 35);
+			this.btnExecute.TabIndex = 32;
+			this.btnExecute.Text = "&Exécuter";
+			this.btnExecute.UseVisualStyleBackColor = true;
+			this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
+			// 
+			// btnRemove
+			// 
+			this.btnRemove.Location = new System.Drawing.Point(306, 611);
+			this.btnRemove.Name = "btnRemove";
+			this.btnRemove.Size = new System.Drawing.Size(81, 35);
+			this.btnRemove.TabIndex = 31;
+			this.btnRemove.Text = "&Supprimer";
+			this.btnRemove.UseVisualStyleBackColor = true;
+			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+			// 
+			// btnEdit
+			// 
+			this.btnEdit.Location = new System.Drawing.Point(306, 570);
+			this.btnEdit.Name = "btnEdit";
+			this.btnEdit.Size = new System.Drawing.Size(81, 35);
+			this.btnEdit.TabIndex = 30;
+			this.btnEdit.Text = "&Modifier";
+			this.btnEdit.UseVisualStyleBackColor = true;
+			this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+			// 
+			// btnCreateNewTask
+			// 
+			this.btnCreateNewTask.Location = new System.Drawing.Point(306, 529);
+			this.btnCreateNewTask.Name = "btnCreateNewTask";
+			this.btnCreateNewTask.Size = new System.Drawing.Size(81, 35);
+			this.btnCreateNewTask.TabIndex = 29;
+			this.btnCreateNewTask.Text = "&Créer";
+			this.btnCreateNewTask.UseVisualStyleBackColor = true;
+			this.btnCreateNewTask.Click += new System.EventHandler(this.btnCreateNewTask_Click);
+			// 
+			// btnCreateProfil
+			// 
+			this.btnCreateProfil.Enabled = false;
+			this.btnCreateProfil.Location = new System.Drawing.Point(393, 488);
+			this.btnCreateProfil.Name = "btnCreateProfil";
+			this.btnCreateProfil.Size = new System.Drawing.Size(81, 35);
+			this.btnCreateProfil.TabIndex = 28;
+			this.btnCreateProfil.Text = "Créer un profil";
+			this.btnCreateProfil.UseVisualStyleBackColor = true;
+			this.btnCreateProfil.Visible = false;
+			this.btnCreateProfil.Click += new System.EventHandler(this.btnCreateProfil_Click);
+			// 
+			// btnManageTasks
+			// 
+			this.btnManageTasks.Enabled = false;
+			this.btnManageTasks.Location = new System.Drawing.Point(393, 529);
+			this.btnManageTasks.Name = "btnManageTasks";
+			this.btnManageTasks.Size = new System.Drawing.Size(81, 35);
+			this.btnManageTasks.TabIndex = 27;
+			this.btnManageTasks.Text = "Management des tâches";
+			this.btnManageTasks.UseVisualStyleBackColor = true;
+			this.btnManageTasks.Visible = false;
+			this.btnManageTasks.Click += new System.EventHandler(this.btnManageTasks_Click);
+			// 
 			// FormCreateTasks
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(920, 484);
+			this.ClientSize = new System.Drawing.Size(920, 657);
+			this.Controls.Add(this.lbxTasks);
+			this.Controls.Add(this.btnExecute);
 			this.Controls.Add(this.gbxFollowName);
+			this.Controls.Add(this.btnRemove);
 			this.Controls.Add(this.lblDataDonneesMetier);
+			this.Controls.Add(this.btnEdit);
 			this.Controls.Add(this.lblTaskExample3);
+			this.Controls.Add(this.btnCreateNewTask);
 			this.Controls.Add(this.lblTaskExample2);
+			this.Controls.Add(this.btnCreateProfil);
 			this.Controls.Add(this.lblTaskExample1);
+			this.Controls.Add(this.btnManageTasks);
 			this.Controls.Add(this.lblProfileExample3);
 			this.Controls.Add(this.lblProfileExample2);
 			this.Controls.Add(this.lblProfileExample1);
 			this.Controls.Add(this.lblExamples);
-			this.Controls.Add(this.btnCreate);
+			this.Controls.Add(this.btnCreateTasks);
 			this.Controls.Add(this.gbxData);
 			this.Controls.Add(this.gbxGenerator);
 			this.Controls.Add(this.gbxProfile);
@@ -883,7 +969,7 @@
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.TextBox tbxDataTrace;
 		private System.Windows.Forms.TextBox tbxDataProfile;
-		private System.Windows.Forms.Button btnCreate;
+		private System.Windows.Forms.Button btnCreateTasks;
 		private System.Windows.Forms.Label lblExamples;
 		private System.Windows.Forms.Label lblProfileExample2;
 		private System.Windows.Forms.Label lblProfileExample3;
@@ -898,5 +984,12 @@
 		private System.Windows.Forms.RadioButton rdbtnFollowProfileName;
 		private System.Windows.Forms.GroupBox gbxFollowName;
 		private System.Windows.Forms.RadioButton rdbtnFollowNone;
+		private System.Windows.Forms.ListBox lbxTasks;
+		private System.Windows.Forms.Button btnExecute;
+		private System.Windows.Forms.Button btnRemove;
+		private System.Windows.Forms.Button btnEdit;
+		private System.Windows.Forms.Button btnCreateNewTask;
+		private System.Windows.Forms.Button btnCreateProfil;
+		private System.Windows.Forms.Button btnManageTasks;
 	}
 }

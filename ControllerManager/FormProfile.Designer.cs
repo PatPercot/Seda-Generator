@@ -34,7 +34,9 @@
 			this.btnEdit = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
 			this.btnExecute = new System.Windows.Forms.Button();
-			this.lbxTasks = new System.Windows.Forms.ListBox();
+			this.lbxTaskType = new System.Windows.Forms.ListBox();
+			this.lbxTaskName = new System.Windows.Forms.ListBox();
+			this.lbxTaskDesc = new System.Windows.Forms.ListBox();
 			this.SuspendLayout();
 			// 
 			// btnManageTasks
@@ -61,7 +63,7 @@
 			// 
 			// btnCreate
 			// 
-			this.btnCreate.Location = new System.Drawing.Point(306, 53);
+			this.btnCreate.Location = new System.Drawing.Point(663, 53);
 			this.btnCreate.Name = "btnCreate";
 			this.btnCreate.Size = new System.Drawing.Size(81, 35);
 			this.btnCreate.TabIndex = 2;
@@ -71,7 +73,7 @@
 			// 
 			// btnEdit
 			// 
-			this.btnEdit.Location = new System.Drawing.Point(306, 94);
+			this.btnEdit.Location = new System.Drawing.Point(663, 94);
 			this.btnEdit.Name = "btnEdit";
 			this.btnEdit.Size = new System.Drawing.Size(81, 35);
 			this.btnEdit.TabIndex = 3;
@@ -81,7 +83,7 @@
 			// 
 			// btnRemove
 			// 
-			this.btnRemove.Location = new System.Drawing.Point(306, 135);
+			this.btnRemove.Location = new System.Drawing.Point(663, 135);
 			this.btnRemove.Name = "btnRemove";
 			this.btnRemove.Size = new System.Drawing.Size(81, 35);
 			this.btnRemove.TabIndex = 4;
@@ -91,7 +93,7 @@
 			// 
 			// btnExecute
 			// 
-			this.btnExecute.Location = new System.Drawing.Point(306, 12);
+			this.btnExecute.Location = new System.Drawing.Point(663, 12);
 			this.btnExecute.Name = "btnExecute";
 			this.btnExecute.Size = new System.Drawing.Size(81, 35);
 			this.btnExecute.TabIndex = 5;
@@ -99,21 +101,39 @@
 			this.btnExecute.UseVisualStyleBackColor = true;
 			this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
 			// 
-			// lbxTasks
+			// lbxTaskType
 			// 
-			this.lbxTasks.FormattingEnabled = true;
-			this.lbxTasks.Location = new System.Drawing.Point(12, 12);
-			this.lbxTasks.Name = "lbxTasks";
-			this.lbxTasks.Size = new System.Drawing.Size(288, 160);
-			this.lbxTasks.TabIndex = 6;
-			this.lbxTasks.SelectedIndexChanged += new System.EventHandler(this.lbxTasks_SelectedIndexChanged);
+			this.lbxTaskType.FormattingEnabled = true;
+			this.lbxTaskType.Location = new System.Drawing.Point(12, 12);
+			this.lbxTaskType.Name = "lbxTaskType";
+			this.lbxTaskType.Size = new System.Drawing.Size(211, 160);
+			this.lbxTaskType.TabIndex = 6;
+			this.lbxTaskType.SelectedIndexChanged += new System.EventHandler(this.lbxTasks_SelectedIndexChanged);
+			// 
+			// lbxTaskName
+			// 
+			this.lbxTaskName.FormattingEnabled = true;
+			this.lbxTaskName.Location = new System.Drawing.Point(229, 12);
+			this.lbxTaskName.Name = "lbxTaskName";
+			this.lbxTaskName.Size = new System.Drawing.Size(211, 160);
+			this.lbxTaskName.TabIndex = 7;
+			// 
+			// lbxTaskDesc
+			// 
+			this.lbxTaskDesc.FormattingEnabled = true;
+			this.lbxTaskDesc.Location = new System.Drawing.Point(446, 12);
+			this.lbxTaskDesc.Name = "lbxTaskDesc";
+			this.lbxTaskDesc.Size = new System.Drawing.Size(211, 160);
+			this.lbxTaskDesc.TabIndex = 8;
 			// 
 			// FormProfile
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(399, 182);
-			this.Controls.Add(this.lbxTasks);
+			this.ClientSize = new System.Drawing.Size(756, 182);
+			this.Controls.Add(this.lbxTaskDesc);
+			this.Controls.Add(this.lbxTaskName);
+			this.Controls.Add(this.lbxTaskType);
 			this.Controls.Add(this.btnExecute);
 			this.Controls.Add(this.btnRemove);
 			this.Controls.Add(this.btnEdit);
@@ -137,6 +157,8 @@
 		private System.Windows.Forms.Button btnEdit;
 		private System.Windows.Forms.Button btnRemove;
 		private System.Windows.Forms.Button btnExecute;
-		private System.Windows.Forms.ListBox lbxTasks;
+		public System.Windows.Forms.ListBox lbxTaskType;
+		public System.Windows.Forms.ListBox lbxTaskName;
+		public System.Windows.Forms.ListBox lbxTaskDesc;
 	}
 }

@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BibliFunctions.cs" />
+    <Compile Include="AccordVersement.cs" />
+    <Compile Include="BigTask.cs" />
+    <Compile Include="DataController.cs" />
     <Compile Include="FormControlLauncher.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +71,9 @@
     <Compile Include="FormProfile.Designer.cs">
       <DependentUpon>FormProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Functions.cs" />
+    <Compile Include="Generator.cs" />
+    <Compile Include="ProfileController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormControlLauncher.resx">

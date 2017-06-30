@@ -110,23 +110,23 @@ namespace ControllerManager
 				&& CompletionVerif(this.tbxArchivalAgencyId.Text) && CompletionVerif(this.tbxArchivalAgencyName.Text) && CompletionVerif(this.tbxArchivalAgencyDesc.Text);
 			// Utilisation des valeurs
 			if (this.cbxProfileTask.Checked) {
-				this.btnCreate.Enabled = profileCreate;
+				this.btnCreateTasks.Enabled = profileCreate;
 				if (this.cbxDataTask.Checked) {
-					this.btnCreate.Enabled = profileCreate && dataCreate;
+					this.btnCreateTasks.Enabled = profileCreate && dataCreate;
 					if (this.cbxGeneratorTask.Checked) {
-						this.btnCreate.Enabled = profileCreate && dataCreate && generatorCreate;
+						this.btnCreateTasks.Enabled = profileCreate && dataCreate && generatorCreate;
 					}
 				} else if (this.cbxGeneratorTask.Checked) {
-						this.btnCreate.Enabled = profileCreate && generatorCreate;
+						this.btnCreateTasks.Enabled = profileCreate && generatorCreate;
 				}
 			} else if (this.cbxDataTask.Checked) {
 				if (this.cbxGeneratorTask.Checked) {
-						this.btnCreate.Enabled = dataCreate && generatorCreate;
+						this.btnCreateTasks.Enabled = dataCreate && generatorCreate;
 				}
 			} else if (this.cbxGeneratorTask.Checked) {
-				this.btnCreate.Enabled = generatorCreate;
+				this.btnCreateTasks.Enabled = generatorCreate;
 			} else {
-				this.btnCreate.Enabled = false;
+				this.btnCreateTasks.Enabled = false;
 			}
 		}
 
@@ -182,49 +182,32 @@ namespace ControllerManager
 			this.Close();
 		}
 
-		private void btnCreate_Click(object sender, EventArgs e) {
-			string tasks = "";
-			if (this.cbxProfileTask.Checked) {
-				// Ecrit la tâche du contrôle de profil
-				tasks += "\n";
-				tasks += "[profile-control : " + this.tbxTaskName.Text + "]\n";
-				tasks += "trace = travail/traces/" + this.tbxProfileTrace.Text + ".txt\n";
-				tasks += "profil = travail/profils/" + this.tbxProfileProfile.Text + ".rng\n";
-				tasks += "data = travail/metier/" + this.tbxProfileData.Text + ".txt\n";
-			}
-			if (this.cbxDataTask.Checked) {
-				// Ecrit la tâche du contrôle des données métier
-				tasks += "\n";
-				tasks += "[data-control : " + this.tbxTaskName.Text + "]\n";
-				tasks += "trace = travail/traces/" + this.tbxDataTrace.Text + ".txt\n";
-				tasks += "profil = travail/profils/" + this.tbxDataProfile.Text + ".rng\n";
-				tasks += "data = travail/metier/" + this.tbxDataData.Text + ".txt\n";
-			}
-			if (this.cbxGeneratorTask.Checked) {
-				// Ecrit la tâche du contrôle du générateur (accord de versement en +)
-				tasks += "\n";
-				tasks += "[accord-versement : " + this.tbxTaskName.Text + "]\n";
-				tasks += "SAE_Serveur = " + this.tbxSaeServer.Text + "\n";
-				tasks += "TransferIdPrefix = " + this.tbxTransferIdPrefix.Text + "\n";
-				tasks += "SAE_ProfilArchivage = travail/profils/" + this.tbxAccordVersementProfile.Text + ".rng\n";
-				tasks += "TransferringAgencyId = " + this.tbxTransferringAgencyId.Text + "\n";
-				tasks += "TransferringAgencyName = " + this.tbxTransferringAgencyName.Text + "\n";
-				tasks += "TransferringAgencyDesc = " + this.tbxTransferringAgencyDesc.Text + "\n";
-				tasks += "ArchivalAgencyId = " + this.tbxArchivalAgencyId.Text + "\n";
-				tasks += "ArchivalAgencyName = " + this.tbxArchivalAgencyName.Text + "\n";
-				tasks += "ArchivalAgencyDesc = " + this.tbxArchivalAgencyDesc.Text + "\n";
-				tasks += "\n";
-				tasks += "[generator : " + this.tbxTaskName.Text + "]\n";
-				tasks += "accord = " + this.tbxTaskName.Text + "\n";
-				tasks += "baseURI = " + this.tbxUriBase.Text + "\n";
-				tasks += "trace = travail/traces/" + this.tbxGeneratorTrace.Text + ".txt\n";
-				tasks += "data = travail/metier/" + this.tbxGeneratorData.Text + ".txt\n";
-				tasks += "rep_documents = travail/documents/" + this.tbxDocumentsRepertory.Text + "\n";
-				tasks += "bordereau = travail/bordereaux/" + this.tbxBordereau.Text + ".xml\n";
-			}
-			using (StreamWriter outputFile = new StreamWriter(@"./job.config", true)) {
-				outputFile.WriteLine(tasks);
-			}
+		private void btnCreateTasks_Click(object sender, EventArgs e) {
+
+		}
+
+		private void btnExecute_Click(object sender, EventArgs e) {
+
+		}
+
+		private void btnCreateProfil_Click(object sender, EventArgs e) {
+
+		}
+
+		private void btnCreateNewTask_Click(object sender, EventArgs e) {
+
+		}
+
+		private void btnManageTasks_Click(object sender, EventArgs e) {
+
+		}
+
+		private void btnEdit_Click(object sender, EventArgs e) {
+
+		}
+
+		private void btnRemove_Click(object sender, EventArgs e) {
+
 		}
 		#endregion
 
