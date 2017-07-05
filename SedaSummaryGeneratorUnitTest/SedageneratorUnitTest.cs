@@ -1211,6 +1211,7 @@ namespace SedaSummaryGeneratorUnitTest {
 
         }
 
+		//A partir d'ici il s'agit de tests en erreur, le contrôleur est à modifier
 
         // Ce test correspond à la génération d'un bordereau au format SEDA 1.0, 
         // le test suivant vérifie avec les mêmes données la génération d'un bordereau au format SEDA 1.0
