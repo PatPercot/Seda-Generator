@@ -1,4 +1,9 @@
-﻿***************************
+***************************
+2017-09-12
+	Contrôleur de données métier
+		Pour un TAG, contrôler la conformité du nombre de fichiers avec la cardinalté des Document
+
+***************************
 2016-03-10
 
 	Prévoir un mode silent (pas d'affichage sur console) pour les exécutables
@@ -8,24 +13,6 @@
 
 	Lors du passage au SEDA 2.0 considérer la notation TAG{DOC] équivalente à la notation TAG/DOC
 
-**************************
-2015-09-07
-	Créer un outil de contrôle des données métier (confrontées au prodil d'archivage)
-	Points à vérifier :
-		Une donnée est fournie alors qu'elle est fixe dans le profil
-		Un TAG utilisé n'est pas référencé dans le profil
-		Le TAG est indiqué comme répétable alors qu'il ne l'est pas dans le profil
-		Le TAG est fourni sous forme fixe alors qu'il est répétable dans le profil
-		Le format de la date est incorrect ou la date est inexistante
-		Le TAG n'est pas générable car le nom de balise n'existe pas 
-			(vérifier ContainsName, Originating_Description, ...)
-		Nombre de champs incorrect ou séparateur mal choisi
-		Vérification des champs d'une ligne document (qui peuvent être mal ordonnés) :
-			TAG non conforme
-			Syntaxe du nom de fichier incorrecte
-			Date du fichier non conforme
-			Nombre de champs insuffisant
-			
 **************************
 2015-07-09
 	Bug si SAEUrl est différent entre BDD et code WS
