@@ -1212,20 +1212,43 @@ namespace SedaSummaryGeneratorUnitTest {
         }
 
 
-        // Ce test correspond à la génération d'un bordereau au format SEDA 1.0, 
-        // le test suivant vérifie avec les mêmes données la génération d'un bordereau au format SEDA 1.0
-		// Verifie que les noms des fichiers des repertoires correspondent bien a ceux que l'on a indique
         [TestMethod]
-        public void W71_TestVerifAttachementFileNameSedaV1_0() {
-            executeGenerator("AttachmentFileNameSedaV1_0", "1.0");
+        public void W72_TestDatesExtremesSedaV1_0() {
+            executeGenerator("DatesExtremesSedaV1_0", "1.0");
 
             checkForNoErrors();
-            checkAttribute("/s:ArchiveTransfer/s:Archive/s:ArchiveObject/s:ArchiveObject/s:Document/s:Attachment"
-                , "filename", "fichierPES_AR.txt");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ContentDescription/s:LatestDate", "2017-10-26");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ContentDescription/s:OldestDate", "2017-03-13");
 
-            checkAttribute("/s:ArchiveTransfer/s:Archive/s:ArchiveObject/s:Document/s:Attachment"
-                , "filename", "fichierPES.txt");
-			
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ContentDescription/s:LatestDate", "2017-07-21");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ContentDescription/s:OldestDate", "2017-07-01");
+
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[2]/s:ContentDescription/s:LatestDate", "2017-08-14");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[2]/s:ContentDescription/s:OldestDate", "2017-08-13");
+
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[4]/s:ArchiveObject[3]/s:ContentDescription/s:LatestDate", "2017-10-26");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[4]/s:ArchiveObject[3]/s:ContentDescription/s:OldestDate", "2017-10-21");
+
+        }
+
+
+        [TestMethod]
+        public void W73_TestDatesExtremesSedaV0_2() {
+            executeGenerator("DatesExtremesSedaV0_2", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:ContentDescription/s:LatestDate", "2017-10-26");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:ContentDescription/s:OldestDate", "2017-03-13");
+
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:ContentDescription/s:LatestDate", "2017-07-21");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:ContentDescription/s:OldestDate", "2017-07-01");
+
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[2]/s:ContentDescription/s:LatestDate", "2017-08-14");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[2]/s:ContentDescription/s:OldestDate", "2017-08-13");
+
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[4]/s:Contains[3]/s:ContentDescription/s:LatestDate", "2017-10-26");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[4]/s:Contains[3]/s:ContentDescription/s:OldestDate", "2017-10-21");
+
         }
 
     }

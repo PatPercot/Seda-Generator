@@ -1,4 +1,10 @@
 -------------------------
+Changements du 2017-09-12
+- Générateur de profils
+	Ajout de la génération des dates extrêmes dans les unités documentaires
+		Testcases en version 1.0 et 0.2 du SEDA
+
+-------------------------
 Changements du 2017-04-17
 - Contrôleur de données et de profils
 	Correction de bug sur la recherche des Keyword répétables et optionnels
