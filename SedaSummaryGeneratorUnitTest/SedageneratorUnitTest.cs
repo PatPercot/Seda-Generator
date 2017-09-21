@@ -89,6 +89,13 @@ namespace SedaSummaryGeneratorUnitTest {
             Assert.AreEqual(contentToCheck, content, "Le xPath '" + xPath + "' doit contenir '" + contentToCheck + "' au lieu de '" + content + "'");
         }
 
+        protected void checkInnerTextBeginning(String xPath, String contentToCheck) {
+            XmlNode node = docBordereau.SelectSingleNode(xPath, docInXmlnsManager);
+            Assert.IsNotNull(node, "Le nœud '" + xPath + "' devrait exister");
+            String content = node.InnerText.Substring(0,contentToCheck.Length);
+            Assert.AreEqual(contentToCheck, content, "Le xPath '" + xPath + "' doit commencer par '" + contentToCheck + "' au lieu de '" + content + "'");
+        }
+
         protected void checkExists(String xPath) {
             XmlNode node = docBordereau.SelectSingleNode(xPath, docInXmlnsManager);
             Assert.IsNotNull(node, "Le nœud '" + xPath + "' devrait exister");
@@ -210,9 +217,9 @@ namespace SedaSummaryGeneratorUnitTest {
             };
 
             SimpleConfig config = new SimpleConfig();
-            String erreur = config.loadFile("./job.config");
+            String erreur = config.loadFile("./job-c#.config");
             if (erreur != String.Empty) // on tient compte du fait qu'en environnement de développement, l'exe est dans bin/Release
-                erreur = config.loadFile("../../job.config");
+                erreur = config.loadFile("../../job-c#.config");
 
             if (erreur != String.Empty) {
                 System.Console.WriteLine(erreur);
@@ -1248,6 +1255,28 @@ namespace SedaSummaryGeneratorUnitTest {
 
             checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[4]/s:Contains[3]/s:ContentDescription/s:LatestDate", "2017-10-26");
             checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[4]/s:Contains[3]/s:ContentDescription/s:OldestDate", "2017-10-21");
+
+        }
+
+
+        [TestMethod]
+        public void W74_TestTAOISedaV1_0() {
+            executeGenerator("TransferringAgencyObjectIdentifier_10", "1.0");
+
+            checkForNoErrors();
+            checkInnerTextBeginning("s:ArchiveTransfer/s:Archive/s:ArchiveObject/s:ArchiveObject[1]/s:TransferringAgencyObjectIdentifier", "CD56_TAOI_");
+            checkInnerTextBeginning("s:ArchiveTransfer/s:Archive/s:TransferringAgencyArchiveIdentifier", "CD56_TAOI_");
+
+        }
+
+
+        [TestMethod]
+        public void W75_TestTAOISedaV0_2() {
+            executeGenerator("TransferringAgencyObjectIdentifier_02", "0.2");
+
+            checkForNoErrors();
+            checkInnerTextBeginning("s:ArchiveTransfer/s:Contains/s:Contains/s:Contains[1]/s:TransferringAgencyObjectIdentifier", "CD56_TAOI_");
+            checkInnerTextBeginning("s:ArchiveTransfer/s:Contains/s:TransferringAgencyArchiveIdentifier", "CD56_TAOI_");
 
         }
 

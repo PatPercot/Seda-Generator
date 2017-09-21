@@ -29,7 +29,7 @@ OldestDate												Auto			Calcul (date la plus ancienne des documents)
 
 Autres que documents
 
-Xpath																					Source			Type										Seda
+Xpath																					Source			Type										Seda	Rôle
 
 /ArchiveTransfer/Date																	Auto			Calcul date exécution du code
 /ArchiveTransfer/Contains/ContentDescription/Size																									0.2
@@ -57,11 +57,15 @@ Xpath																					Source			Type										Seda
 /ArchiveTransfer/Contains/ContentDescription/CustodialHistory							Métier			#CustodialHistory							0.2
 /ArchiveTransfer/Archive/ContentDescription/Keyword/KeywordContent						Métier			#KeywordContent[#x]							1.0
 /ArchiveTransfer/Contains/ContentDescription/ContentDescriptive/KeywordContent			Métier			#KeywordContent[#x]							0.2
-/ArchiveTransfer/Archive/ArchiveObject/TransferringAgencyObjectIdentifier				Métier			TODO										1.0
-/ArchiveTransfer/Contains/Contains/TransferringAgencyObjectIdentifier					Métier			TODO										0.2
+/ArchiveTransfer/Archive/TransferringAgencyArchiveIdentifier							Auto			Préfixe + date exécution + incrément		1.0
+/ArchiveTransfer/Contains/TransferringAgencyObjectIdentifier							Auto			Préfixe + date exécution + incrément		0.2
+/ArchiveTransfer/Archive/ArchiveObject/TransferringAgencyObjectIdentifier				Auto			Préfixe + date exécution + incrément		1.0		Sert à indiquer que l'unité documentaire est un article en EAD
+/ArchiveTransfer/Contains/Contains/TransferringAgencyObjectIdentifier					Auto			Préfixe + date exécution + incrément		0.2		Sert à indiquer que l'unité documentaire est un article en EAD
 ArchiveObject/Name																		Métier			#ContainsName[TagPath]						1.0
 Contains/Contains/Name																	Métier			#ContainsName[TagPath]						0.2
 ArchiveObject/ArchivalAgencyObjectIdentifier											Auto			Préfixe+calcul          					1.0
+Contains/TransferringAgencyObjectIdentifier												Auto			Préfixe+calcul          					0.2
+ArchiveObject/TransferringAgencyObjectIdentifier										Auto			Préfixe+calcul          					1.0
 Contains/ArchivalAgencyObjectIdentifier													Auto			Préfixe+calcul          					0.2
 Document/Identification																	Auto			Préfixe+calcul          					0.2
 ArchiveObject/ContentDescription/Keyword/KeywordContent									Métier			#KeywordContent_TagPath[#x]					1.0

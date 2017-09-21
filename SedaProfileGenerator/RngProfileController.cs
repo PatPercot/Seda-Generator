@@ -130,6 +130,8 @@ namespace SedaSummaryGenerator {
                         else {
                             SEDA_version = "Version du SEDA inconnue";
                             errorsList.Add("Version du SEDA inconnue : '" + sTestSeda + "'");
+                            // Si la version du SEDA est inconnue, on arrête l'analyse
+                            return;
                         }
 
                     XmlNode startNode = docIn.SelectSingleNode("rng:grammar/rng:start/rng:ref", docInXmlnsManager);
@@ -165,6 +167,7 @@ namespace SedaSummaryGenerator {
                                             checkFoArchivalAgreementInArchive(containsNodeName, "rootContains");
                                             checkForContentDescription(containsNodeName, "rootContains");
                                             checkForOptionalOriginatingAgency(containsNodeName, "rootContains");
+                                            checkForOptionalTransferringAgencyObjectIdentifier(containsNodeName, "rootContains");
                                             checkForTagInContains("Keyword", containsNodeName, "rootContains");
                                             // checkForTagInContains("FilePlanPosition", containsNodeName, "rootContains");
                                             checkForFilePlanPositionTag(containsNodeName, "rootContains");
@@ -690,9 +693,10 @@ namespace SedaSummaryGenerator {
 			XmlNodeList documentNodeList = containsNode.SelectNodes(xPath, docInXmlnsManager);
 			if (documentNodeList != null && documentNodeList.Count > 0) {
 			} else {
+                String stTag2Search = SEDA_version == "0.2" ? "Contains" : "ArchiveObject";
 				xPath = "descendant::rng:element[@name='" + descendantContains + "']/rng:ref";
 				XmlNodeList containsNodesList = containsNode.SelectNodes(xPath, docInXmlnsManager);
-				xPath = "descendant::rng:element[@name='Contains']/rng:ref";
+				xPath = "descendant::rng:element[@name='" + stTag2Search + "']/rng:ref";
 				containsNodesList = containsNode.SelectNodes(xPath, docInXmlnsManager);
 				if (containsNodesList != null && containsNodesList.Count > 0) {
 				} else {
@@ -735,6 +739,7 @@ namespace SedaSummaryGenerator {
                 checkForMultipleDocument(defineNodeName, context);
                 checkForContentDescription(defineNodeName, context);
                 checkForOptionalOriginatingAgency(defineNodeName, context);
+                checkForOptionalTransferringAgencyObjectIdentifier(defineNodeName, context);
                 checkForTagInContains("Keyword", defineNodeName, context);
                 // checkForTagInContains("FilePlanPosition", defineNodeName, context);
                 checkForFilePlanPositionTag(defineNodeName, context);
@@ -1073,11 +1078,24 @@ namespace SedaSummaryGenerator {
                     }
                     if (bProducteurOptionnel == true) {
                         if (context.Equals("rootContains"))
-                            errorsList.Add("(--) La balise OriginatingAgency est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire");
+                            errorsList.Add("(--) La balise OriginatingAgency de l'archive est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire");
                         else
                             errorsList.Add("(--) La balise OriginatingAgency de l'unité documentaire '" + currentDocumentTypeId + "' est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire");
                     }
                 }
+            }
+        }
+
+        protected void checkForOptionalTransferringAgencyObjectIdentifier(String defineNodeName, String context) {
+            // Recherche de TransferringAgencyObjectIdentifier alerte si optionnel
+            String tag3search = context.Equals("rootContains") ? "TransferringAgencyArchiveIdentifier" : "TransferringAgencyObjectIdentifier";
+            String xPath = "rng:define[@name='" + defineNodeName + "']/rng:optional/rng:element[@name='" + tag3search + "']/rng:ref";
+            XmlNode cdeNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (cdeNode != null) {
+                if (context.Equals("rootContains"))
+                    errorsList.Add("La balise " + tag3search + " de l'archive ne peut pas être optionnelle. Il faut la rendre obligatoire");
+                else
+                    errorsList.Add("La balise " + tag3search + " de l'unité documentaire '" + currentDocumentTypeId + "' ne peut pas être optionnelle. Il faut la rendre obligatoire");
             }
         }
 

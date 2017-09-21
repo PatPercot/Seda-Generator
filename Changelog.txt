@@ -1,4 +1,16 @@
 -------------------------
+Changements du 2017-09-19
+Version 1.1.1
+- Contrôleur de profils
+	Correction message d'erreur balise document obligatoire injustifié en version 1.0 du SEDA
+	Contrôle des balises TransferringAgencyObjectIdentifier et TransferringAgencyArchiveIdentifier
+		Testcases en version 1.0 et 0.2 du SEDA
+	Arrêt anticipé en cas de version du SEDA non reconnue
+- Générateur de profils
+	Génération des balises TransferringAgencyObjectIdentifier et TransferringAgencyArchiveIdentifier
+		Testcases en version 1.0 et 0.2 du SEDA
+
+-------------------------
 Changements du 2017-09-12
 - Générateur de profils
 	Ajout de la génération des dates extrêmes dans les unités documentaires

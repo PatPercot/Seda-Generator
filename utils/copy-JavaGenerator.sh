@@ -11,9 +11,9 @@
 cd ..
 
 # Copie des exécutables Java CD56
-echo Suppression des exécutables java CD56
-[ ! -e lib-cd56 ] && mkdir lib-cd56
-rm lib-cd56/*
+# echo Suppression des exécutables java CD56
+# [ ! -e lib-cd56 ] && mkdir lib-cd56
+# rm lib-cd56/*
 
 echo Copie des exécutables Java
 cp ../CD56-Java-Seda-Generator/target/lib/* SedaSummaryGeneratorUnitTest/lib-cd56

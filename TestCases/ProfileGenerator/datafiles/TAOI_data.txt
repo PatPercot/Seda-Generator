@@ -1,0 +1,6 @@
+# Fichier de données vide
+
+,fichier.txt,UD_TAOI,Description du document,19/09/2017
+,fichier.txt,UD_TAOI_OPT,Description du document,19/09/2017
+,fichier.txt,UD_SS_TAOI,Description du document,19/09/2017
+

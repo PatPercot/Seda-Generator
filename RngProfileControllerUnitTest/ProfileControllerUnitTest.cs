@@ -421,7 +421,7 @@ namespace RngProfileControllerUnitTest {
             String[] erreursAttendues = 
                 { 
                 "(--) La balise ArchivalAgreement est optionnelle ou absente et ne sera pas générée. Elle pourrait être rendue obligatoire",
-                "(--) La balise OriginatingAgency est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
+                "(--) La balise OriginatingAgency de l'archive est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
 				"La présence d'un document est obligatoire dans l'unité documentaire '",
                 "(--) La balise OriginatingAgency de l'unité documentaire 'UD1' est optionnelle et ne sera pas générée. Elle pourrait être rendue obligatoire",
                 };
@@ -485,32 +485,60 @@ namespace RngProfileControllerUnitTest {
 			declencherTestProfil("SansUniteDocumentaireErreur", branchesAttendues, erreursAttendues, true);
 		}
 
-		[TestMethod]
-		/*
-		 * 
-		 * */
-		public void M28_TestUdSansFilleErreur()
-		{
-			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
-			String[] erreursAttendues = 
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void M28_TestUdSansFilleErreur() {
+            String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+            String[] erreursAttendues = 
                 { 
 				"La présence d'un document est obligatoire dans l'unité documentaire '",
                 };
-			declencherTestProfil("UdSansFilleErreur", branchesAttendues, erreursAttendues, true);
-		}
+            declencherTestProfil("UdSansFilleErreur", branchesAttendues, erreursAttendues, true);
+        }
 
-		[TestMethod]
-		/*
-		 * 
-		 * */
-		public void M29_TestUniteDocumentaireCardinalite01Erreur()
-		{
-			String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
-			String[] erreursAttendues = 
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void M29_TestUniteDocumentaireCardinalite01Erreur() {
+            String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+            String[] erreursAttendues = 
                 { 
-				"La cardinalité d'une unité documentaire doit être de 1-1",
+				"Une unité documentaire unique ne peut pas être optionnelle. La cardinalité minimum doit être 1",
                 };
-			declencherTestProfil("UniteDocumentaireCardinalite01Erreur", branchesAttendues, erreursAttendues, true);
-		}
+            declencherTestProfil("UniteDocumentaireCardinalite01Erreur", branchesAttendues, erreursAttendues, true);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void M30_TestTransferringAgencyObjectOdentifier_02() {
+            String[] branchesAttendues = { "\troot", "\t\tUD1", "\t\t\tUD_TAOI", "\t\t\tUD_TAOI_OPT", "\t\t\tUD_SS_TAOI", "" };
+            String[] erreursAttendues = 
+                { 
+				"La balise TransferringAgencyArchiveIdentifier de l'archive ne peut pas être optionnelle. Il faut la rendre obligatoire",
+				"La balise TransferringAgencyObjectIdentifier de l'unité documentaire 'UD_TAOI_OPT' ne peut pas être optionnelle. Il faut la rendre obligatoire",
+                };
+            declencherTestProfil("TransferringAgencyObjectIdentifier_02", branchesAttendues, erreursAttendues, true);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void M30_TestTransferringAgencyObjectOdentifier_10() {
+            String[] branchesAttendues = { "\troot", "\t\tUD1", "\t\t\tUD_TAOI", "\t\t\tUD_TAOI_OPT", "\t\t\tUD_SS_TAOI", "" };
+            String[] erreursAttendues = 
+                { 
+				"La balise TransferringAgencyArchiveIdentifier de l'archive ne peut pas être optionnelle. Il faut la rendre obligatoire",
+				"La balise TransferringAgencyObjectIdentifier de l'unité documentaire 'UD_TAOI_OPT' ne peut pas être optionnelle. Il faut la rendre obligatoire",
+                };
+            declencherTestProfil("TransferringAgencyObjectIdentifier_10", branchesAttendues, erreursAttendues, true);
+        }
+
+
     }
 }
