@@ -1,13 +1,13 @@
-Guide de démarrage rapide du générateur de bordereaux de transfert
+Guide de dÃ©marrage rapide du gÃ©nÃ©rateur de bordereaux de transfert
 
-	Ce guide est destiné à une mise en œuvre rapide de la distribution des exécutables
+	Ce guide est destinÃ© Ã  une mise en Å“uvre rapide de la distribution des exÃ©cutables
 	https://github.com/PatPercot/SedaGenerator-Distribution-Executables
 
 
 1) Installation du logiciel
 2) Instrumentation d'un profil d'archivage
-3) Préparation des données métier
-4) Génération d'un bordereau de transfert
+3) PrÃ©paration des donnÃ©es mÃ©tier
+4) GÃ©nÃ©ration d'un bordereau de transfert
 
 
 
@@ -15,7 +15,7 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 ***************************************************************************************
 1) Installation du logiciel
 
-	Si vous êtes sous Linux, bonne nouvelle, les programmes peuvent être exécutés 
+	Si vous Ãªtes sous Linux, bonne nouvelle, les programmes peuvent Ãªtre exÃ©cutÃ©s 
 	directement sous Mono (installez le paquetage Mono de votre distribution)
 
 1-a) Installation
@@ -23,32 +23,32 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 	https://github.com/PatPercot/SedaGenerator-Distribution-Executables
 	Cliquer sur le bouton 
 	     "Clone or download" puis sur "Download ZIP"
-	Dézipper le fichier sur votre ordinateur dans un endroit facilement accessible
-		(choisissez un chemin court, idéalement dans la racine d'un de vos disques)
+	DÃ©zipper le fichier sur votre ordinateur dans un endroit facilement accessible
+		(choisissez un chemin court, idÃ©alement dans la racine d'un de vos disques)
 	
 	Faites une copie du fichier job.config.sample et renommez-la en job.config
-	Faites une copie du répertoire travail.sample et renommez-la en travail
+	Faites une copie du rÃ©pertoire travail.sample et renommez-la en travail
 
-	Vous êtes prêt à démarrer.
+	Vous Ãªtes prÃªt Ã  dÃ©marrer.
 
 
 
 1-b) Exploration
-	Explorez le répertoire "travail"
-		Ce répertoire contient :
-			- un répertoire "profils" pour les profils que vous préparez
-			- un répertoire "metier" pour les données métier
-			- un répertoire "documents" pour les documents à archiver
-			- un répertoire "bordereaux" pour les bordereaux générés
-			- un répertoire "traces" pour les fichiers de traces (pour les développeurs)
+	Explorez le rÃ©pertoire "travail"
+		Ce rÃ©pertoire contient :
+			- un rÃ©pertoire "profils" pour les profils que vous prÃ©parez
+			- un rÃ©pertoire "metier" pour les donnÃ©es mÃ©tier
+			- un rÃ©pertoire "documents" pour les documents Ã  archiver
+			- un rÃ©pertoire "bordereaux" pour les bordereaux gÃ©nÃ©rÃ©s
+			- un rÃ©pertoire "traces" pour les fichiers de traces (pour les dÃ©veloppeurs)
 	
 	Explorez le fichier job.config
 		Ce fichier contient des sections reconnaissables parce que le texte de la ligne 
-		est encadré par des crochets droits : [type-section : NOM_SECTION]
-			- section [profile-control : section_PC] ; décrit un contrôle de profil d'archivage
-			- section [data-control : section_DC] ; décrit un contrôle de données métier
-			- section [generator : section_G] ; décrit une génaration de bordereau de transfert
-			- section [accord-versement : section_AV] ; décrit un accord de versment utilisé par 
+		est encadrÃ© par des crochets droits : [type-section : NOM_SECTION]
+			- section [profile-control : section_PC] ; dÃ©crit un contrÃ´le de profil d'archivage
+			- section [data-control : section_DC] ; dÃ©crit un contrÃ´le de donnÃ©es mÃ©tier
+			- section [generator : section_G] ; dÃ©crit une gÃ©naration de bordereau de transfert
+			- section [accord-versement : section_AV] ; dÃ©crit un accord de versment utilisÃ© par 
 					une ou plusieurs sections "generator"
 
 
@@ -57,22 +57,22 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 ***************************************************************************************
 2) Instrumentation d'un profil d'archivage
 
-2-a ) Préparation
+2-a ) PrÃ©paration
 	Vous pouvez partir d'un profil d'archivage existant
-	Choisissez un profl simple pour débuter. Limitez-vous à 2 ou 3 unités documentaires.
-	Copiez ce profil (le fichier XML, pas le RNG) dans le répertoire "profils"
+	Choisissez un profl simple pour dÃ©buter. Limitez-vous Ã  2 ou 3 unitÃ©s documentaires.
+	Copiez ce profil (le fichier XML, pas le RNG) dans le rÃ©pertoire "profils"
 		Si vous n'avez pas de profil existant vous pourrez utiliser le fichier 
 			"CABAN_profil_Sonerion.xml"
 			
 	Vous allez modifier votre profil avec AGAPE pour y ajouter des instructions que ProBANT
-	traitera. ProBANT ne sachant travailler que sur le RNG, après chaque modification, vous
-	devrez régénérer le schéma RNG avec AGAPE.
+	traitera. ProBANT ne sachant travailler que sur le RNG, aprÃ¨s chaque modification, vous
+	devrez rÃ©gÃ©nÃ©rer le schÃ©ma RNG avec AGAPE.
 	
-	Paramétrez AGAPE pour afficher les balises du SEDA : Préférences / Préférences d'affichage / langue utilisée : balises du SEDA
+	ParamÃ©trez AGAPE pour afficher les balises du SEDA : PrÃ©fÃ©rences / PrÃ©fÃ©rences d'affichage / langue utilisÃ©e : balises du SEDA
 	
 
-2-b) Préparation du fichier job.config
-	Ouvrez le fichier job.config avec un "vrai" éditeur de texte (Notepad++ par exemple)
+2-b) PrÃ©paration du fichier job.config
+	Ouvrez le fichier job.config avec un "vrai" Ã©diteur de texte (Notepad++ par exemple)
 	
 	Copiez les 4 lignes de la section "profile-control" ci-dessous :
 	
@@ -83,103 +83,103 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 
     Collez ce texte dans le fichier job.config en fin de fichier
 	
-    À partir de la version 1.0.6, la ligne data produit un fichier de données exemples.
-    Vous pourrez repartir de ce fichier pour générer un vrai jeu de données métier
+    Ã€ partir de la version 1.0.6, la ligne data produit un fichier de donnÃ©es exemples.
+    Vous pourrez repartir de ce fichier pour gÃ©nÃ©rer un vrai jeu de donnÃ©es mÃ©tier
 
 	Si vous utilisez votre propre profil d'archivage, modifiez :
 	  le nom de la cible 
-          (ici CABAN) par un nom qui définit bien votre profil (ce nom ne doit pas contenir d'espaces)
+          (ici CABAN) par un nom qui dÃ©finit bien votre profil (ce nom ne doit pas contenir d'espaces)
 	  et le nom du fichier de profil 
 	      (ici travail/profils/CABAN_profil_Sonerion-schema.rng) par le nom de votre fichier de profil 
 
-    ATTENTION ! par défaut avec AGAPE le nom du RNG se termine par :
+    ATTENTION ! par dÃ©faut avec AGAPE le nom du RNG se termine par :
 		_schema.rng
 	
-2-c) Préparation de la console
-	Vous avez deux façons de procéder
+2-c) PrÃ©paration de la console
+	Vous avez deux faÃ§ons de procÃ©der
 	
 	1) 	Sous Windows
-		À l'aide de l'explorateur de fichiers, déplacez-vous vers le répertoire d'installation de ProBANT.
-		Lorsque ce répertoire est visible dans le panneau de droite,
+		Ã€ l'aide de l'explorateur de fichiers, dÃ©placez-vous vers le rÃ©pertoire d'installation de ProBANT.
+		Lorsque ce rÃ©pertoire est visible dans le panneau de droite,
 			Appuyez sur SHIFT et faites un clic bouton droit
-			Choisissez l'item de menu "Ouvrir une fenêtre de commandes ici"
+			Choisissez l'item de menu "Ouvrir une fenÃªtre de commandes ici"
 		
 	2)	Lancez une console 
-			(sous Windows Démarrer / Exécuter : cmd)
+			(sous Windows DÃ©marrer / ExÃ©cuter : cmd)
 			(sous Linux : Terminal)
 		
-		Déplacez-vous dans le répertoire d'installation de ProBANT
+		DÃ©placez-vous dans le rÃ©pertoire d'installation de ProBANT
 			Windows tapez : cd \[Chemin d'installation de ProBANT]\Seda-Generator-master\\Seda-Generator-master\Programs-Releases
 		
 			Linux   tapez : cd [Chemin d'installation de ProBANT]/Seda-Generator-master/Seda-Generator-master/Programs-Releases
 
-2-d) Édition du profil
+2-d) Ã‰dition du profil
 	Lancez le logiciel Agape
 	Ouvrez le profil
 	
-2-e) Génération du RelaxNG
-	Générez le profil au format RNG (menu Outils/Générer le schéma du profil)
-	Gardez le chemin et le nom proposés par AGAPE
+2-e) GÃ©nÃ©ration du RelaxNG
+	GÃ©nÃ©rez le profil au format RNG (menu Outils/GÃ©nÃ©rer le schÃ©ma du profil)
+	Gardez le chemin et le nom proposÃ©s par AGAPE
 
-2-f) Contrôle du profil
-	Dans la console, lancez la commande suivante (en remplaçant CABAN par le nom que vous avez choisi) :
+2-f) ContrÃ´le du profil
+	Dans la console, lancez la commande suivante (en remplaÃ§ant CABAN par le nom que vous avez choisi) :
 		RngProfileControllerLauncher.exe CABAN
 	Cette commande traite la section profile-control qui porte le nom CABAN
 	
-	À la première utilisation, Windows pourra vous demander d'installer Framwework Dotnet 4.5.
-	Installez ce logiciel qui est nécessaire à l'exécution de ProBANT
+	Ã€ la premiÃ¨re utilisation, Windows pourra vous demander d'installer Framwework Dotnet 4.5.
+	Installez ce logiciel qui est nÃ©cessaire Ã  l'exÃ©cution de ProBANT
 
-2-g) Interprétation des résultats
-	Les messages sont assez explicites et indiquent ce qui doit être fait
-	La balise ArchivalAgencyObjectIdentifier est la première balise des unités documentaires
-		(Identifiant unité documentaire service d'archive en français)
-	Elle doit contenir un TAG identifiant de façon unique le rôle joué par cette unité documentaire
+2-g) InterprÃ©tation des rÃ©sultats
+	Les messages sont assez explicites et indiquent ce qui doit Ãªtre fait
+	La balise ArchivalAgencyObjectIdentifier est la premiÃ¨re balise des unitÃ©s documentaires
+		(Identifiant unitÃ© documentaire service d'archive en franÃ§ais)
+	Elle doit contenir un TAG identifiant de faÃ§on unique le rÃ´le jouÃ© par cette unitÃ© documentaire
 	Les TAGs peuvent se trouver dans :
 		l'attribut SchemeId de ArchivalAgencyObjectIdentifier
-		l'attribut SchemeId de Identifier (6ème balise de Document)
+		l'attribut SchemeId de Identifier (6Ã¨me balise de Document)
 	Les TAGs ont la forme suivante (les espaces autour de "/" sont obligatoires) :
 		LISTETAGS / TAG 
-			où LISTETAGS est le référentiel pour la collectivité ou le profil
-			où TAG est la typologie documentaire correspondant à 
-				l'unité documentaire ou au document
+			oÃ¹ LISTETAGS est le rÃ©fÃ©rentiel pour la collectivitÃ© ou le profil
+			oÃ¹ TAG est la typologie documentaire correspondant Ã  
+				l'unitÃ© documentaire ou au document
 				
 	Exemple :   CD_MORBIHAN / MARCHES_PUBLICITE
-				qui définit l'unité documentaire servant à décrire les publicités des marchés dans 
-				le référentiel documentaire du conseil départemental du Morbihan
+				qui dÃ©finit l'unitÃ© documentaire servant Ã  dÃ©crire les publicitÃ©s des marchÃ©s dans 
+				le rÃ©fÃ©rentiel documentaire du conseil dÃ©partemental du Morbihan
 				
-	Effectuez les modifications préconisées
-	Et répétez les étapes 2-e à 2-g jusqu'à ce qu'il n'y ait plus d'erreurs
+	Effectuez les modifications prÃ©conisÃ©es
+	Et rÃ©pÃ©tez les Ã©tapes 2-e Ã  2-g jusqu'Ã  ce qu'il n'y ait plus d'erreurs
 
 2-h) Profil sans erreurs
 	Le profil travail/profils/CABAN_TAG_profil_Sonerion_schema.rng ne contient pas
-	d'erreurs et peut être utilisé pour aider à comprendre comment traiter un
-	profil erroné
+	d'erreurs et peut Ãªtre utilisÃ© pour aider Ã  comprendre comment traiter un
+	profil erronÃ©
 
 	
 
 
 ***************************************************************************************
-3) Préparation des données métier
+3) PrÃ©paration des donnÃ©es mÃ©tier
 
-3-a) Précisions utiles
-	Le fichier de données est un fichier texte qui liste les données à associer au profil
-	pour produire un bordereau. ATTENTION : dans Notepad++ sélectionnez l'encodage UTF-8.
+3-a) PrÃ©cisions utiles
+	Le fichier de donnÃ©es est un fichier texte qui liste les donnÃ©es Ã  associer au profil
+	pour produire un bordereau. ATTENTION : dans Notepad++ sÃ©lectionnez l'encodage UTF-8.
 	Si vous ne le faites pas, les accents ne seront pas corrects dans le bordereau
 	
-	Les données métier sont les données qui changent à chaque versement. Cela correspond typiquement aux 
-	documents qui sont versés, mais aussi à des descriptions des archives (dont les dates ou les intitulés
-	peuvent changer d'un versement à l'autre) ou à des mots-clés qui décrivent le versement.
+	Les donnÃ©es mÃ©tier sont les donnÃ©es qui changent Ã  chaque versement. Cela correspond typiquement aux 
+	documents qui sont versÃ©s, mais aussi Ã  des descriptions des archives (dont les dates ou les intitulÃ©s
+	peuvent changer d'un versement Ã  l'autre) ou Ã  des mots-clÃ©s qui dÃ©crivent le versement.
 	
-	Vous pouvez vous appuyer (à partir de la version 1.0.6) sur le fichier de données exemples produit par 
-	le contrôleur de profils (voir section précédente).
+	Vous pouvez vous appuyer (Ã  partir de la version 1.0.6) sur le fichier de donnÃ©es exemples produit par 
+	le contrÃ´leur de profils (voir section prÃ©cÃ©dente).
 	
-	Chaque ligne commence par un caractère séparateur (noté "[sép]") qui peut changer à chaque ligne.
-	Ce caractère doit être choisi parmi les caractères de ponctuation ";:,!|" pour ne pas interférer avec
-	les caractères contenus dans les noms, les métadonnées et les chemins de fichiers.
+	Chaque ligne commence par un caractÃ¨re sÃ©parateur (notÃ© "[sÃ©p]") qui peut changer Ã  chaque ligne.
+	Ce caractÃ¨re doit Ãªtre choisi parmi les caractÃ¨res de ponctuation ";:,!|" pour ne pas interfÃ©rer avec
+	les caractÃ¨res contenus dans les noms, les mÃ©tadonnÃ©es et les chemins de fichiers.
 
-	Ci-dessous la liste des balises que vous pouvez mettre dans le fichier de données
-	Les pseudo balises qui ne correspondent pas à réellement à une balise SEDA sont suivies du texte " : pseudobalise".
-	Ces pseudo balises ont été créées parce que les deux premières versions du SEDA n'employaient pas le même nom de balise.
+	Ci-dessous la liste des balises que vous pouvez mettre dans le fichier de donnÃ©es
+	Les pseudo balises qui ne correspondent pas Ã  rÃ©ellement Ã  une balise SEDA sont suivies du texte " : pseudobalise".
+	Ces pseudo balises ont Ã©tÃ© crÃ©Ã©es parce que les deux premiÃ¨res versions du SEDA n'employaient pas le mÃªme nom de balise.
 	
 	TransferName : pseudobalise
 	Comment
@@ -196,27 +196,27 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 	ArchivalAgencyObjectIdentifier
 
 	La forme d'une ligne pour une balise est :
-		[sép] BALISE [sép] VALEUR
+		[sÃ©p] BALISE [sÃ©p] VALEUR
 
 	La forme d'une ligne pour un document est :
-		[sép] NOM_FIC [sép] TAG [sép] TITRE_DOC [sép] DATE
-		[sép] NOM_FIC [sép] TAG [sép] TITRE_DOC [sép] DATE [sép] ALGO [sép] EMPREINTE [sép] TAILLE
-	où 
+		[sÃ©p] NOM_FIC [sÃ©p] TAG [sÃ©p] TITRE_DOC [sÃ©p] DATE
+		[sÃ©p] NOM_FIC [sÃ©p] TAG [sÃ©p] TITRE_DOC [sÃ©p] DATE [sÃ©p] ALGO [sÃ©p] EMPREINTE [sÃ©p] TAILLE
+	oÃ¹ 
 		NOM_FIC est le nom du fichier
 		TAG est la typologie documentaire du document
 		TITRE_DOC est le titre du document
-		DATE est la date de création du document
-		ALGO est l'algorithme utilisé pour créer l'empreinte
+		DATE est la date de crÃ©ation du document
+		ALGO est l'algorithme utilisÃ© pour crÃ©er l'empreinte
 		EMPREINTE est l'empreinte du fichier
 		TAILLE est la taille du fichier en octets
-	par défaut, ALGO, EMPREINTE et TAILLE sont calculés par le générateur s'il peut avoir accès aux documents
+	par dÃ©faut, ALGO, EMPREINTE et TAILLE sont calculÃ©s par le gÃ©nÃ©rateur s'il peut avoir accÃ¨s aux documents
 
-3-b) Contrôler les données métier
-	Dans le répertoire "travail/metier" il y a deux fichiers de données.
-	Le fichier "CABAN_data-err.txt" contient des erreurs signalées par les lignes
+3-b) ContrÃ´ler les donnÃ©es mÃ©tier
+	Dans le rÃ©pertoire "travail/metier" il y a deux fichiers de donnÃ©es.
+	Le fichier "CABAN_data-err.txt" contient des erreurs signalÃ©es par les lignes
 			# Ci-dessous une erreur
 
-	Pour le vérifier, vous pouvez créer une section de contrôle des données dans le 
+	Pour le vÃ©rifier, vous pouvez crÃ©er une section de contrÃ´le des donnÃ©es dans le 
 	fichier job.config :
 
 	[data-control : erreurs]
@@ -226,9 +226,9 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
   
 	Dans la console, tapez la ligne de commande :
 		BusinessDataControllerLauncher erreurs
-	Le programme vous signale toutes les erreurs contenues dans les données métier
+	Le programme vous signale toutes les erreurs contenues dans les donnÃ©es mÃ©tier
 
-	Vous pouvez les corriger une à une ou utiliser le fichier corrigé "CABAN_data-ok.txt"
+	Vous pouvez les corriger une Ã  une ou utiliser le fichier corrigÃ© "CABAN_data-ok.txt"
 	[data-control : ok]
 	  trace = travail/traces/ok-trace.txt
 	  profil = travail/profils/CABAN_TAG_profil_Sonerion_schema.rng
@@ -242,19 +242,19 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 
 
 ***************************************************************************************
-4) Génération d'un bordereau de transfert
+4) GÃ©nÃ©ration d'un bordereau de transfert
 
-Dorénavant, vous avez un profil d'archivage vérifié par le programme de contrôle et 
-un fichier de données validé par le programme de contrôle et confronté au profil 
+DorÃ©navant, vous avez un profil d'archivage vÃ©rifiÃ© par le programme de contrÃ´le et 
+un fichier de donnÃ©es validÃ© par le programme de contrÃ´le et confrontÃ© au profil 
 d'archivage.
 
-4-a) Préparation des données du SAE
-	Le SAE est paramétré pour un accord de versement
-	Certaines données sont nécessaires pour produire le bordereau de transfert
-	La section que vous allez ajouter dans job.config représente la configuration
+4-a) PrÃ©paration des donnÃ©es du SAE
+	Le SAE est paramÃ©trÃ© pour un accord de versement
+	Certaines donnÃ©es sont nÃ©cessaires pour produire le bordereau de transfert
+	La section que vous allez ajouter dans job.config reprÃ©sente la configuration
 	du SAE.
 	
-	La clé d'accès à un accord de versement est constituée du nom de l'accord (accord-versement) 
+	La clÃ© d'accÃ¨s Ã  un accord de versement est constituÃ©e du nom de l'accord (accord-versement) 
 	et du nom du serveur du SAE (SAE_Serveur). 
 	
 	[accord-versement : CABAN]
@@ -262,17 +262,17 @@ d'archivage.
 		TransferIdPrefix = PREFIX_CABAN_
 		SAE_ProfilArchivage = travail/profils/CABAN_TAG_profil_Sonerion_schema.rng
 		TransferringAgencyId = 22560001400016
-		TransferringAgencyName = Conseil départemental du Morbihan
-		TransferringAgencyDesc = Le conseil départemental du Morbihan est l'auteur du programme ProBANT (générateur de bordereaux de transfert)
+		TransferringAgencyName = Conseil dÃ©partemental du Morbihan
+		TransferringAgencyDesc = Le conseil dÃ©partemental du Morbihan est l'auteur du programme ProBANT (gÃ©nÃ©rateur de bordereaux de transfert)
 		ArchivalAgencyId = 22560001400016
-		ArchivalAgencyName = Conseil départemental du Morbihan - Archives départementales
-		ArchivalAgencyDesc = Les archives départementales du Morbihan conservent les archives définitives du département du Morbihan
+		ArchivalAgencyName = Conseil dÃ©partemental du Morbihan - Archives dÃ©partementales
+		ArchivalAgencyDesc = Les archives dÃ©partementales du Morbihan conservent les archives dÃ©finitives du dÃ©partement du Morbihan
 
 4-b) Ajout d'une cible de production de bordereau
 
-	Si, dans le profil, vous avez demandé les empreintes ou la taille des documents, vous devrez rendre
-	ces documents accessibles au générateur et lui indiquer dans la clé "rep_documents" où vous avez copié ces
-	fichiers pour que le générateur les calcule automatiquement.
+	Si, dans le profil, vous avez demandÃ© les empreintes ou la taille des documents, vous devrez rendre
+	ces documents accessibles au gÃ©nÃ©rateur et lui indiquer dans la clÃ© "rep_documents" oÃ¹ vous avez copiÃ© ces
+	fichiers pour que le gÃ©nÃ©rateur les calcule automatiquement.
 
 	[generator : CABAN]
 	  accord = CABAN
@@ -284,11 +284,9 @@ d'archivage.
 	  
 4-c) Production du bordereau
 	Dans la console, tapez la ligne de commande :
-		JavaSedaProfileGenerator_task.bat CABAN
+		JavaSedaProfileGeneratorCD56_task.bat CABAN
 			
-			anciennement, pour le version C# :
-				SedaSummaryGeneratorLauncher CABAN
-	
 	En ouvrant le fichier "travail/bordereaux/CABAN_sonerion.xml" vous pourrez constater
-	que certaines informations concernant les documents à archiver ont été produites à partir
-	des documents enregistrés dans "travail/documents"
+	que certaines informations concernant les documents Ã  archiver ont Ã©tÃ© produites Ã  partir
+	des documents enregistrÃ©s dans "travail/documents". Ã€ savoir empreintes d'intÃ©gritÃ© 
+	et taille des documents
