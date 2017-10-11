@@ -1,4 +1,11 @@
 -------------------------
+Changements du 2017-10-06
+Version 1.1.1
+- Documentation et exécutables
+	Modification de Quickstart.txt destiné à la distribution des exécutables
+	Suppression de Programs-Releases
+	
+-------------------------
 Changements du 2017-09-19
 Version 1.1.1
 - Contrôleur de profils

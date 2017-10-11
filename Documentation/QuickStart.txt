@@ -1,14 +1,8 @@
 Guide de démarrage rapide du générateur de bordereaux de transfert
 
-	À compter de mai 2016, le code C# va se focaliser sur le contrôle, la génération
-	étant assurée par la version Java. 
-	Le code C# sera gardé en synchronisation avec le générateur Java que vous trouverez
-	à cette adresse : https://github.com/PatPercot/Java-Seda-Generator
-	Ce code est un fork du générateur CGI publié sur GitHub :
-		https://github.com/CGI-France/Java-Seda-Generator
-	CGI traitera les Pull request produites à partir de cette version au fur et à mesure
-	de leur validation. Cette validation n'étant ni automatique ni systématique, les deux
-	versions pourront diverger temporairement.
+	Ce guide est destiné à une mise en œuvre rapide de la distribution des exécutables
+	https://github.com/PatPercot/SedaGenerator-Distribution-Executables
+
 
 1) Installation du logiciel
 2) Instrumentation d'un profil d'archivage
@@ -25,32 +19,40 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 	directement sous Mono (installez le paquetage Mono de votre distribution)
 
 1-a) Installation
-	Sur la plate-forme GitHub : en page d'accueil, cliquer sur le bouton 
+	Sur la plate-forme GitHub : en page d'accueil de la page 
+	https://github.com/PatPercot/SedaGenerator-Distribution-Executables
+	Cliquer sur le bouton 
 	     "Clone or download" puis sur "Download ZIP"
 	Dézipper le fichier sur votre ordinateur dans un endroit facilement accessible
 		(choisissez un chemin court, idéalement dans la racine d'un de vos disques)
-	Aller dans le répertoire "Programs-Releases" qui contient les exécutables
+	
 	Faites une copie du fichier job.config.sample et renommez-la en job.config
+	Faites une copie du répertoire travail.sample et renommez-la en travail
 
-	Téléchargez la dernière version du ZIP situé à cette adresse :
-		https://github.com/PatPercot/Java-Seda-Generator/tree/master/target
-	Extraire les fichiers de ce ZIP dans Programs-Releases, particulièrement :
-		le répertoire lib
-		le fichier JavaSedaProfileGenerator_task.bat
-	
 	Vous êtes prêt à démarrer.
+
+
+
+1-b) Exploration
+	Explorez le répertoire "travail"
+		Ce répertoire contient :
+			- un répertoire "profils" pour les profils que vous préparez
+			- un répertoire "metier" pour les données métier
+			- un répertoire "documents" pour les documents à archiver
+			- un répertoire "bordereaux" pour les bordereaux générés
+			- un répertoire "traces" pour les fichiers de traces (pour les développeurs)
 	
+	Explorez le fichier job.config
+		Ce fichier contient des sections reconnaissables parce que le texte de la ligne 
+		est encadré par des crochets droits : [type-section : NOM_SECTION]
+			- section [profile-control : section_PC] ; décrit un contrôle de profil d'archivage
+			- section [data-control : section_DC] ; décrit un contrôle de données métier
+			- section [generator : section_G] ; décrit une génaration de bordereau de transfert
+			- section [accord-versement : section_AV] ; décrit un accord de versment utilisé par 
+					une ou plusieurs sections "generator"
 
 
-1-b) Préparation
-	Explorez le répertoire "travail" dans le répertoire "Programs-Releases"
-	Ce répertoire contient :
-		- un répertoire "profils" pour les profils que vous préparez
-		- un répertoire "metier" pour les données métier
-		- un répertoire "documents" pour les documents à archiver
-		- un répertoire "bordereaux" pour les bordereaux générés
-		- un répertoire "traces" pour les fichiers de traces (pour les développeurs)
-			
+					
 			
 ***************************************************************************************
 2) Instrumentation d'un profil d'archivage
@@ -66,29 +68,24 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 	traitera. ProBANT ne sachant travailler que sur le RNG, après chaque modification, vous
 	devrez régénérer le schéma RNG avec AGAPE.
 	
-	Paramétrez AGAPE poyur afficher les balise du SEDA : Préférences / Préférences d'affichage / langue utilisée : balises du SEDA
+	Paramétrez AGAPE pour afficher les balises du SEDA : Préférences / Préférences d'affichage / langue utilisée : balises du SEDA
 	
 
 2-b) Préparation du fichier job.config
 	Ouvrez le fichier job.config avec un "vrai" éditeur de texte (Notepad++ par exemple)
 	
-	Copiez les 3 lignes de la section "profile-control" ci-dessous :
+	Copiez les 4 lignes de la section "profile-control" ci-dessous :
 	
 [profile-control : CABAN]
   trace = travail/traces/CABAN_profil_Sonerion_traces.txt
   profil = travail/profils/CABAN_profil_Sonerion_schema.rng
-
-  Si vous souhaitez produire un fichier de données exemples (à partir de la version 1.0.6)
-  vous pouvez ajouter une ligne data. Vous pourrez repartir ensuite de ce fichier pour générer
-  vos données métier
-
-[profile-control : CABAN]
-  trace = travail/traces/CABAN_profil_Sonerion_traces.txt
-  profil = travail/profils/CABAN_profil_Sonerion_schema.rng
-  date = travail/traces/CABAN_profil_Sonerion_donnees.txt
+  data = travail/profils/CABAN_profil_Sonerion_donnees_sample.txt
 
     Collez ce texte dans le fichier job.config en fin de fichier
 	
+    À partir de la version 1.0.6, la ligne data produit un fichier de données exemples.
+    Vous pourrez repartir de ce fichier pour générer un vrai jeu de données métier
+
 	Si vous utilisez votre propre profil d'archivage, modifiez :
 	  le nom de la cible 
           (ici CABAN) par un nom qui définit bien votre profil (ce nom ne doit pas contenir d'espaces)
@@ -96,17 +93,25 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 	      (ici travail/profils/CABAN_profil_Sonerion-schema.rng) par le nom de votre fichier de profil 
 
     ATTENTION ! par défaut avec AGAPE le nom du RNG se termine par :
-		-schema.rng
+		_schema.rng
 	
 2-c) Préparation de la console
-	Lancez une console 
-		(sous Windows Démarrer / Exécuter : cmd)
-		(sous Linux : Terminal)
+	Vous avez deux façons de procéder
+	
+	1) 	Sous Windows
+		À l'aide de l'explorateur de fichiers, déplacez-vous vers le répertoire d'installation de ProBANT.
+		Lorsque ce répertoire est visible dans le panneau de droite,
+			Appuyez sur SHIFT et faites un clic bouton droit
+			Choisissez l'item de menu "Ouvrir une fenêtre de commandes ici"
 		
-	Déplacez-vous dans le répertoire Programs-Releases 
-		Windows tapez : cd \[Chemin d'installation de ProBANT]\Seda-Generator-master\\Seda-Generator-master\Programs-Releases
+	2)	Lancez une console 
+			(sous Windows Démarrer / Exécuter : cmd)
+			(sous Linux : Terminal)
 		
-		Linux   tapez : cd [Chemin d'installation de ProBANT]/Seda-Generator-master/Seda-Generator-master/Programs-Releases
+		Déplacez-vous dans le répertoire d'installation de ProBANT
+			Windows tapez : cd \[Chemin d'installation de ProBANT]\Seda-Generator-master\\Seda-Generator-master\Programs-Releases
+		
+			Linux   tapez : cd [Chemin d'installation de ProBANT]/Seda-Generator-master/Seda-Generator-master/Programs-Releases
 
 2-d) Édition du profil
 	Lancez le logiciel Agape
@@ -150,6 +155,7 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 	d'erreurs et peut être utilisé pour aider à comprendre comment traiter un
 	profil erroné
 
+	
 
 
 ***************************************************************************************
@@ -186,6 +192,8 @@ Guide de démarrage rapide du générateur de bordereaux de transfert
 	ContainsName : pseudobalise
 	ContainsDescription : pseudobalise
 	KeywordContent
+	ArchivalAgencyArchiveIdentifier
+	ArchivalAgencyObjectIdentifier
 
 	La forme d'une ligne pour une balise est :
 		[sép] BALISE [sép] VALEUR
@@ -246,7 +254,7 @@ d'archivage.
 	La section que vous allez ajouter dans job.config représente la configuration
 	du SAE.
 	
-	La clé d'accès à un accord de versement est constitué du nom de l'accord (accord-versement) 
+	La clé d'accès à un accord de versement est constituée du nom de l'accord (accord-versement) 
 	et du nom du serveur du SAE (SAE_Serveur). 
 	
 	[accord-versement : CABAN]
