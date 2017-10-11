@@ -1,4 +1,9 @@
 ***************************
+2017-10-11
+	Générateur et contrôleurs
+		Ajouter la balise RelatedObjectReference dans l'archive et les unités documentaires
+
+***************************
 2017-09-12
 	Contrôleur de données métier
 		Pour un TAG, contrôler la conformité du nombre de fichiers avec la cardinalté des Document
