@@ -1,4 +1,9 @@
 ***************************
+2017-11-29
+	Contrôleur de profil
+		Ajouter la production de la balise '#ContentDescription.Description' dans les données métier
+
+***************************
 2017-10-11
 	Générateur et contrôleurs
 		Ajouter la balise RelatedObjectReference dans l'archive et les unités documentaires
