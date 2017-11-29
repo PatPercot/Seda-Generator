@@ -7,6 +7,7 @@
 		La génération des dates extrêmes ne fonctionne pas pour :
 			Les unités documentaires qui ont plusieurs types de documents
 			Les unités documentaires englobantes ne contenant pas de documents
+		Ajouter la production d'historique de conservation des unités documentaires (erreur version 1.0 ?)
 
 ***************************
 2017-10-11
