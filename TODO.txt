@@ -2,6 +2,10 @@
 2017-11-29
 	Contrôleur de profil
 		Ajouter la production de la balise '#ContentDescription.Description' dans les données métier
+	Générateur de bordereau
+		La génération des dates extrêmes ne fonctionne pas pour :
+			Les unités documentaires qui ont plusieurs types de documents
+			Les unités documentaires englobantes ne contenant pas de documents
 
 ***************************
 2017-10-11
