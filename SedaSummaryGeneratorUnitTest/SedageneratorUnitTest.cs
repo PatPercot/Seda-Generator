@@ -1224,17 +1224,17 @@ namespace SedaSummaryGeneratorUnitTest {
             executeGenerator("DatesExtremesSedaV1_0", "1.0");
 
             checkForNoErrors();
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ContentDescription/s:LatestDate", "2017-10-26");
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ContentDescription/s:OldestDate", "2017-03-13");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject/s:ContentDescription/s:LatestDate", "2017-10-26");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject/s:ContentDescription/s:OldestDate", "2017-03-13");
 
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ContentDescription/s:LatestDate", "2017-07-21");
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ContentDescription/s:OldestDate", "2017-07-01");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject/s:ArchiveObject[1]/s:ContentDescription/s:LatestDate", "2017-07-21");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject/s:ArchiveObject[1]/s:ContentDescription/s:OldestDate", "2017-07-01");
 
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[2]/s:ContentDescription/s:LatestDate", "2017-08-14");
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[2]/s:ContentDescription/s:OldestDate", "2017-08-13");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject/s:ArchiveObject[2]/s:ContentDescription/s:LatestDate", "2017-08-14");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject/s:ArchiveObject[2]/s:ContentDescription/s:OldestDate", "2017-08-13");
 
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[4]/s:ArchiveObject[3]/s:ContentDescription/s:LatestDate", "2017-10-26");
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[4]/s:ArchiveObject[3]/s:ContentDescription/s:OldestDate", "2017-10-21");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject/s:ArchiveObject[4]/s:ArchiveObject[3]/s:ContentDescription/s:LatestDate", "2017-10-26");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject/s:ArchiveObject[4]/s:ArchiveObject[3]/s:ContentDescription/s:OldestDate", "2017-10-21");
 
         }
 
@@ -1244,17 +1244,17 @@ namespace SedaSummaryGeneratorUnitTest {
             executeGenerator("DatesExtremesSedaV0_2", "0.2");
 
             checkForNoErrors();
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:ContentDescription/s:LatestDate", "2017-10-26");
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:ContentDescription/s:OldestDate", "2017-03-13");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains/s:ContentDescription/s:LatestDate", "2017-10-26");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains/s:ContentDescription/s:OldestDate", "2017-03-13");
 
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:ContentDescription/s:LatestDate", "2017-07-21");
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:ContentDescription/s:OldestDate", "2017-07-01");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains/s:Contains[1]/s:ContentDescription/s:LatestDate", "2017-07-21");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains/s:Contains[1]/s:ContentDescription/s:OldestDate", "2017-07-01");
 
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[2]/s:ContentDescription/s:LatestDate", "2017-08-14");
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[2]/s:ContentDescription/s:OldestDate", "2017-08-13");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains/s:Contains[2]/s:ContentDescription/s:LatestDate", "2017-08-14");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains/s:Contains[2]/s:ContentDescription/s:OldestDate", "2017-08-13");
 
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[4]/s:Contains[3]/s:ContentDescription/s:LatestDate", "2017-10-26");
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[4]/s:Contains[3]/s:ContentDescription/s:OldestDate", "2017-10-21");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains/s:Contains[4]/s:Contains[3]/s:ContentDescription/s:LatestDate", "2017-10-26");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains/s:Contains[4]/s:Contains[3]/s:ContentDescription/s:OldestDate", "2017-10-21");
 
         }
 
