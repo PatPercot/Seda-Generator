@@ -1152,9 +1152,12 @@ namespace SedaSummaryGeneratorUnitTest {
         // le test suivant vérifie avec les mêmes données la génération d'un bordereau au format SEDA 1.0
         [TestMethod]
         public void W66_TestDateManquanteSansErreur() {
-            executeGenerator("date_manquante_sans_erreur", "0.2");
+            executeGenerator("date_manquante_avec_erreur", "0.2");
 
-            checkForNoErrors();
+            String[] erreursAttendues = { 
+                                            "Impossible de calculer les dates extrêmes car la date de ce document n'a pas été trouvée : document1e1.txt",
+                                        };
+            checkForErrors(erreursAttendues);
 
         }
 
@@ -1224,17 +1227,22 @@ namespace SedaSummaryGeneratorUnitTest {
             executeGenerator("DatesExtremesSedaV1_0", "1.0");
 
             checkForNoErrors();
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ContentDescription/s:LatestDate", "2017-10-26");
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ContentDescription/s:OldestDate", "2017-03-13");
-
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ContentDescription/s:LatestDate", "2017-07-21");
+            // # Dates extrêmes UD0 01/07/2017 au 21/07/2017
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ContentDescription/s:LatestDate", "2017-10-26");
             checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ContentDescription/s:OldestDate", "2017-07-01");
 
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[2]/s:ContentDescription/s:LatestDate", "2017-08-14");
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[2]/s:ContentDescription/s:OldestDate", "2017-08-13");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ArchiveObject[1]/s:ContentDescription/s:LatestDate", "2017-07-21");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ArchiveObject[1]/s:ContentDescription/s:OldestDate", "2017-07-01");
 
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[4]/s:ArchiveObject[3]/s:ContentDescription/s:LatestDate", "2017-10-26");
-            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[4]/s:ArchiveObject[3]/s:ContentDescription/s:OldestDate", "2017-10-21");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ArchiveObject[2]/s:ContentDescription/s:LatestDate", "2017-08-14");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ArchiveObject[2]/s:ContentDescription/s:OldestDate", "2017-08-13");
+
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ArchiveObject[4]/s:ArchiveObject[3]/s:ContentDescription/s:LatestDate", "2017-10-26");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ArchiveObject[4]/s:ArchiveObject[3]/s:ContentDescription/s:OldestDate", "2017-10-21");
+
+            // # Dates extrêmes UD2 13/03/2017 au 18/04/2017
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[2]/s:ContentDescription/s:LatestDate", "2017-04-18");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[2]/s:ContentDescription/s:OldestDate", "2017-03-13");
 
         }
 
@@ -1244,17 +1252,22 @@ namespace SedaSummaryGeneratorUnitTest {
             executeGenerator("DatesExtremesSedaV0_2", "0.2");
 
             checkForNoErrors();
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:ContentDescription/s:LatestDate", "2017-10-26");
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:ContentDescription/s:OldestDate", "2017-03-13");
-
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:ContentDescription/s:LatestDate", "2017-07-21");
+            // # Dates extrêmes UD0 01/07/2017 au 21/07/2017
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:ContentDescription/s:LatestDate", "2017-10-26");
             checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:ContentDescription/s:OldestDate", "2017-07-01");
 
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[2]/s:ContentDescription/s:LatestDate", "2017-08-14");
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[2]/s:ContentDescription/s:OldestDate", "2017-08-13");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:Contains[1]/s:ContentDescription/s:LatestDate", "2017-07-21");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:Contains[1]/s:ContentDescription/s:OldestDate", "2017-07-01");
 
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[4]/s:Contains[3]/s:ContentDescription/s:LatestDate", "2017-10-26");
-            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[4]/s:Contains[3]/s:ContentDescription/s:OldestDate", "2017-10-21");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:Contains[2]/s:ContentDescription/s:LatestDate", "2017-08-14");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:Contains[2]/s:ContentDescription/s:OldestDate", "2017-08-13");
+
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:Contains[4]/s:Contains[3]/s:ContentDescription/s:LatestDate", "2017-10-26");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:Contains[4]/s:Contains[3]/s:ContentDescription/s:OldestDate", "2017-10-21");
+
+            // # Dates extrêmes UD2 13/03/2017 au 18/04/2017
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[2]/s:ContentDescription/s:LatestDate", "2017-04-18");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[2]/s:ContentDescription/s:OldestDate", "2017-03-13");
 
         }
 

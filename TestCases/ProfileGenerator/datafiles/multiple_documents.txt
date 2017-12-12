@@ -9,6 +9,6 @@
 
 ,#ContainsName[UD1],Unité documentaire 1
 ,#ContentDescription.Description[UD1],Description de l'unité documentaire 1
-,document1e1.txt,UD1{DOC1},Document 1 E1,
-,document2e1.txt,UD1{DOC2},Document 2 E1,
+,document1e1.txt,UD1{DOC1},Document 1 E1,2017/12/12
+,document2e1.txt,UD1{DOC2},Document 2 E1,2017/12/12
 
