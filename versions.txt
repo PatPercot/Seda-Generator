@@ -1,5 +1,24 @@
 ﻿Suivi des versions
 
+Version 1.1.5
+	Générateur
+		Imbrication de documents et unités documentaires dans une même unité documentaire en SEDA v1.0 (correction CGI du 04/06/2018)
+
+Version 1.1.4
+	Générateur
+		Ajout des paramètres fichier métier, rep_documents et bordereau (prévalent sur la configuration de job.config)
+
+Version 1.1.3
+	Générateur
+		Correction bug des dates extrêmes non calculées sur les unités documentaires sans documents
+
+Version 1.1.1
+	Contrôleur
+		Correction message d'erreur balise document obligatoire injustifié en version 1.0 du SEDA
+		Contrôle des balises TransferringAgencyObjectIdentifier et TransferringAgencyArchiveIdentifier
+	Générateur
+		Génération des balises TransferringAgencyObjectIdentifier et TransferringAgencyArchiveIdentifier
+
 Version 1.0.7
 	Contrôleur de profils
 		OriginatingAgency.xxx ne sont plus générées dans les données métier si le profil les fournit

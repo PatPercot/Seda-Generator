@@ -17,7 +17,7 @@ REM if not exist lib-cd56 mkdir lib-cd56
 REM del /Q lib-cd56\*
 
 echo Copie des bibliothèques Java
-copy ..\CD56-Java-Seda-Generator\target\lib\* SedaSummaryGeneratorUnitTest\lib-cd56 1>NUL
+copy ..\CD56-Java-Seda-Generator\target\lib\* SedaSummaryGeneratorUnitTest\lib-cd56 
 echo Copie des exécutables Java CD56
 copy ..\CD56-Java-Seda-Generator\target\JavaSedaProfileGenerator-*.jar SedaSummaryGeneratorUnitTest\lib-cd56 1>NUL
 

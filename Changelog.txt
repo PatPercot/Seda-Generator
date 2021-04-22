@@ -1,4 +1,16 @@
 -------------------------
+Changements du 2021-04-21
+Version 1.1.5
+- Générateur de bordereaux
+	Imbrication de documents et unités documentaires dans une même unité documentaire en SEDA v1.0 (correction CGI du 04/06/2018)
+	
+-------------------------
+Changements du 2020-01-21
+Version 1.1.4
+- Générateur de bordereaux
+	Ajout des paramètres fichier métier, rep_documents et bordereau (prévalent sur la configuration de job.config)
+	
+-------------------------
 Changements du 2017-12-12
 Version 1.1.3
 - Générateur de bordereaux et cas de tests
@@ -7,7 +19,7 @@ Version 1.1.3
 	
 -------------------------
 Changements du 2017-10-06
-Version 1.1.1
+Version 1.1.2
 - Documentation et exécutables
 	Modification de Quickstart.txt destiné à la distribution des exécutables
 	Suppression de Programs-Releases
