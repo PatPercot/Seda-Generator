@@ -36,6 +36,18 @@ ArchiveObject/Name																		Métier			#ContainsName[TagPath]						1.0
 Contains/Contains/Name																	Métier			#ContainsName[TagPath]						0.2
 ArchiveObject/ContentDescription/Keyword/KeywordContent									Métier			#KeywordContent_TagPath[#x]					1.0
 Contains/ContentDescription/ContentDescriptive/KeywordContent							Métier			#KeywordContent_TagPath[#x]					0.2
+/ArchiveTransfer/Contains/Appraisal/Code                            					Métier			#Appraisal.Code								0.2
+/ArchiveTransfer/Contains/Appraisal/Duration                           					Métier			#Appraisal.Duration							0.2
+/ArchiveTransfer/Contains/AccessRestriction/Code                       					Métier			#AccessRestriction.Code						0.2
+/ArchiveTransfer/Archive/AppraisalRule/Code                            					Métier			#Appraisal.Code								1.0
+/ArchiveTransfer/Archive/AppraisalRule/Duration                        					Métier			#Appraisal.Duration							1.0
+/ArchiveTransfer/Archive/AccessRestrictionRue/Code                     					Métier			#AccessRestriction.Code						1.0
+/ArchiveTransfer/Contains/Contains/Appraisal/Code                      					Métier			#Appraisal.Code[TagPath]					0.2
+/ArchiveTransfer/Contains/Contains/Appraisal/Duration                 					Métier			#Appraisal.Duration[TagPath]				0.2
+/ArchiveTransfer/Contains/Contains/AccessRestriction/Code             					Métier			#AccessRestriction.Code[TagPath]			0.2
+/ArchiveTransfer/Archive/ArchiveObject/AppraisalRule/Code              					Métier			#Appraisal.Code[TagPath]					1.0
+/ArchiveTransfer/Archive/ArchiveObject/AppraisalRule/Duration          					Métier			#Appraisal.Duration[TagPath]				1.0
+/ArchiveTransfer/Archive/ArchiveObject/AccessRestrictionRue/Code       					Métier			#AccessRestriction.Code[TagPath]			1.0
 
  * 
  * */
