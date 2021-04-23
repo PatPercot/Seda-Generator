@@ -515,7 +515,8 @@ namespace RngProfileControllerUnitTest {
         /*
          * 
          * */
-        public void M30_TestTransferringAgencyObjectOdentifier_02() {
+        public void M30_TestTransferringAgencyObjectOdentifier_02()
+        {
             String[] branchesAttendues = { "\troot", "\t\tUD1", "\t\t\tUD_TAOI", "\t\t\tUD_TAOI_OPT", "\t\t\tUD_SS_TAOI", "" };
             String[] erreursAttendues = 
                 { 
@@ -529,7 +530,8 @@ namespace RngProfileControllerUnitTest {
         /*
          * 
          * */
-        public void M30_TestTransferringAgencyObjectOdentifier_10() {
+        public void M31_TestTransferringAgencyObjectOdentifier_10()
+        {
             String[] branchesAttendues = { "\troot", "\t\tUD1", "\t\t\tUD_TAOI", "\t\t\tUD_TAOI_OPT", "\t\t\tUD_SS_TAOI", "" };
             String[] erreursAttendues = 
                 { 
@@ -537,6 +539,32 @@ namespace RngProfileControllerUnitTest {
 				"La balise TransferringAgencyObjectIdentifier de l'unité documentaire 'UD_TAOI_OPT' ne peut pas être optionnelle. Il faut la rendre obligatoire",
                 };
             declencherTestProfil("TransferringAgencyObjectIdentifier_10", branchesAttendues, erreursAttendues, true);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void M32_TestCycleVie_02()
+        {
+            String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+            String[] erreursAttendues = 
+                { 
+                };
+            declencherTestProfil("cycle_vie_02", branchesAttendues, erreursAttendues, true);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void M33_TCycleVie_10()
+        {
+            String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+            String[] erreursAttendues = 
+                { 
+                };
+            declencherTestProfil("cycle_vie_10", branchesAttendues, erreursAttendues, true);
         }
 
 

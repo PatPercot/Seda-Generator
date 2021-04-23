@@ -163,6 +163,8 @@ namespace SedaSummaryGenerator {
                                         } else {
                                             currentDocumentTypeId = "root";
                                             loadExpectedTagsInMainContainsNode( containsNodeName, "rootContains" );
+                                            checkForAppraisalCodeAndDuration(containsNodeName, "rootContains");
+                                            checkForAccessRestrictionCode(containsNodeName, "rootContains");
                                             checkForDocumentInArchive(containsNodeName, "rootContains");
                                             checkFoArchivalAgreementInArchive(containsNodeName, "rootContains");
                                             checkForContentDescription(containsNodeName, "rootContains");
@@ -227,7 +229,13 @@ namespace SedaSummaryGenerator {
                     dataStream.WriteLine("# \n\n");
                     if (expectedTagsList != null && expectedTagsList.Count != 0) {
                         foreach (String str in expectedTagsList) {
-                            if (str.StartsWith("#")) {
+                            if (str.StartsWith("#Appraisal.Code")) {
+                                dataStream.WriteLine("," + str + ",conserver|detruire");
+                            } else if (str.StartsWith("#Appraisal.Duration")) {
+                                dataStream.WriteLine("," + str + ",Durée ISO 8601 en années : ex P10Y");
+                            } else if (str.StartsWith("#AccessRestriction.Code")) {
+                                dataStream.WriteLine("," + str + ",AR038...AR062");
+                            } else if (str.StartsWith("#")) {
                                 dataStream.WriteLine("," + str + ",Texte à personnaliser");
                             } else {
                                 dataStream.WriteLine(",fichier.txt," + str.Replace("document: ", "") + ",Description du document,13/03/2017 14:31:27");
@@ -265,19 +273,90 @@ namespace SedaSummaryGenerator {
 
         }
 
-        private void loadExpectedTagsInMainContainsNode(String activeNodeName, String context) {
+        private void checkForAppraisalCodeAndDuration(String activeNodeName, String context) {
+            XmlNode node;
+            String xPath, savedNodeName, parentNodeName, nodeContent;
+            parentNodeName = SEDA_version == "0.2" ? "Appraisal" : "AppraisalRule";
+            // Recherche de la balise Appraisal
+            xPath = "rng:define[@name='" + activeNodeName + "']/descendant::rng:element[@name='" + parentNodeName + "']/rng:ref";
+            node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (node != null) {
+                nodeContent = node.Attributes.GetNamedItem("name").Value;
+                savedNodeName = nodeContent;
+                if (nodeContent != null) { // something like Appraisal_N65713
+                    xPath = "rng:define[@name='" + nodeContent + "']/descendant::rng:element[@name='" + "Code" + "']/rng:ref";
+                    node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (node != null) {
+                        nodeContent = node.Attributes.GetNamedItem("name").Value;
+                        if (nodeContent != null) { // something like Code_N65718
+                            xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
+                            node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (node != null) {
+                                if (context == "rootContains") 
+                                    expectedTagsList.Add("#Appraisal.Code");
+                                else
+                                    expectedTagsList.Add("#Appraisal.Code" + "[" + currentContainsNode.getRelativeContext() + "]");
+                            }
+                        }
+                    }
+                    xPath = "rng:define[@name='" + savedNodeName + "']/descendant::rng:element[@name='" + "Duration" + "']/rng:data[@type='string']";
+                    node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (node != null) {
+                        if (context == "rootContains")
+                            expectedTagsList.Add("#Appraisal.Duration");
+                        else
+                            expectedTagsList.Add("#Appraisal.Duration" +  "[" + currentContainsNode.getRelativeContext() + "]");
+                    }
+
+                }
+            }
+        }
+
+        private void checkForAccessRestrictionCode(String activeNodeName, String context) {
+            XmlNode node;
+            String xPath, parentNodeName, nodeContent;
+            parentNodeName = SEDA_version == "0.2" ? "AccessRestriction" : "AccessRestrictionRule";
+            // Recherche de la balise Appraisal
+            xPath = "rng:define[@name='" + activeNodeName + "']/descendant::rng:element[@name='" + parentNodeName + "']/rng:ref";
+            node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+            if (node != null) {
+                nodeContent = node.Attributes.GetNamedItem("name").Value;
+                if (nodeContent != null) { // something like AccessRestriction_N65748
+                    xPath = "rng:define[@name='" + nodeContent + "']/descendant::rng:element[@name='" + "Code" + "']/rng:ref";
+                    node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                    if (node != null) {
+                        nodeContent = node.Attributes.GetNamedItem("name").Value;
+                        if (nodeContent != null) { // something like Code_N65718
+                            xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
+                            node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                            if (node != null) {
+                                if (context == "rootContains")
+                                    expectedTagsList.Add("#AccessRestriction.Code");
+                                else
+                                    expectedTagsList.Add("#AccessRestriction.Code" + "[" + currentContainsNode.getRelativeContext() + "]");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+            private void loadExpectedTagsInMainContainsNode(String activeNodeName, String context) {
             XmlNode node, parentNode;
             String xPath, nodeName, parentNodeName, nodeContent;
 
             // Recherche du nom du transfert
             xPath = "rng:define[@name='" + activeNodeName + "']/descendant::rng:element[@name='" + "Name" + "']/rng:ref";
             node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-            if (node != null) {
+            if (node != null)
+            {
                 nodeContent = node.Attributes.GetNamedItem("name").Value;
-                if (nodeContent != null) {
+                if (nodeContent != null)
+                {
                     xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
                     node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                    if (node != null) {
+                    if (node != null)
+                    {
                         expectedTagsList.Add("#TransferName");
                     }
                 }
@@ -291,6 +370,7 @@ namespace SedaSummaryGenerator {
                 if (parentNodeName != null) {
                     String oldParentNodeName = parentNodeName;
 
+                    // TODO: SEDA 1.0 CustodialHistoryItem
                     nodeName = "CustodialHistory";
                     xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
                     node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
@@ -331,12 +411,15 @@ namespace SedaSummaryGenerator {
                     // Recherche de Description
                     xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + "Description" + "']/rng:ref";
                     parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                    if (parentNode != null) {
+                    if (parentNode != null)
+                    {
                         parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
-                        if (parentNodeName != null) {
+                        if (parentNodeName != null)
+                        {
                             xPath = "rng:define[@name='" + parentNodeName + "']/rng:data[@type='string']";
                             node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                            if (node != null) {
+                            if (node != null)
+                            {
                                 expectedTagsList.Add("#ContentDescription.Description");
                             }
                         }
@@ -349,6 +432,7 @@ namespace SedaSummaryGenerator {
                     addExpectedFilePlanPositionTags(oldParentNodeName, context, null);
                 }
             }
+
         }
 
 
@@ -538,6 +622,7 @@ namespace SedaSummaryGenerator {
                 if (parentNodeName != null) {
                     String contentDescriptionDefineName = parentNodeName;
 
+                    // TODO: SEDA_version 1.0 CustodialHistoryItem 
                     String nodeName = "CustodialHistory";
                     xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
                     node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
@@ -760,6 +845,8 @@ namespace SedaSummaryGenerator {
                 if (! isRepeatable &&   currentDocumentTypeId.EndsWith("+"))
                     errorsList.Add("L'unité documentaire '" + currentDocumentTypeId + "' est unique ou optionnelle, mais elle possède un TAG répétable (TAG+). Il faut supprimer le '+' du tag ou changer les cardinalités");
                 loadExpectedTagsInContainsNode(defineNodeName, currentDocumentTypeId, context);
+                checkForAppraisalCodeAndDuration(defineNodeName, context);
+                checkForAccessRestrictionCode(defineNodeName, context);
             }
 
 
