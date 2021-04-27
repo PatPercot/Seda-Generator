@@ -496,6 +496,62 @@ namespace BusinessDataControllerUnitTest {
         /*
          * 
          * */
+        public void H10_TestCycleVieDonnees10() {
+            String[] erreursAttendues = 
+                { 
+                };
+            ConfrontationDonneesEtProfil("cycle_vie_10", erreursAttendues, true);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void H11_TestCycleVieDonnees02() {
+            String[] erreursAttendues = 
+                { 
+                };
+            ConfrontationDonneesEtProfil("cycle_vie_02", erreursAttendues, true);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void H12_TestCycleVieDonnees02_Erreurs() {
+            String[] erreursAttendues = 
+                { 
+                "Dans le profil, le tag '#Appraisal.Code' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#Appraisal.Duration' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#AccessRestriction.Code' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#Appraisal.Code[UD1]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#Appraisal.Duration[UD1]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#AccessRestriction.Code[UD1]' ne trouve pas de correspondance dans les données métier",
+                };
+            ConfrontationDonneesEtProfil("cycle_vie_02_err", erreursAttendues, true);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void H13_TestCycleVieDonnees10_Erreurs() {
+            String[] erreursAttendues = 
+                { 
+                "Dans le profil, le tag '#Appraisal.Code' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#Appraisal.Duration' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#AccessRestriction.Code' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#Appraisal.Code[UD1]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#Appraisal.Duration[UD1]' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#AccessRestriction.Code[UD1]' ne trouve pas de correspondance dans les données métier",
+                };
+            ConfrontationDonneesEtProfil("cycle_vie_10_err", erreursAttendues, true);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
         public void I01_TestFilePlanPosition() {
             String[] erreursAttendues = 
                 { 

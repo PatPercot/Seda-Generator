@@ -1,4 +1,13 @@
 ***************************
+2021-04-26
+	Contrôleur de profil
+		SEDA 1.0 CustodialHistoryItem
+	Contrôleur de données
+		SEDA 1.0 CustodialHistoryItem
+	Générateur de bordereau
+		SEDA 1.0 CustodialHistoryItem
+
+***************************
 2017-11-29
 	Contrôleur de profil
 		Ajouter la production de la balise '#ContentDescription.Description' dans les données métier
