@@ -1293,5 +1293,36 @@ namespace SedaSummaryGeneratorUnitTest {
 
         }
 
+        [TestMethod]
+        public void W76_TestCycleVieServersantSedaV0_2() {
+            executeGenerator("cycle_vie_serversant_seda02", "0.2");
+
+            checkForNoErrors();
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Appraisal/s:Code", "conserver");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Appraisal/s:Duration", "P10Y");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:AccessRestriction/s:Code", "AR039");
+
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:Appraisal/s:Code", "detruire");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:Appraisal/s:Duration", "P77Y");
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:AccessRestriction/s:Code", "AR042");
+
+        }
+
+        [TestMethod]
+        public void W77_TestCycleVieServersantSedaV1_0() {
+            executeGenerator("cycle_vie_serversant_seda10", "1.0");
+
+            checkForNoErrors();
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:AppraisalRule/s:Code", "conserver");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:AppraisalRule/s:Duration", "P10Y");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:AccessRestrictionRule/s:Code", "AR039");
+
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:AppraisalRule/s:Code", "detruire");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:AppraisalRule/s:Duration", "P77Y");
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:AccessRestrictionRule/s:Code", "AR042");
+
+        }
+
+
     }
 }
