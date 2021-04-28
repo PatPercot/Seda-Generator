@@ -1,5 +1,10 @@
 ﻿Suivi des versions
 
+Version 1.1.6
+	Générateur
+		Possibilité de fournir les métadonnées du cycle de vie et le service versant dans les données métier
+		(situation transitoire avant intégration d'un référentiel d'archivage)
+
 Version 1.1.5
 	Générateur
 		Imbrication de documents et unités documentaires dans une même unité documentaire en SEDA v1.0 (correction CGI du 04/06/2018)
