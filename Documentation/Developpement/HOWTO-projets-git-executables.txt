@@ -188,5 +188,5 @@ On commence par intégrer le code de la branche de développement pour chacune d
 
 	git tag -a v1.1.6 -m '"Version 1.1.6"
 	git push --follow-tags origin master
-	git push --follow-tags origin github
+	git push --follow-tags github origin
 
