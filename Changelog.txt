@@ -1,4 +1,10 @@
 -------------------------
+Changements du 2021-04-28
+Version 1.1.6
+- Générateur de bordereaux
+	Métadonnées cycle de vie et service versant dans les données métier
+	
+-------------------------
 Changements du 2021-04-21
 Version 1.1.5
 - Générateur de bordereaux

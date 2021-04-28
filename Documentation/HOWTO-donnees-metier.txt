@@ -14,6 +14,15 @@
 
 Guide de production des données métier
 
+Table des matières :
+0) Principes de base
+1) Données générales
+2) Unités documentaires simples
+3) Unités documentaires répétées
+4) Gestion du cycle de vie
+5) Documents identifiés 
+6) Mots-clés
+
 
 0) Principes de base
 
@@ -50,6 +59,15 @@ Exemple :
 
 Ainsi de suite pour toutes les balises qui peuvent être demandées par le profil d'archivage.
 
+Les données du service versant (TransferringAgency) sont normalement fournies par la configuration de ProBANT.
+Toutefois, il est possible de les laisser vides dans la configuration de ProBANT.
+Dans ce cas, les données métier doivent fournir les tags suivants :
+,#TransferringAgency.Description,Le service versant dans les données métier
+,#TransferringAgency.Identification,DONNEES_METIER_007
+,#TransferringAgency.Name,Service versant connu de l'application métier
+NOTE : cette situation est transitoire, car en définitive ces métadonnées doivent être dans un référentiel et produites par le générateur.
+
+
 À ce jour, les données de contact ne sont pas gérées.
 
 2) Unités documentaires simples
@@ -80,7 +98,7 @@ Exemple :
 ,PESALR120710560900020141201121403628-sig.xml,PES,Flux des mandats transférés à la DgFIP,2014-12-01;http://www.w3.org/2001/04/xmlenc#sha256;f81ba5573d70bb23c5510237208e2965bd87a389623c985cff341879e373c4b7;12345
 
 
-2) Unités documentaires répétées
+3) Unités documentaires répétées
 
 Les unités documentaires du profil d'archivage sont marquées par un TAG suivi d'un +. 
 Les données métier liés à ce type de tag porteront un numéro indiquant leur ordre
@@ -128,8 +146,25 @@ Exemple pour un nom d'unité documentaire :
 Exemple pour un document :
 ,document2e2l1nr.txt,LOT[#1]//OFFRE_ETP[#2]//ENGAGT,Engagement ETP 2 LOT 1,01/12/2014 12:00:00
 
+4) Gestion du cycle de vie
 
-3) Documents identifiés 
+Les métadonnées de gestion du cycle de vie peuvent être fournies par les données métier.
+NOTE : Cette possibilité est offerte de manière transitoire en attendant que ProBANT puisse accéder
+directement à un référentiel d'archivage.
+
+Les métadonnées qui peuvent être fournies, lorsque le profil d'archivage ne les contient pas, sont :
+a) données de cycle de vie de l'archive
+,#Appraisal.Code,conserver|detruire
+,#Appraisal.Duration,PxxY avec xx une durée en années
+,#AccessRestriction.Code,AR038 à AR062
+
+b) données de cycle de veie d'une unité documentaire
+,#Appraisal.Code[UD1],conserver|detruire
+,#Appraisal.Duration[UD1],PxxY avec xx une durée en années
+,#AccessRestriction.Code[UD1],AR038 à AR062
+
+
+5) Documents identifiés 
 
 Dans certaines unités documentaires, il peut y avoir des documents qui jouent un rôle différent.
 Cela peut éviter de créer des unités documentaires supplémentaires pour servir de conteneur à 
@@ -144,7 +179,7 @@ Exemples de documents:
 ,document2e2l1nr.txt,LOT[#1]//OFFRE_ETP[#2]{ENGAGT},Engagement ETP 2 LOT 1,01/12/2014 12:00:00
 
 
-4) Mots-clés
+6) Mots-clés
 
 Les mots-clés de la description du contenu de l'archive sont produits en fonction de leur numéro d'ordre.
 Le mot #KeywordContent est simplement postfixé d'un # suivi du numéro d'ordre encadrés par des crochets droits [].

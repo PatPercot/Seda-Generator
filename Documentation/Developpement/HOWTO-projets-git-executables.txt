@@ -1,0 +1,192 @@
+/*****************************************************************************************
+ * 
+ * Générateur de bordereaux de transfert guidé par le profil d'archivage
+ *                         -----------------------
+ * Département du Morbihan
+ * Direction des systèmes d'information
+ * Service Études
+ * Patrick Percot
+ * Mai 2015
+ * 
+ * Réutilisation du code autorisée dans l'intérêt des collectivités territoriales
+ * 
+ * ****************************************************************************************/
+
+Guide de production des données métier
+
+Révision 1.0 du 28/04/2021
+
+Table des matières :
+0) Organisation des projets
+1) Modification de code et environnement de développement
+2) Documentation
+3) Mise à jour du code pour la distribution des exécutables
+4) Mise à jour finale des dépôts GIT
+
+
+0) Organisation des projets
+
+Le générateur ProBANT est constitué de 4 projets.
+En organisation interne, cela donne l'arborescence de répertoires suivante :
+	SedaGenerator/	
+		ce répertoire n'est pas suivi par GIT, c'est juste un conteneur pour les 4 projets
+			CD56-Java-Seda-Generator/	Actif en 2021
+				Projet Java CD56 du générateur de bordereaux suivi par GIT
+				Référentiels GIT
+					origin  https://github.com/PatPercot/Java-Seda-Generator.git (fetch)
+					origin  https://github.com/PatPercot/Java-Seda-Generator.git (push)
+					
+				Référentiels de la version CGI
+					upstream        https://github.com/CGI-France/Java-Seda-Generator (fetch)
+					upstream        https://github.com/CGI-France/Java-Seda-Generator (push)
+
+			CGI-Java-Seda-Generator/	Inactif depuis 2018
+				Projet Java CGI du générateur de bordereaux suivi par GIT
+				Référentiels GIT
+					origin  https://github.com/CGI-France/Java-Seda-Generator.git (fetch)
+					origin  https://github.com/CGI-France/Java-Seda-Generator.git (push)
+
+			CS-Seda-Generator/			Actif en 2021
+				Projet C# CD56 du contrôleur de profil et du contrôleur de données métier
+				Ce projet contient aussi les testcases pour les contrôleurs et le générateur CD56
+				Référentiels GIT
+					origin  https://github.com/PatPercot/Seda-Generator.git (fetch)
+					origin  https://github.com/PatPercot/Seda-Generator.git (push)
+
+				Référentiels GIT abandonnés
+					codeplex        https://git01.codeplex.com/sedaautogenerator (fetch)
+					codeplex        https://git01.codeplex.com/sedaautogenerator (push)
+
+			Distribution-Executables/	Actif en 20121
+				Projet contenant les exécutables pour une mise en œuvre rapide
+				Référentiels GIT
+					github  https://github.com/PatPercot/SedaGenerator-Distribution-Executables.git (fetch)
+					github  https://github.com/PatPercot/SedaGenerator-Distribution-Executables.git (push)
+					origin  git@git-prod.morbihan.fr:SedaGenerator/Distribution-Executables.git (fetch)
+					origin  git@git-prod.morbihan.fr:SedaGenerator/Distribution-Executables.git (push)
+
+
+1) Modification de code et environnement de développement
+
+Avant toute modification de code, s'assurer avec GIT que le code sur lequel on travaille est à jour.
+$ git status
+$ git diff
+
+Créer ensuite, à partir de la branche master, une branche pour le développement que l'on prévoit dans les différents projets qui seront impactés
+$ cd SedaGenerator/CS-Seda-Generator/
+$ git checkout -b devel-hotfix-2021-019
+$ cd SedaGenerator/CD56-Java-Seda-Generator/
+$ git checkout -b devel-hotfix-2021-019
+$ cd SedaGenerator/Distribution-Executables/
+$ git checkout -b devel-hotfix-2021-019
+
+Le projet CS-Seda-Generator est sous environnement de développement Microsoft avec Visual Studio.
+Le code doit absolument se trouver sur un disque local sinon, les tests unitaires de génération ne pourront pas être exécutés.
+
+	Le code C# est réparti entre les répertoires suivants :
+		SedaProfileGenerator/          		Code du générateur (encore utilisé pour les contrôles mais plus pour la génération)
+		CommonClassesLibrary/            	Code des fonctionnalités de base
+		UnitaryTestsUnitTest/				Code des tests unitaires des fonctionnalités de base
+		RngProfileControllerUnitTest/  		Code des tests unitaires du contrôleur de profils d'archivage
+		BusinessDataControllerUnitTest/  	Code des tests unitaires du contrôleur de données métier
+		SedaSummaryGeneratorUnitTest/  		Code des tests unitaires du générateur de bordereaux
+		BusinessDataController/ 			Lanceur du testeur du contrôleur de données métier
+		RngProfileControllerTester/    		Lanceur du testeur du contrôleur de profils (chargement de job.config, ...)
+
+	Les répertoires suivants contiennent des données :
+		utils/								Utilitaires de copie des exécutables du générateur Java CD56 de bordereaux 
+		Documentation/                   	Documentation des projets générateur et contrôleurs
+		TestCases/							Cas de tests unitaires (profils XML et RNG, données métier, ...)
+		TestResults/						Résultats des cas de tests unitaires pour analyse
+
+	Les répertoires suivants sont obsolètes :
+		SedaSummaryGeneratorTester/    		
+		WcfSedaGeneratorServicesHost/
+		WcfSedaGeneratorServicesLib/
+		WsSoapSedaGeneratorAspWebApp/
+
+Le projet CD56-Java-Seda-Generator Java est sous environnement de développement Eclipse.
+La génération du code se fait avec Maven. Menu Run / Run configurations / Maven Build avec goal install
+
+Avant la première compilation, penser à changer le numéro de version courante dans le fichier CD56-Java-Seda-Generator/pom.xml
+À la fin du fichier :
+				<version>1.1.6</version>
+		</project>
+Modifier également le fichier de lancement du générateur pour tenir compte de ce changement de version :
+	CS-Seda-Generator/SedaSummaryGeneratorUnitTest/JavaSedaProfileGeneratorCD56_task.bat
+
+		REM GENERATOR : Modifier à chaque changement de version
+		SET JAVASEDAPROFILEGENERATOR=lib-cd56/JavaSedaProfileGenerator-1.1.6.jar
+
+	
+Suivre le principe des petits commit avec GIT dans la branche de développement qui a été créée pour l'occasion.
+Ex : git commit -a -m "Modification documentation"
+
+Avant chaque lancement des tests unitaires, penser à lancer CS-Seda-Generator/utils/copy-JavaGenerator.bat
+
+2) Documentation
+
+Lorsque des modifications sont faites, penser à modifier les fichiers de documentation :
+a) la documentation d'utilisation :
+		CS-Seda-Generator/Documentation/HOWTO-donnees-metier.txt
+		CS-Seda-Generator/Documentation/HOWTO-SEDA-keys.txt
+		CS-Seda-Generator/Documentation/HOWTO-profil-archivage.txt
+		CS-Seda-Generator/Documentation/QuickStart.txt
+
+b) les Changelog.txt et autres fichiers de suivi
+		CD56-Java-Seda-Generator/Changelog.txt
+		CS-Seda-Generator/Changelog.txt
+		CGI-Java-Seda-Generator/Changelog.txt
+		CS-Seda-Generator/versions.txt
+
+c) cette documentation de développement
+		/CS-Seda-Generator/Documentation/Developpement/HOWTO-projets-git-executables.txt
+
+3) Mise à jour du code pour la distribution des exécutables
+
+Mettre à jour les exécutables, les bibliothèques et les documentations :
+	Se placer préalablement dans le répertoire 
+		Distribution-Executables/utils/
+	Lancer prepare-distro.bat
+
+Modifier les scripts de lancement du générateur :
+		JavaSedaProfileGeneratorCD56_task.bat
+			REM GENERATOR : Modifier à chaque changement de version
+			SET JAVASEDAPROFILEGENERATOR=lib-cd56/JavaSedaProfileGenerator-1.1.6.jar
+			
+		JavaSedaProfileGeneratorCD56_task.sh
+			#GENERATOR : Modifier à chaque changement de version
+			JAVASEDAPROFILEGENERATOR=lib-cd56/JavaSedaProfileGenerator-1.1.6.jar
+
+
+4) Mise à jour finale des dépôts GIT
+
+On s'assure qu'on a mis à jour les dépôts :
+	cd CD56-Java-Seda-Generator/
+	git push --follow-tags origin devel-lifecycle
+
+	cd CS-Seda-Generator/
+	git push --follow-tags origin devel-lifecycle
+
+On commence par intégrer le code de la branche de développement pour chacune des 3 projets
+	cd CD56-Java-Seda-Generator/
+	git checkout master
+	git merge devel-hotfix-2021-019
+	git tag -a v1.1.6 -m '"Version 1.1.6"
+	git push --follow-tags origin master
+
+	cd CS-Seda-Generator/
+	git checkout master
+	git merge devel-hotfix-2021-019
+	git tag -a v1.1.6 -m '"Version 1.1.6"
+	git push --follow-tags origin master
+
+	cd Distribution-Executables/
+	git checkout master
+	
+	S'assurer que l'étape 3) "Mise à jour du code pour la distribution des exécutables" a bien été exécutée
+
+	git tag -a v1.1.6 -m '"Version 1.1.6"
+	git push --follow-tags origin master
+	git push --follow-tags origin github
+
