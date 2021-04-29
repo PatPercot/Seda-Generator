@@ -44,7 +44,7 @@ namespace SedaSummaryGenerator {
             String str;
             StringCollection tagsForKeys = ad.getTagsListForKeys();
             StringCollection tagsForDocs = ad.getTagsListForDocuments();
-            StringCollection expectedTags = rpc.getExpectedTagsListList();
+            StringCollection expectedTags = rpc.getExpectedTagsList();
 
             StringCollection expectedTagsForDocs = new StringCollection();
             foreach (String st in expectedTags) {

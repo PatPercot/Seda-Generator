@@ -369,21 +369,64 @@ namespace SedaSummaryGenerator {
                 parentNodeName = parentNode.Attributes.GetNamedItem("name").Value;
                 if (parentNodeName != null) {
                     String oldParentNodeName = parentNodeName;
-
-                    // TODO: SEDA 1.0 CustodialHistoryItem
                     nodeName = "CustodialHistory";
                     xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
                     node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
                     if (node != null) {
                         nodeContent = node.Attributes.GetNamedItem("name").Value;
                         if (nodeContent != null) {
-                            xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
-                            node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                            if (node != null) {
-                                expectedTagsList.Add("#" + nodeName);
+                            /* SEDA 0.2
+                             * 	<rng:define name="ContentDescription_N65786">
+                             *  <rng:element xmlns="" name="CustodialHistory">
+                             *      <rng:ref name="CustodialHistory_N65789"/>
+                             *  </rng:element>
+                             *
+                             * 	<rng:define name="CustodialHistory_N65789">
+                             *      <rng:data type="string"/>
+                             *  </rng:define>
+                             *
+                             * */
+                            if (SEDA_version.Equals("0.2")) {
+                                xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
+                                node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                if (node != null) {
+                                    expectedTagsList.Add("#" + nodeName);
+                                }
+                            }
+                            /* SEDA 1.0
+                             * 	<rng:define name="ContentDescription_N65746">
+		                     *  <rng:element xmlns="" name="CustodialHistory">
+			                 *      <rng:ref name="CustodialHistory_N65774"/>
+		                     *  </rng:element>
+                             *
+                             * 	<rng:define name="CustodialHistory_N65774">
+		                     *      <rng:element xmlns="" name="CustodialHistoryItem">
+			                 *          <rng:ref name="CustodialHistoryItem_N65778"/>
+		                     *      </rng:element>
+	                         *  </rng:define>
+                             *
+                             * 	<rng:define name="CustodialHistoryItem_N65778">
+		                     *      <rng:data type="string"/>
+	                         *  </rng:define>
+                             *
+                             * */
+                            if (SEDA_version.Equals("1.0")) {
+                                xPath = "rng:define[@name='" + nodeContent + "']/descendant::rng:element[@name='CustodialHistoryItem']/rng:ref";
+                                node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                if (node != null) {
+                                    nodeContent = node.Attributes.GetNamedItem("name").Value;
+                                    if (nodeContent != null) {
+                                        xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
+                                        node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                        if (node != null) {
+                                            expectedTagsList.Add("#" + nodeName);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
+
                     nodeName = "OriginatingAgency";
                     xPath = "rng:define[@name='" + parentNodeName + "']/descendant::rng:element[@name='" + nodeName + "']/rng:ref";
                     parentNode = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
@@ -629,10 +672,54 @@ namespace SedaSummaryGenerator {
                     if (node != null) {
                         nodeContent = node.Attributes.GetNamedItem("name").Value;
                         if (nodeContent != null) {
-                            xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
-                            node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
-                            if (node != null) {
-                                expectedTagsList.Add("#" + nodeName + "[" + currentContainsNode.getRelativeContext() + "]");
+                            /* SEDA 0.2
+                             * 	<rng:define name="ContentDescription_N65786">
+                             *  <rng:element xmlns="" name="CustodialHistory">
+                             *      <rng:ref name="CustodialHistory_N65789"/>
+                             *  </rng:element>
+                             *
+                             * 	<rng:define name="CustodialHistory_N65789">
+                             *      <rng:data type="string"/>
+                             *  </rng:define>
+                             *
+                             * */
+                            if (SEDA_version.Equals("0.2")) {
+                                xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
+                                node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                if (node != null) {
+                                    expectedTagsList.Add("#" + nodeName + "[" + currentContainsNode.getRelativeContext() + "]");
+                                }
+                            }
+                            /* SEDA 1.0
+                             * 	<rng:define name="ContentDescription_N65746">
+		                     *  <rng:element xmlns="" name="CustodialHistory">
+			                 *      <rng:ref name="CustodialHistory_N65774"/>
+		                     *  </rng:element>
+                             *
+                             * 	<rng:define name="CustodialHistory_N65774">
+		                     *      <rng:element xmlns="" name="CustodialHistoryItem">
+			                 *          <rng:ref name="CustodialHistoryItem_N65778"/>
+		                     *      </rng:element>
+	                         *  </rng:define>
+                             *
+                             * 	<rng:define name="CustodialHistoryItem_N65778">
+		                     *      <rng:data type="string"/>
+	                         *  </rng:define>
+                             *
+                             * */
+                            if (SEDA_version.Equals("1.0")) {
+                                xPath = "rng:define[@name='" + nodeContent + "']/descendant::rng:element[@name='CustodialHistoryItem']/rng:ref";
+                                node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                if (node != null) {
+                                    nodeContent = node.Attributes.GetNamedItem("name").Value;
+                                    if (nodeContent != null) {
+                                        xPath = "rng:define[@name='" + nodeContent + "']/rng:data[@type='string']";
+                                        node = grammarNode.SelectSingleNode(xPath, docInXmlnsManager);
+                                        if (node != null) {
+                                            expectedTagsList.Add("#" + nodeName + "[" + currentContainsNode.getRelativeContext() + "]");
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -1492,7 +1579,7 @@ namespace SedaSummaryGenerator {
         /*
          * La structure de l'arbre peut être récupéré dans la liste
          * */
-        public StringCollection getExpectedTagsListList() {
+        public StringCollection getExpectedTagsList() {
             return expectedTagsList;
         }
 

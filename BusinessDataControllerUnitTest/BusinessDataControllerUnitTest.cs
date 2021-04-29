@@ -138,7 +138,7 @@ namespace BusinessDataControllerUnitTest {
 
             }
 
-            StringCollection tags = rpc.getExpectedTagsListList();
+            StringCollection tags = rpc.getExpectedTagsList();
             {
                 streamWriter.WriteLine("-----------------");
                 streamWriter.WriteLine("Liste des tags.");
@@ -546,6 +546,54 @@ namespace BusinessDataControllerUnitTest {
                 "Dans le profil, le tag '#AccessRestriction.Code[UD1]' ne trouve pas de correspondance dans les données métier",
                 };
             ConfrontationDonneesEtProfil("cycle_vie_10_err", erreursAttendues, true);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void H14_TestCustodialHistory10() {
+            String[] erreursAttendues = 
+                { 
+                };
+            ConfrontationDonneesEtProfil("custodial10", erreursAttendues, true);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void H15_TestCustodialHistory02() {
+            String[] erreursAttendues = 
+                { 
+                };
+            ConfrontationDonneesEtProfil("custodial02", erreursAttendues, true);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void H16_TestCustodialHistoryErr10() {
+            String[] erreursAttendues = 
+                { 
+                "Dans le profil, le tag '#CustodialHistory' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#CustodialHistory[UD1]' ne trouve pas de correspondance dans les données métier",
+                };
+            ConfrontationDonneesEtProfil("custodial10_err", erreursAttendues, true);
+        }
+
+        [TestMethod]
+        /*
+         * 
+         * */
+        public void H17_TestCustodialHistoryErr02() {
+            String[] erreursAttendues = 
+                { 
+                "Dans le profil, le tag '#CustodialHistory' ne trouve pas de correspondance dans les données métier",
+                "Dans le profil, le tag '#CustodialHistory[UD1]' ne trouve pas de correspondance dans les données métier",
+                };
+            ConfrontationDonneesEtProfil("custodial02_err", erreursAttendues, true);
         }
 
         [TestMethod]

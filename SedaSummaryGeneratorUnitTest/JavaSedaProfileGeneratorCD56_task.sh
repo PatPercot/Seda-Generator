@@ -11,7 +11,7 @@
 TASK=$*
 
 #GENERATOR : Modifier à chaque changement de version
-JAVASEDAPROFILEGENERATOR=lib-cd56/JavaSedaProfileGenerator-1.1.6.jar
+JAVASEDAPROFILEGENERATOR=lib-cd56/JavaSedaProfileGenerator-1.1.7.jar
 
 #LIB
 ANTLR_LIB=lib-cd56/antlr-2.7.7.jar
@@ -26,12 +26,12 @@ COMMONS_LANG_LIB=lib-cd56/commons-lang-2.3.jar
 LOGBACK_LIB=lib-cd56/logback-classic-1.0.7.jar
 LOGBACK_CORE_LIB=lib-cd56/logback-core-1.0.7.jar
 POSTGRESQL_LIB=lib-cd56/postgresql-9.4-1201-jdbc41.jar
-SERIALIZER_LIB=lib-cd56/serializer-2.7.1.jar
+SERIALIZER_LIB=lib-cd56/serializer-2.7.2.jar
 SLF4J_LIB=lib-cd56/slf4j-api-1.7.12.jar
 STAX2_LIB=lib-cd56/stax2-api-3.1.4.jar
 STRINGTEMPLATE_LIB=lib-cd56/stringtemplate-3.2.1.jar
 WOODSTOX_LIB=lib-cd56/woodstox-core-asl-4.4.0.jar
-XALAN_LIB=lib-cd56/xalan-2.7.1.jar
+XALAN_LIB=lib-cd56/xalan-2.7.2.jar
 XMLAPIS_LIB=lib-cd56/xml-apis-1.3.04.jar
 
 JAVA_BIN=java

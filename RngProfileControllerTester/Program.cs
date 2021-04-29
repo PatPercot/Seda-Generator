@@ -90,7 +90,7 @@ namespace RngProfileControllerLauncher {
                 }
             }
 
-            StringCollection expectedTagsList = rpc.getExpectedTagsListList();
+            StringCollection expectedTagsList = rpc.getExpectedTagsList();
 
             if (expectedTagsList != null && expectedTagsList.Count != 0) {
                 Console.WriteLine("\nTags attendus par le profil.\n");

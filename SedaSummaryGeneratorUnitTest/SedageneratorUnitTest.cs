@@ -1320,9 +1320,32 @@ namespace SedaSummaryGeneratorUnitTest {
             checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:AppraisalRule/s:Code", "detruire");
             checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:AppraisalRule/s:Duration", "P77Y");
             checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:AccessRestrictionRule/s:Code", "AR042");
-
         }
 
+        [TestMethod]
+        public void W78_TestCustodialHistorySedaV0_2() {
+            executeGenerator("custodialhistory_seda02", "0.2");
 
+            checkForNoErrors();
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:ContentDescription/s:CustodialHistory"
+                , "Historique de conservation niveau archive");
+
+            checkInnerText("s:ArchiveTransfer/s:Contains/s:Contains[1]/s:ContentDescription/s:CustodialHistory"
+                , "Historique de conservation de l'UD1");
+        }
+
+        [TestMethod]
+        public void W79_TestCustodialHistorySedaV1_0() {
+            executeGenerator("custodialhistory_seda10", "1.0");
+
+            checkForNoErrors();
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ContentDescription/s:CustodialHistory/s:CustodialHistoryItem"
+                , "Historique de conservation niveau archive");
+
+            checkInnerText("s:ArchiveTransfer/s:Archive/s:ArchiveObject[1]/s:ContentDescription/s:CustodialHistory/s:CustodialHistoryItem"
+                , "Historique de conservation de l'UD1");
+        }
+
+        
     }
 }

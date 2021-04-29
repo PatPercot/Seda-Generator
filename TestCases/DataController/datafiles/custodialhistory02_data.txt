@@ -1,0 +1,21 @@
+# Liste de tags attendus par le profil
+# Les tags de la forme TAG[#1] sont des tags répétables
+# 	#1 est un indice qui peut prendre des valeurs entières
+# 
+
+# Les documents peuvent prendre trois formes
+# Les trois derniers éléments peuvent être produits par le générateur
+# Dans les données qui suivent, seule la première forme est fournie
+
+# Document, 1ère forme (chemin et nom du fichier) (TAG) (Description) (date)
+# Document, 2ème forme (chemin et nom du fichier) (TAG) (Description) (date) (algorithme de l'empreinte) (empreinte)
+# Document, 3ème forme (chemin et nom du fichier) (TAG) (Description) (date) (algorithme de l'empreinte) (empreinte) (taille)
+# Exemple complet : ,fichier.txt,TAG,Description du document,13/03/2017 14:31:27,http://www.w3.org/2001/04/xmlenc#sha256,f81ba5573d70bb23c5510237208e2965bd87a389623c985cff341879e373c4b7,29516
+# 
+
+
+,#TransferName,Test CustodialHistory SEDA 0.2
+,#CustodialHistory,Historique de conservation niveau archive
+,#ContainsName[UD1],Unité documentaire numéro UD1
+,#CustodialHistory[UD1],Historique de conservation de l'UD1
+,fichier.txt,UD1,Description du document,13/03/2017 14:31:27

@@ -1,12 +1,12 @@
 Les testcases situés ici permettent de tester le bon fonctionnement global du générateur
 
-Ils sont divisés en deux parties :
+Ils sont divisés en trois parties :
 - le contrôle des profils d'archivage dans ProfileController
+- la vérification des données métier confrontées au profil d'archivage dans DataController
 - la génération des bordereaux de transfert dans ProfileGenerator
 
-À venir :
-- vérification des données métier confrontées au profil d'archivage
-
+Ne pas oublier d'aller voir les fichiers produits lorsque les test sont en erreur (fichier de données métier 
+attendues pour le contrôleur, bordereau pour le générateur)
 
 1) ProfileController
 
@@ -14,8 +14,28 @@ Un répertoire profiles contient les profils à tester
 Les erreurs attendues et la structure attendue sont dans les testcases
 Un répertoire traces contient les traces d'exécution
 
+Le code du testeur de contrôleur de profils est dans le répertoire ../RngProfileControllerUnitTest/RngProfileControllerUnitTest.cs
+S'inspirer des tests existants pour écrire de nouveaux tests
 
-2) ProfileGenerator
+Deux fonctions principales pour tester les profils :
+	- declencherTestProfil : permet de vérifier les erreurs produites
+	- declencherTestProfilEtGeneration : zn plus des erreurs, permet de vérifier les données métier attendues
+
+Le fichier job.config pour les tests de profils est CS-Seda-Generator/RngProfileControllerUnitTest/job.config
+
+2) DataController
+
+Un répertoire profiles contient les profils à tester
+Un répertoire datafiles contient les données métier à utiliser pour le contrôle des données métier
+Les erreurs attendues et la structure attendue sont dans les testcases
+Un répertoire traces contient les traces d'exécution
+
+Le code du testeur de contrôleur de données métier est dans le répertoire ../BusinessDataControllerUnitTest/BusinessDataControllerUnitTest.cs
+S'inspirer des tests existants pour écrire de nouveaux tests
+
+Le fichier job.config pour les tests de données métier est CS-Seda-Generator/BusinessDataControllerUnitTest/job.config
+
+3) ProfileGenerator
 
 Un répertoire profiles contient les profils utilisés pour la production des bordereaux
 Un répertoire datafiles contient les données métier à utiliser pour la production des bordereaux
@@ -23,3 +43,15 @@ Un répertoire database contient les informations à mettre dans la base de donnée
 Les erreurs attendues et la structure attendue sont dans les testcases
 Un répertoire traces contient les traces d'exécution
 Un répertoire profiles-and-data-not-yet-under-test contient,à titre d'exemple, des profils et données qui ne sont pas encore sous tests
+
+Le code du testeur de contrôleur de données métier est dans le répertoire ../SedaSummaryGeneratorUnitTest/SedageneratorUnitTest.cs
+S'inspirer des tests existants pour écrire de nouveaux tests
+
+Le fichier job.config pour les tests de données métier est CS-Seda-Generator/SedaSummaryGeneratorUnitTest/job-java.config
+Le fichier job-java.config contient :
+	- des rubriques accord-versement au début du fichier
+	- des rubriques generator à partir du milieu du fichier
+Les deux rubriques sont nécessaires pour exécuter un test, mais une même rubrique accord-versement peut être utilisée par plusieurs rubriques generator
+
+ATTENTION : Le code obsolète du générateur C# n'a pas été éliminé. job-c#.config ne doit plus être maintenu
+

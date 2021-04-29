@@ -24,8 +24,8 @@ namespace RngProfileControllerUnitTest {
             return config.getProfileConfig(configName);
         }
 
-        private void declencherTestProfilEtGeneration(String jobName, String[] branchesAttendues, String[] erreursAttendues
-            , String[] tagsExemplesAttendus) {
+        private void declencherTestProfilEtGeneration(String jobName, String[] branchesAttendues
+            , String[] erreursAttendues, String[] tagsExemplesAttendus) {
                 Action<Exception> eh = (ex) => {
                     Console.WriteLine(ex.GetType().Name + " en comparaison des tags attendus : " + control.dataFile);
                     throw ex;
@@ -558,13 +558,41 @@ namespace RngProfileControllerUnitTest {
         /*
          * 
          * */
-        public void M33_TCycleVie_10()
+        public void M33_TestCycleVie_10()
         {
             String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
             String[] erreursAttendues = 
                 { 
                 };
             declencherTestProfil("cycle_vie_10", branchesAttendues, erreursAttendues, true);
+        }
+
+        [TestMethod]
+        public void M34_TestCustodialHistory_02() {
+            String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+            String[] erreursAttendues = { };
+            String[] tagsExemplesAttendus = { 
+                ",#TransferName,Texte à personnaliser",
+                ",#CustodialHistory,Texte à personnaliser",
+                ",#ContainsName[UD1],Texte à personnaliser",
+                ",#CustodialHistory[UD1],Texte à personnaliser",
+                ",fichier.txt,UD1,Description du document,13/03/2017 14:31:27",
+            };
+            declencherTestProfilEtGeneration("custodial02", branchesAttendues, erreursAttendues, tagsExemplesAttendus);
+        }
+
+        [TestMethod]
+        public void M35_TestCustodialHistory_10() {
+            String[] branchesAttendues = { "\troot", "\t\tUD1", "" };
+            String[] erreursAttendues = { };
+            String[] tagsExemplesAttendus = { 
+                ",#TransferName,Texte à personnaliser",
+                ",#CustodialHistory,Texte à personnaliser",
+                ",#ContainsName[UD1],Texte à personnaliser",
+                ",#CustodialHistory[UD1],Texte à personnaliser",
+                ",fichier.txt,UD1,Description du document,13/03/2017 14:31:27",
+            };
+            declencherTestProfilEtGeneration("custodial10", branchesAttendues, erreursAttendues, tagsExemplesAttendus);
         }
 
 

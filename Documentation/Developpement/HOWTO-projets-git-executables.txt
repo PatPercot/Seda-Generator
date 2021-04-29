@@ -19,9 +19,10 @@ Révision 1.0 du 28/04/2021
 Table des matières :
 0) Organisation des projets
 1) Modification de code et environnement de développement
-2) Documentation
-3) Mise à jour du code pour la distribution des exécutables
-4) Mise à jour finale des dépôts GIT
+2) Conseils de développement
+3) Documentation
+4) Mise à jour du code pour la distribution des exécutables
+5) Mise à jour finale des dépôts GIT
 
 
 0) Organisation des projets
@@ -124,7 +125,17 @@ Ex : git commit -a -m "Modification documentation"
 
 Avant chaque lancement des tests unitaires, penser à lancer CS-Seda-Generator/utils/copy-JavaGenerator.bat
 
-2) Documentation
+2) Conseils de développement
+
+Commencer par produire un profil d'archivage et les cas de test qui permettent de le valider.
+Cette façon de travailler facilite les développements, car dès que l'on écrit ou modifie du code,
+on peut le valider rapidement en exécutant le test.
+
+Les fichiers de données des cas de test sont conservés dans le répertoire TestCases/
+Lire le fichier TestCases/TestCases-HOWTO.txt pour démarrer
+
+
+3) Documentation
 
 Lorsque des modifications sont faites, penser à modifier les fichiers de documentation :
 a) la documentation d'utilisation :
@@ -142,7 +153,7 @@ b) les Changelog.txt et autres fichiers de suivi
 c) cette documentation de développement
 		/CS-Seda-Generator/Documentation/Developpement/HOWTO-projets-git-executables.txt
 
-3) Mise à jour du code pour la distribution des exécutables
+4) Mise à jour du code pour la distribution des exécutables
 
 Mettre à jour les exécutables, les bibliothèques et les documentations :
 	Se placer préalablement dans le répertoire 
@@ -159,7 +170,7 @@ Modifier les scripts de lancement du générateur :
 			JAVASEDAPROFILEGENERATOR=lib-cd56/JavaSedaProfileGenerator-1.1.6.jar
 
 
-4) Mise à jour finale des dépôts GIT
+5) Mise à jour finale des dépôts GIT
 
 On s'assure qu'on a mis à jour les dépôts :
 	cd CD56-Java-Seda-Generator/

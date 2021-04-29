@@ -11,16 +11,16 @@ REM ARGUMENTS
 SET TASK=%*
 
 REM GENERATOR : Modifier à chaque changement de version
-SET JAVASEDAPROFILEGENERATOR=lib-cd56/JavaSedaProfileGenerator-1.1.6.jar
+SET JAVASEDAPROFILEGENERATOR=lib-cd56/JavaSedaProfileGenerator-1.1.7.jar
 
 REM LIB
 SET LOGBACK_LIB=lib-cd56/logback-classic-1.0.7.jar
 SET LOGBACK_CORE_LIB=lib-cd56/logback-core-1.0.7.jar
 SET POSTGRESQL_LIB=lib-cd56/postgresql-9.4-1201-jdbc41.jar
 SET SAXON_LIB=lib-cd56/saxon-8.7.jar
-SET SERIALIZER_LIB=lib-cd56/serializer-2.7.1.jar
+SET SERIALIZER_LIB=lib-cd56/serializer-2.7.2.jar
 SET SLF4J_LIB=lib-cd56/slf4j-api-1.7.12.jar
-SET XALAN_LIB=lib-cd56/xalan-2.7.1.jar
+SET XALAN_LIB=lib-cd56/xalan-2.7.2.jar
 SET XMLAPIS_LIB=lib-cd56/xml-apis-1.3.04.jar
 SET COMMONS_LANG_LIB=lib-cd56/commons-lang-2.3.jar
 
