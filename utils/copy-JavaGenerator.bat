@@ -26,3 +26,8 @@ REM On revient dans utils
 cd utils
 
 echo Copie achevée
+echo !!!!!!!!!!
+echo Modifier la version dans CS-Seda-Generator\SedaSummaryGeneratorUnitTest\JavaSedaProfileGeneratorCD56_task.bat
+echo Modifier la version dans CS-Seda-Generator\SedaSummaryGeneratorUnitTest\JavaSedaProfileGeneratorCD56_task.sh
+echo !!!!!!!!!!
+

@@ -11,7 +11,7 @@
 TASK=$*
 
 #GENERATOR : Modifier à chaque changement de version
-JAVASEDAPROFILEGENERATOR=lib-cd56/JavaSedaProfileGenerator-1.1.7.jar
+JAVASEDAPROFILEGENERATOR=lib-cd56/JavaSedaProfileGenerator-1.1.8.jar
 
 #LIB
 ANTLR_LIB=lib-cd56/antlr-2.7.7.jar

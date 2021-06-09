@@ -41,12 +41,12 @@
 # Dates extrêmes UD2 13/03/2017 au 18/04/2017
 
 # Dates extrêmes UD21 13/03/2017 au 16/03/2017
-,fichierUD21.txt,UD21,Description du document,13/03/2017
-,fichierUD21.txt,UD21,Description du document,14/03/2017
-,fichierUD21.txt,UD21,Description du document,15/03/2017
-,fichierUD21.txt,UD21,Description du document,16/03/2017
+,fichierUD21.txt,UD21{UD21_DOC1},Description du document,13/03/2017
+,fichierUD21.txt,UD21{UD21_DOC1},Description du document,14/03/2017
+,fichierUD21.txt,UD21{UD21_DOC2},Description du document,15/03/2017
+,fichierUD21.txt,UD21{UD21_DOC2},Description du document,16/03/2017
 
 
 # Dates extrêmes UD22 13/04/2017 au 18/04/2017
-,fichierUD22.txt,UD22,Description du document,13/04/2017
-,fichierUD22.txt,UD22,Description du document,18/04/2017
+,fichierUD22.txt,UD22{UD22_DOC1},Description du document,13/04/2017
+,fichierUD22.txt,UD22{UD22_DOC2},Description du document,18/04/2017
